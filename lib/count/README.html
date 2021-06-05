@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="hexo-symbols-count-time Symbols count and time to read for articles in Hexo blog. Better than hexo-reading-time and faster than hexo-wordcount. No external dependencies. Installation 1$ npm install he">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Guiny-Time">
+<meta property="og:url" content="http://example.com/lib/count/README.html">
+<meta property="og:site_name" content="Guiny-Time">
+<meta property="og:description" content="hexo-symbols-count-time Symbols count and time to read for articles in Hexo blog. Better than hexo-reading-time and faster than hexo-wordcount. No external dependencies. Installation 1$ npm install he">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.shields.io/npm/v/hexo-symbols-count-time?style=flat-square">
+<meta property="og:image" content="https://img.shields.io/node/v/hexo-symbols-count-time?style=flat-square">
+<meta property="og:image" content="https://img.shields.io/badge/hexo-%3E%3D%203.0-blue?style=flat-square">
+<meta property="og:image" content="https://img.shields.io/coveralls/theme-next/hexo-symbols-count-time/master?style=flat-square">
+<meta property="og:image" content="https://img.shields.io/travis/theme-next/hexo-symbols-count-time/master?style=flat-square">
+<meta property="og:image" content="https://img.shields.io/appveyor/ci/ivan-nginx/hexo-symbols-count-time/master?style=flat-square">
+<meta property="og:image" content="https://img.shields.io/npm/l/hexo-symbols-count-time?style=flat-square">
+<meta property="og:image" content="https://img.shields.io/github/languages/code-size/theme-next/hexo-symbols-count-time?style=flat-square">
+<meta property="og:image" content="https://img.shields.io/npm/dm/hexo-symbols-count-time?style=flat-square">
+<meta property="og:image" content="https://img.shields.io/npm/dt/hexo-symbols-count-time?style=flat-square">
+<meta property="article:published_time" content="2021-06-05T12:15:49.882Z">
+<meta property="article:modified_time" content="2021-06-05T12:15:49.882Z">
+<meta property="article:author" content="时光">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.shields.io/npm/v/hexo-symbols-count-time?style=flat-square">
+
+<link rel="canonical" href="http://example.com/lib/count/README">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | Guiny-Time
+</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Guiny-Time</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">时间的旅者，无痕的过客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-请戳我">
+
+    <a href="/cats/" rel="section"><i class="fa fa-cat fa-fw"></i>请戳我</a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/categories/" rel="section"><i class="fa fa-bullseye fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-归档">
+
+    <a href="/archives/" rel="section"><i class="fa fa-th fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+</h1>
+
+<div class="post-meta">
+  
+  <ul class="breadcrumb">
+          
+            <li><a href="/lib/">LIB</a></li>
+            <li><a href="/lib/count/">COUNT</a></li>
+            <li>README</li>
+          
+  </ul>
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="hexo-symbols-count-time"><a href="#hexo-symbols-count-time" class="headerlink" title="hexo-symbols-count-time"></a>hexo-symbols-count-time</h1><p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-symbols-count-time"><img src="https://img.shields.io/npm/v/hexo-symbols-count-time?style=flat-square" alt="npm-image"></a><br><a target="_blank" rel="noopener" href="https://nodejs.org/en/download/releases"><img src="https://img.shields.io/node/v/hexo-symbols-count-time?style=flat-square" alt="node-image"></a><br><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://img.shields.io/badge/hexo-%3E%3D%203.0-blue?style=flat-square" alt="hexo-image"></a><br><a target="_blank" rel="noopener" href="https://coveralls.io/github/theme-next/hexo-symbols-count-time?branch=master" title="Coverage of Tests"><img src="https://img.shields.io/coveralls/theme-next/hexo-symbols-count-time/master?style=flat-square" alt="cover-image"></a><br><a target="_blank" rel="noopener" href="https://travis-ci.org/theme-next/hexo-symbols-count-time?branch=master" title="Travis CI [Linux]"><img src="https://img.shields.io/travis/theme-next/hexo-symbols-count-time/master?style=flat-square" alt="travis-image"></a><br><a target="_blank" rel="noopener" href="https://ci.appveyor.com/project/ivan-nginx/hexo-symbols-count-time/branch/master" title="AppVeyor [Windows]"><img src="https://img.shields.io/appveyor/ci/ivan-nginx/hexo-symbols-count-time/master?style=flat-square" alt="appveyor-image"></a><br><a href="LICENSE"><img src="https://img.shields.io/npm/l/hexo-symbols-count-time?style=flat-square" alt="lic-image"></a></p>
+<p>Symbols count and time to read for articles in Hexo blog.</p>
+<p>Better than <a target="_blank" rel="noopener" href="https://github.com/ierhyna/hexo-reading-time"><code>hexo-reading-time</code></a> and faster than <a target="_blank" rel="noopener" href="https://github.com/willin/hexo-wordcount"><code>hexo-wordcount</code></a>. No external dependencies.</p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p><img src="https://img.shields.io/github/languages/code-size/theme-next/hexo-symbols-count-time?style=flat-square" alt="size-image"><br><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-symbols-count-time"><img src="https://img.shields.io/npm/dm/hexo-symbols-count-time?style=flat-square" alt="dm-image"></a><br><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-symbols-count-time"><img src="https://img.shields.io/npm/dt/hexo-symbols-count-time?style=flat-square" alt="dt-image"></a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-symbols-count-time</span><br></pre></td></tr></table></figure>
+
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><p>You can set options of hexo-symbols-count-time in the <strong>Hexo’s <code>_config.yml</code></strong> (which locates in the root dir of your blog):</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">symbols:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">time:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_symbols:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_time:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">exclude_codeblock:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">awl:</span> <span class="number">4</span></span><br><span class="line">  <span class="attr">wpm:</span> <span class="number">275</span></span><br><span class="line">  <span class="attr">suffix:</span> <span class="string">&quot;mins.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>If <code>symbols_count_time</code> option is not specified, the default parameters will be used.</p>
+<h3 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h3><ul>
+<li><code>awl</code> – Average Word Length (chars count in word). Default: <code>4</code>. You can check this <a target="_blank" rel="noopener" href="https://charactercounttool.com/">here</a>.<ul>
+<li>CN &asymp; <code>2</code></li>
+<li>EN &asymp; <code>5</code></li>
+<li>RU &asymp; <code>6</code></li>
+</ul>
+</li>
+<li><code>wpm</code> – Words Per Minute. Default: <code>275</code>. You can check this <a target="_blank" rel="noopener" href="https://wordcounter.net/">here</a>.<ul>
+<li>Slow &asymp; <code>200</code></li>
+<li>Normal &asymp; <code>275</code></li>
+<li>Fast &asymp; <code>350</code></li>
+</ul>
+</li>
+<li><code>suffix</code> – If time to read less then 60 minutes, added suffix as string parameter.<br>If not defined, <code>mins.</code> will be used as default.</li>
+<li><code>exclude_codeblock</code> – Allow to exclude all content inside code blocks for more accurate words counting.<br>If not defined, <code>false</code> will be used as default.</li>
+</ul>
+<p><strong>Note for Chinese users:</strong> because in Chinese language average word length about <code>~1.5</code> and if you at most cases write posts in Chinese (without mixed English), recommended to set <code>awl</code> to <code>2</code> and <code>wpm</code> to <code>300</code>.<br>But if you usualy mix your posts with English, <code>awl</code> to <code>4</code> and <code>wpm</code> to <code>275</code> will be nice.</p>
+<h3 id="NexT-theme"><a href="#NexT-theme" class="headerlink" title="NexT theme"></a>NexT theme</h3><p>This plugin integrated in «NexT» and after plugin enabled in main Hexo config, you may adjust options in NexT config:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">separated_meta:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">item_text_post:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">item_text_total:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Development"><a href="#Development" class="headerlink" title="Development"></a>Development</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> hexo</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/theme-next/hexo-symbols-count-time.git node_modules/hexo-symbols-count-time</span><br><span class="line">$ <span class="built_in">cd</span> node_modules/hexo-symbols-count-time</span><br></pre></td></tr></table></figure>
+
+<h3 id="Tests"><a href="#Tests" class="headerlink" title="Tests"></a>Tests</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install mocha chai --save-dev</span><br><span class="line">$ npm <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Tests-with-coverage"><a href="#Tests-with-coverage" class="headerlink" title="Tests with coverage"></a>Tests with coverage</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g nyc</span><br><span class="line">$ nyc --<span class="built_in">print</span> both node_modules/.bin/_mocha -- <span class="built_in">test</span>/index.js</span><br></pre></td></tr></table></figure>
+
+<h3 id="Templates"><a href="#Templates" class="headerlink" title="Templates"></a>Templates</h3><h4 id="Symbols-Count"><a href="#Symbols-Count" class="headerlink" title="Symbols Count"></a>Symbols Count</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; symbolsCount(post) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Symbols-Time"><a href="#Symbols-Time" class="headerlink" title="Symbols Time"></a>Symbols Time</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; symbolsTime(post) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Or with predefined parameters:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; symbolsTime(post, awl, wpm, suffix) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Symbols-Count-Total"><a href="#Symbols-Count-Total" class="headerlink" title="Symbols Count Total"></a>Symbols Count Total</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; symbolsCountTotal(site) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Symbols-Time-Total"><a href="#Symbols-Time-Total" class="headerlink" title="Symbols Time Total"></a>Symbols Time Total</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; symbolsTimeTotal(site) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Or with predefined parameters:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; symbolsTimeTotal(site, awl, wpm, suffix) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Renderers-syntax"><a href="#Renderers-syntax" class="headerlink" title="Renderers syntax"></a>Renderers syntax</h4><p>SWIG / Nunjucks: <code>&#123;&#123;` `template` `&#125;&#125;</code><br>EJS: <code>&lt;%-</code> <code>template</code> <code>%&gt;</code><br>Jade: <code>span=</code> <code>template</code></p>
+
+      </div>
+      
+      
+      
+    </div>
+    
+  <ul class="breadcrumb">
+          
+            <li><a href="/lib/">LIB</a></li>
+            <li><a href="/lib/count/">COUNT</a></li>
+            <li>README</li>
+          
+  </ul>
+
+    
+    
+    
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo-symbols-count-time"><span class="nav-number">1.</span> <span class="nav-text">hexo-symbols-count-time</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">1.2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameters"><span class="nav-number">1.2.1.</span> <span class="nav-text">Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NexT-theme"><span class="nav-number">1.2.2.</span> <span class="nav-text">NexT theme</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Development"><span class="nav-number">1.3.</span> <span class="nav-text">Development</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tests"><span class="nav-number">1.3.1.</span> <span class="nav-text">Tests</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tests-with-coverage"><span class="nav-number">1.3.2.</span> <span class="nav-text">Tests with coverage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Templates"><span class="nav-number">1.3.3.</span> <span class="nav-text">Templates</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Symbols-Count"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">Symbols Count</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Symbols-Time"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">Symbols Time</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Symbols-Count-Total"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">Symbols Count Total</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Symbols-Time-Total"><span class="nav-number">1.3.3.4.</span> <span class="nav-text">Symbols Time Total</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Renderers-syntax"><span class="nav-number">1.3.3.5.</span> <span class="nav-text">Renderers syntax</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="时光"
+      src="/images/wons.png">
+  <p class="site-author-name" itemprop="name">时光</p>
+  <div class="site-description" itemprop="description">时光光的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Guiny-Time" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Guiny-Time" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:guinytime@gmail.com" title="Mail → mailto:guinytime@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021/6/5 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fab fa-connectdevelop"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuinyTime©2021</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='255,201,0' opacity='1' zIndex='-1' count='200' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
