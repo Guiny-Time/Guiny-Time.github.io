@@ -1,0 +1,11 @@
+#recent-posts>.recent-post-item,.layout_page>div:first-child:not(.recent-posts),.layout_post>#page,.layout_post>#post,.read-mode .layout_post>#post {
+    background: linear-gradient(0deg,rgba(255,255,255,.5),rgba(75,227,209,.5) 100%)
+}
+
+#aside-content .card-widget {
+    background: rgba(255,255,255,.8)
+}
+
+#web_bg {
+    background: linear-gradient(45deg,rgba(0,125,122,1),rgba(0,255,216,.4) 40%,rgba(0,255,235,.4) 75%,rgba(255,255,0,.5) 100%)
+}
