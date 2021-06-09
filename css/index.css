@@ -5060,6 +5060,12 @@ _:future,
 #waline .vcards .vcard .vcontent.expand:after {
   z-index: 22;
 }
+#vcomment textarea {
+  background: url("/img/comment_bg.png# valine background") 100% 100% no-repeat;
+}
+#vcomment textarea:focus {
+  background-image: none;
+}
 .fireworks {
   position: fixed;
   top: 0;
