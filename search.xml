@@ -232,6 +232,31 @@
     
     
     <entry>
+      <title>Ch15: 随机变量</title>
+      <link href="/2021/03/29/Ch15%EA%9E%89%20%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/"/>
+      <url>/2021/03/29/Ch15%EA%9E%89%20%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Ch15-随机变量"><a href="#Ch15-随机变量" class="headerlink" title="Ch15: 随机变量"></a>Ch15: 随机变量</h1><p>书本p406~</p><h2 id="期望值-Except-Value"><a href="#期望值-Except-Value" class="headerlink" title="期望值(Except Value)"></a>期望值(Except Value)</h2><ul><li>可以用μ来表示</li><li>也可以用E(x)表示<br>随机变量的期望值是其理论长期均值，是其模型的中心，其实就是平均值<blockquote><p>The expected value of a random variable is its theoretical long-run average value, the center of its model.</p></blockquote></li></ul><h3 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h3><p>μ = X<sub>1</sub>P(X<sub>1</sub>)+X<sub>2</sub>P(X<sub>2</sub>)+…+X<sub>n</sub>P(X<sub>n</sub>)</p><h2 id="方差与标准差"><a href="#方差与标准差" class="headerlink" title="方差与标准差"></a>方差与标准差</h2><h3 id="方差"><a href="#方差" class="headerlink" title="方差"></a>方差</h3><ul><li>可以用σ<sup>2</sup>表示</li><li>也可以用Var(x)表示<h4 id="计算公式"><a href="#计算公式" class="headerlink" title="计算公式"></a>计算公式</h4>σ<sup>2</sup> = (X<sub>1</sub>-μ)<sup>2</sup>P<sub>1</sub>+(X<sub>2</sub>-μ)<sup>2</sup>P<sub>2</sub>+…+(X<sub>n</sub>-μ)<sup>2</sup>P<sub>n</sub></li></ul><hr><h3 id="标准差"><a href="#标准差" class="headerlink" title="标准差"></a>标准差</h3><ul><li>可以用σ表示</li><li>就是累加的时候没有乘平方的方差<h4 id="计算公式-1"><a href="#计算公式-1" class="headerlink" title="计算公式"></a>计算公式</h4>σ = 根号下(X<sub>1</sub>-μ)<sup>2</sup>P<sub>1</sub>+(X<sub>2</sub>-μ)<sup>2</sup>P<sub>2</sub>+…+(X<sub>n</sub>-μ)<sup>2</sup>P<sub>n</sub></li></ul><h2 id="随机变量的位移和组合"><a href="#随机变量的位移和组合" class="headerlink" title="随机变量的位移和组合"></a>随机变量的位移和组合</h2><p>记结论性的东西，没什么好讲的</p><ul><li><strong>加上常数</strong><br>μ：加上常数<br>σ：不变</li><li><strong>乘上常数</strong><br>μ：乘上常数<br>σ：乘上常数的平方</li><li><strong>事件相加</strong><br>μ(X ± Y)：μ(X) ± μ(Y)<br>σ(X ± Y)：σ(X) + σ(Y)</li></ul><h2 id="连续随机数"><a href="#连续随机数" class="headerlink" title="连续随机数"></a>连续随机数</h2><p>本章节涉及的连续随机数为正态分布模型</p><h3 id="公式-1"><a href="#公式-1" class="headerlink" title="公式"></a>公式</h3><p>X~N(μ，σ)，其中μ为平均值，σ为标准差<br>z是一个特殊的东西，x是什么？</p><h3 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h3><p><img src="/.com//Clipboard_2021-04-05-14-26-31.png"></p><p>如图所示，μ(平均值)正好位于整个图像的中心也就是最突出的地方</p><h3 id="68-95-99-7规则"><a href="#68-95-99-7规则" class="headerlink" title="68-95-99.7规则"></a>68-95-99.7规则</h3><p>分别对应μ ± σ(对应z = ±1)、μ ± 2σ(对应z = ±2)、μ ± 3σ(对应z = ±3)<br>z = (x - μ) / σ，z有的时候写作Y。这个公式反过来可以推x<br>正态分布的面积即表示概率</p><h3 id="特殊的Z值"><a href="#特殊的Z值" class="headerlink" title="特殊的Z值"></a>特殊的Z值</h3><p>有的时候要求的东西的z并不是1、2或3.这时候需要用到z表来看。z表会提供对应z值的概率，请注意这个概率对应的是z左侧的面机占比<br>如下图的蓝色部分<br><img src="/.com//Clipboard_2021-04-05-14-24-42.png"></p><p>z表：<br><img src="/.com//Clipboard_2021-04-05-14-25-45.png"></p><h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><p><a href="https://www.youtube.com/watch?v=CjF_yQ2N638">https://www.youtube.com/watch?v=CjF_yQ2N638</a></p><ul><li>给定Z问X</li><li>给定X问Z</li><li>Z值正负造成的不同(在平均值的左右)</li><li>利用平均值、标准差、利用68-95-99.7规则来求概率和人数</li><li>利用z表求概率和人数</li><li>通过概率，利用z表逆推求z</li></ul><h4 id="推论"><a href="#推论" class="headerlink" title="推论"></a>推论</h4><ul><li>如果随机数X满足N(μ，σ)，那么Y = (X-μ)/σ满足N(0,1)</li><li>把两个随机数相加，得到的正态分布模型会与最开始的完全不一样</li><li>虽然完全不一样，但是它的分布依然遵守正态分布模型</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 统计学导论 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ST221 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>L4-需求工程</title>
       <link href="/2021/03/19/L4-%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B/"/>
       <url>/2021/03/19/L4-%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B/</url>
@@ -245,6 +270,31 @@
           
       </categories>
       
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Ch14: 概率规则</title>
+      <link href="/2021/03/19/Ch14%EA%9E%89%20%E6%A6%82%E7%8E%87%E8%A7%84%E5%88%99/"/>
+      <url>/2021/03/19/Ch14%EA%9E%89%20%E6%A6%82%E7%8E%87%E8%A7%84%E5%88%99/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Ch14-概率规则"><a href="#Ch14-概率规则" class="headerlink" title="Ch14: 概率规则"></a>Ch14: 概率规则</h1><p>书本p383~p399<br>参考视频：<a href="https://www.youtube.com/watch?v=aVqmWW3xmdU">https://www.youtube.com/watch?v=aVqmWW3xmdU</a></p><h2 id="一般加法规则"><a href="#一般加法规则" class="headerlink" title="一般加法规则"></a>一般加法规则</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">P(A or B) = P(A) + P(B) - P(A and B)</span><br></pre></td></tr></table></figure><ul><li>如果AB两个事件存在相交的部分，那么P(A或B)的概率就需要减去重复的那部分来<strong>去重</strong></li><li>如果AB两个事件是互斥的，那么P(A与B)的概率本身就为0，P(A或B)的概率可以简写成P(A)+P(B)<br><img src="/.com//Clipboard_2021-06-19-10-35-37.png"><br>Venn图是判断事件是否相交的有力工具<blockquote><p><strong>例题</strong><br>一项调查显示，50%的同学参加了学生会，28%的同学参加了魔法部，11%的同学两个部门都参加了。请问参加了学生会或者魔法部的同学有多少</p><blockquote><p>于是Venn图上有两个相交的圈，一个代表参加学生会的同学，另一个是参加魔法部的同学，它们相交的部分为11%。<br>圈子外的部分指的是两个会都没有参加的同学</p></blockquote></blockquote><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">P(参加了学生会或魔法部) = P(参加了学生会) + P(参加了魔法部) - P(同时参加了学生会和魔法部)</span><br><span class="line">                       = 0.5 + 0.28 - 0.11</span><br><span class="line">                       = 0.67</span><br></pre></td></tr></table></figure><h3 id="警惕自然语言与统计学术语之间的差异"><a href="#警惕自然语言与统计学术语之间的差异" class="headerlink" title="警惕自然语言与统计学术语之间的差异"></a>警惕自然语言与统计学术语之间的差异</h3>在统计学语言中，A或B的概率意味着A或B或两者的概率，指的是<strong>包含了两者的一个更为大的概念</strong>，有点只可意会不可言传…<br>但在日常语言中，“或”通常是唯一的版本，意思是<strong>其中之一</strong>，但不是两者都是<br>所以，不要让自然语言影响你的统计思维</li></ul><br><h2 id="条件概率与一般乘法规则"><a href="#条件概率与一般乘法规则" class="headerlink" title="条件概率与一般乘法规则"></a>条件概率与一般乘法规则</h2><h3 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h3><p>当我们想从一个声明条件A的分布中得到一个事件B的概率时，我们写P(B | A)，发音为” the probability of B given a.(当A作为前提的情况下发生B的概率) “<br>考虑到一个给定的条件的概率就叫做条件概率。简单的条件分布会直接告诉你P(A)、P(B)与P(A and B)<br>当涉及因素变量与分布变量时，最直观的解决条件概率的方法是列出联表(一般有两个因素变量作为横轴，其他的分布变量作为纵轴)</p><blockquote><p>因素变量是指采样的因素，比如男性和女性、老人和小孩、年龄分层等等<br>分布变量是指因素变量群体的具体选择，比如男性群体中有多少人选择参加学生会，有多少人选择参加魔法部</p></blockquote><h4 id="条件概率公式"><a href="#条件概率公式" class="headerlink" title="条件概率公式"></a>条件概率公式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">              P(A and B)</span><br><span class="line">P(B | A) =  ———————————————</span><br><span class="line">                 P(A)</span><br></pre></td></tr></table></figure><h3 id="一般乘法规则"><a href="#一般乘法规则" class="headerlink" title="一般乘法规则"></a>一般乘法规则</h3><p>对于不要求复合事件事件独立的一般乘法规则，通用的条件概率公式如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">P(A and B) = P(A) * P(B | A)</span><br><span class="line">P(A and B) = P(B) * P(A | B)</span><br></pre></td></tr></table></figure><p>当且仅当A与B互相为独立事件(事件A发生后不会影响事件B发生的概率，比如摸球放回)时，P(B | A) = P(B)；P(A | B) = P(A)<br>此时，乘法规则可以简单的写成P(A) * P(B)的形式<br>于是，当我们无法判断两个事件是否独立时，我们可以用一般乘法规则计算出其条件概率，再直接计算P(A) * P(B)，如果两个概率值一致则两个事件相互独立</p><br><h2 id="独立与互斥"><a href="#独立与互斥" class="headerlink" title="独立与互斥"></a>独立与互斥</h2><h3 id="独立性-Independence"><a href="#独立性-Independence" class="headerlink" title="独立性(Independence)"></a>独立性(Independence)</h3><p align="center"><img src="/.com//ST221-3.png" width="400px"></p><ul><li>两个事件独立<br>事件A发生之后不会影响到事件B发生的概率，比如摸球放回</li><li>两个事件不独立<br>事件A发生之后事件B发生的概率随之改变，比如摸球不放回</li></ul><h3 id="互斥-不相交-Mutually-Exclusive-Disjoint"><a href="#互斥-不相交-Mutually-Exclusive-Disjoint" class="headerlink" title="互斥/不相交(Mutually Exclusive/Disjoint)"></a>互斥/不相交(Mutually Exclusive/Disjoint)</h3><p align="center"><img src="/.com//ST221-2.png" width="400px"></p><p>看Venn图是最直接的，只要两个事件的圈不相交那么它们就是互斥的<br>换句话说，两个事件无法同时发生。比如丢出点数为1的骰子和点数为3的骰子无法同时发生</p><h3 id="独立不等同于不相交"><a href="#独立不等同于不相交" class="headerlink" title="独立不等同于不相交"></a>独立不等同于不相交</h3><p>两个事件独立与否，相当于两个面<br>独立的事件依然可以相交，虽然是两个面，但是向下投影如果能够重合那么就可以认定为是相交的(被我描述的极其抽象)</p><blockquote><p>听歌和下雨这两个事件相互独立，听歌位于“人的层面”，下雨位于“天气的层面”<br>当然可以一边下雨一边听歌，两件事情是可以同时发生的</p></blockquote><h3 id="不相交不等同于独立"><a href="#不相交不等同于独立" class="headerlink" title="不相交不等同于独立"></a>不相交不等同于独立</h3><p>不相交指两个事件无法同时发生，这两个事件一定是不独立的</p><blockquote><p>在路口遇到红灯和在路口遇到绿灯是两个事件，它们发生的概率各位50%<br>假设行人遭遇红灯，他不可能在遭遇红灯的同时遭遇绿灯，所以绿灯发生的概率为0。因为概率发生改变，所以两个事件不独立，但也不相交</p></blockquote><br><h2 id="概率问题的图形化求解"><a href="#概率问题的图形化求解" class="headerlink" title="概率问题的图形化求解"></a>概率问题的图形化求解</h2><h3 id="表格与Venn图"><a href="#表格与Venn图" class="headerlink" title="表格与Venn图"></a>表格与Venn图</h3><p><img src="/.com//Clipboard_2021-06-19-16-59-47.png"><br>71%的成年人在线使用Facebook, 18%使用Twitter, 15%两者都使用</p><h3 id="树状图"><a href="#树状图" class="headerlink" title="树状图"></a>树状图</h3><p><img src="/.com//Clipboard_2021-06-19-17-02-05.png"><br>树状图把事件序列表示为看起来像树的分支的路径<br>树状图的用武之地在于将复杂的与或关系用分支的形式展现了出来。这样，在求许多条件概率问题的时候树状图显得非常直观方便</p><br><h2 id="贝叶斯规则"><a href="#贝叶斯规则" class="headerlink" title="贝叶斯规则"></a>贝叶斯规则</h2><p>贝叶斯规则是条件概率的一种很复杂的写法，公式如下</p><p align="center"><img src="/.com//ST221-4.png" width="600"></p>他展示了条件概率的另一种求法。不过，一般我们通过树形图都可以得出正常需要的概率值]]></content>
+      
+      
+      <categories>
+          
+          <category> 统计学导论 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ST221 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -302,6 +352,31 @@
           
       </categories>
       
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Ch13: 从随机数到概率</title>
+      <link href="/2021/03/15/Ch13%EA%9E%89%20%E4%BB%8E%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%88%B0%E6%A6%82%E7%8E%87/"/>
+      <url>/2021/03/15/Ch13%EA%9E%89%20%E4%BB%8E%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%88%B0%E6%A6%82%E7%8E%87/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Ch13-从随机数到概率"><a href="#Ch13-从随机数到概率" class="headerlink" title="Ch13: 从随机数到概率"></a>Ch13: 从随机数到概率</h1><p>课本p365~373</p><h2 id="随机现象"><a href="#随机现象" class="headerlink" title="随机现象"></a>随机现象</h2><h3 id="定义及概念"><a href="#定义及概念" class="headerlink" title="定义及概念"></a>定义及概念</h3><blockquote><p>a random phenomenon is a situation in which we know what outcomes can possibly occur, but we don’t know which particular outcome will happen<br>比如说开车经过红绿灯，我们知道可能遇到红灯、黄灯或者绿灯，但不知道具体会遇到哪种情况，所以开车遇到红绿灯是随机现象</p></blockquote><ul><li>如果我们知道什么结果可能会发生，但我们不知道什么特定的结果会发生，我们就称这种现象是随机的<blockquote><p>In general, each occasion upon which we observe a random phenomenon is called a trial.<br>At each trial, we note the value of the random phenomenon, and call that the trial’s outcome</p></blockquote></li><li>一般来说，对随机现象的一次尝试或实现称为试验(trial)</li><li>测量、观察或报告的价值为一个单独的试验实例称为试验结果(outcome)<blockquote><p>When we combine outcomes like that, the resulting combination is an event.<br>We call the collection of all possible outcomes the sample space</p></blockquote></li><li>我们称事件是结果的集合。我们用粗体大写字母表示事件(Events)，如A、B或C</li><li>所有可能结果值的集合称为样本空间(Sample Space)。我们用黑体大写S表示样本空间(用于Venn图)</li></ul><br><h2 id="大数定律-LLN-Law-of-Large-Numbers"><a href="#大数定律-LLN-Law-of-Large-Numbers" class="headerlink" title="大数定律(LLN / Law of Large Numbers)"></a>大数定律(LLN / Law of Large Numbers)</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>当我们大量多次重复一个随机过程时，一个事件发生的次数所占的比例会逐渐降为一个数字。我们称这个数字为事件发生的概率<br>因为这个定义是基于对事件结果的反复观察，所以这个概率的定义通常被称为<strong>经验概率</strong></p><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul><li>随机现象一定不能改变，每个试验的结果必须有相同的概率(比如抛硬币，正反两面的概率恒定是1/2)</li><li>事件必须独立互不影响。独立性意味着<strong>一个试验的结果不影响其他试验的结果</strong><h3 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h3>LLN保证相对频率在长期内稳定下来，我们可以为它们接近的值命名。我们称之为事件的概率。因为这个定义是建立在反复观察事件结果的基础上的，所以这个概率的定义通常被称为经验概率。对于任何事件A，经验概率的公式为：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">     一个事件在多次执行的过程中发生的次数</span><br><span class="line">——————————————————————————————————————————</span><br><span class="line">             事件执行的次数</span><br></pre></td></tr></table></figure></li></ul><br><h2 id="不存在的平均定律-The-Nonexistent-Law-of-Averages"><a href="#不存在的平均定律-The-Nonexistent-Law-of-Averages" class="headerlink" title="不存在的平均定律(The Nonexistent Law of Averages)"></a>不存在的平均定律(The Nonexistent Law of Averages)</h2><p>The so-called Law of Averages doesn’t exist at all.<br>大数定律经常被误解，因为”长期”的概念很难理解。举个简单的例子，许多人认为在许多次试验之后仍没有发生过的随机事件“应该很快就会”发生。</p><blockquote><p>许多赌徒把赌注押在一段时间没有出现的数字上，错误地认为这些数字可能会更早出现<br>另一个著名的例子是老虎机，赌徒错误的认为一台机子越久没有摇到777中奖的几率就越大</p></blockquote><p>针对这种现象与心理，一个更为常见的术语是“平均定律”。根据大数定律(LLN)，相对频率将最终确定为这种结果的概率，但是<strong>大数定律没有提到短期行为。相对频率只有在长期内才会均匀</strong>。根据LLN，长期是非常长的(实际上是无限长的)。所以<strong>所谓的平均法则根本就不存在</strong>。</p><blockquote><p>一个优秀的棒球击球手在过去六次三振出局后，下次会被击出安打吗?如果你在统计学课上的每周小测验中表现特别好，你会不会有一个糟糕的成绩?</p></blockquote><p>这不是随机现象的工作方式。短期内没有平均法则，评价定律并不存在</p><blockquote><p>答题模板</p><ul><li>平均定律并不存在</li><li>每个xx事件都是一个独立的事件</li><li>过去一小段时间的影响不会影响LLN进而影响到未来</li></ul></blockquote><br><h2 id="理论概率"><a href="#理论概率" class="headerlink" title="理论概率"></a>理论概率</h2><h3 id="公式-1"><a href="#公式-1" class="headerlink" title="公式"></a>公式</h3><p>当概率来自一个模型(如等可能的结果)而不是来自观察，它被称为理论概率。对于任何事件A，理论概率的公式为：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">      事件A发生</span><br><span class="line">—————————————————————</span><br><span class="line">  可能发生的事件类型</span><br></pre></td></tr></table></figure><br><h2 id="其他概率"><a href="#其他概率" class="headerlink" title="其他概率"></a>其他概率</h2><h3 id="个人概率"><a href="#个人概率" class="headerlink" title="个人概率"></a>个人概率</h3><p>第三方的主观概率</p><h3 id="正式概率"><a href="#正式概率" class="headerlink" title="正式概率"></a>正式概率</h3><h4 id="Venn图"><a href="#Venn图" class="headerlink" title="Venn图"></a>Venn图</h4><ul><li>Venn图规定了一个框，整个框内代表概率为1(一次尝试的所有可能结果的集合的概率必须为1)，即P(S) = 1</li></ul><h4 id="正式概率规则"><a href="#正式概率规则" class="headerlink" title="正式概率规则"></a>正式概率规则</h4><ul><li>任意一个事件A，它发生的概率为0≤P(A)≤1</li><li>概率分配规则：一个实验(Trial)所有结果(Outcome)的概率和为P(S) = 1</li><li>补数规则：事件不发生的概率为1减去它发生的概率。不属于事件A的结果集合称为A的补数，表示为A<sup>C</sup></li><li>加法定律：两个**不相交(或互斥)**的事件A和B，他们中一个发生发生的概率为：<br>P(A or B) = P(A) + P(B)</li><li>乘法定律：两个<strong>独立</strong>事件，他们同时发生的概率为：<br>P(A and B) = P(A) * P(B)</li></ul><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol><li>小心那些加起来不等于1的概率</li><li>如果事件相交，不要用加法定律</li><li>如果事件不独立(不互斥)，就不要把它们的概率相乘</li><li>不要混淆不连贯和独立。不相交的事件不可能是独立的<blockquote><p>关于这点，举个例子：<br>如果A ={你在测验中得到A} B ={你在测验中得到B}， A和B是不相交(无法同时发生)的。他们是独立的吗?<br>如果你发现A发生了，会改变B发生的概率吗？当然了，因为B发生的概率变成0了，如果A已经发生则不可能发生B，所以它们不可能是独立的</p></blockquote></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 统计学导论 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ST221 </tag>
+            
+        </tags>
       
     </entry>
     
