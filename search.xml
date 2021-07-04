@@ -4,6 +4,101 @@
   
     
     <entry>
+      <title>Ch24: 卡方测试</title>
+      <link href="/2021/07/04/Ch24%EA%9E%89%20%E5%8D%A1%E6%96%B9%E6%B5%8B%E8%AF%95/"/>
+      <url>/2021/07/04/Ch24%EA%9E%89%20%E5%8D%A1%E6%96%B9%E6%B5%8B%E8%AF%95/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Ch24-卡方测试"><a href="#Ch24-卡方测试" class="headerlink" title="Ch24: 卡方测试"></a>Ch24: 卡方测试</h1><p>书本p672~p692</p><h2 id="卡方值图"><a href="#卡方值图" class="headerlink" title="卡方值图"></a>卡方值图</h2><p>或者说，有点歪的正态曲线(实际上完全不是正态曲线)<br><img src="/.com//Clipboard_2021-05-28-08-48-48.png"></p><h2 id="临界卡方值"><a href="#临界卡方值" class="headerlink" title="临界卡方值"></a>临界卡方值</h2><p>根据卡方值表，利用自由度df与重要性指数α获得值<br>值得注意的是，卡方值表中的横轴是右侧面积<br><img src="/.com//Clipboard_2021-05-28-08-47-57.png"></p><h2 id="卡方拟合优度测试-chi-square-Goodness-of-Fit-Tests"><a href="#卡方拟合优度测试-chi-square-Goodness-of-Fit-Tests" class="headerlink" title="卡方拟合优度测试(chi-square Goodness-of-Fit Tests)"></a>卡方拟合优度测试(chi-square Goodness-of-Fit Tests)</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>指的是<strong>原假设认为数据属于均匀分布</strong>，而<strong>备择假设认为数据不属于均匀分布</strong>，现在需要是否能够<strong>推翻原假设</strong><br>比如原假设认为十二星座对就业不影响，而现在想验证十二星座能影响就业(推翻不影响的原假设</p><blockquote><p><strong>一个类别变量</strong>的计数分布是否与模型预测的分布相匹配的检验称为拟合优度检验。<br>在卡方拟合优度检验中，预期计数来自预测模型。检验从n - 1个自由度的卡方模型中找到一个p值，其中n是类别变量中的类别数</p></blockquote><h3 id="前提条件判断"><a href="#前提条件判断" class="headerlink" title="前提条件判断"></a>前提条件判断</h3><ul><li>计数数据条件(Counted Data Condition): 该数据必须是一个分类变量的类别计数。</li><li>独立性假设(Independence Assumption): 单位内的计数应该是相互独立的。</li><li>样本量假设(Frequency Condition): 我们必须有足够的数据才能使方法工作，所以我们通常检查期望单位频率条件。我们预计每个单位中至少有5个个体<h3 id="计算卡方值"><a href="#计算卡方值" class="headerlink" title="计算卡方值"></a>计算卡方值</h3>s是样本标准差，而σ是总体标准差<br><img src="/.com//Clipboard_2021-05-28-08-46-15.png"><br>实际值-观测值得到的结果也被称为<strong>残差(Residual)</strong><h3 id="计算P值"><a href="#计算P值" class="headerlink" title="计算P值"></a>计算P值</h3>df的值：<strong>类别</strong>-1(比如12星座的例子，df为12 - 1 = 11)<br>利用计算卡方值与df的值，在卡方值表查找p值的大小(一般为右尾测试)<br><img src="/.com//Clipboard_2021-06-10-11-36-06.png"><br><img src="/.com//Clipboard_2021-06-10-11-37-03.png"></li></ul><h2 id="卡方同一性测试-The-χ2-test-for-homogeneity"><a href="#卡方同一性测试-The-χ2-test-for-homogeneity" class="headerlink" title="卡方同一性测试(The χ2-test for homogeneity)"></a>卡方同一性测试(The χ2-test for homogeneity)</h2><p>卡方同一测试的目的是是否能够<strong>证实某种理论是正确的</strong></p><blockquote><p>对<strong>同一分类变量</strong>的<strong>两组或多组计数分布</strong>进行比较的检验，即一个变量相对于不同类别的分布<br>同质性卡方检验发现基于总体频率的预期计数，在(零假设)假设下调整每组的总数，每个组的分布是相同的。我们从(#Rows - 1) * (#Cols - 1)自由度的卡方分布中找到一个p值，其中#Rows表示类别的数量，#Cols表示独立组的数量</p></blockquote><h3 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h3><ul><li>计数数据条件: 该数据必须是一个分类变量的类别计数。</li><li>独立性假设:单位内的计数应该是相互独立的。</li><li>单位频率条件:我们必须有足够的数据才能使这些方法工作，所以我们通常检查期望单位频率条件。我们预计每个单位中至少有5个个体。<h3 id="计算卡方值-1"><a href="#计算卡方值-1" class="headerlink" title="计算卡方值"></a>计算卡方值</h3><img src="/.com//Clipboard_2021-05-28-08-46-15.png"><br>并不是所有时候都会直接把期望值列出来。拟合优度检测专注于寻找几种不同的分组(cell)的概率是否相同。我们需要利用求和之后的占比乘以该分组的总数才能获得期望值</li></ul><h3 id="计算p值"><a href="#计算p值" class="headerlink" title="计算p值"></a>计算p值</h3><p>首先计算df。同质性测试中，df的值为(R - 1)(C - 1)<br>根据df与卡方值，在卡方表中找到p值</p><h3 id="标准残差"><a href="#标准残差" class="headerlink" title="标准残差"></a>标准残差</h3><p>计算公式：<img src="/.com//Clipboard_2021-05-31-08-41-27.png"></p><blockquote><p>这些标准化残差就是我们为每个单元计算的分量的平方根，它们的符号表明我们观察到的情况是比我们预期的多，还是更少<br>即：最可能…和最不可能…<br>当我们拒绝卡方检验时，对标准化残差的检验有时可以揭示更多关于数据如何偏离零模型的信息</p></blockquote><h2 id="卡方独立性测试-Chi-Square-independence-test"><a href="#卡方独立性测试-Chi-Square-independence-test" class="headerlink" title="卡方独立性测试(Chi-Square independence test)"></a>卡方独立性测试(Chi-Square independence test)</h2><p>当问到在<strong>同一总体</strong>上测量的<strong>两个变量是否独立</strong>时，我们使用卡方独立性检验</p><blockquote><p>两个分类变量是否独立的检验检验了根据两个变量分类的一组个体的计数分布。<br>独立卡方检验通过假设知道边际总数就能告诉我们细胞频率，假设变量之间没有关联来发现预期计数。这和同质性测试的计算是一样的。我们从(#Rows - 1) * (#Cols - 1)自由度的卡方分布中找到一个p值，其中#Rows表示一个变量中的类别数，#Cols表示另一个变量中的类别数</p></blockquote><ul><li>原假设：两个变量独立</li><li>备择假设：两个变量不独立</li><li>自由度df = (r - 1)*(c - 1)</li><li>卡方值<br><img src="/.com//Clipboard_2021-05-28-08-46-15.png"></li><li>p值：和前面的算法一样</li></ul><p>这个卡方测试也是右尾测试，基本逻辑和前面一样</p><h2 id="容易犯错的点"><a href="#容易犯错的点" class="headerlink" title="容易犯错的点"></a>容易犯错的点</h2><h3 id="警惕大样本"><a href="#警惕大样本" class="headerlink" title="警惕大样本"></a>警惕大样本</h3><p>当样本数量过大时，自由度也随之上升，卡方表上得出的结论</p><h3 id="依赖？"><a href="#依赖？" class="headerlink" title="依赖？"></a>依赖？</h3><p>当两个变量是相关的时候，你只能说他们有联系，而不应该说他们是相互依赖的</p><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>卡方检验要求变量有计数，如果一个测试的cell值是定量的，那么它不适合用于卡方测试</p><h2 id="判断使用哪种卡方测试"><a href="#判断使用哪种卡方测试" class="headerlink" title="判断使用哪种卡方测试"></a>判断使用哪种卡方测试</h2><p>首先，你应该分析题干是针对一个变量分析还是两个变量</p><blockquote><ul><li>一个变量：卡方拟合优度测试</li><li>两个变量：卡方同质性检测或卡方独立性检测</li></ul></blockquote>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> ST221 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Ch23: 对比数据检测</title>
+      <link href="/2021/07/04/Ch23%EA%9E%89%20%E5%AF%B9%E6%AF%94%E6%95%B0%E6%8D%AE%E6%A3%80%E6%B5%8B/"/>
+      <url>/2021/07/04/Ch23%EA%9E%89%20%E5%AF%B9%E6%AF%94%E6%95%B0%E6%8D%AE%E6%A3%80%E6%B5%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Ch23-对比数据检测"><a href="#Ch23-对比数据检测" class="headerlink" title="Ch23: 对比数据检测"></a>Ch23: 对比数据检测</h1><p>书本p647~p660</p><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>对于对比数据检测，第一步需要判断实验是否满足对比检测的三个假设条件<br>使用<strong>t测试</strong>，而不是z测试。二者的体系存在偏差<br>计算出t值之后，再<strong>求p值</strong>，然后进行判断能否推翻原假设</p><h2 id="对比数据"><a href="#对比数据" class="headerlink" title="对比数据"></a>对比数据</h2><p>对比数据指的是<strong>同一组数据</strong>前后的变化、内外的变化一流</p><ol><li>当观察结果成对收集或一组的观察结果自然地与另一组的观察结果相关时，数据就是成对的。</li><li>配对最简单的形式是对每个受试者进行两次测量——通常是在治疗前和治疗后。在实验中更复杂的配对形式是一种阻塞形式，在其他情况下也会出现。</li><li>观测数据和调查数据的配对是一种匹配形式。</li><li>我们感兴趣的是每对的差异。</li></ol><h2 id="对比检测的假设条件"><a href="#对比检测的假设条件" class="headerlink" title="对比检测的假设条件"></a>对比检测的假设条件</h2><ul><li>数据配对条件: 必须<strong>对数据进行配对</strong>。</li><li>独立性假设: 如果数据是成对的，则组不是独立的。对于这些方法，必须是<strong>彼此独立</strong>的差异。<blockquote><p>统计学中的勾股定理只适用于独立的随机变量，当变量不独立时，勾股定理不起作用</p></blockquote></li><li>接近正态分布: 我们需要假设<strong>差异(difference,指的是两组样本数据的差值)的总体</strong>接近<strong>正态分布模型</strong>。我们不需要检查每一组。这种情况可以用差异的直方图或正态概率图来检查，但不能用个体组来检查。一般来说，即使你的原始测量是倾斜的或双峰的，差异可能是接近正态的。</li></ul><h2 id="对比检测步骤"><a href="#对比检测步骤" class="headerlink" title="对比检测步骤"></a>对比检测步骤</h2><h3 id="原假设与备择假设"><a href="#原假设与备择假设" class="headerlink" title="原假设与备择假设"></a>原假设与备择假设</h3><p>这个跟题干关系比较大…如果题干问的是“能否证明不变”，那么备择假设就是<br>H<sub>A</sub>: p = 0(z-test)或者H<del>A</del>: μ<del>d</del> = 0(t-test)</p><h3 id="计算差值均值与标准差"><a href="#计算差值均值与标准差" class="headerlink" title="计算差值均值与标准差"></a>计算差值均值与标准差</h3><p>μ<del>d</del> = Σd/n<br>S<sub>d</sub> = 根号下Σ(x-x<sub>d</sub>)<sup>2</sup>)/(n-1)</p><h3 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h3><h4 id="配对T-测试-Paired-T-test"><a href="#配对T-测试-Paired-T-test" class="headerlink" title="配对T-测试(Paired T-test)"></a>配对T-测试(Paired T-test)</h4><ul><li>计算自由度df<br>df = n - 1，其中n为配对数(count of pairs)</li><li>计算t值<br>计算公式：<br><img src="/.com//Clipboard_2021-05-27-10-53-03.png"><br>其中X<sub>d</sub>与S<sub>d</sub>就是前面计算得到的均值(教材中写成d^-)<br>μ<sub>d</sub>为0(由原假设得到)<br>S<del>d</del>/根号n 是差值d的标准误差(SE(d))，由差值d的标准差(SD(d),就是s<del>d</del>)计算得来</li><li>计算P值<br>需要使用t表查询。配对测试似乎都是双尾测试，所以P = 2P(t<del>n-1</del>&gt;t*)<br>得出P值之后，判断P值与α的关系：</li><li>若P小于α则拒绝原假设</li><li>若P大于α，不一定能拒绝原假设</li></ul><h3 id="求误差幅度ME"><a href="#求误差幅度ME" class="headerlink" title="求误差幅度ME"></a>求误差幅度ME</h3><p>计算公式：<br>t*<del>n-1</del> SE(d^-)<br><img src="/.com//Clipboard_2021-05-27-11-04-35.png"></p><h3 id="求置信区间CI"><a href="#求置信区间CI" class="headerlink" title="求置信区间CI"></a>求置信区间CI</h3><p>公式：<br><img src="/.com//Clipboard_2021-05-27-10-59-54.png"></p><p>CI区间的含义：<br>我们有95%(或者别的数值)的信心认为，μ<sub>d</sub>落于这个区间范围</p><h2 id="请注意不要对对比数据使用两组数据检测的方法"><a href="#请注意不要对对比数据使用两组数据检测的方法" class="headerlink" title="请注意不要对对比数据使用两组数据检测的方法"></a>请注意不要对对比数据使用两组数据检测的方法</h2><p>当<strong>样本不是独立</strong>的时候，不要使用两样本方法。<br>当这种独立性假设被违反时，这些方法给出了错误的答案。<br>良好的随机抽样通常是独立群体的最佳保证。<strong>确保这两个群体之间没有关系</strong>。配对设计经常出现，也很重要，但不能用本章的方法进行分析。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> ST221 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Ch22: 两组样本的假设检测</title>
+      <link href="/2021/07/04/Ch22%EA%9E%89%20%E4%B8%A4%E7%BB%84%E6%A0%B7%E6%9C%AC%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E6%B5%8B/"/>
+      <url>/2021/07/04/Ch22%EA%9E%89%20%E4%B8%A4%E7%BB%84%E6%A0%B7%E6%9C%AC%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E6%B5%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Ch22-两组样本的假设检测"><a href="#Ch22-两组样本的假设检测" class="headerlink" title="Ch22: 两组样本的假设检测"></a>Ch22: 两组样本的假设检测</h1><p>书本p602~p628<br>要改的挺多的…因为对于两组样本的假设检测，有两个截然不同的体系z检测和t检测</p><h2 id="检测前提"><a href="#检测前提" class="headerlink" title="检测前提"></a>检测前提</h2><ul><li><strong>随机</strong>条件:理想情况下，每组的数据应该独立地、随机地从人群中抽取，或通过随机比较实验产生。</li><li>10%条件:如果数据未经替换抽样，则在不调整标准差的情况下，样本应**不超过人口的10%**。</li><li>独立组假设:我们正在比较的<strong>两组必须相互独立</strong>。</li><li>成功/失败条件:两组都足够大，每个组<strong>至少有10次成功和10次失败</strong>。</li></ul><h2 id="z测试"><a href="#z测试" class="headerlink" title="z测试"></a>z测试</h2><h3 id="原假设与备择假设"><a href="#原假设与备择假设" class="headerlink" title="原假设与备择假设"></a>原假设与备择假设</h3><p>H<sub>0</sub> : p<sub>1</sub> = p<sub>2</sub><br>H<sub>A</sub> : p<sub>1</sub> ≠ p<sub>2</sub><br>p指的是样本所代表的总体成功的概率</p><h3 id="测试步骤"><a href="#测试步骤" class="headerlink" title="测试步骤"></a>测试步骤</h3><ol><li><p>计算<strong>总体成功概率p</strong>。p的计算公式为：<br>x<sub>1</sub> + x<sub>2</sub><br>———<br>n<sub>1</sub> + n<sub>2</sub></p></li><li><p>通过数据求得<strong>样本z值</strong>。样本z值的计算公式为：<br><img src="/.com//Clipboard_2021-05-16-20-14-21.png"></p></li><li><p>求P值，比较关系</p></li></ol><h3 id="置信区间"><a href="#置信区间" class="headerlink" title="置信区间"></a>置信区间</h3><p>通过p计算标准误差，有<br><img src="/.com//Clipboard_2021-06-09-00-00-39.png"><br>于是，置信区间为<br><img src="/.com//Clipboard_2021-06-09-00-01-08.png"></p><h2 id="t测试"><a href="#t测试" class="headerlink" title="t测试"></a>t测试</h2><h3 id="原假设与备择假设-1"><a href="#原假设与备择假设-1" class="headerlink" title="原假设与备择假设"></a>原假设与备择假设</h3><p>H<sub>0</sub> : μ<sub>1</sub> = μ<sub>2</sub><br>H<sub>A</sub> : μ<sub>1</sub> ≠ μ<sub>2</sub><br>μ指的是样本所代表的总体的均值</p><h3 id="测试步骤-1"><a href="#测试步骤-1" class="headerlink" title="测试步骤"></a>测试步骤</h3><ol><li><p>首先计算<strong>df的值</strong>(前提是知道s与μ)。计算公式如下：<br><img src="/.com//Clipboard_2021-05-16-20-48-54.png"></p></li><li><p>计算<strong>样本t值</strong>，计算公式如下：<br><img src="/.com//Clipboard_2021-05-16-20-55-03.png"></p></li><li><p>求P值，比较关系</p></li></ol><h3 id="置信区间-1"><a href="#置信区间-1" class="headerlink" title="置信区间"></a>置信区间</h3><p>通过s(样本内标准差)计算标准误差，有<br><img src="/.com//Clipboard_2021-06-09-00-01-55.png"><br>于是，置信区间为<br><img src="/.com//Clipboard_2021-06-09-00-02-09.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> ST221 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Ch20: 数据推断</title>
+      <link href="/2021/07/04/Ch20%EA%9E%89%20%E6%95%B0%E6%8D%AE%E6%8E%A8%E6%96%AD/"/>
+      <url>/2021/07/04/Ch20%EA%9E%89%20%E6%95%B0%E6%8D%AE%E6%8E%A8%E6%96%AD/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Ch20-数据推断"><a href="#Ch20-数据推断" class="headerlink" title="Ch20: 数据推断"></a>Ch20: 数据推断</h1><p>书本p535~554</p><h2 id="Student-T-model"><a href="#Student-T-model" class="headerlink" title="Student-T model"></a>Student-T model</h2><p>用于T测试的模型，长得和正态分布的样子挺像的但是稍有不同(指略胖)</p><p><img src="/.com//Clipboard_2021-04-29-20-26-30.png"></p><h3 id="使用情况"><a href="#使用情况" class="headerlink" title="使用情况"></a>使用情况</h3><ul><li>随机化条件<br>如果数据来自随机样本或适当的随机化实验，则满足此条件</li><li>一般在样本容量n &lt; 30时使用<br>当n &gt; 30，一般使用的是正态分布</li><li>题目叫你用t检测你就用.jpg</li></ul><h3 id="相关变量"><a href="#相关变量" class="headerlink" title="相关变量"></a>相关变量</h3><ul><li>df：自由度，用来查表</li><li>t：t值(你就想成z值就好了)，用来查表</li><li>临界t值：处于true/false边缘的临界值，用于判断原命题真伪</li></ul><h2 id="假设检测"><a href="#假设检测" class="headerlink" title="假设检测"></a>假设检测</h2><h3 id="单个样本的假设检测"><a href="#单个样本的假设检测" class="headerlink" title="单个样本的假设检测"></a>单个样本的假设检测</h3><h4 id="自由度df"><a href="#自由度df" class="headerlink" title="自由度df"></a>自由度df</h4><p>计算公式：n - 1, n为样本容量</p><h4 id="显著性水平α"><a href="#显著性水平α" class="headerlink" title="显著性水平α"></a>显著性水平α</h4><p>计算公式：1 - 置信水平CI</p><h4 id="查询临界t值"><a href="#查询临界t值" class="headerlink" title="查询临界t值"></a>查询临界t值</h4><p>横轴：df的值<br>纵轴：α的值<br>通过前面计算得到的两个值即可找到临界t值<br><strong>注意</strong>：t表中对应的α是往右边走的(z表中是左侧面积)，如下图：</p><p><img src="/.com//Clipboard_2021-04-29-14-35-00.png"></p><h4 id="样本t值"><a href="#样本t值" class="headerlink" title="样本t值"></a>样本t值</h4><p>用于与临界t值相比较，若落于false区间则原命题被否<br>计算公式：</p><p><img src="/.com//Clipboard_2021-04-29-14-39-29.png"></p><p>但是<strong>需要注意的是</strong>，我们在实际操作过程中需要判断p值才能去否定原命题或者无法否定。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> ST221 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Ch19: 区间假设检测</title>
+      <link href="/2021/07/04/Ch19%EA%9E%89%20%E5%8C%BA%E9%97%B4%E5%81%87%E8%AE%BE%E6%A3%80%E6%B5%8B/"/>
+      <url>/2021/07/04/Ch19%EA%9E%89%20%E5%8C%BA%E9%97%B4%E5%81%87%E8%AE%BE%E6%A3%80%E6%B5%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Ch19-区间假设检测"><a href="#Ch19-区间假设检测" class="headerlink" title="Ch19: 区间假设检测"></a>Ch19: 区间假设检测</h1><p>书本p511~p</p><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>在做假设检测相关的题目的时候，请务必要写以下流程(防止过程分没)：</p><ol><li>列出原假设与备择假设<br>也就是H<del>0</del>：什么什么什么<br>   H<del>A</del>：什么什么什么</li><li>确定检测是否满足对应的假设条件<br>assumption1: …<br>condition2: …<br>…</li><li>列出参数、画图、套用统计学公式<br>n = ;s = ; y^- = …<br>明确使用左尾测试还是右尾测试还是双尾</li><li>给出结论<br>请不要直接使用z值或者t值与临界的大小关系进行比较<br>按照课本的流程，请使用p值与α之间的关系进行比较(因为这样可以拒绝原假设，但是不能说原假设一定正确)</li></ol><h2 id="概念定义"><a href="#概念定义" class="headerlink" title="概念定义"></a>概念定义</h2><h3 id="假设-Hypothesis"><a href="#假设-Hypothesis" class="headerlink" title="假设(Hypothesis)"></a>假设(Hypothesis)</h3><p>假设是我们用来检验的<strong>模型或命题</strong></p><blockquote><p>Hypothesis is a model or proposition that we adopt in order to test.</p></blockquote><h3 id="原假设-Null-Hypothesis"><a href="#原假设-Null-Hypothesis" class="headerlink" title="原假设(Null Hypothesis)"></a>原假设(Null Hypothesis)</h3><p>对于一个可测试的原假设，它必须为某个总体参数指定一个值，这个值可以作为假设一个检验统计量的抽样分布的基础<br>通常写作H<sub>0</sub>: p = xx</p><h3 id="备择假设-Alternative-Hypothesis"><a href="#备择假设-Alternative-Hypothesis" class="headerlink" title="备择假设(Alternative Hypothesis)"></a>备择假设(Alternative Hypothesis)</h3><p>提出了如果我们拒绝零假设我们应该得出的结论<br>通常写作H<sub>A</sub>: p != xx (xx一般是原假设的值，这是双边测试)或p &gt; xx或p &lt; xx(这是单边测试)</p><h3 id="P值法-P-Value"><a href="#P值法-P-Value" class="headerlink" title="P值法(P-Value)"></a>P值法(P-Value)</h3><p>p值是在零假设为真时，观察到一个检验统计量的值与假设值的距离至少与实际观察到的统计量的距离的概率</p><h4 id="根据P值我们能得到什么结论？"><a href="#根据P值我们能得到什么结论？" class="headerlink" title="根据P值我们能得到什么结论？"></a>根据P值我们能得到什么结论？</h4><ul><li>小P值<br>较小的p值说明观测结果是不可能的，或者说明概率计算是基于错误的假设。原假设的假定真理是被怀疑的假设<br>对于一个足够小的p值，你应该<strong>推翻原假设</strong></li><li>大P值<br>当p值很高时，我们没有看到任何不可能或令人惊讶的事情。有高发生概率的事件经常发生<br>我们<strong>还没有证明原假设是正确的</strong>。我们最多只能说，它<strong>看起来不像是假的</strong><br>形式上，我们<strong>未能拒绝原假设</strong></li></ul><h2 id="检测步骤"><a href="#检测步骤" class="headerlink" title="检测步骤"></a>检测步骤</h2><ul><li>找到原假设与备择假设</li><li>建立模型(寻找p值、SD等等)</li><li>利用机制推理判断(说白了就是看p大小)</li><li>得出结论————原假设是否应该被舍弃</li></ul><h2 id="具体测试"><a href="#具体测试" class="headerlink" title="具体测试"></a>具体测试</h2><h3 id="双边测试"><a href="#双边测试" class="headerlink" title="双边测试"></a>双边测试</h3><p><strong>可视化</strong></p><p><img src="/.com//Clipboard_2021-04-25-20-33-54.png"></p><p>可以看到，阴影部分是被拒绝的区域，这个区域是由置信区间得出的<br>1.96源自置信比例为95%时的z值<br><strong>模型</strong><br>当样本容量n &lt; 30时应当使用学生-T分布；如果超过30则选择正态分布模型<br><strong>机制计算</strong><br>计算临界z值，有：</p><p><img src="/.com//Clipboard_2021-04-25-20-40-43.png"></p><p>计算通过样本检测的z值(与临界z值进行比较)，有：</p><p><img src="/.com//Clipboard_2021-04-26-09-43-44.png"></p><p>请注意未标注0下标的都是备择模型里的数值<br><strong>结论</strong><br>如果z落在拒绝区间，则原假设应该<font color="red">被否定</font>，反之<font color="red">被接受</font></p><h3 id="单边测试"><a href="#单边测试" class="headerlink" title="单边测试"></a>单边测试</h3><p><strong>可视化</strong></p><p><img src="/.com//Clipboard_2021-04-25-20-50-09.png"></p><p>然后其他和双边基本是一样的，就是看z检测的结果(或者t检测)是否落于成功范围</p><h3 id="P值法"><a href="#P值法" class="headerlink" title="P值法"></a>P值法</h3><p><strong>可视化</strong></p><p><img src="/.com//Clipboard_2021-04-25-21-00-20.png"></p><p><strong>模型</strong><br>看题目是单边还是双边模型进行建模<br><strong>机制计算</strong></p><ul><li>引入了一个新的区间α(显著性水平，Significant Level)，值为1-置信区间C</li><li>计算p值<br>p值是计算得出z之后，新的正态分布图像中拒绝部分的概率和</li></ul><p><img src="/.com//Clipboard_2021-04-25-21-07-27.png"><img src="/.com//Clipboard_2021-04-25-21-13-14.png"></p><p>若p &lt; α，则p值过小，应当<font color="red">推翻原假设</font><br>若p ≥ α，则p值较大，我们<font color="red">不一定能拒绝原假设</font>(不能说它对也不能说它错)</p><blockquote><p><strong><p style="font-family:等线 ">当p值无法用于判断结论的时候，我们需要用z值来进行判断</p></strong></p></blockquote><h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ul><li>列出原假设与备择假设</li><li>判断在一定置信比例下能否信任原假设</li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> ST221 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>2021/6/22~2021/6/27涩图精选</title>
       <link href="/2021/06/23/%E6%B6%A9%E5%9B%BE%E7%B2%BE%E9%80%892021-6-22-2021-6-27/"/>
       <url>/2021/06/23/%E6%B6%A9%E5%9B%BE%E7%B2%BE%E9%80%892021-6-22-2021-6-27/</url>

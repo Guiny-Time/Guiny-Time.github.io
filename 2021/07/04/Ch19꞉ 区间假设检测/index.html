@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ch19: 区间假设检测 | Guiny-Time</title><meta name="keywords" content="ST221"><meta name="author" content="时光"><meta name="copyright" content="时光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Ch19: 区间假设检测书本p511~p 写在前面在做假设检测相关的题目的时候，请务必要写以下流程(防止过程分没)：  列出原假设与备择假设也就是H0：什么什么什么   HA：什么什么什么 确定检测是否满足对应的假设条件assumption1: …condition2: …… 列出参数、画图、套用统计学公式n &#x3D; ;s &#x3D; ; y^- &#x3D; …明确使用左尾测试还是右尾测试还是双尾 给出结论请不要直接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ch19: 区间假设检测">
+<meta property="og:url" content="http://example.com/2021/07/04/Ch19%EA%9E%89%20%E5%8C%BA%E9%97%B4%E5%81%87%E8%AE%BE%E6%A3%80%E6%B5%8B/index.html">
+<meta property="og:site_name" content="Guiny-Time">
+<meta property="og:description" content="Ch19: 区间假设检测书本p511~p 写在前面在做假设检测相关的题目的时候，请务必要写以下流程(防止过程分没)：  列出原假设与备择假设也就是H0：什么什么什么   HA：什么什么什么 确定检测是否满足对应的假设条件assumption1: …condition2: …… 列出参数、画图、套用统计学公式n &#x3D; ;s &#x3D; ; y^- &#x3D; …明确使用左尾测试还是右尾测试还是双尾 给出结论请不要直接">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2021-07-04T04:18:23.548Z">
+<meta property="article:modified_time" content="2021-07-04T04:17:33.267Z">
+<meta property="article:author" content="时光">
+<meta property="article:tag" content="ST221">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2021/07/04/Ch19%EA%9E%89%20%E5%8C%BA%E9%97%B4%E5%81%87%E8%AE%BE%E6%A3%80%E6%B5%8B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Ch19: 区间假设检测',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-04 12:17:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/wons-head.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/cats/"><i class="fa-fw fab fa-connectdevelop"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Guiny-Time</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/cats/"><i class="fa-fw fab fa-connectdevelop"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Ch19: 区间假设检测</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-04T04:18:23.548Z" title="发表于 2021-07-04 12:18:23">2021-07-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-04T04:17:33.267Z" title="更新于 2021-07-04 12:17:33">2021-07-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Ch19: 区间假设检测"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Ch19-区间假设检测"><a href="#Ch19-区间假设检测" class="headerlink" title="Ch19: 区间假设检测"></a>Ch19: 区间假设检测</h1><p>书本p511~p</p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>在做假设检测相关的题目的时候，请务必要写以下流程(防止过程分没)：</p>
+<ol>
+<li>列出原假设与备择假设<br>也就是H<del>0</del>：什么什么什么<br>   H<del>A</del>：什么什么什么</li>
+<li>确定检测是否满足对应的假设条件<br>assumption1: …<br>condition2: …<br>…</li>
+<li>列出参数、画图、套用统计学公式<br>n = ;s = ; y^- = …<br>明确使用左尾测试还是右尾测试还是双尾</li>
+<li>给出结论<br>请不要直接使用z值或者t值与临界的大小关系进行比较<br>按照课本的流程，请使用p值与α之间的关系进行比较(因为这样可以拒绝原假设，但是不能说原假设一定正确)</li>
+</ol>
+<h2 id="概念定义"><a href="#概念定义" class="headerlink" title="概念定义"></a>概念定义</h2><h3 id="假设-Hypothesis"><a href="#假设-Hypothesis" class="headerlink" title="假设(Hypothesis)"></a>假设(Hypothesis)</h3><p>假设是我们用来检验的<strong>模型或命题</strong></p>
+<blockquote>
+<p>Hypothesis is a model or proposition that we adopt in order to test.</p>
+</blockquote>
+<h3 id="原假设-Null-Hypothesis"><a href="#原假设-Null-Hypothesis" class="headerlink" title="原假设(Null Hypothesis)"></a>原假设(Null Hypothesis)</h3><p>对于一个可测试的原假设，它必须为某个总体参数指定一个值，这个值可以作为假设一个检验统计量的抽样分布的基础<br>通常写作H<sub>0</sub>: p = xx</p>
+<h3 id="备择假设-Alternative-Hypothesis"><a href="#备择假设-Alternative-Hypothesis" class="headerlink" title="备择假设(Alternative Hypothesis)"></a>备择假设(Alternative Hypothesis)</h3><p>提出了如果我们拒绝零假设我们应该得出的结论<br>通常写作H<sub>A</sub>: p != xx (xx一般是原假设的值，这是双边测试)或p &gt; xx或p &lt; xx(这是单边测试)</p>
+<h3 id="P值法-P-Value"><a href="#P值法-P-Value" class="headerlink" title="P值法(P-Value)"></a>P值法(P-Value)</h3><p>p值是在零假设为真时，观察到一个检验统计量的值与假设值的距离至少与实际观察到的统计量的距离的概率</p>
+<h4 id="根据P值我们能得到什么结论？"><a href="#根据P值我们能得到什么结论？" class="headerlink" title="根据P值我们能得到什么结论？"></a>根据P值我们能得到什么结论？</h4><ul>
+<li>小P值<br>较小的p值说明观测结果是不可能的，或者说明概率计算是基于错误的假设。原假设的假定真理是被怀疑的假设<br>对于一个足够小的p值，你应该<strong>推翻原假设</strong></li>
+<li>大P值<br>当p值很高时，我们没有看到任何不可能或令人惊讶的事情。有高发生概率的事件经常发生<br>我们<strong>还没有证明原假设是正确的</strong>。我们最多只能说，它<strong>看起来不像是假的</strong><br>形式上，我们<strong>未能拒绝原假设</strong></li>
+</ul>
+<h2 id="检测步骤"><a href="#检测步骤" class="headerlink" title="检测步骤"></a>检测步骤</h2><ul>
+<li>找到原假设与备择假设</li>
+<li>建立模型(寻找p值、SD等等)</li>
+<li>利用机制推理判断(说白了就是看p大小)</li>
+<li>得出结论————原假设是否应该被舍弃</li>
+</ul>
+<h2 id="具体测试"><a href="#具体测试" class="headerlink" title="具体测试"></a>具体测试</h2><h3 id="双边测试"><a href="#双边测试" class="headerlink" title="双边测试"></a>双边测试</h3><p><strong>可视化</strong></p>
+<p><img src="/.com//Clipboard_2021-04-25-20-33-54.png"></p>
+<p>可以看到，阴影部分是被拒绝的区域，这个区域是由置信区间得出的<br>1.96源自置信比例为95%时的z值<br><strong>模型</strong><br>当样本容量n &lt; 30时应当使用学生-T分布；如果超过30则选择正态分布模型<br><strong>机制计算</strong><br>计算临界z值，有：</p>
+<p><img src="/.com//Clipboard_2021-04-25-20-40-43.png"></p>
+<p>计算通过样本检测的z值(与临界z值进行比较)，有：</p>
+<p><img src="/.com//Clipboard_2021-04-26-09-43-44.png"></p>
+<p>请注意未标注0下标的都是备择模型里的数值<br><strong>结论</strong><br>如果z落在拒绝区间，则原假设应该<font color="red">被否定</font>，反之<font color="red">被接受</font></p>
+<h3 id="单边测试"><a href="#单边测试" class="headerlink" title="单边测试"></a>单边测试</h3><p><strong>可视化</strong></p>
+<p><img src="/.com//Clipboard_2021-04-25-20-50-09.png"></p>
+<p>然后其他和双边基本是一样的，就是看z检测的结果(或者t检测)是否落于成功范围</p>
+<h3 id="P值法"><a href="#P值法" class="headerlink" title="P值法"></a>P值法</h3><p><strong>可视化</strong></p>
+<p><img src="/.com//Clipboard_2021-04-25-21-00-20.png"></p>
+<p><strong>模型</strong><br>看题目是单边还是双边模型进行建模<br><strong>机制计算</strong></p>
+<ul>
+<li>引入了一个新的区间α(显著性水平，Significant Level)，值为1-置信区间C</li>
+<li>计算p值<br>p值是计算得出z之后，新的正态分布图像中拒绝部分的概率和</li>
+</ul>
+<p><img src="/.com//Clipboard_2021-04-25-21-07-27.png"><img src="/.com//Clipboard_2021-04-25-21-13-14.png"></p>
+<p>若p &lt; α，则p值过小，应当<font color="red">推翻原假设</font><br>若p ≥ α，则p值较大，我们<font color="red">不一定能拒绝原假设</font>(不能说它对也不能说它错)</p>
+<blockquote>
+<p><strong><p style="font-family:等线 ">当p值无法用于判断结论的时候，我们需要用z值来进行判断</p></strong></p>
+</blockquote>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ul>
+<li>列出原假设与备择假设</li>
+<li>判断在一定置信比例下能否信任原假设</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">时光</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/07/04/Ch19%EA%9E%89%20%E5%8C%BA%E9%97%B4%E5%81%87%E8%AE%BE%E6%A3%80%E6%B5%8B/">http://example.com/2021/07/04/Ch19%EA%9E%89%20%E5%8C%BA%E9%97%B4%E5%81%87%E8%AE%BE%E6%A3%80%E6%B5%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Guiny-Time</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ST221/">ST221</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/07/04/Ch20%EA%9E%89%20%E6%95%B0%E6%8D%AE%E6%8E%A8%E6%96%AD/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Ch20: 数据推断</div></div></a></div><div class="next-post pull-right"><a href="/2021/06/23/%E6%B6%A9%E5%9B%BE%E7%B2%BE%E9%80%892021-6-22-2021-6-27/"><img class="next-cover" src="https://pixiv.cat/90781328.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2021/6/22~2021/6/27涩图精选</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/07/04/Ch20꞉ 数据推断/" title="Ch20: 数据推断"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-04</div><div class="title">Ch20: 数据推断</div></div></a></div><div><a href="/2021/07/04/Ch22꞉ 两组样本的假设检测/" title="Ch22: 两组样本的假设检测"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-04</div><div class="title">Ch22: 两组样本的假设检测</div></div></a></div><div><a href="/2021/07/04/Ch23꞉ 对比数据检测/" title="Ch23: 对比数据检测"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-04</div><div class="title">Ch23: 对比数据检测</div></div></a></div><div><a href="/2021/07/04/Ch24꞉ 卡方测试/" title="Ch24: 卡方测试"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-04</div><div class="title">Ch24: 卡方测试</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/wons-head.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">时光</div><div class="author-info__description">时光光的个人博客</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Guiny-Time"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Guiny-Time" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:guinytime@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎光临时光光之家，详细信息请见“关于”</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ch19-%E5%8C%BA%E9%97%B4%E5%81%87%E8%AE%BE%E6%A3%80%E6%B5%8B"><span class="toc-number">1.</span> <span class="toc-text">Ch19: 区间假设检测</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-number">1.1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.</span> <span class="toc-text">概念定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%87%E8%AE%BE-Hypothesis"><span class="toc-number">1.2.1.</span> <span class="toc-text">假设(Hypothesis)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%81%87%E8%AE%BE-Null-Hypothesis"><span class="toc-number">1.2.2.</span> <span class="toc-text">原假设(Null Hypothesis)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%87%E6%8B%A9%E5%81%87%E8%AE%BE-Alternative-Hypothesis"><span class="toc-number">1.2.3.</span> <span class="toc-text">备择假设(Alternative Hypothesis)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P%E5%80%BC%E6%B3%95-P-Value"><span class="toc-number">1.2.4.</span> <span class="toc-text">P值法(P-Value)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AEP%E5%80%BC%E6%88%91%E4%BB%AC%E8%83%BD%E5%BE%97%E5%88%B0%E4%BB%80%E4%B9%88%E7%BB%93%E8%AE%BA%EF%BC%9F"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">根据P值我们能得到什么结论？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%B5%8B%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.3.</span> <span class="toc-text">检测步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%B5%8B%E8%AF%95"><span class="toc-number">1.4.</span> <span class="toc-text">具体测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E8%BE%B9%E6%B5%8B%E8%AF%95"><span class="toc-number">1.4.1.</span> <span class="toc-text">双边测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E8%BE%B9%E6%B5%8B%E8%AF%95"><span class="toc-number">1.4.2.</span> <span class="toc-text">单边测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P%E5%80%BC%E6%B3%95"><span class="toc-number">1.4.3.</span> <span class="toc-text">P值法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">1.5.</span> <span class="toc-text">常见问题</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/04/Ch24%EA%9E%89%20%E5%8D%A1%E6%96%B9%E6%B5%8B%E8%AF%95/" title="Ch24: 卡方测试"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ch24: 卡方测试"/></a><div class="content"><a class="title" href="/2021/07/04/Ch24%EA%9E%89%20%E5%8D%A1%E6%96%B9%E6%B5%8B%E8%AF%95/" title="Ch24: 卡方测试">Ch24: 卡方测试</a><time datetime="2021-07-04T04:18:23.554Z" title="发表于 2021-07-04 12:18:23">2021-07-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/04/Ch23%EA%9E%89%20%E5%AF%B9%E6%AF%94%E6%95%B0%E6%8D%AE%E6%A3%80%E6%B5%8B/" title="Ch23: 对比数据检测"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ch23: 对比数据检测"/></a><div class="content"><a class="title" href="/2021/07/04/Ch23%EA%9E%89%20%E5%AF%B9%E6%AF%94%E6%95%B0%E6%8D%AE%E6%A3%80%E6%B5%8B/" title="Ch23: 对比数据检测">Ch23: 对比数据检测</a><time datetime="2021-07-04T04:18:23.553Z" title="发表于 2021-07-04 12:18:23">2021-07-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/04/Ch22%EA%9E%89%20%E4%B8%A4%E7%BB%84%E6%A0%B7%E6%9C%AC%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E6%B5%8B/" title="Ch22: 两组样本的假设检测"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ch22: 两组样本的假设检测"/></a><div class="content"><a class="title" href="/2021/07/04/Ch22%EA%9E%89%20%E4%B8%A4%E7%BB%84%E6%A0%B7%E6%9C%AC%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E6%B5%8B/" title="Ch22: 两组样本的假设检测">Ch22: 两组样本的假设检测</a><time datetime="2021-07-04T04:18:23.551Z" title="发表于 2021-07-04 12:18:23">2021-07-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/04/Ch20%EA%9E%89%20%E6%95%B0%E6%8D%AE%E6%8E%A8%E6%96%AD/" title="Ch20: 数据推断"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ch20: 数据推断"/></a><div class="content"><a class="title" href="/2021/07/04/Ch20%EA%9E%89%20%E6%95%B0%E6%8D%AE%E6%8E%A8%E6%96%AD/" title="Ch20: 数据推断">Ch20: 数据推断</a><time datetime="2021-07-04T04:18:23.549Z" title="发表于 2021-07-04 12:18:23">2021-07-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/04/Ch19%EA%9E%89%20%E5%8C%BA%E9%97%B4%E5%81%87%E8%AE%BE%E6%A3%80%E6%B5%8B/" title="Ch19: 区间假设检测"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ch19: 区间假设检测"/></a><div class="content"><a class="title" href="/2021/07/04/Ch19%EA%9E%89%20%E5%8C%BA%E9%97%B4%E5%81%87%E8%AE%BE%E6%A3%80%E6%B5%8B/" title="Ch19: 区间假设检测">Ch19: 区间假设检测</a><time datetime="2021-07-04T04:18:23.548Z" title="发表于 2021-07-04 12:18:23">2021-07-04</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 时光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '4JASk8p4lhva62ulFWxkL4l7-MdYXbMMI',
+      appKey: 'fpVWVFvybj7LfEnve7qBA9r4',
+      placeholder: '留下你的留言吧',
+      avatar: '',
+      meta: 'nick'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: {"tv_doge":"6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png","tv_亲亲":"a8111ad55953ef5e3be3327ef94eb4a39d535d06.png","tv_偷笑":"bb690d4107620f1c15cff29509db529a73aee261.png","tv_再见":"180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png","tv_冷漠":"b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png","tv_发怒":"34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png","tv_发财":"34db290afd2963723c6eb3c4560667db7253a21a.png","tv_可爱":"9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png","tv_吐血":"09dd16a7aa59b77baa1155d47484409624470c77.png","tv_呆":"fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png","tv_呕吐":"9f996894a39e282ccf5e66856af49483f81870f3.png","tv_困":"241ee304e44c0af029adceb294399391e4737ef2.png","tv_坏笑":"1f0b87f731a671079842116e0991c91c2c88645a.png","tv_大佬":"093c1e2c490161aca397afc45573c877cdead616.png","tv_大哭":"23269aeb35f99daee28dda129676f6e9ea87934f.png","tv_委屈":"d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png","tv_害羞":"a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png","tv_尴尬":"7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png","tv_微笑":"70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png","tv_思考":"90cf159733e558137ed20aa04d09964436f618a1.png","tv_惊吓":"0d15c7e2ee58e935adc6a7193ee042388adc22af.png"},
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="255,255,255" opacity="1" zIndex="-1" count="150" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
