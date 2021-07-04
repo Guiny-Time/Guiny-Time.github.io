@@ -213,6 +213,25 @@
     
     
     <entry>
+      <title>Ch18: 比例置信区间</title>
+      <link href="/2021/04/22/Ch18%EA%9E%89%20%E6%AF%94%E4%BE%8B%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4/"/>
+      <url>/2021/04/22/Ch18%EA%9E%89%20%E6%AF%94%E4%BE%8B%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Ch18-比例置信区间"><a href="#Ch18-比例置信区间" class="headerlink" title="Ch18: 比例置信区间"></a>Ch18: 比例置信区间</h1><p>课本p489~p503</p><h2 id="置信区间-Confidence-Interval"><a href="#置信区间-Confidence-Interval" class="headerlink" title="置信区间(Confidence Interval)"></a>置信区间(Confidence Interval)</h2><p>标准误差(Standard Error)：当我们估计一个抽样分布的标准差时，我们称它为标准误差</p><blockquote><p>When we estimate the standard deviation of a sampling distribution, we call it a <strong>standard error</strong></p></blockquote><p>面对两种抽样分布模型，有以下两种计算标准误差的模型：                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/dameyoClipboard_2021-07-03-22-12-14.png" style="zoom:67%;"><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/dame20210704105610.png" style="zoom:67%;"><br>标准误差也可定义为<strong>残差的标准差</strong>，是描述样本平均数抽样分布的离散程度及衡量对应样本平均数抽样误差大小的尺度的数值</p><h3 id="95-置信区间-常用置信区间"><a href="#95-置信区间-常用置信区间" class="headerlink" title="95%置信区间(常用置信区间)"></a>95%置信区间(常用置信区间)</h3><p>我们有95%的信心认为抽样结果集中在该范围.</p><h4 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h4><ul><li>分布中心 ± ME</li><li>分布中心 ± z* * SE</li></ul><br><h2 id="误差幅度-Margin-of-Error"><a href="#误差幅度-Margin-of-Error" class="headerlink" title="误差幅度(Margin of Error)"></a>误差幅度(Margin of Error)</h2><p>又称ME，指的是从样本中心出发左右两侧的误差幅度<br>ME = z* * SE</p><blockquote><p>当我们知道误差幅度、样本成功概率p^和置信比例α的时候，我们可以逆推公式来求样本容量n</p></blockquote><h3 id="临界值-z"><a href="#临界值-z" class="headerlink" title="临界值(z*)"></a>临界值(z*)</h3><p>z*可以查表，或者使用A<sub>L</sub> = (1 + 置信比例)/2，然后通过数值在z表查找对应的z*<br>通常情况下，95%置信区间对应的z*为1.96；90%置信区间对应1.645<br><br></p><h2 id="需要满足的条件与假设"><a href="#需要满足的条件与假设" class="headerlink" title="需要满足的条件与假设"></a>需要满足的条件与假设</h2><ul><li>独立性假设</li><li>随机抽样条件</li><li>10%条件</li><li>成功/失败条件</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 统计学导论 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Ch17: 抽样分布模型</title>
       <link href="/2021/04/15/Ch17%EA%9E%89%20%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83%E6%A8%A1%E5%9E%8B/"/>
       <url>/2021/04/15/Ch17%EA%9E%89%20%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83%E6%A8%A1%E5%9E%8B/</url>
