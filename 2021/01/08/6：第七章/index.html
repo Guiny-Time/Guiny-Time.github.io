@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>堆栈与队列 | Guiny-Time</title><meta name="author" content="时光"><meta name="copyright" content="时光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="堆栈和队列都是抽象数据类型(abstract data type) 堆栈什么是堆栈?一个后进先出(Last-In-First-Out)的玩意，你可以理解成一叠碗。实际上一叠碗就是一个堆栈In computer science, a stack is an abstract data type that serves as a collection of elements, with two mai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="堆栈与队列">
+<meta property="og:url" content="http://example.com/2021/01/08/6%EF%BC%9A%E7%AC%AC%E4%B8%83%E7%AB%A0/index.html">
+<meta property="og:site_name" content="Guiny-Time">
+<meta property="og:description" content="堆栈和队列都是抽象数据类型(abstract data type) 堆栈什么是堆栈?一个后进先出(Last-In-First-Out)的玩意，你可以理解成一叠碗。实际上一叠碗就是一个堆栈In computer science, a stack is an abstract data type that serves as a collection of elements, with two mai">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2021-01-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-05T14:09:52.466Z">
+<meta property="article:author" content="时光">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2021/01/08/6%EF%BC%9A%E7%AC%AC%E4%B8%83%E7%AB%A0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '堆栈与队列',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-05 22:09:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/wons-head.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">41</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/cats/"><i class="fa-fw fab fa-connectdevelop"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Guiny-Time</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/cats/"><i class="fa-fw fab fa-connectdevelop"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">堆栈与队列</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-01-07T16:00:00.000Z" title="发表于 2021-01-08 00:00:00">2021-01-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-05T14:09:52.466Z" title="更新于 2021-07-05 22:09:52">2021-07-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">算法与数据结构</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="堆栈与队列"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>堆栈和队列都是抽象数据类型(abstract data type)</p>
+<h2 id="堆栈"><a href="#堆栈" class="headerlink" title="堆栈"></a>堆栈</h2><h3 id="什么是堆栈"><a href="#什么是堆栈" class="headerlink" title="什么是堆栈?"></a>什么是堆栈?</h3><p>一个后进先出(Last-In-First-Out)的玩意，你可以理解成一叠碗。实际上一叠碗就是一个堆栈<br>In computer science, a stack is an abstract data type that serves as a collection of elements, with two main principal operations:<br>Push, which adds an element to the collection, and<br>Pop, which removes the most recently added element that was not yet removed.</p>
+<blockquote>
+<p>在计算机科学中，堆栈是一种抽象数据类型，它作为元素的集合，具有两个主要操作:<br>Push，将元素添加到集合中<br>Pop，它将删除最近添加的尚未删除的元素</p>
+</blockquote>
+<h3 id="堆栈操作"><a href="#堆栈操作" class="headerlink" title="堆栈操作"></a>堆栈操作</h3><ul>
+<li>Pop()<br>往堆栈顶端放入一个元素</li>
+<li>Push()<br>往堆栈顶端取出一个元素</li>
+<li>Peek()<br>检查堆栈顶端的元素并复制它的值</li>
+<li>MakeEmpty()<br>移除堆栈内所有元素</li>
+<li>IsFull()<br>检查堆栈是不是满的，返回一个布尔值</li>
+<li>IsEmpty()<br>检查堆栈是不是空的，返回一个布尔值</li>
+</ul>
+<h3 id="堆栈的top"><a href="#堆栈的top" class="headerlink" title="堆栈的top"></a>堆栈的top</h3><ul>
+<li>当没有元素的时候，堆栈的top为-1</li>
+<li>类似数组，堆栈最底下的那个槽位是0（top = 0），随着元素的加入top随之改变<p align="center">
+<img src="/.com//CS210-5.png" width="650">
+</p></li>
+</ul>
+<h3 id="堆栈的优缺点"><a href="#堆栈的优缺点" class="headerlink" title="堆栈的优缺点"></a>堆栈的优缺点</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>空间复杂度为O(n)</li>
+<li>每个堆栈操作的时间复杂度为O(1)<h4 id="缺点-基于array实现的stack"><a href="#缺点-基于array实现的stack" class="headerlink" title="缺点(基于array实现的stack)"></a>缺点(基于array实现的stack)</h4></li>
+<li>堆栈的长度在开始时被定死</li>
+<li>尝试将新元素插入已满的堆栈会导致特定于实现的异常</li>
+</ul>
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><h3 id="什么是队列"><a href="#什么是队列" class="headerlink" title="什么是队列?"></a>什么是队列?</h3><p>一个先进先出(First-In-First-Out)的玩意，你可以理解成排队，这名字已经很直白了<br>In computer science, a queue is a collection of entities that are maintained in a sequence and can be modified by the addition of entities at one end of the sequence and the removal of entities from the other end of the sequence.</p>
+<blockquote>
+<p>在计算机科学中，队列是按序列维护的实体的集合，可以通过在序列的一端添加实体和从序列的另一端删除实体来修改。</p>
+</blockquote>
+<h3 id="队列操作"><a href="#队列操作" class="headerlink" title="队列操作"></a>队列操作</h3><ul>
+<li>insert()<br>入队，在队列的rear（尾部）加上一个元素</li>
+<li>remove()<br>出队，在队列的front（头部）取出一个元素</li>
+<li>peek()<br>检查队列头部的元素，并复制它的值</li>
+<li>size()<br>假设队列非空，返回队列内元素的总数</li>
+<li>isFull()<br>检查队列是不是满的，返回一个布尔值</li>
+<li>IsEmpty()<br>检查队列是不是空的，返回一个布尔值</li>
+</ul>
+<h3 id="队列的rear-尾-和front-头"><a href="#队列的rear-尾-和front-头" class="headerlink" title="队列的rear(尾)和front(头)"></a>队列的rear(尾)和front(头)</h3><ul>
+<li><p>头和尾是相对的。一个队列有固定的长度（举个例子你是用数组实现的队列），由于队列的特性，会出现很神奇的头尾现象（缠绕现象）</p>
+</li>
+<li><p>当队列是空的时候，front为0，rear为-1</p>
+</li>
+<li><p>下面那个rear = 2是打错了，就是你想的那样</p>
+<p align="left">
+<img src="/.com//CS210-6.png" width="450">
+<img src="/.com//CS210-7.png" width="450">
+</p></li>
+<li><p>表格样队列操作视图</p>
+<p align="center">
+<img src="/.com//CS210-8.png" width="450">
+</p></li>
+</ul>
+<h3 id="队列的优缺点"><a href="#队列的优缺点" class="headerlink" title="队列的优缺点"></a>队列的优缺点</h3><h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>空间复杂度为O(n)</li>
+<li>每个队列操作的时间复杂度为O(1)<h4 id="缺点-基于array实现的queue"><a href="#缺点-基于array实现的queue" class="headerlink" title="缺点(基于array实现的queue)"></a>缺点(基于array实现的queue)</h4></li>
+<li>队列的长度被定死</li>
+<li>尝试将新元素插入已满的队列会导致特定于实现的异常</li>
+</ul>
+<h2 id="双队列"><a href="#双队列" class="headerlink" title="双队列"></a>双队列</h2><h3 id="什么是双队列-Deque"><a href="#什么是双队列-Deque" class="headerlink" title="什么是双队列(Deque)?"></a>什么是双队列(Deque)?</h3><ul>
+<li>双队列没有front和rear的概念</li>
+<li>A deque is a double-ended queue. This means you can insert items at either end and delete them at either end<blockquote>
+<p>deque是一种双端队列<br>这意味着您可以在任意一端插入项，也可以在任意一端删除项</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="双队列操作"><a href="#双队列操作" class="headerlink" title="双队列操作"></a>双队列操作</h3><ul>
+<li>insertLeft()<br>从左边插入元素</li>
+<li>insertRight()<br>从右边插入元素</li>
+<li>removeLeft()<br>从左边移除元素</li>
+<li>removeRight()<br>从右边移除元素<p align="left">
+<img src="/.com//CS210-9.png" width="450">
+<img src="/.com//CS210-10.png" width="450">
+</p></li>
+</ul>
+<h3 id="Deque与Stack和Queue的关系"><a href="#Deque与Stack和Queue的关系" class="headerlink" title="Deque与Stack和Queue的关系"></a>Deque与Stack和Queue的关系</h3><ul>
+<li>Stack是只具有insertRight()和removeRight()的Deque</li>
+<li>Queue是只具有insertRight()和removeLeft()的Deque</li>
+</ul>
+<h2 id="优先队列Priority-Queue"><a href="#优先队列Priority-Queue" class="headerlink" title="优先队列Priority Queue"></a>优先队列Priority Queue</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>A priority queue is a queue where items don’t just join at the rear, they are slotted into the queue according to their priority </p>
+<blockquote>
+<p>优先队列是指项目不是在后面连接，而是根据它们的优先级插入队列</p>
+</blockquote>
+<h3 id="优先队列方法"><a href="#优先队列方法" class="headerlink" title="优先队列方法"></a>优先队列方法</h3><ul>
+<li>insert()<br>按照<strong>优先级</strong>插入元素。通常使用heap的方法插入<br>比如queue里已经有了1，3，现在要插入2，我们得到的新queue应该是1，2，3而不是1，3，2</li>
+<li>remove()<br>删除掉当前队列优先级最高的元素</li>
+</ul>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul>
+<li>插入的时间复杂度为O(n)，因为要进行优先级衡量的heap</li>
+<li>删除的时间复杂度为O(1)</li>
+</ul>
+<h3 id="使用heap实现优先队列"><a href="#使用heap实现优先队列" class="headerlink" title="使用heap实现优先队列"></a>使用heap实现优先队列</h3><p><a href="@note/7%EF%BC%9A%E7%AC%AC%E4%B8%83.x%E7%AB%A0.md">第七.x章</a> </p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">时光</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/01/08/6%EF%BC%9A%E7%AC%AC%E4%B8%83%E7%AB%A0/">http://example.com/2021/01/08/6%EF%BC%9A%E7%AC%AC%E4%B8%83%E7%AB%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Guiny-Time</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/01/08/5%EF%BC%9A%E7%AC%AC%E5%85%AD%E7%AB%A0/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">排序算法</div></div></a></div><div class="next-post pull-right"><a href="/2021/01/08/7%EF%BC%9A%E7%AC%AC%E4%B8%83.x%E7%AB%A0/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">二叉树</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/wons-head.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">时光</div><div class="author-info__description">时光光的个人博客</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">41</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Guiny-Time"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Guiny-Time" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:guinytime@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎光临时光光之家，详细信息请见“关于”</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A0%86%E6%A0%88"><span class="toc-number">1.</span> <span class="toc-text">堆栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%A0%86%E6%A0%88"><span class="toc-number">1.1.</span> <span class="toc-text">什么是堆栈?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E6%A0%88%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.</span> <span class="toc-text">堆栈操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E6%A0%88%E7%9A%84top"><span class="toc-number">1.3.</span> <span class="toc-text">堆栈的top</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E6%A0%88%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">1.4.</span> <span class="toc-text">堆栈的优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">1.4.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-%E5%9F%BA%E4%BA%8Earray%E5%AE%9E%E7%8E%B0%E7%9A%84stack"><span class="toc-number">1.4.2.</span> <span class="toc-text">缺点(基于array实现的stack)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%9F%E5%88%97"><span class="toc-number">2.</span> <span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%98%9F%E5%88%97"><span class="toc-number">2.1.</span> <span class="toc-text">什么是队列?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%9F%E5%88%97%E6%93%8D%E4%BD%9C"><span class="toc-number">2.2.</span> <span class="toc-text">队列操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%9F%E5%88%97%E7%9A%84rear-%E5%B0%BE-%E5%92%8Cfront-%E5%A4%B4"><span class="toc-number">2.3.</span> <span class="toc-text">队列的rear(尾)和front(头)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%9F%E5%88%97%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">2.4.</span> <span class="toc-text">队列的优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9-1"><span class="toc-number">2.4.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-%E5%9F%BA%E4%BA%8Earray%E5%AE%9E%E7%8E%B0%E7%9A%84queue"><span class="toc-number">2.4.2.</span> <span class="toc-text">缺点(基于array实现的queue)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8C%E9%98%9F%E5%88%97"><span class="toc-number">3.</span> <span class="toc-text">双队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8C%E9%98%9F%E5%88%97-Deque"><span class="toc-number">3.1.</span> <span class="toc-text">什么是双队列(Deque)?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E9%98%9F%E5%88%97%E6%93%8D%E4%BD%9C"><span class="toc-number">3.2.</span> <span class="toc-text">双队列操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deque%E4%B8%8EStack%E5%92%8CQueue%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">3.3.</span> <span class="toc-text">Deque与Stack和Queue的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97Priority-Queue"><span class="toc-number">4.</span> <span class="toc-text">优先队列Priority Queue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">4.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%E6%96%B9%E6%B3%95"><span class="toc-number">4.2.</span> <span class="toc-text">优先队列方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%80%A7"><span class="toc-number">4.3.</span> <span class="toc-text">特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8heap%E5%AE%9E%E7%8E%B0%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97"><span class="toc-number">4.4.</span> <span class="toc-text">使用heap实现优先队列</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/06/23/L11-%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" title="L11-项目管理"><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/damedane%E5%BC%80%E4%BC%9A.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="L11-项目管理"/></a><div class="content"><a class="title" href="/2021/06/23/L11-%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" title="L11-项目管理">L11-项目管理</a><time datetime="2021-06-22T16:00:00.000Z" title="发表于 2021-06-23 00:00:00">2021-06-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/16/2021-6-16-2021-6-21%E6%B6%A9%E5%9B%BE%E7%B2%BE%E9%80%89/" title="2021/6/16~2021/6/21涩图精选"><img src="https://pixiv.cat/90572417.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2021/6/16~2021/6/21涩图精选"/></a><div class="content"><a class="title" href="/2021/06/16/2021-6-16-2021-6-21%E6%B6%A9%E5%9B%BE%E7%B2%BE%E9%80%89/" title="2021/6/16~2021/6/21涩图精选">2021/6/16~2021/6/21涩图精选</a><time datetime="2021-06-16T08:27:07.000Z" title="发表于 2021-06-16 16:27:07">2021-06-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/14/L10-%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" title="L10-软件测试"><img src="https://www.mrninfotech.com/images/testing.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="L10-软件测试"/></a><div class="content"><a class="title" href="/2021/06/14/L10-%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" title="L10-软件测试">L10-软件测试</a><time datetime="2021-06-13T16:00:00.000Z" title="发表于 2021-06-14 00:00:00">2021-06-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/10/6-10-6-15%E6%B6%A9%E5%9B%BE%E7%B2%BE%E9%80%89/" title="2021/6/10~2021/6/15涩图精选"><img src="https://pixiv.cat/90409224.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2021/6/10~2021/6/15涩图精选"/></a><div class="content"><a class="title" href="/2021/06/10/6-10-6-15%E6%B6%A9%E5%9B%BE%E7%B2%BE%E9%80%89/" title="2021/6/10~2021/6/15涩图精选">2021/6/10~2021/6/15涩图精选</a><time datetime="2021-06-10T06:10:57.000Z" title="发表于 2021-06-10 14:10:57">2021-06-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/08/L9-UI_UX%E8%AE%BE%E8%AE%A1/" title="L9-UI/UX设计"><img src="https://miro.medium.com/max/1050/1*hp-yfKsmzsj711iLbM8eEw.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="L9-UI/UX设计"/></a><div class="content"><a class="title" href="/2021/06/08/L9-UI_UX%E8%AE%BE%E8%AE%A1/" title="L9-UI/UX设计">L9-UI/UX设计</a><time datetime="2021-06-07T16:00:00.000Z" title="发表于 2021-06-08 00:00:00">2021-06-08</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 时光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '4JASk8p4lhva62ulFWxkL4l7-MdYXbMMI',
+      appKey: 'fpVWVFvybj7LfEnve7qBA9r4',
+      placeholder: '留下你的留言吧',
+      avatar: '',
+      meta: 'nick'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: {"tv_doge":"6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png","tv_亲亲":"a8111ad55953ef5e3be3327ef94eb4a39d535d06.png","tv_偷笑":"bb690d4107620f1c15cff29509db529a73aee261.png","tv_再见":"180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png","tv_冷漠":"b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png","tv_发怒":"34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png","tv_发财":"34db290afd2963723c6eb3c4560667db7253a21a.png","tv_可爱":"9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png","tv_吐血":"09dd16a7aa59b77baa1155d47484409624470c77.png","tv_呆":"fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png","tv_呕吐":"9f996894a39e282ccf5e66856af49483f81870f3.png","tv_困":"241ee304e44c0af029adceb294399391e4737ef2.png","tv_坏笑":"1f0b87f731a671079842116e0991c91c2c88645a.png","tv_大佬":"093c1e2c490161aca397afc45573c877cdead616.png","tv_大哭":"23269aeb35f99daee28dda129676f6e9ea87934f.png","tv_委屈":"d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png","tv_害羞":"a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png","tv_尴尬":"7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png","tv_微笑":"70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png","tv_思考":"90cf159733e558137ed20aa04d09964436f618a1.png","tv_惊吓":"0d15c7e2ee58e935adc6a7193ee042388adc22af.png"},
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="255,255,255" opacity="1" zIndex="-1" count="150" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

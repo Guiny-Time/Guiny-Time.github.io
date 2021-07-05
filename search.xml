@@ -4,120 +4,6 @@
   
     
     <entry>
-      <title>第15章-字典树</title>
-      <link href="/2021/07/05/%E7%AC%AC15%E7%AB%A0-%E5%AD%97%E5%85%B8%E6%A0%91/"/>
-      <url>/2021/07/05/%E7%AC%AC15%E7%AB%A0-%E5%AD%97%E5%85%B8%E6%A0%91/</url>
-      
-        <content type="html"><![CDATA[<h1 id="第15章-字典树"><a href="#第15章-字典树" class="headerlink" title="第15章-字典树"></a>第15章-字典树</h1><h2 id="字典树-前缀树"><a href="#字典树-前缀树" class="headerlink" title="字典树(前缀树)"></a>字典树(前缀树)</h2><p>一种数据结构，常用于搜索引擎、查询、输入法</p><ul><li>查找速度很快</li><li>占用空间很大</li><li>根节点是NIL</li><li>字母表的大小与叶子节点的个数相同</li><li>时间复杂度: O(L), L为单词长度</li></ul><p><img src="/.com//Clipboard_2021-04-07-23-27-26.png"></p><h2 id="查找Search"><a href="#查找Search" class="headerlink" title="查找Search"></a>查找Search</h2><ul><li>搜索前缀</li><li>搜索整个单词</li><li>搜索具有相同前缀的单词<br>就是按顺序查找下去，如果查到null就返回不存在</li></ul><p><img src="/.com//Clipboard_2021-04-07-23-34-31.png"></p><h2 id="插入Insert"><a href="#插入Insert" class="headerlink" title="插入Insert"></a>插入Insert</h2><h2 id="删除Delete"><a href="#删除Delete" class="headerlink" title="删除Delete"></a>删除Delete</h2><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>字典树的每个节点可以接的子节点不止两个，所以要抛弃BST的那套(指定义Left和RIght)，创建一个链表来装子节点们</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> CS211 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>第14章-红黑树</title>
-      <link href="/2021/07/05/%E7%AC%AC14%E7%AB%A0-%E7%BA%A2%E9%BB%91%E6%A0%91/"/>
-      <url>/2021/07/05/%E7%AC%AC14%E7%AB%A0-%E7%BA%A2%E9%BB%91%E6%A0%91/</url>
-      
-        <content type="html"><![CDATA[<h1 id="第14章-红黑树"><a href="#第14章-红黑树" class="headerlink" title="第14章-红黑树"></a>第14章-红黑树</h1><h2 id="红黑树的几个基本规则"><a href="#红黑树的几个基本规则" class="headerlink" title="红黑树的几个基本规则"></a>红黑树的几个基本规则</h2><ul><li>节点只有两种颜色，红色和黑色</li><li>根节点一定是黑色的</li><li>红色节点的父节点和子节点必须是黑色的</li><li>从当前节点(包括它本身)出发走到null，不论哪条路径所经过的黑色节点数目相同<h3 id="为什么使用红黑树？"><a href="#为什么使用红黑树？" class="headerlink" title="为什么使用红黑树？"></a>为什么使用红黑树？</h3>在数据量庞大的时候，红黑树依然能快速搜索出想要寻找的元素，而且它是自平衡的二叉搜索树<br>插入/删除/搜索的时间复杂度均为O(logn)</li></ul><h2 id="红黑树操作"><a href="#红黑树操作" class="headerlink" title="红黑树操作"></a>红黑树操作</h2><p>在谈操作之前，看看这张图大概了解一下兄弟姐妹爸爸叔叔爷爷<br><strong>注意!!!</strong><br>Nil也可以作为叔叔，而且他一定是黑色的<br><img src="/.com//Clipboard_2021-04-06-22-55-14.png"></p><h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p><a href="https://www.youtube.com/watch?v=5IBxA-bZZH8">5min教学视频</a></p><ul><li>所有新插入的节点默认都是红色的</li><li>重新着色并旋转以平衡<h4 id="爸爸是黑色的"><a href="#爸爸是黑色的" class="headerlink" title="爸爸是黑色的"></a>爸爸是黑色的</h4>你不用做任何修改</li></ul><h4 id="是根节点"><a href="#是根节点" class="headerlink" title="是根节点"></a>是根节点</h4><p>最简单的一种情况，直接把节点涂黑就好了</p><h4 id="叔叔是红色的"><a href="#叔叔是红色的" class="headerlink" title="叔叔是红色的"></a>叔叔是红色的</h4><p>比较简单的一种情况，对叔叔、爸爸和爷爷重新上色。其中叔叔和爸爸改为黑色，爷爷改为红色<br><img src="/.com//Clipboard_2021-04-06-23-01-59.png">    <img src="/.com//Clipboard_2021-04-06-23-02-23.png"></p><h4 id="叔叔是黑色的-三角形情况"><a href="#叔叔是黑色的-三角形情况" class="headerlink" title="叔叔是黑色的(三角形情况)"></a>叔叔是黑色的(三角形情况)</h4><p>遇到这个问题你第一反应可能是这个图：<br><img src="/.com//Clipboard_2021-04-06-23-04-48.png"><br>在这这种情况中，实际上子节点与他爸和他爷爷形成了一种三角恋(不是)关系：<br><img src="/.com//Clipboard_2021-04-06-23-07-51.png"><br>解法就是旋转爸爸，旋转方向与子节点所在方向相反(意思是是左子节点就做右旋，是右子节点就做左旋)</p><h4 id="叔叔是黑色的-直线情况"><a href="#叔叔是黑色的-直线情况" class="headerlink" title="叔叔是黑色的(直线情况)"></a>叔叔是黑色的(直线情况)</h4><p>在这种情况中，实际上子节点与他爸和他爷爷形成了一种直线关系：<br><img src="/.com//Clipboard_2021-04-06-23-17-45.png"><br>解法是旋转爷爷，旋转方向与子节点所在方向相反<br>旋转完之后，重新着色爸爸和爷爷，得到以下：<br><img src="/.com//Clipboard_2021-04-06-23-21-15.png"></p><h4 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h4><p><img src="/.com//Clipboard_2021-04-06-23-40-02.png"></p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> CS211 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>第13章-AVL算法</title>
-      <link href="/2021/07/05/%E7%AC%AC13%E7%AB%A0-AVL%E7%AE%97%E6%B3%95/"/>
-      <url>/2021/07/05/%E7%AC%AC13%E7%AB%A0-AVL%E7%AE%97%E6%B3%95/</url>
-      
-        <content type="html"><![CDATA[<h1 id="第13章-AVL算法"><a href="#第13章-AVL算法" class="headerlink" title="第13章-AVL算法"></a>第13章-AVL算法</h1><p><strong>动机</strong>：因为有的时候二叉树简直退化成了链表，所以为了得到相对平衡的二叉树，发明了诸如AVL/RBT/Splay这样的平衡二叉树算法<br><strong>节点创建</strong>：在创建的时候带上高度这一新的参数，并写一个与高度有关的方法</p><h2 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h2><h3 id="左旋"><a href="#左旋" class="headerlink" title="左旋"></a>左旋</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>将一个节点的父节点变为自己的左节点<br>如果该节点本身以及有两个节点：</p><ul><li>如果y有一个左子树，将x赋值为y的左子树的父结点</li><li>如果x的父结点为空，则让y作为树的根</li><li>否则如果x是p的左子结点，让y是p的左子结点</li><li>否则将y赋值为p的右子结点</li><li>让y作为x的父结点<br><img src="/.com//Clipboard_2021-03-24-23-37-49.png"></li></ul><h4 id="图示"><a href="#图示" class="headerlink" title="图示"></a>图示</h4><p><img src="/.com//Clipboard_2021-03-24-23-34-31.png"></p><h4 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h4><p><img src="/.com//Clipboard_2021-03-25-10-20-33.png"></p><h3 id="右旋"><a href="#右旋" class="headerlink" title="右旋"></a>右旋</h3><p>和左旋类似，但是不同的是把操作放到了右边</p><ul><li>如果x有一个右子树，将y赋值为x右子树的父结点。</li><li>如果y的父结点为空，则让x作为树的根。</li><li>否则如果y是其父p的右子结点，那么x就是p的右子结点。</li><li>否则，将x赋值为p的左子结点。</li><li>让x作为y的父结点。<br><img src="/.com//Clipboard_2021-03-25-10-18-11.png"></li></ul><h4 id="图示-1"><a href="#图示-1" class="headerlink" title="图示"></a>图示</h4><p><img src="/.com//Clipboard_2021-03-25-10-19-02.png"></p><h4 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h4><p><img src="/.com//Clipboard_2021-03-25-10-20-22.png"></p><h3 id="左右旋"><a href="#左右旋" class="headerlink" title="左右旋"></a>左右旋</h3><p>顾名思义，先左旋再右旋的一种方法。有时仅通过左旋或者右旋并没有办法达成目标，比如有拐点的二叉树，此时需要通过左右旋或者右左旋</p><h4 id="图示-2"><a href="#图示-2" class="headerlink" title="图示"></a>图示</h4><p><img src="/.com//Clipboard_2021-03-25-10-46-43.png"></p><h4 id="伪代码-2"><a href="#伪代码-2" class="headerlink" title="伪代码"></a>伪代码</h4><h3 id="右左旋"><a href="#右左旋" class="headerlink" title="右左旋"></a>右左旋</h3><h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul><li>正常插入</li><li>判断是否为平衡二叉树</li><li>如果不是的话那么开始旋转<h3 id="伪代码-3"><a href="#伪代码-3" class="headerlink" title="伪代码"></a>伪代码</h3><img src="/.com//Clipboard_2021-03-25-10-49-06.png"><br><img src="/.com//Clipboard_2021-03-25-10-51-05.png"></li></ul><h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><ul><li>正常删除</li><li>判断是否为平衡二叉树</li><li>如果不是那么开始旋转<h3 id="伪代码-4"><a href="#伪代码-4" class="headerlink" title="伪代码"></a>伪代码</h3><img src="/.com//Clipboard_2021-03-25-10-50-48.png"></li></ul><h2 id="极值搜寻"><a href="#极值搜寻" class="headerlink" title="极值搜寻"></a>极值搜寻</h2><p>AVL过的树也是BST，所以不用多说了</p><h2 id="各操作时间复杂度"><a href="#各操作时间复杂度" class="headerlink" title="各操作时间复杂度"></a>各操作时间复杂度</h2><p>都是O(logn)</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> CS211 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>第12章-二叉搜索树</title>
-      <link href="/2021/07/05/%E7%AC%AC12%E7%AB%A0-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/"/>
-      <url>/2021/07/05/%E7%AC%AC12%E7%AB%A0-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
-      
-        <content type="html"><![CDATA[<h1 id="第12章-二叉搜索树"><a href="#第12章-二叉搜索树" class="headerlink" title="第12章-二叉搜索树"></a>第12章-二叉搜索树</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>BST在二叉树的基础上引入了左小右大的规则<br>一个父节点，它左边的元素必然小于其本身，而右边的元素则大于其本身</p><h3 id="推理"><a href="#推理" class="headerlink" title="推理"></a>推理</h3><ul><li>BST中<strong>最小</strong>的元素是叶子节点中最左边的那个</li><li>BST中<strong>最大</strong>的元素是叶子节点最右边的那个</li><li>搜索元素的平均时间复杂度为O(log<sub>2</sub>n)，这同时也是BST的平均高度</li><li>退化的BST的高度可以达到n，这也是最坏的情况，O(n)</li><li>最好的情况是要找的元素是根节点，O(1)</li></ul><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>BST中的每个元素有一个特殊的键值，其中根节点的key为1，<strong>注意不是0</strong></p><p align="center"><img src="/.com//CS211-5.png" width="600"></p><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><blockquote><p>class Node{<br>  &nbsp;&nbsp;&nbsp;&nbsp;int value;<br>  &nbsp;&nbsp;&nbsp;&nbsp;Node left;<br>  &nbsp;&nbsp;&nbsp;&nbsp;Node right;<br>  &nbsp;&nbsp;&nbsp;&nbsp;Node(int value){<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.value = value;<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right = null; left = null;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}</p></blockquote><p>这个显然是一个用于定义Node属性的类，构造函数为Node赋值，Node类里定义了两种类型的Node（左节点或右节点）</p><hr><h3 id="数据插入"><a href="#数据插入" class="headerlink" title="数据插入"></a>数据插入</h3><ul><li>从根节点开始尝试插入。如果新node的值小于当前节点,插入到左子节点</li><li>如果新节点的值大于当前节点,插入到右子节点</li><li>当前节点为空时,我们已经达到了一个叶子节点,可以把新node插入在这个位置<h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4><blockquote><p>private Node add(Node current, int value){<br>&nbsp;&nbsp;&nbsp;&nbsp;if(current == null){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new Node(value);<br>&nbsp;&nbsp;&nbsp;&nbsp;}if(value &gt; current.value){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current.right = add(current.right,value);<br>&nbsp;&nbsp;&nbsp;&nbsp;}else if(value &lt; current.value){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current.left = add(current.left,value)<br>&nbsp;&nbsp;&nbsp;&nbsp;}else{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;return current;<br>}</p></blockquote></li></ul><h4 id="代码逻辑"><a href="#代码逻辑" class="headerlink" title="代码逻辑"></a>代码逻辑</h4><ul><li>如果新node小于当前node，往左边走</li><li>如果新node大于当前node，往右边走</li><li>如果当前node为空，则插入当前位置，返回一个新的Node对象，构造函数内输入value值</li><li>空的else的意思是相等，代表这个数已经存在，所以直接return</li><li>本质是<strong>递归思想</strong><h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4>嗯，最好封装一下，新的方法里面只有一句<br>root = add(root,value);，因为是从根节点开始插入的</li></ul><p>于是，我们创建一个BST，可以这么写：</p><p align="center"><img src="/.com//CS211-6.png" width="600"></p><hr><h3 id="数据搜索"><a href="#数据搜索" class="headerlink" title="数据搜索"></a>数据搜索</h3><h4 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h4><p align="center"><img src="/.com//CS211-7.png" width="600"></p><h4 id="代码逻辑-1"><a href="#代码逻辑-1" class="headerlink" title="代码逻辑"></a>代码逻辑</h4><ul><li>如果当前的值就是要查找的值，那么返回存在(true)</li><li>如果不是，进行三元运算。如果要查找的值比较大就往右边去找，比较小就往左边</li><li>如果找到最后了为空，则返回不存在(false)</li></ul><h4 id="封装-1"><a href="#封装-1" class="headerlink" title="封装"></a>封装</h4><p>这毕竟是面向对象的五大原则之一(单一职责)</p><p align="center"><img src="/.com//CS211-8.png" width="600"></p><hr><h3 id="数据删除"><a href="#数据删除" class="headerlink" title="数据删除"></a>数据删除</h3><h4 id="删除比较麻烦。是三种操作中最麻烦的，分以下三种情况："><a href="#删除比较麻烦。是三种操作中最麻烦的，分以下三种情况：" class="headerlink" title="删除比较麻烦。是三种操作中最麻烦的，分以下三种情况："></a>删除比较麻烦。是三种操作中最麻烦的，分以下三种情况：</h4><ul><li><p>如果这个节点没有子节点，那么直接删除</p><blockquote><p>if(current.left == null &amp;&amp; current.right == null){return null;}</p></blockquote></li><li><p>如果这个节点有一个子节点，那么子节点将替代它的位置</p><blockquote><p>if(current.right == null){return current.left}<br>if(current.left == null){return current.right}</p></blockquote></li><li><p>如果这个节点有两个子节点，那么取这个节点的左子树叶子的最大值或者这个节点的右子树叶子的最小值替换本体</p><blockquote><p><img src="/.com//Clipboard_2021-03-18-19-44-52.png"><br><img src="/.com//Clipboard_2021-03-18-19-45-17.png"></p></blockquote></li></ul><p>最后一种其实也不难，因为左子树的最大值就是左子树叶子节点中最右边的元素。实际上可以嵌套一个Find</p><h4 id="代码实现-3"><a href="#代码实现-3" class="headerlink" title="代码实现"></a>代码实现</h4><ul><li>找到要删除的元素(Find)<br><img src="/.com//Clipboard_2021-03-18-19-53-23.png"></li><li>上面三种情况</li></ul><h4 id="封装-2"><a href="#封装-2" class="headerlink" title="封装"></a>封装</h4><p>不想多说了，和前面一样的</p><h2 id="BST遍历"><a href="#BST遍历" class="headerlink" title="BST遍历"></a>BST遍历</h2><h3 id="广度优先遍历"><a href="#广度优先遍历" class="headerlink" title="广度优先遍历"></a>广度优先遍历</h3><p>这种一般是用Queue实现的</p><ul><li>Level-Order</li><li>遍历顺序是逐层遍历</li><li>时间复杂度：O(n)，n为节点个数<br>伪代码：<br><img src="/.com//Clipboard_2021-03-28-17-00-41.png"></li></ul><h4 id="代码挺好理解"><a href="#代码挺好理解" class="headerlink" title="代码挺好理解"></a>代码挺好理解</h4><ul><li>把根节点丢尽queue里</li><li>dequeue根节点，同时把根节点的左右子节点enqueue</li><li>继续dequeue和enqueue，就完成了广度优先遍历</li></ul><hr><h3 id="深度优先遍历"><a href="#深度优先遍历" class="headerlink" title="深度优先遍历"></a>深度优先遍历</h3><h4 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h4><ul><li>Pre-Order</li><li>遍历顺序是父节点-左子树-右子树</li><li>时间复杂度：O(n)，n为节点个数<br>伪代码：<br><img src="/.com//Clipboard_2021-03-28-16-45-48.png"></li></ul><hr><h4 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h4><p>实际上，这是BST相关算法题里比较常用到的遍历方法，因为<strong>中序遍历BST得到的结果是一个有序的数组/列表</strong></p><ul><li>In-Order</li><li>遍历顺序是左子树-父节点-右子树</li><li>时间复杂度：O(n)，n为节点个数<blockquote><p><strong>中序遍历结合列表的写法</strong>：<br>public void inorder(TreeNode root, List <Integer> list) {<br>&nbsp;&nbsp;&nbsp;&nbsp;if (root == null)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;<br>&nbsp;&nbsp;&nbsp;&nbsp;//遍历左子节点<br>&nbsp;&nbsp;&nbsp;&nbsp;inorder(root.left, list);<br>&nbsp;&nbsp;&nbsp;&nbsp;//遍历父节点<br>&nbsp;&nbsp;&nbsp;&nbsp;list.add(root.val);<br>&nbsp;&nbsp;&nbsp;&nbsp;//遍历右子节点<br>&nbsp;&nbsp;&nbsp;&nbsp;inorder(root.right, list);<br>  }</Integer></p></blockquote></li></ul><hr><h4 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h4><ul><li>Post-Order</li><li>遍历顺序是左子树-右子树-父节点</li><li>时间复杂度：O(n)，n为节点个数<br>伪代码：<br><img src="/.com//Clipboard_2021-03-28-16-53-42.png"></li></ul><p>使用迭代的方式进行遍历：利用stack的结构，代码如下<br>public static void preOrder(TreeNode biTree)<br>    {//非递归实现<br>        Stack<TreeNode> stack = new Stack<TreeNode>();<br>        while(biTree != null || !stack.isEmpty())<br>        {<br>            while(biTree != null)<br>            {<br>                System.out.println(biTree.value);<br>                stack.push(biTree);<br>                biTree = biTree.left;<br>            }<br>            if(!stack.isEmpty())<br>            {<br>                biTree = stack.pop();<br>                biTree = biTree.right;<br>            }<br>        }<br>    }<br>我觉得我是需要一些可视化理解</TreeNode></TreeNode></p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> CS211 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>第11章-哈希表</title>
-      <link href="/2021/07/05/%E7%AC%AC11%E7%AB%A0-%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
-      <url>/2021/07/05/%E7%AC%AC11%E7%AB%A0-%E5%93%88%E5%B8%8C%E8%A1%A8/</url>
-      
-        <content type="html"><![CDATA[<h1 id="第11章-哈希表"><a href="#第11章-哈希表" class="headerlink" title="第11章-哈希表"></a>第11章-哈希表</h1><h2 id="什么是哈希表"><a href="#什么是哈希表" class="headerlink" title="什么是哈希表"></a>什么是哈希表</h2><blockquote><p>A hash table is a collection of items which are stored in such a way as to make it easy to find them later.<br><strong>哈希表是一组项的集合，这些项的存储方式便于以后查找.key的命名从0开始</strong></p></blockquote><ul><li>有Hash Function(计算Hash Value)</li><li>得出Hash Value之后，真正的key值为hv%数组的长度</li><li>有一个结构存放数据，最佳情况是使用键值对组成的哈希表（链表数组）<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3>哈希表搜索的时间复杂度是O(1)，因为每个元素都有对应的key值，直接抓出key值就是对应元素了</li></ul><h2 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h2><p>一个好的hash function应该具有以下几种功能：</p><ul><li>容易计算</li><li>均匀分布</li><li>减少碰撞<h3 id="中间平方法"><a href="#中间平方法" class="headerlink" title="中间平方法"></a>中间平方法</h3></li><li>拿到需要hash的数，对其平方</li><li>取平方完的数中间的数字再次平方</li><li>重复多次上述操作，直到得到你想要的key。这种情况下得到的key具有极大的随机性（如果初始输入很大的话）<p align="center"><img src="/.com//CS211-1.png" width="600"></p></li></ul><h2 id="哈希碰撞"><a href="#哈希碰撞" class="headerlink" title="哈希碰撞"></a>哈希碰撞</h2><p>由于Hash函数没选好而导致value的key重叠碰撞。遇到这种情况</p><blockquote><p>实际上，最简单的观察一个hash function是否会发生碰撞的方法就是看这个函数是否是<strong>单调递增/单调递减</strong>的</p></blockquote><p>有这么几种寻找碰撞的方法：</p><h3 id="断开链表"><a href="#断开链表" class="headerlink" title="断开链表"></a>断开链表</h3><ul><li>首先，该hash使用的数据结构是链表</li><li>如果出现冲突，请把另一个元素继续放进来形成一个数组链表<p align="center"><img src="/.com//CS211-2.png" width="400"></p></li></ul><hr><h3 id="线性探查"><a href="#线性探查" class="headerlink" title="线性探查"></a>线性探查</h3><ul><li>hash的结构是数组</li><li>当遇到碰撞时，在原本计算得到的key的基础上+1%数组大小</li><li>如果再遇到，那就在<strong>最开始得到的key上</strong>+2%数组大小</li><li>相同思想递归<h4 id="线性探查难题：删除问题"><a href="#线性探查难题：删除问题" class="headerlink" title="线性探查难题：删除问题"></a>线性探查难题：删除问题</h4><blockquote><p>当在同一个key处存在相同的碰撞，可能会导致连续的一个范围内都是这个key的线性延伸<br>此时，当我们删掉了这个线性延伸中间的一部分时，就可能会导致程序认为这个key的延伸已经没有了。请问怎么办呢？</p></blockquote></li></ul><p>正确做法是使用<strong>tombstone</strong>（墓碑，只是一个比喻）标记该单元格是空的，并且之前被占用过</p><ul><li>查找时，不要停留在墓碑前，继续寻找</li></ul><ul><li>需要小心环绕</li></ul><ul><li>当插入时，请随意替换你遇到的任何墓碑<p align="center"><img src="/.com//CS211-3.png" width="400"></p></li></ul><h4 id="线性探查的优点"><a href="#线性探查的优点" class="headerlink" title="线性探查的优点"></a>线性探查的优点</h4><p>在实践中，线性探测是最快的通用哈希策略之一。</p><ul><li>低内存开销: 只需要一个数组和一个hash函数</li><li>极佳的局部性: 当冲突发生时，我们只搜索数组中相邻的位置</li><li>出色的缓存性能: 这是上述两个因素的结合<h4 id="线性探查的缺点"><a href="#线性探查的缺点" class="headerlink" title="线性探查的缺点"></a>线性探查的缺点</h4></li><li>线性探测在负载系数很高时表现出严重的性能下降</li><li>碰撞的数量趋向于随着现有碰撞的数量而增长<blockquote><p>这称为主集群(primary clustering)</p></blockquote></li></ul><hr><h3 id="二次探查"><a href="#二次探查" class="headerlink" title="二次探查"></a>二次探查</h3><ul><li>hash的结构是数组</li><li>当遇到碰撞时，在原本计算得到的key的基础上+1<sup>2</sup>%数组大小</li><li>如果再遇到，那就在<strong>最开始得到的key上</strong>+2<sup>2</sup>%数组大小</li><li>相同思想递归</li><li><strong>为了保证您的二次探测最终将击中每一个可用点，表大小必须满足质数</strong></li></ul><hr><h3 id="双重hashing"><a href="#双重hashing" class="headerlink" title="双重hashing"></a>双重hashing</h3><ul><li>有两个hash函数</li><li>hash的结构是数组</li><li>当遇到碰撞时，在原本计算得到的key的基础上+1*h2(value)%数组大小，也就是用上了第二个函数来找另一个key</li><li>如果再遇到，那就在<strong>最开始得到的key上</strong>+2*h2(value)%数组大小</li><li>相同思想递归<p align="center"><img src="/.com//CS211-4.png" width="600"></p></li></ul><h3 id="满表扩容"><a href="#满表扩容" class="headerlink" title="满表扩容"></a>满表扩容</h3><p>衡量表格是否满了的参数：λ<br><strong>λ = 当前元素个数/表格长度</strong><br>当λ逐渐接近1(或者已经大于1/2)，我们就要考虑给哈希表扩容</p><ul><li>创建更大的表</li><li>扫描当前的表，移植到新的表里（使用新的hash函数）</li><li>扩容rehashing的时间复杂度为O(n)，因为一共有n个元素，每个元素hash的时间复杂度为O(1),每个元素插入的时间复杂度为O(1)，一共是O(1)*N+O(N)</li></ul>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> CS211 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>第16章-图论</title>
-      <link href="/2021/07/05/%E7%AC%AC16%E7%AB%A0-%E5%9B%BE%E8%AE%BA/"/>
-      <url>/2021/07/05/%E7%AC%AC16%E7%AB%A0-%E5%9B%BE%E8%AE%BA/</url>
-      
-        <content type="html"><![CDATA[<h1 id="第16章-图论"><a href="#第16章-图论" class="headerlink" title="第16章-图论"></a>第16章-图论</h1><h2 id="概论"><a href="#概论" class="headerlink" title="概论"></a>概论</h2><h3 id="名词介绍"><a href="#名词介绍" class="headerlink" title="名词介绍"></a>名词介绍</h3><ul><li>图是一组对象的图形表示，其中一些对对象通过有指向的线连接起来<br>相互连接的对象由称为<strong>顶点(Vertex)<strong>的点表示，连接顶点的有向线段称为</strong>边(Edge)</strong></li><li>形式上，一个图是一对集合(V, E)，其中V是顶点的集合，E是连接顶点对的边的集合，注意边的方向</li><li>如果两个顶点通过边连接在了一起，那么可以说这两个顶点是<strong>相邻的(Adjacency)</strong></li><li>从一个顶点到达另一个顶点经过的通路被称为<strong>路径(Path)</strong>,比如说A到D的路径可以是ABCD<blockquote><p>A graph is a pictorial representation of a set of objects where some pairs of objects are connected by links. The interconnected objects are represented by points termed as vertices, and the links that connect the vertices are called edges.<br>Formally, a graph is a pair of sets (V, E), where V is the set of vertices and E is the set of edges, connecting the pairs of vertices. </p></blockquote><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3></li><li>添加顶点</li><li>添加边</li><li>矩阵展示<details><summary>相邻矩阵(Adjacency Matrix)</summary><markdown>用矩阵展示出可通行的边的情况。每个顶点都要一个自己的编号，并且可以用这些编号创建一个n*n的矩阵，如下图所示：</markdown></details></li></ul><p><img src="/.com//Clipboard_2021-04-11-10-00-33.png"><img src="/.com//Clipboard_2021-04-11-10-00-38.png"><br>0表示两点之间没有边，1表示两点之间有边</p><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul><li>查找很快，O(1)</li><li>显示很明白</li><li>移除也很快，O(1)<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4></li><li>添加一个新的顶点将会消耗O(n<sup>2</sup>)的时间<br>原因挺显而易见的，因为加入一个新的顶点意味着要创建一个新的二维数组O(n<sup>2</sup>)，同时要把原二维数组的内容复制过来</li></ul><details>  <summary>相邻数组链表(Adjacency List)</summary>  <markdown>用列表展示出可通行的边的情况(感觉有点像哈希表？或者说就是？)，如下图所示：<p><img src="/.com//Clipboard_2021-04-11-10-08-53.png"><img src="/.com//Clipboard_2021-04-11-10-08-57.png"></p><h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><ul><li>相对于前一个，链表非常节省空间</li><li>适合大量顶点存在的图，比如一个有数百万个顶点和边的图(虽然但是，这也太多了)</li></ul><h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p><code>class Graph &#123;<br>    private int numVertices;<br>    private LinkedList<integer> adjLists[];<br>&#125;</integer></code><br>    </p></markdown><p></p></details><h2 id="查找算法"><a href="#查找算法" class="headerlink" title="查找算法"></a>查找算法</h2><p>常用的有两种，请不要用数组或者链表做图的遍历…</p><h3 id="深度优先-DFS-用Stack实现"><a href="#深度优先-DFS-用Stack实现" class="headerlink" title="深度优先(DFS,用Stack实现)"></a>深度优先(DFS,用Stack实现)</h3><p>简单来说呢就是</p><ul><li>把顶点入栈，然后把它的子元素按顺序入栈</li><li>如果这个顶点已经无路可走就把它出栈</li><li>重复上述过程</li></ul><p><img src="/.com//Clipboard_2021-04-11-10-32-39.png"></p><h3 id="广度优先-BFS-用Queue实现"><a href="#广度优先-BFS-用Queue实现" class="headerlink" title="广度优先(BFS,用Queue实现)"></a>广度优先(BFS,用Queue实现)</h3><p>简单来说呢就是</p><ul><li>把顶点、顶点的子元素入队</li><li>子元素入队完就可以dequeue了(这时候把顶点出队了)，如果没有子元素照样dequeue</li><li>重复上述过程</li></ul><p><img src="/.com//Clipboard_2021-04-11-10-32-49.png"></p><h2 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h2><h3 id="前提限制"><a href="#前提限制" class="headerlink" title="前提限制"></a>前提限制</h3><p>拓扑排序仅适用于有向非循环图(DAG)<br>如果不是DAG会造成没有输出或者输出不完全等等一系列问题，输出也不是拓扑排序</p><h3 id="用Stack实现拓扑排序"><a href="#用Stack实现拓扑排序" class="headerlink" title="用Stack实现拓扑排序"></a>用Stack实现拓扑排序</h3><p><a href="https://www.geeksforgeeks.org/topological-sorting/">用Stack实现拓扑排序</a></p><p>其实和DFS的思路完全一样</p><h3 id="用Queue实现拓扑排序"><a href="#用Queue实现拓扑排序" class="headerlink" title="用Queue实现拓扑排序"></a>用Queue实现拓扑排序</h3><p>这种实现方式又被称作Kahn’s algorithm(可汗算法吗?)</p><p><a href="https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/">用Queue实现拓扑排序</a></p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> CS211 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>L11-项目管理</title>
       <link href="/2021/06/23/L11-%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
       <url>/2021/06/23/L11-%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/</url>
@@ -460,6 +346,44 @@
     
     
     <entry>
+      <title>图论</title>
+      <link href="/2021/04/11/%E7%AC%AC16%E7%AB%A0-%E5%9B%BE%E8%AE%BA/"/>
+      <url>/2021/04/11/%E7%AC%AC16%E7%AB%A0-%E5%9B%BE%E8%AE%BA/</url>
+      
+        <content type="html"><![CDATA[<h1 id="第16章-图论"><a href="#第16章-图论" class="headerlink" title="第16章-图论"></a>第16章-图论</h1><h2 id="概论"><a href="#概论" class="headerlink" title="概论"></a>概论</h2><h3 id="名词介绍"><a href="#名词介绍" class="headerlink" title="名词介绍"></a>名词介绍</h3><ul><li>图是一组对象的图形表示，其中一些对对象通过有指向的线连接起来<br>相互连接的对象由称为<strong>顶点(Vertex)<strong>的点表示，连接顶点的有向线段称为</strong>边(Edge)</strong></li><li>形式上，一个图是一对集合(V, E)，其中V是顶点的集合，E是连接顶点对的边的集合，注意边的方向</li><li>如果两个顶点通过边连接在了一起，那么可以说这两个顶点是<strong>相邻的(Adjacency)</strong></li><li>从一个顶点到达另一个顶点经过的通路被称为<strong>路径(Path)</strong>,比如说A到D的路径可以是ABCD<blockquote><p>A graph is a pictorial representation of a set of objects where some pairs of objects are connected by links. The interconnected objects are represented by points termed as vertices, and the links that connect the vertices are called edges.<br>Formally, a graph is a pair of sets (V, E), where V is the set of vertices and E is the set of edges, connecting the pairs of vertices. </p></blockquote><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3></li><li>添加顶点</li><li>添加边</li><li>矩阵展示<details><summary>相邻矩阵(Adjacency Matrix)</summary><markdown>用矩阵展示出可通行的边的情况。每个顶点都要一个自己的编号，并且可以用这些编号创建一个n*n的矩阵，如下图所示：</markdown></details></li></ul><p><img src="/.com//Clipboard_2021-04-11-10-00-33.png"><img src="/.com//Clipboard_2021-04-11-10-00-38.png"><br>0表示两点之间没有边，1表示两点之间有边</p><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul><li>查找很快，O(1)</li><li>显示很明白</li><li>移除也很快，O(1)<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4></li><li>添加一个新的顶点将会消耗O(n<sup>2</sup>)的时间<br>原因挺显而易见的，因为加入一个新的顶点意味着要创建一个新的二维数组O(n<sup>2</sup>)，同时要把原二维数组的内容复制过来</li></ul><details>  <summary>相邻数组链表(Adjacency List)</summary>  <markdown>用列表展示出可通行的边的情况(感觉有点像哈希表？或者说就是？)，如下图所示：<p><img src="/.com//Clipboard_2021-04-11-10-08-53.png"><img src="/.com//Clipboard_2021-04-11-10-08-57.png"></p><h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><ul><li>相对于前一个，链表非常节省空间</li><li>适合大量顶点存在的图，比如一个有数百万个顶点和边的图(虽然但是，这也太多了)</li></ul><h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p><code>class Graph &#123;<br>    private int numVertices;<br>    private LinkedList<integer> adjLists[];<br>&#125;</integer></code><br>    </p></markdown><p></p></details><h2 id="查找算法"><a href="#查找算法" class="headerlink" title="查找算法"></a>查找算法</h2><p>常用的有两种，请不要用数组或者链表做图的遍历…</p><h3 id="深度优先-DFS-用Stack实现"><a href="#深度优先-DFS-用Stack实现" class="headerlink" title="深度优先(DFS,用Stack实现)"></a>深度优先(DFS,用Stack实现)</h3><p>简单来说呢就是</p><ul><li>把顶点入栈，然后把它的子元素按顺序入栈</li><li>如果这个顶点已经无路可走就把它出栈</li><li>重复上述过程</li></ul><p><img src="/.com//Clipboard_2021-04-11-10-32-39.png"></p><h3 id="广度优先-BFS-用Queue实现"><a href="#广度优先-BFS-用Queue实现" class="headerlink" title="广度优先(BFS,用Queue实现)"></a>广度优先(BFS,用Queue实现)</h3><p>简单来说呢就是</p><ul><li>把顶点、顶点的子元素入队</li><li>子元素入队完就可以dequeue了(这时候把顶点出队了)，如果没有子元素照样dequeue</li><li>重复上述过程</li></ul><p><img src="/.com//Clipboard_2021-04-11-10-32-49.png"></p><h2 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h2><h3 id="前提限制"><a href="#前提限制" class="headerlink" title="前提限制"></a>前提限制</h3><p>拓扑排序仅适用于有向非循环图(DAG)<br>如果不是DAG会造成没有输出或者输出不完全等等一系列问题，输出也不是拓扑排序</p><h3 id="用Stack实现拓扑排序"><a href="#用Stack实现拓扑排序" class="headerlink" title="用Stack实现拓扑排序"></a>用Stack实现拓扑排序</h3><p><a href="https://www.geeksforgeeks.org/topological-sorting/">用Stack实现拓扑排序</a></p><p>其实和DFS的思路完全一样</p><h3 id="用Queue实现拓扑排序"><a href="#用Queue实现拓扑排序" class="headerlink" title="用Queue实现拓扑排序"></a>用Queue实现拓扑排序</h3><p>这种实现方式又被称作Kahn’s algorithm(可汗算法吗?)</p><p><a href="https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/">用Queue实现拓扑排序</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>字典树</title>
+      <link href="/2021/04/07/%E7%AC%AC15%E7%AB%A0-%E5%AD%97%E5%85%B8%E6%A0%91/"/>
+      <url>/2021/04/07/%E7%AC%AC15%E7%AB%A0-%E5%AD%97%E5%85%B8%E6%A0%91/</url>
+      
+        <content type="html"><![CDATA[<h2 id="字典树-前缀树"><a href="#字典树-前缀树" class="headerlink" title="字典树(前缀树)"></a>字典树(前缀树)</h2><p>一种数据结构，常用于搜索引擎、查询、输入法</p><ul><li>查找速度很快</li><li>占用空间很大</li><li>根节点是NIL</li><li>字母表的大小与叶子节点的个数相同</li><li>时间复杂度: O(L), L为单词长度</li></ul><p><img src="/.com//Clipboard_2021-04-07-23-27-26.png"></p><h2 id="查找Search"><a href="#查找Search" class="headerlink" title="查找Search"></a>查找Search</h2><ul><li>搜索前缀</li><li>搜索整个单词</li><li>搜索具有相同前缀的单词<br>就是按顺序查找下去，如果查到null就返回不存在</li></ul><p><img src="/.com//Clipboard_2021-04-07-23-34-31.png"></p><h2 id="插入Insert"><a href="#插入Insert" class="headerlink" title="插入Insert"></a>插入Insert</h2><h2 id="删除Delete"><a href="#删除Delete" class="headerlink" title="删除Delete"></a>删除Delete</h2><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>字典树的每个节点可以接的子节点不止两个，所以要抛弃BST的那套(指定义Left和RIght)，创建一个链表来装子节点们</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Ch16: 概率模型</title>
       <link href="/2021/03/30/Ch16%EA%9E%89%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B/"/>
       <url>/2021/03/30/Ch16%EA%9E%89%20%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B/</url>
@@ -489,6 +413,44 @@
       <categories>
           
           <category> 统计学导论 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>红黑树</title>
+      <link href="/2021/03/25/%E7%AC%AC14%E7%AB%A0-%E7%BA%A2%E9%BB%91%E6%A0%91/"/>
+      <url>/2021/03/25/%E7%AC%AC14%E7%AB%A0-%E7%BA%A2%E9%BB%91%E6%A0%91/</url>
+      
+        <content type="html"><![CDATA[<h2 id="红黑树的几个基本规则"><a href="#红黑树的几个基本规则" class="headerlink" title="红黑树的几个基本规则"></a>红黑树的几个基本规则</h2><ul><li>节点只有两种颜色，红色和黑色</li><li>根节点一定是黑色的</li><li>红色节点的父节点和子节点必须是黑色的</li><li>从当前节点(包括它本身)出发走到null，不论哪条路径所经过的黑色节点数目相同<h3 id="为什么使用红黑树？"><a href="#为什么使用红黑树？" class="headerlink" title="为什么使用红黑树？"></a>为什么使用红黑树？</h3>在数据量庞大的时候，红黑树依然能快速搜索出想要寻找的元素，而且它是自平衡的二叉搜索树<br>插入/删除/搜索的时间复杂度均为O(logn)</li></ul><h2 id="红黑树操作"><a href="#红黑树操作" class="headerlink" title="红黑树操作"></a>红黑树操作</h2><p>在谈操作之前，看看这张图大概了解一下兄弟姐妹爸爸叔叔爷爷<br><strong>注意!!!</strong><br>Nil也可以作为叔叔，而且他一定是黑色的<br><img src="/.com//Clipboard_2021-04-06-22-55-14.png"></p><h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p><a href="https://www.youtube.com/watch?v=5IBxA-bZZH8">5min教学视频</a></p><ul><li>所有新插入的节点默认都是红色的</li><li>重新着色并旋转以平衡<h4 id="爸爸是黑色的"><a href="#爸爸是黑色的" class="headerlink" title="爸爸是黑色的"></a>爸爸是黑色的</h4>你不用做任何修改</li></ul><h4 id="是根节点"><a href="#是根节点" class="headerlink" title="是根节点"></a>是根节点</h4><p>最简单的一种情况，直接把节点涂黑就好了</p><h4 id="叔叔是红色的"><a href="#叔叔是红色的" class="headerlink" title="叔叔是红色的"></a>叔叔是红色的</h4><p>比较简单的一种情况，对叔叔、爸爸和爷爷重新上色。其中叔叔和爸爸改为黑色，爷爷改为红色<br><img src="/.com//Clipboard_2021-04-06-23-01-59.png">    <img src="/.com//Clipboard_2021-04-06-23-02-23.png"></p><h4 id="叔叔是黑色的-三角形情况"><a href="#叔叔是黑色的-三角形情况" class="headerlink" title="叔叔是黑色的(三角形情况)"></a>叔叔是黑色的(三角形情况)</h4><p>遇到这个问题你第一反应可能是这个图：<br><img src="/.com//Clipboard_2021-04-06-23-04-48.png"><br>在这这种情况中，实际上子节点与他爸和他爷爷形成了一种三角恋(不是)关系：<br><img src="/.com//Clipboard_2021-04-06-23-07-51.png"><br>解法就是旋转爸爸，旋转方向与子节点所在方向相反(意思是是左子节点就做右旋，是右子节点就做左旋)</p><h4 id="叔叔是黑色的-直线情况"><a href="#叔叔是黑色的-直线情况" class="headerlink" title="叔叔是黑色的(直线情况)"></a>叔叔是黑色的(直线情况)</h4><p>在这种情况中，实际上子节点与他爸和他爷爷形成了一种直线关系：<br><img src="/.com//Clipboard_2021-04-06-23-17-45.png"><br>解法是旋转爷爷，旋转方向与子节点所在方向相反<br>旋转完之后，重新着色爸爸和爷爷，得到以下：<br><img src="/.com//Clipboard_2021-04-06-23-21-15.png"></p><h4 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h4><p><img src="/.com//Clipboard_2021-04-06-23-40-02.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>AVL算法</title>
+      <link href="/2021/03/24/%E7%AC%AC13%E7%AB%A0-AVL%E7%AE%97%E6%B3%95/"/>
+      <url>/2021/03/24/%E7%AC%AC13%E7%AB%A0-AVL%E7%AE%97%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p><strong>动机</strong>：因为有的时候二叉树简直退化成了链表，所以为了得到相对平衡的二叉树，发明了诸如AVL/RBT/Splay这样的平衡二叉树算法<br><strong>节点创建</strong>：在创建的时候带上高度这一新的参数，并写一个与高度有关的方法</p><h2 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h2><h3 id="左旋"><a href="#左旋" class="headerlink" title="左旋"></a>左旋</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>将一个节点的父节点变为自己的左节点<br>如果该节点本身以及有两个节点：</p><ul><li>如果y有一个左子树，将x赋值为y的左子树的父结点</li><li>如果x的父结点为空，则让y作为树的根</li><li>否则如果x是p的左子结点，让y是p的左子结点</li><li>否则将y赋值为p的右子结点</li><li>让y作为x的父结点<br><img src="/.com//Clipboard_2021-03-24-23-37-49.png"></li></ul><h4 id="图示"><a href="#图示" class="headerlink" title="图示"></a>图示</h4><p><img src="/.com//Clipboard_2021-03-24-23-34-31.png"></p><h4 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h4><p><img src="/.com//Clipboard_2021-03-25-10-20-33.png"></p><h3 id="右旋"><a href="#右旋" class="headerlink" title="右旋"></a>右旋</h3><p>和左旋类似，但是不同的是把操作放到了右边</p><ul><li>如果x有一个右子树，将y赋值为x右子树的父结点。</li><li>如果y的父结点为空，则让x作为树的根。</li><li>否则如果y是其父p的右子结点，那么x就是p的右子结点。</li><li>否则，将x赋值为p的左子结点。</li><li>让x作为y的父结点。<br><img src="/.com//Clipboard_2021-03-25-10-18-11.png"></li></ul><h4 id="图示-1"><a href="#图示-1" class="headerlink" title="图示"></a>图示</h4><p><img src="/.com//Clipboard_2021-03-25-10-19-02.png"></p><h4 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h4><p><img src="/.com//Clipboard_2021-03-25-10-20-22.png"></p><h3 id="左右旋"><a href="#左右旋" class="headerlink" title="左右旋"></a>左右旋</h3><p>顾名思义，先左旋再右旋的一种方法。有时仅通过左旋或者右旋并没有办法达成目标，比如有拐点的二叉树，此时需要通过左右旋或者右左旋</p><h4 id="图示-2"><a href="#图示-2" class="headerlink" title="图示"></a>图示</h4><p><img src="/.com//Clipboard_2021-03-25-10-46-43.png"></p><h4 id="伪代码-2"><a href="#伪代码-2" class="headerlink" title="伪代码"></a>伪代码</h4><h3 id="右左旋"><a href="#右左旋" class="headerlink" title="右左旋"></a>右左旋</h3><h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul><li>正常插入</li><li>判断是否为平衡二叉树</li><li>如果不是的话那么开始旋转<h3 id="伪代码-3"><a href="#伪代码-3" class="headerlink" title="伪代码"></a>伪代码</h3><img src="/.com//Clipboard_2021-03-25-10-49-06.png"><br><img src="/.com//Clipboard_2021-03-25-10-51-05.png"></li></ul><h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><ul><li>正常删除</li><li>判断是否为平衡二叉树</li><li>如果不是那么开始旋转<h3 id="伪代码-4"><a href="#伪代码-4" class="headerlink" title="伪代码"></a>伪代码</h3><img src="/.com//Clipboard_2021-03-25-10-50-48.png"></li></ul><h2 id="极值搜寻"><a href="#极值搜寻" class="headerlink" title="极值搜寻"></a>极值搜寻</h2><p>AVL过的树也是BST，所以不用多说了</p><h2 id="各操作时间复杂度"><a href="#各操作时间复杂度" class="headerlink" title="各操作时间复杂度"></a>各操作时间复杂度</h2><p>都是O(logn)</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
           
       </categories>
       
@@ -574,6 +536,25 @@
     
     
     <entry>
+      <title>二叉搜索树</title>
+      <link href="/2021/03/17/%E7%AC%AC12%E7%AB%A0-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/"/>
+      <url>/2021/03/17/%E7%AC%AC12%E7%AB%A0-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
+      
+        <content type="html"><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>BST在二叉树的基础上引入了左小右大的规则<br>一个父节点，它左边的元素必然小于其本身，而右边的元素则大于其本身</p><h3 id="推理"><a href="#推理" class="headerlink" title="推理"></a>推理</h3><ul><li>BST中<strong>最小</strong>的元素是叶子节点中最左边的那个</li><li>BST中<strong>最大</strong>的元素是叶子节点最右边的那个</li><li>搜索元素的平均时间复杂度为O(log<sub>2</sub>n)，这同时也是BST的平均高度</li><li>退化的BST的高度可以达到n，这也是最坏的情况，O(n)</li><li>最好的情况是要找的元素是根节点，O(1)</li></ul><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>BST中的每个元素有一个特殊的键值，其中根节点的key为1，<strong>注意不是0</strong></p><p align="center"><img src="/.com//CS211-5.png" width="600"></p><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><blockquote><p>class Node{<br>  &nbsp;&nbsp;&nbsp;&nbsp;int value;<br>  &nbsp;&nbsp;&nbsp;&nbsp;Node left;<br>  &nbsp;&nbsp;&nbsp;&nbsp;Node right;<br>  &nbsp;&nbsp;&nbsp;&nbsp;Node(int value){<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.value = value;<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right = null; left = null;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}</p></blockquote><p>这个显然是一个用于定义Node属性的类，构造函数为Node赋值，Node类里定义了两种类型的Node（左节点或右节点）</p><hr><h3 id="数据插入"><a href="#数据插入" class="headerlink" title="数据插入"></a>数据插入</h3><ul><li>从根节点开始尝试插入。如果新node的值小于当前节点,插入到左子节点</li><li>如果新节点的值大于当前节点,插入到右子节点</li><li>当前节点为空时,我们已经达到了一个叶子节点,可以把新node插入在这个位置<h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4><blockquote><p>private Node add(Node current, int value){<br>&nbsp;&nbsp;&nbsp;&nbsp;if(current == null){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new Node(value);<br>&nbsp;&nbsp;&nbsp;&nbsp;}if(value &gt; current.value){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current.right = add(current.right,value);<br>&nbsp;&nbsp;&nbsp;&nbsp;}else if(value &lt; current.value){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current.left = add(current.left,value)<br>&nbsp;&nbsp;&nbsp;&nbsp;}else{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;return current;<br>}</p></blockquote></li></ul><h4 id="代码逻辑"><a href="#代码逻辑" class="headerlink" title="代码逻辑"></a>代码逻辑</h4><ul><li>如果新node小于当前node，往左边走</li><li>如果新node大于当前node，往右边走</li><li>如果当前node为空，则插入当前位置，返回一个新的Node对象，构造函数内输入value值</li><li>空的else的意思是相等，代表这个数已经存在，所以直接return</li><li>本质是<strong>递归思想</strong><h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4>嗯，最好封装一下，新的方法里面只有一句<br>root = add(root,value);，因为是从根节点开始插入的</li></ul><p>于是，我们创建一个BST，可以这么写：</p><p align="center"><img src="/.com//CS211-6.png" width="600"></p><hr><h3 id="数据搜索"><a href="#数据搜索" class="headerlink" title="数据搜索"></a>数据搜索</h3><h4 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h4><p align="center"><img src="/.com//CS211-7.png" width="600"></p><h4 id="代码逻辑-1"><a href="#代码逻辑-1" class="headerlink" title="代码逻辑"></a>代码逻辑</h4><ul><li>如果当前的值就是要查找的值，那么返回存在(true)</li><li>如果不是，进行三元运算。如果要查找的值比较大就往右边去找，比较小就往左边</li><li>如果找到最后了为空，则返回不存在(false)</li></ul><h4 id="封装-1"><a href="#封装-1" class="headerlink" title="封装"></a>封装</h4><p>这毕竟是面向对象的五大原则之一(单一职责)</p><p align="center"><img src="/.com//CS211-8.png" width="600"></p><hr><h3 id="数据删除"><a href="#数据删除" class="headerlink" title="数据删除"></a>数据删除</h3><h4 id="删除比较麻烦。是三种操作中最麻烦的，分以下三种情况："><a href="#删除比较麻烦。是三种操作中最麻烦的，分以下三种情况：" class="headerlink" title="删除比较麻烦。是三种操作中最麻烦的，分以下三种情况："></a>删除比较麻烦。是三种操作中最麻烦的，分以下三种情况：</h4><ul><li><p>如果这个节点没有子节点，那么直接删除</p><blockquote><p>if(current.left == null &amp;&amp; current.right == null){return null;}</p></blockquote></li><li><p>如果这个节点有一个子节点，那么子节点将替代它的位置</p><blockquote><p>if(current.right == null){return current.left}<br>if(current.left == null){return current.right}</p></blockquote></li><li><p>如果这个节点有两个子节点，那么取这个节点的左子树叶子的最大值或者这个节点的右子树叶子的最小值替换本体</p><blockquote><p><img src="/.com//Clipboard_2021-03-18-19-44-52.png"><br><img src="/.com//Clipboard_2021-03-18-19-45-17.png"></p></blockquote></li></ul><p>最后一种其实也不难，因为左子树的最大值就是左子树叶子节点中最右边的元素。实际上可以嵌套一个Find</p><h4 id="代码实现-3"><a href="#代码实现-3" class="headerlink" title="代码实现"></a>代码实现</h4><ul><li>找到要删除的元素(Find)<br><img src="/.com//Clipboard_2021-03-18-19-53-23.png"></li><li>上面三种情况</li></ul><h4 id="封装-2"><a href="#封装-2" class="headerlink" title="封装"></a>封装</h4><p>不想多说了，和前面一样的</p><h2 id="BST遍历"><a href="#BST遍历" class="headerlink" title="BST遍历"></a>BST遍历</h2><h3 id="广度优先遍历"><a href="#广度优先遍历" class="headerlink" title="广度优先遍历"></a>广度优先遍历</h3><p>这种一般是用Queue实现的</p><ul><li>Level-Order</li><li>遍历顺序是逐层遍历</li><li>时间复杂度：O(n)，n为节点个数<br>伪代码：<br><img src="/.com//Clipboard_2021-03-28-17-00-41.png"></li></ul><h4 id="代码挺好理解"><a href="#代码挺好理解" class="headerlink" title="代码挺好理解"></a>代码挺好理解</h4><ul><li>把根节点丢尽queue里</li><li>dequeue根节点，同时把根节点的左右子节点enqueue</li><li>继续dequeue和enqueue，就完成了广度优先遍历</li></ul><hr><h3 id="深度优先遍历"><a href="#深度优先遍历" class="headerlink" title="深度优先遍历"></a>深度优先遍历</h3><h4 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h4><ul><li>Pre-Order</li><li>遍历顺序是父节点-左子树-右子树</li><li>时间复杂度：O(n)，n为节点个数<br>伪代码：<br><img src="/.com//Clipboard_2021-03-28-16-45-48.png"></li></ul><hr><h4 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h4><p>实际上，这是BST相关算法题里比较常用到的遍历方法，因为<strong>中序遍历BST得到的结果是一个有序的数组/列表</strong></p><ul><li>In-Order</li><li>遍历顺序是左子树-父节点-右子树</li><li>时间复杂度：O(n)，n为节点个数<blockquote><p><strong>中序遍历结合列表的写法</strong>：<br>public void inorder(TreeNode root, List <Integer> list) {<br>&nbsp;&nbsp;&nbsp;&nbsp;if (root == null)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;<br>&nbsp;&nbsp;&nbsp;&nbsp;//遍历左子节点<br>&nbsp;&nbsp;&nbsp;&nbsp;inorder(root.left, list);<br>&nbsp;&nbsp;&nbsp;&nbsp;//遍历父节点<br>&nbsp;&nbsp;&nbsp;&nbsp;list.add(root.val);<br>&nbsp;&nbsp;&nbsp;&nbsp;//遍历右子节点<br>&nbsp;&nbsp;&nbsp;&nbsp;inorder(root.right, list);<br>  }</Integer></p></blockquote></li></ul><hr><h4 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h4><ul><li>Post-Order</li><li>遍历顺序是左子树-右子树-父节点</li><li>时间复杂度：O(n)，n为节点个数<br>伪代码：<br><img src="/.com//Clipboard_2021-03-28-16-53-42.png"></li></ul><p>使用迭代的方式进行遍历：利用stack的结构，代码如下<br>public static void preOrder(TreeNode biTree)<br>    {//非递归实现<br>        Stack<TreeNode> stack = new Stack<TreeNode>();<br>        while(biTree != null || !stack.isEmpty())<br>        {<br>            while(biTree != null)<br>            {<br>                System.out.println(biTree.value);<br>                stack.push(biTree);<br>                biTree = biTree.left;<br>            }<br>            if(!stack.isEmpty())<br>            {<br>                biTree = stack.pop();<br>                biTree = biTree.right;<br>            }<br>        }<br>    }<br>我觉得我是需要一些可视化理解</TreeNode></TreeNode></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>L1-软件工程介绍</title>
       <link href="/2021/03/16/L1-%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E4%BB%8B%E7%BB%8D/"/>
       <url>/2021/03/16/L1-%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E4%BB%8B%E7%BB%8D/</url>
@@ -593,6 +574,25 @@
     
     
     <entry>
+      <title>哈希表</title>
+      <link href="/2021/03/16/%E7%AC%AC11%E7%AB%A0-%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
+      <url>/2021/03/16/%E7%AC%AC11%E7%AB%A0-%E5%93%88%E5%B8%8C%E8%A1%A8/</url>
+      
+        <content type="html"><![CDATA[<h2 id="什么是哈希表"><a href="#什么是哈希表" class="headerlink" title="什么是哈希表"></a>什么是哈希表</h2><blockquote><p>A hash table is a collection of items which are stored in such a way as to make it easy to find them later.<br><strong>哈希表是一组项的集合，这些项的存储方式便于以后查找.key的命名从0开始</strong></p></blockquote><ul><li>有Hash Function(计算Hash Value)</li><li>得出Hash Value之后，真正的key值为hv%数组的长度</li><li>有一个结构存放数据，最佳情况是使用键值对组成的哈希表（链表数组）<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3>哈希表搜索的时间复杂度是O(1)，因为每个元素都有对应的key值，直接抓出key值就是对应元素了</li></ul><h2 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h2><p>一个好的hash function应该具有以下几种功能：</p><ul><li>容易计算</li><li>均匀分布</li><li>减少碰撞<h3 id="中间平方法"><a href="#中间平方法" class="headerlink" title="中间平方法"></a>中间平方法</h3></li><li>拿到需要hash的数，对其平方</li><li>取平方完的数中间的数字再次平方</li><li>重复多次上述操作，直到得到你想要的key。这种情况下得到的key具有极大的随机性（如果初始输入很大的话）<p align="center"><img src="/.com//CS211-1.png" width="600"></p></li></ul><h2 id="哈希碰撞"><a href="#哈希碰撞" class="headerlink" title="哈希碰撞"></a>哈希碰撞</h2><p>由于Hash函数没选好而导致value的key重叠碰撞。遇到这种情况</p><blockquote><p>实际上，最简单的观察一个hash function是否会发生碰撞的方法就是看这个函数是否是<strong>单调递增/单调递减</strong>的</p></blockquote><p>有这么几种寻找碰撞的方法：</p><h3 id="断开链表"><a href="#断开链表" class="headerlink" title="断开链表"></a>断开链表</h3><ul><li>首先，该hash使用的数据结构是链表</li><li>如果出现冲突，请把另一个元素继续放进来形成一个数组链表<p align="center"><img src="/.com//CS211-2.png" width="400"></p></li></ul><hr><h3 id="线性探查"><a href="#线性探查" class="headerlink" title="线性探查"></a>线性探查</h3><ul><li>hash的结构是数组</li><li>当遇到碰撞时，在原本计算得到的key的基础上+1%数组大小</li><li>如果再遇到，那就在<strong>最开始得到的key上</strong>+2%数组大小</li><li>相同思想递归<h4 id="线性探查难题：删除问题"><a href="#线性探查难题：删除问题" class="headerlink" title="线性探查难题：删除问题"></a>线性探查难题：删除问题</h4><blockquote><p>当在同一个key处存在相同的碰撞，可能会导致连续的一个范围内都是这个key的线性延伸<br>此时，当我们删掉了这个线性延伸中间的一部分时，就可能会导致程序认为这个key的延伸已经没有了。请问怎么办呢？</p></blockquote></li></ul><p>正确做法是使用<strong>tombstone</strong>（墓碑，只是一个比喻）标记该单元格是空的，并且之前被占用过</p><ul><li>查找时，不要停留在墓碑前，继续寻找</li></ul><ul><li>需要小心环绕</li></ul><ul><li>当插入时，请随意替换你遇到的任何墓碑<p align="center"><img src="/.com//CS211-3.png" width="400"></p></li></ul><h4 id="线性探查的优点"><a href="#线性探查的优点" class="headerlink" title="线性探查的优点"></a>线性探查的优点</h4><p>在实践中，线性探测是最快的通用哈希策略之一。</p><ul><li>低内存开销: 只需要一个数组和一个hash函数</li><li>极佳的局部性: 当冲突发生时，我们只搜索数组中相邻的位置</li><li>出色的缓存性能: 这是上述两个因素的结合<h4 id="线性探查的缺点"><a href="#线性探查的缺点" class="headerlink" title="线性探查的缺点"></a>线性探查的缺点</h4></li><li>线性探测在负载系数很高时表现出严重的性能下降</li><li>碰撞的数量趋向于随着现有碰撞的数量而增长<blockquote><p>这称为主集群(primary clustering)</p></blockquote></li></ul><hr><h3 id="二次探查"><a href="#二次探查" class="headerlink" title="二次探查"></a>二次探查</h3><ul><li>hash的结构是数组</li><li>当遇到碰撞时，在原本计算得到的key的基础上+1<sup>2</sup>%数组大小</li><li>如果再遇到，那就在<strong>最开始得到的key上</strong>+2<sup>2</sup>%数组大小</li><li>相同思想递归</li><li><strong>为了保证您的二次探测最终将击中每一个可用点，表大小必须满足质数</strong></li></ul><hr><h3 id="双重hashing"><a href="#双重hashing" class="headerlink" title="双重hashing"></a>双重hashing</h3><ul><li>有两个hash函数</li><li>hash的结构是数组</li><li>当遇到碰撞时，在原本计算得到的key的基础上+1*h2(value)%数组大小，也就是用上了第二个函数来找另一个key</li><li>如果再遇到，那就在<strong>最开始得到的key上</strong>+2*h2(value)%数组大小</li><li>相同思想递归<p align="center"><img src="/.com//CS211-4.png" width="600"></p></li></ul><h3 id="满表扩容"><a href="#满表扩容" class="headerlink" title="满表扩容"></a>满表扩容</h3><p>衡量表格是否满了的参数：λ<br><strong>λ = 当前元素个数/表格长度</strong><br>当λ逐渐接近1(或者已经大于1/2)，我们就要考虑给哈希表扩容</p><ul><li>创建更大的表</li><li>扫描当前的表，移植到新的表里（使用新的hash函数）</li><li>扩容rehashing的时间复杂度为O(n)，因为一共有n个元素，每个元素hash的时间复杂度为O(1),每个元素插入的时间复杂度为O(1)，一共是O(1)*N+O(N)</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Ch13: 从随机数到概率</title>
       <link href="/2021/03/15/Ch13%EA%9E%89%20%E4%BB%8E%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%88%B0%E6%A6%82%E7%8E%87/"/>
       <url>/2021/03/15/Ch13%EA%9E%89%20%E4%BB%8E%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%88%B0%E6%A6%82%E7%8E%87/</url>
@@ -603,6 +603,177 @@
       <categories>
           
           <category> 统计学导论 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>进制转换与位运算</title>
+      <link href="/2021/01/09/10%EF%BC%9A%E7%AC%AC%E5%8D%81%E7%AB%A0/"/>
+      <url>/2021/01/09/10%EF%BC%9A%E7%AC%AC%E5%8D%81%E7%AB%A0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h2><p>关于进制转换，请参见<a href="@note/2%EF%BC%9A%E5%A4%84%E7%90%86%E6%93%8D%E4%BD%9C.md">数字系统</a><br>请注意，这边负数都用二进码表示的</p><h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><blockquote><p>位运算魔法<br>.         ————神经元</p></blockquote><p>不好意思，不考</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>链表</title>
+      <link href="/2021/01/09/8%EF%BC%9A%E7%AC%AC%E5%85%AB%E7%AB%A0/"/>
+      <url>/2021/01/09/8%EF%BC%9A%E7%AC%AC%E5%85%AB%E7%AB%A0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="数组和链表的优缺点"><a href="#数组和链表的优缺点" class="headerlink" title="数组和链表的优缺点"></a>数组和链表的优缺点</h2><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><ul><li><p>array优点：查找元素很快,数据是连续的形式储存在内存中的</p><blockquote><p>easy to search elements by using index; data elements are stored in contiguous locations in memory</p></blockquote></li><li><p>array缺点：当数组满了以后无法扩充，需要把所有元素转移到新的数组，很麻烦。没有填满的数组浪费空间</p><blockquote><p>When they get full it is not easy to extend them, we have to copy all items and move them to the new array. And also, the unfull array waste space</p></blockquote></li></ul><h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><ul><li><p>linked list优点：不浪费任何空间，易于添加和删除新的元素</p><blockquote><p>Linked list doesn’t waste any space and extra links can easily be added or deleted</p></blockquote></li><li><p>linked list缺点：查找元素要从头开始…</p><blockquote><p>hard to search elements. If we want to search one element, we need to search from the head of the linked list</p></blockquote></li></ul><blockquote><p><strong>例题</strong><br>Why are linked lists better than arrays?<br>比较两个，说linked list的优势</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>递归与迭代</title>
+      <link href="/2021/01/09/9%EF%BC%9A%E7%AC%AC%E4%B9%9D%E7%AB%A0/"/>
+      <url>/2021/01/09/9%EF%BC%9A%E7%AC%AC%E4%B9%9D%E7%AB%A0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Recursive和Iterative的区别"><a href="#Recursive和Iterative的区别" class="headerlink" title="Recursive和Iterative的区别"></a>Recursive和Iterative的区别</h2><h4 id="Recursive"><a href="#Recursive" class="headerlink" title="Recursive"></a>Recursive</h4><p>递归是方法调用方法本身实现的重复执行<br>Recursion is when a method calls itself</p><h4 id="Iterative"><a href="#Iterative" class="headerlink" title="Iterative"></a>Iterative</h4><p>迭代嘛…就是for或者while的循环体，虽然也是反复执行的但是是在一个方法里的<br>Iterative is a loop that be used in a method. It will run several times</p><h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><p>如果没有base case，递归会无限持续下去，而循环体在达到循环的条件之后就会终止<br>The method keeps calling itself until it reached the base case  and it filters back up. Iterative will end when it out the condition of the loop</p><h2 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h2><p>经典的递归例题，输入位置返回斐波那契数列对应位置的值<br>因为第一个和第二个的元素是固定的1，所以是有两个base case的</p><details>  <summary>代码</summary>  <markdown>public class Fbnq {    public static long fbnq(int n) {        if (n == 1) return 1;        if (n == 2) return 1;        return fbnq(n-1) + fbnq(n-2);        }    public static void main(String[] args) {        System.out.println(fbnq(5));    }}  </markdown></details><h2 id="归并排序Merge-Sort"><a href="#归并排序Merge-Sort" class="headerlink" title="归并排序Merge Sort"></a>归并排序Merge Sort</h2><p>一种递归的Sort方法，实际上Quick Sort也是一种递归的算法</p><h4 id="时间复杂度：O-nlogn"><a href="#时间复杂度：O-nlogn" class="headerlink" title="时间复杂度：O(nlogn)"></a>时间复杂度：O(nlogn)</h4><h4 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h4><ul><li>创建一个工作数组，与最终结果等长（其实就是装最终数组的</li><li>将给的数组拆成两部分，然后继续往下拆，直到拆到单独元素</li><li>开始归并，比较大小的归并啦</li><li>有比完空的（归并的两部分不等长）就直接把剩下的部分搬到尾巴<br><img src="/.com//Clipboard_2021-01-09-17-29-18.png"></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>算法与数据结构</title>
+      <link href="/2021/01/08/1%EF%BC%9A%E7%AC%AC%E4%B8%80%E7%AB%A0/"/>
+      <url>/2021/01/08/1%EF%BC%9A%E7%AC%AC%E4%B8%80%E7%AB%A0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="什么是算法"><a href="#什么是算法" class="headerlink" title="什么是算法"></a>什么是算法</h2><p>A data structure is a conceptual structure for organizing information </p><blockquote><p>数据结构是用于组织信息的概念结构</p></blockquote><h2 id="什么是数据结构"><a href="#什么是数据结构" class="headerlink" title="什么是数据结构"></a>什么是数据结构</h2><p>An algorithm is a precise step-by-step plan for solving a problem using a finite sequence of instructions</p><blockquote><p>算法是用有限的指令序列来解决问题的精确的分步计划</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>自增与自减</title>
+      <link href="/2021/01/08/2%EF%BC%9A%E7%AC%AC%E4%BA%8C%E7%AB%A0/"/>
+      <url>/2021/01/08/2%EF%BC%9A%E7%AC%AC%E4%BA%8C%E7%AB%A0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="自增"><a href="#自增" class="headerlink" title="自增"></a>自增</h2><ul><li>i++<br>执行完这次算法后，i自增</li><li>++i<br>执行这次算法的时候i就自增了<details><summary>代码</summary><markdown>> public static void main (String[] args){      int x = 5;      int y = 5;      x = x++;      y = ++y;      System.out.println("x = "+ x);      System.out.println("y = "+ y);  }**Answer:** *x = 5,y = 6*</markdown></details></li></ul><h2 id="自减"><a href="#自减" class="headerlink" title="自减"></a>自减</h2><ul><li>i–<br>执行完这次算法后，i自减</li><li>–i<br>执行这次算法的时候i就自减了<details><summary>代码</summary><markdown>> public static void main (String[] args){      int x = 5;      int y = 5;      x = x--;      y = --y;      System.out.println("x = "+ x);      System.out.println("y = "+ y);  }</markdown></details></li></ul><p><strong>Answer:</strong> <em>x = 5,y = 4</em><br>  <br>  </p><h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><p>  public static void main(String[] args){<br>    int a = 100;<br>    int b = 0;<br>    int c = 0;<br>    int d = 100;<br>    for(int i = 0;i&lt;100;i++){<br>      a = a++;<br>      d = ++d;<br>      c = c++;<br>      d = c++;<br>    }<br>  }<br>这样a是不变的，因为a = a，然后结束整个步骤之后a才会自增1<br>而d会自增，因为在执行的时候自增1<br>c和d会自增，但是d比c少一。因为d的缘故，c才得以增加（否则会和a一样</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>线性查找与二分查找</title>
+      <link href="/2021/01/08/3%EF%BC%9A%E7%AC%AC%E5%9B%9B%E7%AB%A0/"/>
+      <url>/2021/01/08/3%EF%BC%9A%E7%AC%AC%E5%9B%9B%E7%AB%A0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="linear-search"><a href="#linear-search" class="headerlink" title="linear search"></a>linear search</h2><h4 id="时间复杂度：O-n"><a href="#时间复杂度：O-n" class="headerlink" title="时间复杂度：O(n)"></a>时间复杂度：O(n)</h4><details>  <summary>代码</summary>  <markdown>public calss LinearSearch{  public static int linear(int[] array,int value){    for(int i = 0;i<array.length,i++){ if(array[i]="value){" return i; } < markdown></array.length,i++){></markdown></details><hr><h2 id="binary-search"><a href="#binary-search" class="headerlink" title="binary search"></a>binary search</h2><h4 id="时间复杂度：O-logn-，这里的对数是以2为底的"><a href="#时间复杂度：O-logn-，这里的对数是以2为底的" class="headerlink" title="时间复杂度：O(logn)，这里的对数是以2为底的"></a>时间复杂度：O(logn)，这里的对数是以2为底的</h4><details>  <summary>代码</summary>  <markdown>public class BinaryTest{    public static int binary(int[] array, int value)    {        int low = 0;//数组的头啦        int high = array.length - 1;//数组的尾巴        while(low <= high) 底下没有用递归是因为用了while啊233.如果这里用的是if判别的话就要递归了。这么写的好处是可以在方法内定义low和high { int middle="(low" + 2; 头和尾巴中间的部分，就是最中间的那个元素 if(value="=" array[middle]) return middle; 你小子运气真好 }> array[middle])            {                low = middle + 1;//值在右边，将底边界移动到middle左边            }            if(value < array[middle])            {                high = middle - 1;//值在左边，将顶边界移动到middle右边            }        }        return -1;//找不到    }  </=></markdown></details>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>排序算法</title>
+      <link href="/2021/01/08/5%EF%BC%9A%E7%AC%AC%E5%85%AD%E7%AB%A0/"/>
+      <url>/2021/01/08/5%EF%BC%9A%E7%AC%AC%E5%85%AD%E7%AB%A0/</url>
+      
+        <content type="html"><![CDATA[<p>以下提及的除了heap以外都是comparison sort，基于比较的排序法</p><ul><li>Stable/Unsatble<br>A stable sorting algorithm is any sorting algorithm that preserves the relative ordering of items with equal values. <blockquote><p>一个稳定的排序算法是保持具有相等值的项的相对顺序的任何排序算法。</p></blockquote></li><li>In-palce/Out-place<br>An in-place algorithm is an algorithm which transforms input using no auxiliary data structure. <blockquote><p>就地算法是一种不使用辅助数据结构对输入进行转换的算法。</p></blockquote><h2 id="bubble-sort"><a href="#bubble-sort" class="headerlink" title="bubble sort"></a>bubble sort</h2></li><li>时间复杂度：O(n^2)<br>n*(n - 1)/2</li><li>Stable/In-place</li><li>图解冒泡排序：<p align="center"><img src="/.com//CS210-1.png" width="650"></p><details><summary>代码</summary><markdown>public class BubbleSort {  public static void bubble(int[] A){      int temp = 0;        for(int i = A.length-1;i>0;i--){//外层（冒泡循环），减去已经排序好的部分          for(int j = 0;j<i;j++){ 内层（交换循环），遍历未排序的部分 if(a[j]>A[j+1]){//执行交换，进行冒泡              temp = A[j];              A[j] = A[j+1];              A[j+1] = temp;            }          }           }        for(int k = 0;k<A.length;k++) { system.out.println(a[k]); } < markdown></A.length;k++)></i;j++){></markdown></details></li></ul><h2 id="selection-sort"><a href="#selection-sort" class="headerlink" title="selection sort"></a>selection sort</h2><p>在未排序部分找到最小的数，放到未排序的首位</p><ul><li>时间复杂度: O(n^2)<br>(n - 1) * n/2</li><li>Unsatble/In-place</li><li>图解选择排序<p align="center"><img src="/.com//CS210-2.png" width="550"></p><details><summary>代码</summary><markdown>public class SelectionSort {  public static void selectionSort(int[] array) {      int min;      int temp = 0;      for (int outer = 0; outer < array.length; outer++) {//未排序的部分          min = outer;//要检查的槽位           for (int i = outer + 1; i < array.length; i++) {//内循环，遍历未排序的部分              if (array[i] < array[min]) {                   min = i; //找到最小值              }          }           temp = array[outer];          array[outer] = array[min];          array[min] = temp;      }      for(int i = 0;i<array.length;i++) { system.out.println(array[i]); } public static void main(string[] args) int[] a="{2,1,0,3,4,5,};" selectionsort(a); < markdown></array.length;i++)></markdown></details></li></ul><h2 id="insertion-sort"><a href="#insertion-sort" class="headerlink" title="insertion sort"></a>insertion sort</h2><ul><li>时间复杂度：O(n^2)</li><li>Stable/In-place</li><li>图解插入排序：<p align="center"><img src="/.com//CS210-3.png" width="650"></p><details><summary>代码</summary><markdown>public class InsertionSort {  public static void insertionSort(int[] array) {       int temp = 0;        for (int outer = 1; outer < array.length; outer++) {        //O（n）        // outer是下一个要被sorting的元素，默认第一个已经sort好了          int inner = outer; // inner是用来判断交换的          while (inner > 0 && array[inner - 1] >= array[inner]) {     //O（n）            temp = array[inner-1];            array[inner - 1] = array[inner];            array[inner] = temp;            inner--;           }         }         for(int i = 0;i<array.length;i++) { system.out.println(array[i]); } public static void main(string[] args) int[] array="{2,1,0,5,3,7};" insertionsort(array); < markdown></array.length;i++)></markdown></details></li></ul><h2 id="quick-sort"><a href="#quick-sort" class="headerlink" title="quick sort"></a>quick sort</h2><ul><li>时间复杂度：O(n^2)</li><li>Unsatble/Out-place</li><li>图解快速排序<br>啊这，你还是看视频吧:<video width="620" height="440" controls><source src="@attachment/CS210-4.mp4" type="video/mp4"></video><details><summary>代码</summary><markdown>public static int[] qsort(int arr[],int start,int end) {        //start和end指的是要排序的部分  int pivot = arr[start];            //取第一个作为pivot  int i = start;                    //数组头  int j = end;                    //数组尾  while (i<j) { while ((i<j)&&(arr[j]>pivot)) {                          j--;                              }                  while ((i<j)&&(arr[i]<pivot)) { i++; } if ((arr[ i ]="=arr[" j ]) && (i < j)) else swap（arr[i], arr[j]）; (i-1>start) arr = qsort(arr,start,i-1);        //递归的部分if (j+1<end) arr="qsort(arr,j+1,end);" return (arr); } < markdown></end)></j)&&(arr[i]<pivot))></j)></markdown></details></li></ul><h2 id="heap-sort"><a href="#heap-sort" class="headerlink" title="heap sort"></a>heap sort</h2><ul><li>详情见<a href="@note/7%EF%BC%9A%E7%AC%AC%E4%B8%83.x%E7%AB%A0.md">第七.x章</a> </li><li>Unstable/In-place</li><li>O(lgn)</li></ul><h2 id="merge-sort"><a href="#merge-sort" class="headerlink" title="merge sort"></a>merge sort</h2><ul><li>O(nlgn)</li><li>Stable/Out-place<br>会画图已经ok了，老师说不考代码<br>关于递归实现merge的思路见<a href="@note/9%EF%BC%9A%E7%AC%AC%E4%B9%9D%E7%AB%A0.md">第九章</a> </li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>堆栈与队列</title>
+      <link href="/2021/01/08/6%EF%BC%9A%E7%AC%AC%E4%B8%83%E7%AB%A0/"/>
+      <url>/2021/01/08/6%EF%BC%9A%E7%AC%AC%E4%B8%83%E7%AB%A0/</url>
+      
+        <content type="html"><![CDATA[<p>堆栈和队列都是抽象数据类型(abstract data type)</p><h2 id="堆栈"><a href="#堆栈" class="headerlink" title="堆栈"></a>堆栈</h2><h3 id="什么是堆栈"><a href="#什么是堆栈" class="headerlink" title="什么是堆栈?"></a>什么是堆栈?</h3><p>一个后进先出(Last-In-First-Out)的玩意，你可以理解成一叠碗。实际上一叠碗就是一个堆栈<br>In computer science, a stack is an abstract data type that serves as a collection of elements, with two main principal operations:<br>Push, which adds an element to the collection, and<br>Pop, which removes the most recently added element that was not yet removed.</p><blockquote><p>在计算机科学中，堆栈是一种抽象数据类型，它作为元素的集合，具有两个主要操作:<br>Push，将元素添加到集合中<br>Pop，它将删除最近添加的尚未删除的元素</p></blockquote><h3 id="堆栈操作"><a href="#堆栈操作" class="headerlink" title="堆栈操作"></a>堆栈操作</h3><ul><li>Pop()<br>往堆栈顶端放入一个元素</li><li>Push()<br>往堆栈顶端取出一个元素</li><li>Peek()<br>检查堆栈顶端的元素并复制它的值</li><li>MakeEmpty()<br>移除堆栈内所有元素</li><li>IsFull()<br>检查堆栈是不是满的，返回一个布尔值</li><li>IsEmpty()<br>检查堆栈是不是空的，返回一个布尔值</li></ul><h3 id="堆栈的top"><a href="#堆栈的top" class="headerlink" title="堆栈的top"></a>堆栈的top</h3><ul><li>当没有元素的时候，堆栈的top为-1</li><li>类似数组，堆栈最底下的那个槽位是0（top = 0），随着元素的加入top随之改变<p align="center"><img src="/.com//CS210-5.png" width="650"></p></li></ul><h3 id="堆栈的优缺点"><a href="#堆栈的优缺点" class="headerlink" title="堆栈的优缺点"></a>堆栈的优缺点</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul><li>空间复杂度为O(n)</li><li>每个堆栈操作的时间复杂度为O(1)<h4 id="缺点-基于array实现的stack"><a href="#缺点-基于array实现的stack" class="headerlink" title="缺点(基于array实现的stack)"></a>缺点(基于array实现的stack)</h4></li><li>堆栈的长度在开始时被定死</li><li>尝试将新元素插入已满的堆栈会导致特定于实现的异常</li></ul><h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><h3 id="什么是队列"><a href="#什么是队列" class="headerlink" title="什么是队列?"></a>什么是队列?</h3><p>一个先进先出(First-In-First-Out)的玩意，你可以理解成排队，这名字已经很直白了<br>In computer science, a queue is a collection of entities that are maintained in a sequence and can be modified by the addition of entities at one end of the sequence and the removal of entities from the other end of the sequence.</p><blockquote><p>在计算机科学中，队列是按序列维护的实体的集合，可以通过在序列的一端添加实体和从序列的另一端删除实体来修改。</p></blockquote><h3 id="队列操作"><a href="#队列操作" class="headerlink" title="队列操作"></a>队列操作</h3><ul><li>insert()<br>入队，在队列的rear（尾部）加上一个元素</li><li>remove()<br>出队，在队列的front（头部）取出一个元素</li><li>peek()<br>检查队列头部的元素，并复制它的值</li><li>size()<br>假设队列非空，返回队列内元素的总数</li><li>isFull()<br>检查队列是不是满的，返回一个布尔值</li><li>IsEmpty()<br>检查队列是不是空的，返回一个布尔值</li></ul><h3 id="队列的rear-尾-和front-头"><a href="#队列的rear-尾-和front-头" class="headerlink" title="队列的rear(尾)和front(头)"></a>队列的rear(尾)和front(头)</h3><ul><li><p>头和尾是相对的。一个队列有固定的长度（举个例子你是用数组实现的队列），由于队列的特性，会出现很神奇的头尾现象（缠绕现象）</p></li><li><p>当队列是空的时候，front为0，rear为-1</p></li><li><p>下面那个rear = 2是打错了，就是你想的那样</p><p align="left"><img src="/.com//CS210-6.png" width="450"><img src="/.com//CS210-7.png" width="450"></p></li><li><p>表格样队列操作视图</p><p align="center"><img src="/.com//CS210-8.png" width="450"></p></li></ul><h3 id="队列的优缺点"><a href="#队列的优缺点" class="headerlink" title="队列的优缺点"></a>队列的优缺点</h3><h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><ul><li>空间复杂度为O(n)</li><li>每个队列操作的时间复杂度为O(1)<h4 id="缺点-基于array实现的queue"><a href="#缺点-基于array实现的queue" class="headerlink" title="缺点(基于array实现的queue)"></a>缺点(基于array实现的queue)</h4></li><li>队列的长度被定死</li><li>尝试将新元素插入已满的队列会导致特定于实现的异常</li></ul><h2 id="双队列"><a href="#双队列" class="headerlink" title="双队列"></a>双队列</h2><h3 id="什么是双队列-Deque"><a href="#什么是双队列-Deque" class="headerlink" title="什么是双队列(Deque)?"></a>什么是双队列(Deque)?</h3><ul><li>双队列没有front和rear的概念</li><li>A deque is a double-ended queue. This means you can insert items at either end and delete them at either end<blockquote><p>deque是一种双端队列<br>这意味着您可以在任意一端插入项，也可以在任意一端删除项</p></blockquote></li></ul><h3 id="双队列操作"><a href="#双队列操作" class="headerlink" title="双队列操作"></a>双队列操作</h3><ul><li>insertLeft()<br>从左边插入元素</li><li>insertRight()<br>从右边插入元素</li><li>removeLeft()<br>从左边移除元素</li><li>removeRight()<br>从右边移除元素<p align="left"><img src="/.com//CS210-9.png" width="450"><img src="/.com//CS210-10.png" width="450"></p></li></ul><h3 id="Deque与Stack和Queue的关系"><a href="#Deque与Stack和Queue的关系" class="headerlink" title="Deque与Stack和Queue的关系"></a>Deque与Stack和Queue的关系</h3><ul><li>Stack是只具有insertRight()和removeRight()的Deque</li><li>Queue是只具有insertRight()和removeLeft()的Deque</li></ul><h2 id="优先队列Priority-Queue"><a href="#优先队列Priority-Queue" class="headerlink" title="优先队列Priority Queue"></a>优先队列Priority Queue</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>A priority queue is a queue where items don’t just join at the rear, they are slotted into the queue according to their priority </p><blockquote><p>优先队列是指项目不是在后面连接，而是根据它们的优先级插入队列</p></blockquote><h3 id="优先队列方法"><a href="#优先队列方法" class="headerlink" title="优先队列方法"></a>优先队列方法</h3><ul><li>insert()<br>按照<strong>优先级</strong>插入元素。通常使用heap的方法插入<br>比如queue里已经有了1，3，现在要插入2，我们得到的新queue应该是1，2，3而不是1，3，2</li><li>remove()<br>删除掉当前队列优先级最高的元素</li></ul><h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul><li>插入的时间复杂度为O(n)，因为要进行优先级衡量的heap</li><li>删除的时间复杂度为O(1)</li></ul><h3 id="使用heap实现优先队列"><a href="#使用heap实现优先队列" class="headerlink" title="使用heap实现优先队列"></a>使用heap实现优先队列</h3><p><a href="@note/7%EF%BC%9A%E7%AC%AC%E4%B8%83.x%E7%AB%A0.md">第七.x章</a> </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>二叉树</title>
+      <link href="/2021/01/08/7%EF%BC%9A%E7%AC%AC%E4%B8%83.x%E7%AB%A0/"/>
+      <url>/2021/01/08/7%EF%BC%9A%E7%AC%AC%E4%B8%83.x%E7%AB%A0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="二叉树Binary-Tree"><a href="#二叉树Binary-Tree" class="headerlink" title="二叉树Binary Tree"></a>二叉树Binary Tree</h2><h3 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h3><p>A complete binary tree is a binary tree in which every level, except possibly the last, is completely filled, and all nodes are as far left as possible</p><blockquote><p>完备二叉树是指除了最后一层之外的每一层都是满的，并且所有节点都在尽可能远的左边的二叉树</p></blockquote><h3 id="排序好的二叉树"><a href="#排序好的二叉树" class="headerlink" title="排序好的二叉树"></a>排序好的二叉树</h3><p>所有的父节点，都比他的子节点（不管是一个还是两个还是没有）大</p><h3 id="二叉树的节点关系"><a href="#二叉树的节点关系" class="headerlink" title="二叉树的节点关系"></a>二叉树的节点关系</h3><p>首先二叉树的第一个元素（最顶上那个）的序号是1</p><ul><li><p>一个节点的左子节点为2i</p></li><li><p>一个节点的右子节点为2i + 1</p></li><li><p>一个节点的父节点为i/2向下取整</p><h3 id="二叉树的五个特点"><a href="#二叉树的五个特点" class="headerlink" title="二叉树的五个特点"></a>二叉树的五个特点</h3><p>完全二叉树（最底下移除满了）</p></li><li><p><strong>FACT1:</strong> 一个有n个子节点的二叉树的高度至少为lgn向下取整</p><blockquote><p><strong>证明</strong><br>2^(h+1) − 1 ≥ 𝑛<br>2^(ℎ+1) ≥ 𝑛+1<br>ℎ+1 ≥ lg⁡(𝑛+1)<br>ℎ+1 ≥ ⌈lg⁡(𝑛+1)⌉    (Number of nodes is positive integer)<br>ℎ ≥ ⌈lg⁡(𝑛+1)⌉−1 = ⌊lg⁡𝑛⌋</p></blockquote></li><li><p><strong>FACT2:</strong> 一个有n个叶子节点的二叉树的高度至少为lgn向上取整</p><blockquote><p><strong>证明</strong><br>It has 𝑛 leaves<br>Suppose that the height of this tree is ℎ<br>There are at most 2^ℎ leaves<br>  2^ℎ ≥ 𝑛<br>  ℎ ≥ ⌈lg⁡𝑛⌉</p></blockquote></li><li><p><strong>FACT3:</strong> 一个高度为h的二叉树至多有2^0 + 2^1 + 2^2 + … + 2^h = 2^h+1 - 1个节点，最多有2^h个叶子节点</p><blockquote><p><strong>证明</strong><br>节点(实际上是数学归纳法)：<br>By induction on ℎ.<br>ℎ=0, so 2^0=1 leaf<br>ℎ=1, so at mose 2^1=2 leaves<br>Thus, we suppose that it holds on ℎ &lt; 𝑚<br>Then we will show that it holds on ℎ = 𝑚<br>叶子节点：<br>By induction hypothesis, we have that there are at most 2^(𝑚−1) leaves at the left subtree<br>and there are at most 2^(𝑚−1) leaves at the right subtree.<br>So, there are at most 2^(𝑚−1) + 2^(𝑚−1) = 2^𝑚  leaves at this binary tree</p></blockquote></li></ul><hr><p>接近完全的二叉树（就是最底下一层没满）</p><ul><li><strong>FACT4:</strong> 一个有n个叶子节点的二叉树的高度至少为⌈lg⁡(𝑛)⌉（或者⌈lg⁡(𝑛)⌉+1?）</li><li><strong>FACT4:</strong> 一个高度为h的二叉树有[2^h, 2^h + 1]个子节点，有[2^h-1, 2^h]个叶子节点</li><li><strong>FACT5:</strong> 第k个节点位于第⌊lg⁡k⌋层<blockquote><p><strong>证明</strong><br>也是数学归纳法，比较..直观明了</p></blockquote></li></ul><h2 id="堆排序Heap-Sort"><a href="#堆排序Heap-Sort" class="headerlink" title="堆排序Heap Sort"></a>堆排序Heap Sort</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>O(nlgn)</p><h3 id="heap-sort流程"><a href="#heap-sort流程" class="headerlink" title="heap sort流程"></a>heap sort流程</h3><ul><li>第一步，把数组元素装进一个二叉树中，并排序找到最大的元素(这个操作叫heapify)，也就是二叉树的头头</li><li>第二步，把二叉树的头头拿出来放到新建的数组的最后面，然后把最底下的叶子节点抓来放到头头的空位里</li><li>第三步，对新的二叉树重排序，迭代上述过程找到最大放到最后（要放最前也可以，看你想怎么排</li><li>第四步，二叉树只剩下最后一个元素了，这就是最小的元素，在数组的arr[0]</li></ul><h3 id="heapify具体操作"><a href="#heapify具体操作" class="headerlink" title="heapify具体操作"></a>heapify具体操作</h3><p>heapify即在一个父节点和它的子节点中进行排序得到排序好的二叉树的方法。<strong>是从上往下进行的</strong>。以HEAPIFY(A, 1)为例：<br>从顶点向下找第一个左父节点: </p><blockquote><p>比较左子节点与父节点，若父节点小则交换<br>比较右子节点与父节点，若父节点小则交换</p></blockquote><p>接下来，继续往上找左父节点，重复以上步骤</p><ul><li>HEAPIFY(A, n)的意思是A这个二叉树的序号为n的节点作为父节点向这个单元heapify</li><li>题目有的时候会给i = n，这个意思是以第n个节点为父节点向下所有父节点进行heapify</li><li>因为这种和2有关的操作，以及前面的定律，所以这个操作的时间复杂度为O(lgn)<blockquote><p><strong>证明</strong><br>𝑇(𝑛)≤𝑇(2/3 𝑛)+𝛩(1)<br>𝑇(𝑛)=𝑂(lg⁡𝑛)<br>Why?<br>Because there are at most 𝟐/𝟑 𝒏 nodes in the left subtree</p></blockquote></li></ul><h3 id="两种画堆的方式"><a href="#两种画堆的方式" class="headerlink" title="两种画堆的方式"></a>两种画堆的方式</h3><h4 id="时间复杂度区别："><a href="#时间复杂度区别：" class="headerlink" title="时间复杂度区别："></a>时间复杂度区别：</h4><ul><li>顶端到底端top-dowm：O(nlgn)</li><li>底端到顶端bottom-up：O(n)<h4 id="操作区别："><a href="#操作区别：" class="headerlink" title="操作区别："></a>操作区别：</h4></li><li>top-down<br>就是我们平常惯用的填法，一股脑的从上填到下、从左填到右</li></ul><p><em>请注意！！填入和heapify是同时进行的。不过这个行为好像被称作<strong>floating up</strong></em><br>填入的过程是O(n)，heapify的过程是O(lgn)，所以总的时间复杂度是O(nlgn)<br><img src="/2021/01/08/7%EF%BC%9A%E7%AC%AC%E4%B8%83/Clipboard_2021-01-09-22-50-59.png"></p><ul><li>buttom-up<br>首先按照元素个数画出二叉树的雏形，然后填入最后的几个元素到二叉树的底下</li></ul><h2 id="使用heap实现优先队列"><a href="#使用heap实现优先队列" class="headerlink" title="使用heap实现优先队列"></a>使用heap实现优先队列</h2><h3 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>O(nlgn)</p><h3 id="操作流程"><a href="#操作流程" class="headerlink" title="操作流程"></a>操作流程</h3><ul><li><p>Maximum(A)<br>找到最大的数<br>O(1) –&gt;原因是 A[1]，就在顶端</p></li><li><p>Extract-max(A)<br>1、take the maximum (in A[1]) –&gt; O(1)找到最大<br>2、set A[1] = A[n]<br>3、Heapify （由上到下调整）A[1] ~ A[n-1] –&gt; O(lgn)</p><blockquote><p>Take the maximun and remove it.</p></blockquote></li><li><p>Insert(A,x)<br>把元素放入二叉树中，x是它的位置，S是这个元素本身，O(1)<br>Heapify（由下往上调整）把x往根节点调整 –&gt; O(lgn)</p><blockquote><p>Add a node x to the end of this tree.<br>Then “floating up”. </p></blockquote></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
           
       </categories>
       
