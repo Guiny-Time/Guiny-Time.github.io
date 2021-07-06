@@ -4,6 +4,82 @@
   
     
     <entry>
+      <title>第19章-最短路径问题</title>
+      <link href="/2021/07/07/%E7%AC%AC19%E7%AB%A0-%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/"/>
+      <url>/2021/07/07/%E7%AC%AC19%E7%AB%A0-%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h1 id="第19章-最短路径问题"><a href="#第19章-最短路径问题" class="headerlink" title="第19章-最短路径问题"></a>第19章-最短路径问题</h1>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> CS211 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>第18章-最小生成树</title>
+      <link href="/2021/07/07/%E7%AC%AC18%E7%AB%A0-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/"/>
+      <url>/2021/07/07/%E7%AC%AC18%E7%AB%A0-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/</url>
+      
+        <content type="html"><![CDATA[<h1 id="第18章-最小生成树"><a href="#第18章-最小生成树" class="headerlink" title="第18章-最小生成树"></a>第18章-最小生成树</h1>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> CS211 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>第20章-NP问题</title>
+      <link href="/2021/07/07/%E7%AC%AC20%E7%AB%A0-NP%E9%97%AE%E9%A2%98/"/>
+      <url>/2021/07/07/%E7%AC%AC20%E7%AB%A0-NP%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h1 id="第20章-NP问题"><a href="#第20章-NP问题" class="headerlink" title="第20章-NP问题"></a>第20章-NP问题</h1>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> CS211 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>贪心算法</title>
+      <link href="/2021/07/06/%E7%AC%AC17%E7%AB%A0-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/"/>
+      <url>/2021/07/06/%E7%AC%AC17%E7%AB%A0-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="什么是贪心算法"><a href="#什么是贪心算法" class="headerlink" title="什么是贪心算法"></a>什么是贪心算法</h3><p>贪心算法是一种通过选择当前可用的最佳选择来解决问题的方法，而不担心它将带来的未来结果。<br>换句话说，局部最佳选择旨在产生全局最佳结果。<br>这个算法永远不会回头去推翻所做的决定。该算法以<strong>自顶向下</strong>的方式工作</p><blockquote><p>A greedy algorithm is an approach for solving a problem by selecting the best option available at the moment, without worrying about the future result it would bring.<br>In other words, the locally best choices aim at producing globally best results.<br>This algorithm never goes back to reverse the decision made. This algorithm works in a top-down approach</p></blockquote><h3 id="贪心缺点"><a href="#贪心缺点" class="headerlink" title="贪心缺点"></a>贪心缺点</h3><ul><li>这个算法可能不是所有问题的最佳选择</li><li>在某些情况下可能会产生错误的结果</li></ul><h3 id="贪心优点"><a href="#贪心优点" class="headerlink" title="贪心优点"></a>贪心优点</h3><ul><li>算法更容易描述</li><li>比其他算法的性能更好(但不是在所有情况下)</li></ul><h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="旋转密码锁的最小次数"><a href="#旋转密码锁的最小次数" class="headerlink" title="旋转密码锁的最小次数"></a>旋转密码锁的最小次数</h3><p>时间复杂度：O(n),n为密码个数<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/damedaneClipboard_2021-07-07-05-53-02.png"><br>给定一个密码锁和密码，问旋转得出密码的最小次数<br>请注意！密码锁的初始数值可能不是0000</p><ul><li>针对每一位，寻找到达代求数的最短方向和差值</li><li>求和这些差值，得到最小次数<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java program for min rotation to unlock</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GFG</span> </span>&#123;</span><br><span class="line">    <span class="comment">// function for min rotation</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">minRotation</span><span class="params">(<span class="keyword">int</span> input, <span class="keyword">int</span> unlock_code)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> rotation = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> input_digit, code_digit;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// iterate till input and unlock code become 0</span></span><br><span class="line">        <span class="keyword">while</span> (input&gt;<span class="number">0</span> || unlock_code&gt;<span class="number">0</span>) &#123;</span><br><span class="line">  </span><br><span class="line">            <span class="comment">// input and unlock last digit as reminder</span></span><br><span class="line">            input_digit = input % <span class="number">10</span>;</span><br><span class="line">            code_digit = unlock_code % <span class="number">10</span>;</span><br><span class="line">  </span><br><span class="line">            <span class="comment">// find min rotation</span></span><br><span class="line">            rotation += Math.min(Math.abs(input_digit - code_digit), <span class="number">10</span> - Math.abs(input_digit - code_digit));</span><br><span class="line">            <span class="comment">// update code and input</span></span><br><span class="line">            input /= <span class="number">10</span>;</span><br><span class="line">            unlock_code /= <span class="number">10</span>;</span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="keyword">return</span> rotation;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li></ul><h3 id="数组的最小积子集"><a href="#数组的最小积子集" class="headerlink" title="数组的最小积子集"></a>数组的最小积子集</h3><p>时间复杂度：O(N)，N为数组的长度<br>给定一个数组a，我们必须找到与数组中存在的元素子集的最小乘积</p><ul><li>如果有偶数个负数，没有零，结果是除最大的负数外的所有数的乘积</li><li>如果有奇数个负数，没有零，结果就是所有的乘积</li><li>如果有零和正的，没有负的，结果是0</li><li>例外情况是，当没有负数，所有其他元素都是正的，那么我们的结果应该是第一个最小正数<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java program to find maximum product of a subset.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GFG</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">minProductSubset</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">if</span> (n == <span class="number">1</span>)</span><br><span class="line"><span class="keyword">return</span> a[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">int</span> negmax = Integer.MIN_VALUE;</span><br><span class="line"><span class="keyword">int</span> posmin = Integer.MAX_VALUE;</span><br><span class="line"><span class="keyword">int</span> count_neg = <span class="number">0</span>, count_zero = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> product = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">// count the zero numbers </span></span><br><span class="line"><span class="keyword">if</span>(a[i] == <span class="number">0</span>) count_zero++;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line"><span class="comment">// count the negetive numbers</span></span><br><span class="line">       <span class="keyword">if</span>(a[i] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">count_neg++;</span><br><span class="line"><span class="keyword">if</span>(a[i] &gt; negmax) negmax = a[i] ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// find the minimum positive number</span></span><br><span class="line"><span class="keyword">if</span>(a[i] &gt; <span class="number">0</span> &amp;&amp; a[i] &lt; posmin) posmin = a[i];</span><br><span class="line">product *= a[i];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h3 id="最少数量的硬币"><a href="#最少数量的硬币" class="headerlink" title="最少数量的硬币"></a>最少数量的硬币</h3><p>时间复杂度：O(V)<br>给定一个值V,如果我们想要改变V Rs,和我们有无限供应的货币,也就是说,我们有无限供应的{1、2、5、10、20、50、100、500、1000}硬币, 如何使用最小数量的硬币来凑齐V？</p><ul><li>按降序排列硬币数组并初始化结果为空。</li><li>找出比当前金额小的最大面额</li><li>将找到的命名添加到结果中。从金额中减去面值</li><li>如果amount变成0，则打印result；否则重复步骤3和4的新值的V<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java program to find minimum number of denominations</span></span><br><span class="line"><span class="keyword">import</span> java.util.Vector;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GFG</span></span>&#123;</span><br><span class="line"><span class="comment">// All denominations of Indian Currency</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> deno[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">50</span>, <span class="number">100</span>, <span class="number">500</span>, <span class="number">1000</span>&#125;;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> n = deno.length;</span><br><span class="line">  <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">findMin</span><span class="params">(<span class="keyword">int</span> V)</span> </span>&#123;</span><br><span class="line">Vector&lt;Integer&gt; ans = <span class="keyword">new</span> Vector&lt;&gt;(); <span class="comment">// Initialize result</span></span><br><span class="line"><span class="comment">// Traverse through all denomination</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line"><span class="comment">// Find denominations</span></span><br><span class="line"><span class="keyword">while</span> (V &gt;= deno[i])&#123;</span><br><span class="line">V -= deno[i];</span><br><span class="line">ans.add(deno[i]);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Print result</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ans.size(); i++)&#123;</span><br><span class="line">System.out.print(<span class="string">&quot; &quot;</span> + ans.elementAt(i));</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法与数据结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>L11-项目管理</title>
       <link href="/2021/06/23/L11-%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
       <url>/2021/06/23/L11-%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/</url>

@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>贪心算法 | Guiny-Time</title><meta name="author" content="时光"><meta name="copyright" content="时光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="定义什么是贪心算法贪心算法是一种通过选择当前可用的最佳选择来解决问题的方法，而不担心它将带来的未来结果。换句话说，局部最佳选择旨在产生全局最佳结果。这个算法永远不会回头去推翻所做的决定。该算法以自顶向下的方式工作  A greedy algorithm is an approach for solving a problem by selecting the best option availab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="贪心算法">
+<meta property="og:url" content="http://example.com/2021/07/06/%E7%AC%AC17%E7%AB%A0-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Guiny-Time">
+<meta property="og:description" content="定义什么是贪心算法贪心算法是一种通过选择当前可用的最佳选择来解决问题的方法，而不担心它将带来的未来结果。换句话说，局部最佳选择旨在产生全局最佳结果。这个算法永远不会回头去推翻所做的决定。该算法以自顶向下的方式工作  A greedy algorithm is an approach for solving a problem by selecting the best option availab">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2021-07-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-06T22:24:58.233Z">
+<meta property="article:author" content="时光">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2021/07/06/%E7%AC%AC17%E7%AB%A0-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '贪心算法',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-07 06:24:58'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/wons-head.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">45</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/cats/"><i class="fa-fw fab fa-connectdevelop"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Guiny-Time</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/cats/"><i class="fa-fw fab fa-connectdevelop"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">贪心算法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-05T16:00:00.000Z" title="发表于 2021-07-06 00:00:00">2021-07-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-06T22:24:58.233Z" title="更新于 2021-07-07 06:24:58">2021-07-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">算法与数据结构</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">921</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="贪心算法"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="什么是贪心算法"><a href="#什么是贪心算法" class="headerlink" title="什么是贪心算法"></a>什么是贪心算法</h3><p>贪心算法是一种通过选择当前可用的最佳选择来解决问题的方法，而不担心它将带来的未来结果。<br>换句话说，局部最佳选择旨在产生全局最佳结果。<br>这个算法永远不会回头去推翻所做的决定。该算法以<strong>自顶向下</strong>的方式工作</p>
+<blockquote>
+<p>A greedy algorithm is an approach for solving a problem by selecting the best option available at the moment, without worrying about the future result it would bring.<br>In other words, the locally best choices aim at producing globally best results.<br>This algorithm never goes back to reverse the decision made. This algorithm works in a top-down approach</p>
+</blockquote>
+<h3 id="贪心缺点"><a href="#贪心缺点" class="headerlink" title="贪心缺点"></a>贪心缺点</h3><ul>
+<li>这个算法可能不是所有问题的最佳选择</li>
+<li>在某些情况下可能会产生错误的结果</li>
+</ul>
+<h3 id="贪心优点"><a href="#贪心优点" class="headerlink" title="贪心优点"></a>贪心优点</h3><ul>
+<li>算法更容易描述</li>
+<li>比其他算法的性能更好(但不是在所有情况下)</li>
+</ul>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="旋转密码锁的最小次数"><a href="#旋转密码锁的最小次数" class="headerlink" title="旋转密码锁的最小次数"></a>旋转密码锁的最小次数</h3><p>时间复杂度：O(n),n为密码个数<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/damedaneClipboard_2021-07-07-05-53-02.png"><br>给定一个密码锁和密码，问旋转得出密码的最小次数<br>请注意！密码锁的初始数值可能不是0000</p>
+<ul>
+<li>针对每一位，寻找到达代求数的最短方向和差值</li>
+<li>求和这些差值，得到最小次数<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java program for min rotation to unlock</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GFG</span> </span>&#123;</span><br><span class="line">    <span class="comment">// function for min rotation</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">minRotation</span><span class="params">(<span class="keyword">int</span> input, <span class="keyword">int</span> unlock_code)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> rotation = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> input_digit, code_digit;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// iterate till input and unlock code become 0</span></span><br><span class="line">        <span class="keyword">while</span> (input&gt;<span class="number">0</span> || unlock_code&gt;<span class="number">0</span>) &#123;</span><br><span class="line">  </span><br><span class="line">            <span class="comment">// input and unlock last digit as reminder</span></span><br><span class="line">            input_digit = input % <span class="number">10</span>;</span><br><span class="line">            code_digit = unlock_code % <span class="number">10</span>;</span><br><span class="line">  </span><br><span class="line">            <span class="comment">// find min rotation</span></span><br><span class="line">            rotation += Math.min(Math.abs(input_digit - code_digit), <span class="number">10</span> - Math.abs(input_digit - code_digit));</span><br><span class="line">            <span class="comment">// update code and input</span></span><br><span class="line">            input /= <span class="number">10</span>;</span><br><span class="line">            unlock_code /= <span class="number">10</span>;</span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="keyword">return</span> rotation;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="数组的最小积子集"><a href="#数组的最小积子集" class="headerlink" title="数组的最小积子集"></a>数组的最小积子集</h3><p>时间复杂度：O(N)，N为数组的长度<br>给定一个数组a，我们必须找到与数组中存在的元素子集的最小乘积</p>
+<ul>
+<li>如果有偶数个负数，没有零，结果是除最大的负数外的所有数的乘积</li>
+<li>如果有奇数个负数，没有零，结果就是所有的乘积</li>
+<li>如果有零和正的，没有负的，结果是0</li>
+<li>例外情况是，当没有负数，所有其他元素都是正的，那么我们的结果应该是第一个最小正数<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java program to find maximum product of a subset.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GFG</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">minProductSubset</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (n == <span class="number">1</span>)</span><br><span class="line">			<span class="keyword">return</span> a[<span class="number">0</span>];	</span><br><span class="line">		<span class="keyword">int</span> negmax = Integer.MIN_VALUE;</span><br><span class="line">		<span class="keyword">int</span> posmin = Integer.MAX_VALUE;</span><br><span class="line">		<span class="keyword">int</span> count_neg = <span class="number">0</span>, count_zero = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> product = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// count the zero numbers </span></span><br><span class="line">			<span class="keyword">if</span>(a[i] == <span class="number">0</span>) count_zero++;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">// count the negetive numbers</span></span><br><span class="line">		       	<span class="keyword">if</span>(a[i] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">					count_neg++;</span><br><span class="line">					<span class="keyword">if</span>(a[i] &gt; negmax) negmax = a[i] ;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="comment">// find the minimum positive number</span></span><br><span class="line">				<span class="keyword">if</span>(a[i] &gt; <span class="number">0</span> &amp;&amp; a[i] &lt; posmin) posmin = a[i];		</span><br><span class="line">				product *= a[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="最少数量的硬币"><a href="#最少数量的硬币" class="headerlink" title="最少数量的硬币"></a>最少数量的硬币</h3><p>时间复杂度：O(V)<br>给定一个值V,如果我们想要改变V Rs,和我们有无限供应的货币,也就是说,我们有无限供应的{1、2、5、10、20、50、100、500、1000}硬币, 如何使用最小数量的硬币来凑齐V？</p>
+<ul>
+<li>按降序排列硬币数组并初始化结果为空。</li>
+<li>找出比当前金额小的最大面额</li>
+<li>将找到的命名添加到结果中。从金额中减去面值</li>
+<li>如果amount变成0，则打印result；否则重复步骤3和4的新值的V<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java program to find minimum number of denominations</span></span><br><span class="line"><span class="keyword">import</span> java.util.Vector;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GFG</span></span>&#123;</span><br><span class="line">	<span class="comment">// All denominations of Indian Currency</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> deno[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">50</span>, <span class="number">100</span>, <span class="number">500</span>, <span class="number">1000</span>&#125;;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> n = deno.length;</span><br><span class="line">  <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">findMin</span><span class="params">(<span class="keyword">int</span> V)</span> </span>&#123;</span><br><span class="line">		Vector&lt;Integer&gt; ans = <span class="keyword">new</span> Vector&lt;&gt;(); <span class="comment">// Initialize result</span></span><br><span class="line">		<span class="comment">// Traverse through all denomination</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">			<span class="comment">// Find denominations</span></span><br><span class="line">			<span class="keyword">while</span> (V &gt;= deno[i])&#123;</span><br><span class="line">				V -= deno[i];</span><br><span class="line">				ans.add(deno[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// Print result</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ans.size(); i++)&#123;</span><br><span class="line">			System.out.print(<span class="string">&quot; &quot;</span> + ans.elementAt(i));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">时光</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/07/06/%E7%AC%AC17%E7%AB%A0-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">http://example.com/2021/07/06/%E7%AC%AC17%E7%AB%A0-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Guiny-Time</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/07/07/%E7%AC%AC20%E7%AB%A0-NP%E9%97%AE%E9%A2%98/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第20章-NP问题</div></div></a></div><div class="next-post pull-right"><a href="/2021/06/23/L11-%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"><img class="next-cover" src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/damedane%E5%BC%80%E4%BC%9A.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">L11-项目管理</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/wons-head.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">时光</div><div class="author-info__description">时光光的个人博客</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">45</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Guiny-Time"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Guiny-Time" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:guinytime@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎光临时光光之家，详细信息请见“关于”</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">什么是贪心算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%AA%E5%BF%83%E7%BC%BA%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">贪心缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%AA%E5%BF%83%E4%BC%98%E7%82%B9"><span class="toc-number">1.3.</span> <span class="toc-text">贪心优点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">例题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%E5%AF%86%E7%A0%81%E9%94%81%E7%9A%84%E6%9C%80%E5%B0%8F%E6%AC%A1%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">旋转密码锁的最小次数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E7%A7%AF%E5%AD%90%E9%9B%86"><span class="toc-number">2.2.</span> <span class="toc-text">数组的最小积子集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%91%E6%95%B0%E9%87%8F%E7%9A%84%E7%A1%AC%E5%B8%81"><span class="toc-number">2.3.</span> <span class="toc-text">最少数量的硬币</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/07/%E7%AC%AC19%E7%AB%A0-%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/" title="第19章-最短路径问题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第19章-最短路径问题"/></a><div class="content"><a class="title" href="/2021/07/07/%E7%AC%AC19%E7%AB%A0-%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/" title="第19章-最短路径问题">第19章-最短路径问题</a><time datetime="2021-07-06T22:23:34.660Z" title="发表于 2021-07-07 06:23:34">2021-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/07/%E7%AC%AC18%E7%AB%A0-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" title="第18章-最小生成树"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第18章-最小生成树"/></a><div class="content"><a class="title" href="/2021/07/07/%E7%AC%AC18%E7%AB%A0-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" title="第18章-最小生成树">第18章-最小生成树</a><time datetime="2021-07-06T22:23:34.658Z" title="发表于 2021-07-07 06:23:34">2021-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/07/%E7%AC%AC20%E7%AB%A0-NP%E9%97%AE%E9%A2%98/" title="第20章-NP问题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第20章-NP问题"/></a><div class="content"><a class="title" href="/2021/07/07/%E7%AC%AC20%E7%AB%A0-NP%E9%97%AE%E9%A2%98/" title="第20章-NP问题">第20章-NP问题</a><time datetime="2021-07-06T22:23:34.654Z" title="发表于 2021-07-07 06:23:34">2021-07-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/06/%E7%AC%AC17%E7%AB%A0-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" title="贪心算法"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="贪心算法"/></a><div class="content"><a class="title" href="/2021/07/06/%E7%AC%AC17%E7%AB%A0-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" title="贪心算法">贪心算法</a><time datetime="2021-07-05T16:00:00.000Z" title="发表于 2021-07-06 00:00:00">2021-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/23/L11-%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" title="L11-项目管理"><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/damedane%E5%BC%80%E4%BC%9A.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="L11-项目管理"/></a><div class="content"><a class="title" href="/2021/06/23/L11-%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" title="L11-项目管理">L11-项目管理</a><time datetime="2021-06-22T16:00:00.000Z" title="发表于 2021-06-23 00:00:00">2021-06-23</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 时光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '4JASk8p4lhva62ulFWxkL4l7-MdYXbMMI',
+      appKey: 'fpVWVFvybj7LfEnve7qBA9r4',
+      placeholder: '留下你的留言吧',
+      avatar: '',
+      meta: 'nick'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: {"tv_doge":"6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png","tv_亲亲":"a8111ad55953ef5e3be3327ef94eb4a39d535d06.png","tv_偷笑":"bb690d4107620f1c15cff29509db529a73aee261.png","tv_再见":"180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png","tv_冷漠":"b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png","tv_发怒":"34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png","tv_发财":"34db290afd2963723c6eb3c4560667db7253a21a.png","tv_可爱":"9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png","tv_吐血":"09dd16a7aa59b77baa1155d47484409624470c77.png","tv_呆":"fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png","tv_呕吐":"9f996894a39e282ccf5e66856af49483f81870f3.png","tv_困":"241ee304e44c0af029adceb294399391e4737ef2.png","tv_坏笑":"1f0b87f731a671079842116e0991c91c2c88645a.png","tv_大佬":"093c1e2c490161aca397afc45573c877cdead616.png","tv_大哭":"23269aeb35f99daee28dda129676f6e9ea87934f.png","tv_委屈":"d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png","tv_害羞":"a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png","tv_尴尬":"7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png","tv_微笑":"70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png","tv_思考":"90cf159733e558137ed20aa04d09964436f618a1.png","tv_惊吓":"0d15c7e2ee58e935adc6a7193ee042388adc22af.png"},
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="255,255,255" opacity="1" zIndex="-1" count="150" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
