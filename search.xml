@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>解决Z-Fighting</title>
+      <link href="/2022/01/13/%E8%A7%A3%E5%86%B3Z-Fighting/"/>
+      <url>/2022/01/13/%E8%A7%A3%E5%86%B3Z-Fighting/</url>
+      
+        <content type="html"><![CDATA[<h1 id="解决z-fighting"><a class="markdownIt-Anchor" href="#解决z-fighting"></a> 解决Z-Fighting</h1><p>Z-Fighting是在实际项目中困扰到场景布局的一大因素。从理论上来说，在相同深度值的地方有多个片元，并且它们的渲染队列序号是相同的。这导致颜色缓冲区不知道该呈现哪个颜色比较合适，当视角运动时，就会出现糟糕的闪烁：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220113143251.png" width="315/"><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220113143402.png" height="300/"></p><p>通过调整渲染队列并不能避免这种问题，就比如上图的半透明物体的渲染队列是在不透明物体之后的，但他们重叠时依然会发生z-fighting现象。</p><h2 id="解决方法"><a class="markdownIt-Anchor" href="#解决方法"></a> 解决方法</h2><p>Shaderlab语法中的Offset命令</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Properties&#123;</span><br><span class="line">        _OffsetFactor(&quot;深度斜率&quot;,Float) = 0</span><br><span class="line">        _OffsetUnit(&quot;深度偏移&quot;,Float) = 0</span><br><span class="line">    &#125;</span><br><span class="line">SubShader&#123;</span><br><span class="line">    Pass&#123;</span><br><span class="line">        Tags&#123; &quot;LightMode&quot; = &quot;ForwardBase&quot; &#125;</span><br><span class="line">        Offset [_OffsetFactor],[_OffsetUnit]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h3 id="参数解读"><a class="markdownIt-Anchor" href="#参数解读"></a> 参数解读</h3><ul><li><strong>_OffsetFactor</strong>: 缩放最大 Z 斜率，也称为<strong>深度斜率</strong>，以生成每个多边形的可变深度偏移。<br>不平行于近剪裁平面和远剪裁平面的多边形具有 Z 斜率。调整此值以避免此类多边形上出现视觉瑕疵。</li><li><strong>_OffsetUnit</strong>: 缩放最小可分辨深度缓冲区值，以产生恒定的<strong>深度偏移</strong>。最小可分辨深度缓冲区值（一个 <em>unit</em>）因设备而异。<br>负值意味着 GPU 将多边形绘制得更靠近摄像机。正值意味着 GPU 将多边形绘制得更远离摄像机。</li></ul><h3 id="效果"><a class="markdownIt-Anchor" href="#效果"></a> 效果</h3><p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220113152924.png" width="328/"><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220113153033.png" width="315/"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 探索发现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Unity </tag>
+            
+            <tag> ShaderLab </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PBR白皮书笔记-1</title>
       <link href="/2021/11/12/PBR-1/"/>
       <url>/2021/11/12/PBR-1/</url>
@@ -299,7 +326,7 @@
             
             <tag> 渲染管线 </tag>
             
-            <tag> 计算机图形徐 </tag>
+            <tag> 计算机图形学 </tag>
             
         </tags>
       
