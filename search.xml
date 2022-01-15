@@ -4,11 +4,40 @@
   
     
     <entry>
+      <title>UE4 Materials 101：扭曲shader</title>
+      <link href="/2022/01/16/UE4%20Materials%20101%EF%BC%9A%E6%89%AD%E6%9B%B2shader/"/>
+      <url>/2022/01/16/UE4%20Materials%20101%EF%BC%9A%E6%89%AD%E6%9B%B2shader/</url>
+      
+        <content type="html"><![CDATA[<h1 id="ue4-materials-101扭曲shader"><a class="markdownIt-Anchor" href="#ue4-materials-101扭曲shader"></a> UE4 Materials 101：扭曲shader</h1><p>这种方法可以用来模拟水面的涟漪、火焰的效果等扭曲动效。丢一个完成的效果图：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/%E6%9D%90%E8%B4%A8%E7%90%83.gif"><p>这算是对前三期学习的一个总结篇。来解析一下shader graph里的组成！</p><h2 id="噪声扭曲模块"><a class="markdownIt-Anchor" href="#噪声扭曲模块"></a> 噪声扭曲模块</h2><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220116001431.png"><p>可以看到，噪声扭曲模块由<strong>时间节点</strong>、Vector2、<strong>乘法</strong>、纹理展开、<strong>相加</strong>、噪声纹理几个节点组成。</p><ul><li>时间（Time）<br>时间随着时间而流逝（…），意思就是在程序运行的过程中，time值是不断变大的。</li><li>Vector2<br>与时间相乘，用来调节时间的影响程度。当vector的x为0时，时间只影响v坐标，造成纹理在v方向移动；当vector的y为0时，时间只影响u坐标，造成纹理在u方向移动。x/y的值越大，影响的速度越快，反之越慢。当x或y为1时，时间就是时间本身。</li><li>纹理展开<br>我们需要让变化的结果施加到纹理上，因此需要texcoord来放纹理展开的情况。与乘法的结果相加后，纹理映射的结果也开始变化。</li><li>噪声纹理<br>噪声用来扭曲我们之后使用的base color。为了使扭曲不重复，引入了两组相同但是时间乘数不同的噪声。因为手上没有RGB通道不同的噪声，就直接用灰阶噪声来模拟一下（这样做出来效果没那么好就是了）。</li></ul><h2 id="纹理贴图模块"><a class="markdownIt-Anchor" href="#纹理贴图模块"></a> 纹理贴图模块</h2><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220116004811.png"><p>我们把噪声扭曲模块得到的结果相加，再乘上一个用来控制扭曲强弱的乘数（在这里被定成0.2了），之后和调整好的纹理映射结果相加，输入到纹理贴图的uv中。<br>这时候，纹理就动起来了。把结果输出到base color和emission（为了让效果看起来更棒）中，就得到了不错的熔岩效果。<br>以下是完整shader graph：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220116001303.png">]]></content>
+      
+      
+      <categories>
+          
+          <category> UE4-Materials101 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Unreal </tag>
+            
+            <tag> shader </tag>
+            
+            <tag> demo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>UE4 Materials 101：节点数据类型</title>
       <link href="/2022/01/15/UE4%20Materials%20101%E8%8A%82%E7%82%B9%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
       <url>/2022/01/15/UE4%20Materials%20101%E8%8A%82%E7%82%B9%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
       
-        <content type="html"><![CDATA[<h1 id="ue4-materials-101节点数据类型"><a class="markdownIt-Anchor" href="#ue4-materials-101节点数据类型"></a> UE4 Materials 101–节点数据类型</h1><p>很喜欢一句话：“因为浮点数精度的不同造成了z-fighting”。在早年写shader的时候，也因为数据类型的错误得到了一片紫光：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/39DFED12AE11D5D20AC531C4E3C93BDB.jpg" width="250/"><h2 id="常量系"><a class="markdownIt-Anchor" href="#常量系"></a> 常量系</h2><h3 id="constant"><a class="markdownIt-Anchor" href="#constant"></a> Constant</h3><p>常量内包含了一个浮点数（即float），可以用在金属度、粗糙度、镜面反射度等地方，因为它们都接受单一浮点数为输入。<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115194059.png"><br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115194309.png"></p><p>当把浮点数连接到base color时，它代表灰阶的所有颜色，但是最好把constant限制在[0,1]范围内，超出也不会报错，只会是白色或灰色（看哪一段超出了）：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115194614.png"></p><h4 id="数学"><a class="markdownIt-Anchor" href="#数学"></a> 数学</h4><p>我们可以对常量进行数学运算，将结果输出到其他节点。这很重要，因为我们经常需要对一些值进行换算处理，包括且不限于加减乘除。有以下数学节点（没截全）：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115200125.png" width="300/"></p><h3 id="constant2vector"><a class="markdownIt-Anchor" href="#constant2vector"></a> Constant2Vector</h3><p>包含了两个浮点数的浮点数对，很适合表示二维坐标数据，例如uv坐标。<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115200321.png"></p><h4 id="数学-2"><a class="markdownIt-Anchor" href="#数学-2"></a> 数学</h4><p>我们也可以对浮点数对进行数学运算。相当于对两个二维向量进行操作。而当我们只需要浮点数对的其中一个值时，我们可以使用mask节点来对变量进行拦截。mask同样可以使用在其他浮点数组合（比如Vecor3, Vector4）上：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115202153.png"></p><p>除此之外，如果觉得要检查遮罩的值很麻烦，可以用split节点对组合进行拆分。但是需要注意的是，splitComponents只支持输入Vector3类型：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115202541.png"></p><h3 id="constant3vector"><a class="markdownIt-Anchor" href="#constant3vector"></a> Constant3Vector</h3><p>包含了三个浮点数对，很适合三维坐标系。截取方式和上文类似，但是需要注意的是进行加减法运算时，只能和标量或者同类型的浮点数组合进行运算（例如，Vector3不能和Vector4加减乘除）<br>如果想要通过一个常数和一个浮点数对合成一个Vector3，可以用append节点：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115211522.png"></p><p>如果想用constant更自由的配置（不仅是输入，还有输出上），可以用appendMany节点：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115212031.png"></p><p>如果想改变组合顺序，可以用swizzle节点，它可以改变浮点数对以及Vector3的顺序：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115212229.png"></p><h3 id="constant4vector"><a class="markdownIt-Anchor" href="#constant4vector"></a> Constant4Vector</h3><p>包含了四个浮点数对，很适合齐次坐标空间的坐标，以及带有alpha值的颜色。但值得注意的是，base color虽然可以接入Vector4节点，但对于第四个通道是忽略的。不透明度并不会影响base color。</p>]]></content>
+        <content type="html"><![CDATA[<p>很喜欢一句话：“因为浮点数精度的不同造成了z-fighting”。在早年写shader的时候，也因为数据类型的错误得到了一片紫光：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/39DFED12AE11D5D20AC531C4E3C93BDB.jpg" width="250/"><h1 id="constant"><a class="markdownIt-Anchor" href="#constant"></a> Constant</h1><p>常量内包含了一个浮点数（即float），可以用在金属度、粗糙度、镜面反射度等地方，因为它们都接受单一浮点数为输入。<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115194059.png"><br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115194309.png"></p><p>当把浮点数连接到base color时，它代表灰阶的所有颜色，但是最好把constant限制在[0,1]范围内，超出也不会报错，只会是白色或灰色（看哪一段超出了）：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115194614.png"></p><h2 id="数学"><a class="markdownIt-Anchor" href="#数学"></a> 数学</h2><p>我们可以对常量进行数学运算，将结果输出到其他节点。这很重要，因为我们经常需要对一些值进行换算处理，包括且不限于加减乘除。有以下数学节点（没截全）：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115200125.png" width="300/"></p><h1 id="constant2vector"><a class="markdownIt-Anchor" href="#constant2vector"></a> Constant2Vector</h1><p>包含了两个浮点数的浮点数对，很适合表示二维坐标数据，例如uv坐标。<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115200321.png"></p><h2 id="数学-2"><a class="markdownIt-Anchor" href="#数学-2"></a> 数学</h2><p>我们也可以对浮点数对进行数学运算。相当于对两个二维向量进行操作。而当我们只需要浮点数对的其中一个值时，我们可以使用mask节点来对变量进行拦截。mask同样可以使用在其他浮点数组合（比如Vecor3, Vector4）上：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115202153.png"></p><p>除此之外，如果觉得要检查遮罩的值很麻烦，可以用split节点对组合进行拆分。但是需要注意的是，splitComponents只支持输入Vector3类型：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115202541.png"></p><h1 id="constant3vector"><a class="markdownIt-Anchor" href="#constant3vector"></a> Constant3Vector</h1><p>包含了三个浮点数对，很适合三维坐标系。截取方式和上文类似，但是需要注意的是进行加减法运算时，只能和标量或者同类型的浮点数组合进行运算（例如，Vector3不能和Vector4加减乘除）<br>如果想要通过一个常数和一个浮点数对合成一个Vector3，可以用append节点：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115211522.png"></p><p>如果想用constant更自由的配置（不仅是输入，还有输出上），可以用appendMany节点：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115212031.png"></p><p>如果想改变组合顺序，可以用swizzle节点，它可以改变浮点数对以及Vector3的顺序：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220115212229.png"></p><h1 id="constant4vector"><a class="markdownIt-Anchor" href="#constant4vector"></a> Constant4Vector</h1><p>包含了四个浮点数对，很适合齐次坐标空间的坐标，以及带有alpha值的颜色。但值得注意的是，base color虽然可以接入Vector4节点，但对于第四个通道是忽略的。不透明度并不会影响base color。<br>其他部分和Vector3类似。</p>]]></content>
       
       
       <categories>
