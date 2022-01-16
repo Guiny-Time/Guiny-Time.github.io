@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>UE4 Materials 101：环境混合shader</title>
+      <link href="/2022/01/16/UE4%20Materials%20101%EF%BC%9A%E7%8E%AF%E5%A2%83%E6%B7%B7%E5%90%88shader/"/>
+      <url>/2022/01/16/UE4%20Materials%20101%EF%BC%9A%E7%8E%AF%E5%A2%83%E6%B7%B7%E5%90%88shader/</url>
+      
+        <content type="html"><![CDATA[<p>环境混合shader适用于混合材质达成诸如“长了草的石头”、“下雪了的石头”这一类的效果。首先丢一个成品图：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/%E8%8D%89%E5%9D%AA.gif"><h1 id="开始混合"><a class="markdownIt-Anchor" href="#开始混合"></a> 开始混合</h1><p>我们可以简单的用Lerp函数进行插值混合。但Lerp的局限在于，只能全局的根据混合系数混合两张贴图，无法做到“上草地下石头”的效果：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220116205324.png"><h1 id="引入分界线"><a class="markdownIt-Anchor" href="#引入分界线"></a> 引入分界线</h1><p>我们可以用石头的法线贴图来实现分割的效果。由于蓝色的法线贴图是切线空间的法线贴图，我们需要先利用TransformVector节点将切线空间转换到世界空间，再进行操作。<br>由于在Unreal中，表示“上”的方向是z坐标，因此我们利用mask节点过滤出B值（如果过滤的是其他值，会得到草往侧边长的效果）。</p><blockquote><p><strong>错误的过滤值</strong><br>当我们选择过滤G值（也就是y值）的时候，我们得到的结果如下。可以看到，“长草”的一面往Y轴方向生长：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220116214236.png" width="300/"></p></blockquote><p>完成生长之后，我们将一个常量值与通道结果相加，用来控制草坪的覆盖情况。仅仅这样是可以直接接到lerp的控制alpha值中的，但是我们没有这样做，而是加上了一个指数操作，为什么呢？<br>在之前的项目中，我们用指数来实现了镂空边缘的火光效果。这和这里的原理是一样的：用来增强颜色，同时起到收束的作用。最后，将值限定在[0, 1]范围内，防止出现错误效果。</p><blockquote><p><strong>没有使用指数情况下的材质</strong><br>当没有使用指数时，草坪显得很暗淡（左）；当加上指数后，草坪的效果得到了增强（右）：<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220116215009.png" width="280/"><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220116215117.png" width="300/"></p></blockquote><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220116212157.png">]]></content>
+      
+      
+      <categories>
+          
+          <category> UE4-Materials101 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 技术美术 </tag>
+            
+            <tag> Unreal </tag>
+            
+            <tag> shader </tag>
+            
+            <tag> demo </tag>
+            
+            <tag> TA </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>UE4 Materials 101：shader逐帧动画</title>
       <link href="/2022/01/16/UE4%20Materials%20101%EF%BC%9Ashader%E9%80%90%E5%B8%A7%E5%8A%A8%E7%94%BB/"/>
       <url>/2022/01/16/UE4%20Materials%20101%EF%BC%9Ashader%E9%80%90%E5%B8%A7%E5%8A%A8%E7%94%BB/</url>
@@ -41,7 +74,7 @@
       <link href="/2022/01/16/UE4%20Materials%20101%EF%BC%9A%E6%89%AD%E6%9B%B2shader/"/>
       <url>/2022/01/16/UE4%20Materials%20101%EF%BC%9A%E6%89%AD%E6%9B%B2shader/</url>
       
-        <content type="html"><![CDATA[<h1 id="ue4-materials-101扭曲shader"><a class="markdownIt-Anchor" href="#ue4-materials-101扭曲shader"></a> UE4 Materials 101：扭曲shader</h1><p>这种方法可以用来模拟水面的涟漪、火焰的效果等扭曲动效。丢一个完成的效果图：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/%E6%9D%90%E8%B4%A8%E7%90%83.gif"><p>这算是对前三期学习的一个总结篇。来解析一下shader graph里的组成！</p><h2 id="噪声扭曲模块"><a class="markdownIt-Anchor" href="#噪声扭曲模块"></a> 噪声扭曲模块</h2><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220116001431.png"><p>可以看到，噪声扭曲模块由<strong>时间节点</strong>、Vector2、<strong>乘法</strong>、纹理展开、<strong>相加</strong>、噪声纹理几个节点组成。</p><ul><li>时间（Time）<br>时间随着时间而流逝（…），意思就是在程序运行的过程中，time值是不断变大的。</li><li>Vector2<br>与时间相乘，用来调节时间的影响程度。当vector的x为0时，时间只影响v坐标，造成纹理在v方向移动；当vector的y为0时，时间只影响u坐标，造成纹理在u方向移动。x/y的值越大，影响的速度越快，反之越慢。当x或y为1时，时间就是时间本身。</li><li>纹理展开<br>我们需要让变化的结果施加到纹理上，因此需要texcoord来放纹理展开的情况。与乘法的结果相加后，纹理映射的结果也开始变化。</li><li>噪声纹理<br>噪声用来扭曲我们之后使用的base color。为了使扭曲不重复，引入了两组相同但是时间乘数不同的噪声。因为手上没有RGB通道不同的噪声，就直接用灰阶噪声来模拟一下（这样做出来效果没那么好就是了）。</li></ul><h2 id="纹理贴图模块"><a class="markdownIt-Anchor" href="#纹理贴图模块"></a> 纹理贴图模块</h2><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220116004811.png"><p>我们把噪声扭曲模块得到的结果相加，再乘上一个用来控制扭曲强弱的乘数（在这里被定成0.2了），之后和调整好的纹理映射结果相加，输入到纹理贴图的uv中。<br>这时候，纹理就动起来了。把结果输出到base color和emission（为了让效果看起来更棒）中，就得到了不错的熔岩效果。<br>以下是完整shader graph：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220116001303.png">]]></content>
+        <content type="html"><![CDATA[<p>这种方法可以用来模拟水面的涟漪、火焰的效果等扭曲动效。丢一个完成的效果图：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/%E6%9D%90%E8%B4%A8%E7%90%83.gif"><p>这算是对前三期学习的一个总结篇。来解析一下shader graph里的组成！</p><h1 id="噪声扭曲模块"><a class="markdownIt-Anchor" href="#噪声扭曲模块"></a> 噪声扭曲模块</h1><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220116001431.png"><p>可以看到，噪声扭曲模块由<strong>时间节点</strong>、Vector2、<strong>乘法</strong>、纹理展开、<strong>相加</strong>、噪声纹理几个节点组成。</p><ul><li>时间（Time）<br>时间随着时间而流逝（…），意思就是在程序运行的过程中，time值是不断变大的。</li><li>Vector2<br>与时间相乘，用来调节时间的影响程度。当vector的x为0时，时间只影响v坐标，造成纹理在v方向移动；当vector的y为0时，时间只影响u坐标，造成纹理在u方向移动。x/y的值越大，影响的速度越快，反之越慢。当x或y为1时，时间就是时间本身。</li><li>纹理展开<br>我们需要让变化的结果施加到纹理上，因此需要texcoord来放纹理展开的情况。与乘法的结果相加后，纹理映射的结果也开始变化。</li><li>噪声纹理<br>噪声用来扭曲我们之后使用的base color。为了使扭曲不重复，引入了两组相同但是时间乘数不同的噪声。因为手上没有RGB通道不同的噪声，就直接用灰阶噪声来模拟一下（这样做出来效果没那么好就是了）。</li></ul><h1 id="纹理贴图模块"><a class="markdownIt-Anchor" href="#纹理贴图模块"></a> 纹理贴图模块</h1><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220116004811.png"><p>我们把噪声扭曲模块得到的结果相加，再乘上一个用来控制扭曲强弱的乘数（在这里被定成0.2了），之后和调整好的纹理映射结果相加，输入到纹理贴图的uv中。<br>这时候，纹理就动起来了。把结果输出到base color和emission（为了让效果看起来更棒）中，就得到了不错的熔岩效果。<br>以下是完整shader graph：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220116001303.png">]]></content>
       
       
       <categories>
