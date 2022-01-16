@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>UE4 Materials 101：纹理压缩设置</title>
+      <link href="/2022/01/17/UE4%20Materials%20101%EF%BC%9A%E7%BA%B9%E7%90%86%E5%8E%8B%E7%BC%A9%E8%AE%BE%E7%BD%AE/"/>
+      <url>/2022/01/17/UE4%20Materials%20101%EF%BC%9A%E7%BA%B9%E7%90%86%E5%8E%8B%E7%BC%A9%E8%AE%BE%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="纹理细节"><a class="markdownIt-Anchor" href="#纹理细节"></a> 纹理细节</h1><p>对于每一张导入UE4的纹理，我们在双击纹理时，可以在右侧的<strong>细节</strong>栏看到相关的纹理信息（包括分辨率、大小等）。</p><blockquote><p>对于每一张纹理，他的大小最好是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup><mo>∗</mo><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">2^{n} * 2^{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span></span></span></span>的，比如说16 * 16、1024 * 1024、2048 * 2048等。</p></blockquote><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220117022644.png"><ul><li>已流送<br>贴图将在游戏中动态加载。</li><li>DXT5<br>最有效的一种压缩格式。</li><li>Mipmap<br>即多级渐远纹理，记录了一组逐渐变小的纹理链，最小的纹理是4*4。当我们从远处看或者以倾斜的角度观察物体时，物体远处的纹理是比较小的。这时可以调用mipmap链中较小的纹理进行映射，达成比较好的视觉效果。</li></ul><h1 id="压缩"><a class="markdownIt-Anchor" href="#压缩"></a> 压缩</h1><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220117023828.png"><ul><li>无透明度压缩<br>不管这张贴图的alpha通道有没有东西，当勾选了无透明度压缩之后，都会当成alpha通道完全不存在来处理。当alpha不重要或者这张图根本没有alpha通道时，务必勾选此项。</li><li>压缩设置<br>这里面其实有许多可选项，最好是根据贴图类型进行选择（这和在导入贴图进Unity时为贴图选择正确的类型类似）。默认的DXT1非常强，可以把贴图压缩到原本的1/8。</li></ul><blockquote><ul><li>我们对法线贴图选择normal，对打包的纹理选择masks。masks的alpha通道的压缩偏少，所以最好把比较重要的内容放进alpha通道。</li><li>对于高度图这样的<strong>小</strong>的<strong>灰阶</strong>纹理，我们可以选择GrayScale，这会改善被压缩的高度图</li><li>Alpha适合仅需要alpha通道信息的纹理的压缩</li><li>BC7是一种新推出的高质量纹理压缩格式，仅支持DX11或以上版本。它压缩完的效果更好，但是体积比DXT1要大两倍（只压缩4倍）。支持三通道和四通道纹理。</li></ul></blockquote><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220117024335.png"><h1 id="纹理"><a class="markdownIt-Anchor" href="#纹理"></a> 纹理</h1><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220117025237.png"><p>这里最重要的是srgb勾选框。需要注意的是，一切工作在线性空间（不经过伽马矫正）的纹理都<strong>不能勾选</strong>这个选项。这些纹理包括粗糙度贴图、AO、金属度贴图、高度图等等。基本上，我们只对base color打开srgb选项。</p><h1 id="在shader中"><a class="markdownIt-Anchor" href="#在shader中"></a> 在Shader中</h1><p>我们还需要特别注意shader中的texture Sample节点是如何定义贴图类型的。当采样器中的贴图类型与贴图实际的压缩类型不一致时，会出现采样错误导致纹理无法正确显示。<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220117030729.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> UE4-Materials101 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Unreal </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>UE4 Materials 101：凹凸偏移与视差闭塞映射</title>
       <link href="/2022/01/17/UE4%20Materials%20101%EF%BC%9A%E5%87%B9%E5%87%B8%E5%81%8F%E7%A7%BB%E4%B8%8E%E8%A7%86%E5%B7%AE%E9%97%AD%E5%A1%9E%E6%98%A0%E5%B0%84/"/>
       <url>/2022/01/17/UE4%20Materials%20101%EF%BC%9A%E5%87%B9%E5%87%B8%E5%81%8F%E7%A7%BB%E4%B8%8E%E8%A7%86%E5%B7%AE%E9%97%AD%E5%A1%9E%E6%98%A0%E5%B0%84/</url>
