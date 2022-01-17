@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>菲涅尔反射实现边缘光效果</title>
+      <link href="/2022/01/17/%E8%8F%B2%E6%B6%85%E5%B0%94%E5%8F%8D%E5%B0%84%E5%AE%9E%E7%8E%B0%E8%BE%B9%E7%BC%98%E5%85%89%E6%95%88%E6%9E%9C/"/>
+      <url>/2022/01/17/%E8%8F%B2%E6%B6%85%E5%B0%94%E5%8F%8D%E5%B0%84%E5%AE%9E%E7%8E%B0%E8%BE%B9%E7%BC%98%E5%85%89%E6%95%88%E6%9E%9C/</url>
+      
+        <content type="html"><![CDATA[<h1 id="菲涅尔反射实现边缘光效果"><a class="markdownIt-Anchor" href="#菲涅尔反射实现边缘光效果"></a> 菲涅尔反射实现边缘光效果</h1><p>在之前的项目中，我从网上抓了一个用菲涅尔反射写的边缘光shader。经过自己的魔改之后，加上了法线等用在后续的项目中。现在我们回过头来探寻一下菲涅尔效应是如何用来实现边缘光的。<br><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/%E8%8F%B2%E6%B6%85%E5%B0%94.gif"></p><h2 id="参数"><a class="markdownIt-Anchor" href="#参数"></a> 参数</h2><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220117132932.png"><p>我们有三个至关重要的参数：边缘光的颜色、边缘光强度和强度系数。</p><ul><li>边缘光颜色<br>这个没什么好说的，就是控制边缘光的颜色。但因为是<strong>光</strong>，所以当颜色调整为黑色时不论强度多少都是看不到效果的。</li><li>边缘光强度<br>这个值可以控制菲涅尔影响范围的大小，这个值越大，效果上越边缘化（左：强度为1.5；右：强度为4）。</li></ul><p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220117133226.png" width="105/"><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220117133245.png" width="100/"></p><ul><li>边缘光强度系数<br>这个值控制菲涅尔反射的反射强度，值越大，反射越亮，反之越暗（左：强度为1.5；右：强度为12）。代码里的注释有错，因为原先的代码的强度系数在内部被原作者定死了。</li></ul><p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220117134332.png" width="105/"><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220117134445.png" width="100/"></p><h2 id="片元着色器"><a class="markdownIt-Anchor" href="#片元着色器"></a> 片元着色器</h2><h3 id="边缘检测"><a class="markdownIt-Anchor" href="#边缘检测"></a> 边缘检测</h3><p>这一步是实现边缘光效果的核心。<br>首先我们来理清一下思路，如何进行边缘检测？其实很简单的一种方式就是通过视线方向和片元的法线方向点乘进行判断。当我们差不多正视一个片元的时候，夹角通常都是小于45°的。而片元越靠近边缘，与视线的夹角越大，最终达到视线相切的90°，再大就看不到了。<br>所以我们对视线和片元法线归一化之后进行点乘，可以得到：</p><ul><li>视线与法线相切，点乘的结果为0</li><li>视线与法线重合，点乘的结果为1</li><li>视线与法线的夹角在(0°, 45°)，点乘的结果在(0, 1)范围内</li></ul><p>于是我们得到一个信息：值越小，片元越靠近视线观察角度的边缘。我们可以对这个结果进行求反（用1减去值就好），得到更符合逻辑的结果。</p><h3 id="菲涅尔着色"><a class="markdownIt-Anchor" href="#菲涅尔着色"></a> 菲涅尔着色</h3><p>我们已经有了求反过的点乘信息NdotV，接下来我们就需要把它展现在材质球上。我们可以定义一个叫fresnel的变量来简单的将NdotV和控制强度的变量相乘，再乘上边缘光的颜色：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">float fresnel = NdotV * _InSideRimIntensity;</span><br><span class="line">float3 Emissive = _InSideRimColor.rgb * fresnel; </span><br><span class="line">return fixed4(Emissive + diffuse + ambient, 1.0);</span><br></pre></td></tr></table></figure><p>我们已经可以得到一个初步的效果。但是不幸的是，不管我们怎么调整强度，反射环的面积似乎总是太大了，并且有一种雾蒙蒙的感觉：</p><p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220117141104.png" width="100/"><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220117141253.png" width="111/"></p><p>在另一篇文章（UE4 Materials 101：材质混合）中我们介绍了用指数提升对比度、缩小范围的方法。因此，我们可以引入一个变量来控制边缘光的强弱（并不是控制光强，而是控制了最大影响范围）。我们可以把代码改写成：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">float fresnel = pow(NdotV,_InSideRimPower) * _InSideRimIntensity;</span><br></pre></td></tr></table></figure><p>这样，我们就得到了不错的边缘光效果了。如果想在这个基础上加上边缘光的“呼吸”效果，可以引入sin(time.z)对光强进行调整。不过需要小心颜色超出1的情况，所以最好加一个max函数进行限制，或者自己拟好合适的三角函数曲线。</p><h3 id="源码"><a class="markdownIt-Anchor" href="#源码"></a> 源码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">fixed4 frag (v2f i) : SV_Target</span><br><span class="line">&#123;</span><br><span class="line">    const fixed3 albedo = tex2D(_MainTex, i.uv).rgb * _MainColor.rgb;</span><br><span class="line">    // 环境光</span><br><span class="line">    const fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * albedo;</span><br><span class="line">    i.wold_normal = normalize(i.wold_normal);</span><br><span class="line">    // 获取世界空间的视角方向</span><br><span class="line">    float3 worldViewDir = normalize(_WorldSpaceCameraPos.xyz - i.vertexWorld.xyz);</span><br><span class="line">    // 获取世界空间的光照方向</span><br><span class="line">    fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz); </span><br><span class="line">    // 漫反射</span><br><span class="line">    const fixed3 diffuse = _LightColor0.rgb * albedo * max(0, dot(i.wold_normal, worldLightDir)); </span><br><span class="line"></span><br><span class="line">    /*核心步骤*/</span><br><span class="line">    // 计算法线方向和视角方向点积,约靠近边缘夹角越大，值约小，那就是会越在圆球中间约亮，越边缘约暗</span><br><span class="line">    half NdotV = max(0, dot(i.wold_normal, worldViewDir));</span><br><span class="line">    // 求反</span><br><span class="line">    NdotV = 1.0 - NdotV;</span><br><span class="line">    float fresnel = pow(NdotV, _InSideRimPower) * _InSideRimIntensity;</span><br><span class="line">    // 内边缘光自发光颜色</span><br><span class="line">    float3 Emissive = _InSideRimColor.rgb * fresnel;</span><br><span class="line"></span><br><span class="line">    return fixed4(Emissive + diffuse + ambient,1.0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 探索发现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> shader </tag>
+            
+            <tag> Unity </tag>
+            
+            <tag> ShaderLab </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>UE4 Materials 101：纹理压缩设置</title>
       <link href="/2022/01/17/UE4%20Materials%20101%EF%BC%9A%E7%BA%B9%E7%90%86%E5%8E%8B%E7%BC%A9%E8%AE%BE%E7%BD%AE/"/>
       <url>/2022/01/17/UE4%20Materials%20101%EF%BC%9A%E7%BA%B9%E7%90%86%E5%8E%8B%E7%BC%A9%E8%AE%BE%E7%BD%AE/</url>
@@ -498,9 +527,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 坐标空间 </tag>
-            
             <tag> 线性代数 </tag>
+            
+            <tag> 坐标空间 </tag>
             
         </tags>
       
@@ -529,9 +558,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 线性代数 </tag>
-            
             <tag> ShaderLab </tag>
+            
+            <tag> 线性代数 </tag>
             
         </tags>
       
