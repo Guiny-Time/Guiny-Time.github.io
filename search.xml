@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>UE4 Materials 101：体积冰实现</title>
+      <link href="/2022/01/19/UE4%20Materials%20101%EF%BC%9A%E4%BD%93%E7%A7%AF%E5%86%B0%E5%AE%9E%E7%8E%B0/"/>
+      <url>/2022/01/19/UE4%20Materials%20101%EF%BC%9A%E4%BD%93%E7%A7%AF%E5%86%B0%E5%AE%9E%E7%8E%B0/</url>
+      
+        <content type="html"><![CDATA[<p>体积冰的效果适用于可以看透但是不能穿过的半透明物体，例如冰块、石英柱。首先放效果图：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/%E5%86%B0.gif"><h1 id="制造体积感"><a class="markdownIt-Anchor" href="#制造体积感"></a> 制造体积感</h1><p>我们第一步要做的事情是营造出<strong>冰层</strong>的体积感。我们需要贴图“下沉”到冰块里面，实现的方法就是营造视觉偏移。在前面的文章中，我们利用视角（相机）方向和片元法线找到边缘，在体积感的场景中，我们则利用了视角在片元面上的反射。有点抽象，其实就是下图所示的情况：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220119182121.png" width="350/"><p>蓝色的向量就是我们所需要的冰层内层的偏移方向。把这个向量加到uv里之后，uv就会随之偏移。</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220119201150.png"><p>可以看到，我们将发现信息用一张法线纹理来展示，这样可以更生动的展现冰面的细节。由于<span style="color:red"><strong>法线</strong></span>贴图是切线空间下的法线贴图，所以需要将<span style="color:green"><strong>视角方向</strong></span>从世界空间转换到切线空间。得到反射的结果之后，利用mask节点取得<span style="color:blue"><strong>反射向量</strong></span>的x、y坐标。<br>实际上，在这一步完成时，我们已经得到了一种镜面的效果（只不过并没有反射站在对面的人的形象）。我们还需要把这一移动壳层往物体内部移动，才能塑造出体积感：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220119202319.png"><p>我们对内壳的z值动了手脚：</p><ul><li>纹理：用于改变内壳壳层不同凹凸程度的贴图</li><li>求反：为了实现正确的凹凸，我希望白色的部分在上，这样更符合冰层的实际效果</li><li>/250：即最大凹陷程度（当纹理的颜色为黑色时），这个值是多少可以自行改变</li><li>除法：将z值缩放施加最终输出流上</li></ul><h1 id="调整分辨率"><a class="markdownIt-Anchor" href="#调整分辨率"></a> 调整分辨率</h1><p>我们把上述过程完成的值输出，得到了非常奇怪的不正常的效果。可以看到，当对图像进行放大之后，我们会看到很多小的贴图：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220119211629.png" width="300/"><p>这是因为没有调整贴图的分辨率。因为我使用的两张贴图都是1024*1024的，所以加上这个节点组对分辨率进行调整：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220119211514.png"><p>现在得到的效果就是正确的了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> UE4-Materials101 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 技术美术 </tag>
+            
+            <tag> Unreal </tag>
+            
+            <tag> shader </tag>
+            
+            <tag> demo </tag>
+            
+            <tag> TA </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>UE4 Materials 101：布料模拟</title>
       <link href="/2022/01/19/UE4%20Materials%20101%EF%BC%9A%E5%B8%83%E6%96%99%E6%A8%A1%E6%8B%9F/"/>
       <url>/2022/01/19/UE4%20Materials%20101%EF%BC%9A%E5%B8%83%E6%96%99%E6%A8%A1%E6%8B%9F/</url>
