@@ -1,11 +1,48 @@
 #recent-posts>.recent-post-item,.layout_page>div:first-child:not(.recent-posts),.layout_post>#page,.layout_post>#post,.read-mode .layout_post>#post {
-    background: linear-gradient(0deg,rgba(255,255,255,.5),rgba(75,227,209,.5) 100%)
+    background: linear-gradient(0deg,rgba(255,255,255,1),rgba(255,254,149,.7) 100%);
+    box-shadow: -10px -10px rgba(255,247,194,.3);
+    backdrop-filter: blur(2px);
+    color: #000000
 }
 
 #aside-content .card-widget {
-    background: rgba(255,255,255,.8)
+    background: rgba(255,255,255,0.7);
+    box-shadow: 10px -10px rgba(255,255,255,0.5);
+    color: #000000
 }
-
+#page-header{
+    -webkit-animation: imgblur 3s 1 ease-in-out;
+    animation: imgblur 3s 1 ease-in-out;
+}
 #web_bg {
-    background: linear-gradient(45deg,rgba(0,125,122,1),rgba(0,255,216,.4) 40%,rgba(0,255,235,.4) 75%,rgba(255,255,0,.5) 100%)
+   /* 背景图像的地址（url括号里）  */
+   background: url("https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220128022148.png");
+   /* 背景图像不重复 */
+   background-repeat: no-repeat;
+   /* 背景图像大小 */
+   background-size: cover;
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+
+    /* background: linear-gradient(45deg,rgba(0,125,122,1),rgba(0,255,216,.4) 40%,rgba(0,255,235,.4) 75%,rgba(255,255,0,.5) 100%)*/
+}
+@keyframes imgblur {
+  0% {
+    filter: blur(5px);
+  }
+  100% {
+    filter: blur(0px);
+  }
+}
+/*适配使用-webkit内核的浏览器 */
+@-webkit-keyframes imgblur {
+  0% {
+    -webkit-filter: blur(3px);
+  }
+  100% {
+    -webkit-filter: blur(0px);
+  }
 }
