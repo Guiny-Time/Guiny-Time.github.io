@@ -21,10 +21,6 @@
    background-repeat: no-repeat;
    /* 背景图像大小 */
    background-size: cover;
-    -webkit-filter: blur(3px);
-    -moz-filter: blur(3px);
-    -o-filter: blur(3px);
-    -ms-filter: blur(3px);
     filter: blur(3px);
 
     /* background: linear-gradient(45deg,rgba(0,125,122,1),rgba(0,255,216,.4) 40%,rgba(0,255,235,.4) 75%,rgba(255,255,0,.5) 100%)*/
