@@ -2,13 +2,13 @@
     background: linear-gradient(0deg,rgba(255,255,255,1),rgba(255,254,149,.7) 100%);
     box-shadow: -10px -10px rgba(255,247,194,.3);
     backdrop-filter: blur(2px);
-    color: #000000
+    color: #000000;
 }
 
 #aside-content .card-widget {
     background: rgba(255,255,255,0.7);
     box-shadow: 10px -10px rgba(255,255,255,0.5);
-    color: #000000
+    color: #000000;
 }
 #page-header{
     -webkit-animation: imgblur 3s 1 ease-in-out;
@@ -22,8 +22,6 @@
    /* 背景图像大小 */
    background-size: cover;
     filter: blur(3px);
-
-    /* background: linear-gradient(45deg,rgba(0,125,122,1),rgba(0,255,216,.4) 40%,rgba(0,255,235,.4) 75%,rgba(255,255,0,.5) 100%)*/
 }
 @keyframes imgblur {
   0% {
