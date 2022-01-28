@@ -1,4 +1,4 @@
-body {
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>body {
   background: url("/images/wons.png");
   background-size: cover;
   background-repeat: no-repeat;
