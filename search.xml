@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>全局渐变效果实现</title>
+      <link href="/2022/02/06/%E5%85%A8%E5%B1%80%E6%B8%90%E5%8F%98%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0/"/>
+      <url>/2022/02/06/%E5%85%A8%E5%B1%80%E6%B8%90%E5%8F%98%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="全局渐变效果实现"><a class="markdownIt-Anchor" href="#全局渐变效果实现"></a> 全局渐变效果实现</h1><p>  我想试着实现一下下图中纪念碑谷中的全局渐变的效果。关于如何实现这种渐变效果之前和别人讨论过，一开始我认为是通过从下往上打光来实现的，后来同学说是利用了shader和雾。利用后者实现的效果更为缓和，而利用光照可能会造成底部过亮的问题，不好控制。</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220202030207.png" width="300/"><p>  为什么我管这种效果叫“全局渐变”呢？因为当我移动模型的时候，渐变的范围并不是固定在模型身上的，而是在世界空间的“某个位置”（如下图所示）。实际上，我们可以自行规定这个渐变地平线的位置，只需要在shader里加个控制变量就可以了。</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/%E6%B8%90%E5%8F%98.gif"><h2 id="实现"><a class="markdownIt-Anchor" href="#实现"></a> 实现</h2><h3 id="变量"><a class="markdownIt-Anchor" href="#变量"></a> 变量</h3><p>首先，我们需要这么几个变量：</p><ul><li>顶部的颜色</li><li>底部的颜色</li><li>渐变混合的程度</li><li>光照的强度</li><li>渐变地平线</li><li>渐变纹理</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Properties</span><br><span class="line">&#123;</span><br><span class="line">    // 光照的强度</span><br><span class="line">    _Contrast(&quot;Contrast&quot;,Range(0,1))=0.1</span><br><span class="line">    // 渐变纹理</span><br><span class="line">    _RampTex(&quot;渐变纹理&quot;, 2D) = &quot;white&quot;&#123;&#125;</span><br><span class="line">    // 上下渐变色</span><br><span class="line">    _UpColor(&quot;UpColor&quot;,Color)=(1,1,1,1)</span><br><span class="line">    _DownColor(&quot;DownColor&quot;,Color)=(1,1,1,1)</span><br><span class="line">    // 渐变程度</span><br><span class="line">    _WorldYDeno(&quot;WorldYDeno&quot;,float)=0</span><br><span class="line">    // 渐变中心位置</span><br><span class="line">    _Skyline(&quot;地平线&quot;, float) = 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="顶点着色器"><a class="markdownIt-Anchor" href="#顶点着色器"></a> 顶点着色器</h3><p>在顶点着色器中我们需要获取几组坐标：</p><ol><li>世界空间的顶点坐标</li><li>世界空间的顶点法线</li><li>裁剪空间的顶点坐标</li></ol><p>世界空间的坐标和法线用于光照强度的控制；裁剪空间的坐标用于渐变的渲染</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">v2f vert(appdata v)&#123;</span><br><span class="line">    v2f o;</span><br><span class="line">    // 世界空间坐标</span><br><span class="line">    o.worldPo=mul(UNITY_MATRIX_M,v.vertex);</span><br><span class="line">    // 世界空间法线</span><br><span class="line">    o.worldNormal = normalize(mul((float3x3)UNITY_MATRIX_M, v.normal));</span><br><span class="line">    // 裁剪空间坐标</span><br><span class="line">    o.vertex = UnityObjectToClipPos(v.vertex);</span><br><span class="line">    o.uv = TRANSFORM_TEX(v.texcoord, _RampTex);</span><br><span class="line">    return o;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="片元着色器"><a class="markdownIt-Anchor" href="#片元着色器"></a> 片元着色器</h3><p>在片元着色器中，我们进行三个主要步骤：</p><ol><li>计算渐变纹理的映射</li><li>光照强度</li><li>渐变混合</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">float4 frag(v2f i) : SV_Target&#123;</span><br><span class="line">    // 渐变纹理</span><br><span class="line">    fixed3 worldN = normalize(i.worldNormal);</span><br><span class="line">    fixed3 worldLightDir = normalize(UnityWorldSpaceLightDir(i.worldPos));</span><br><span class="line">    fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;</span><br><span class="line">    fixed halfLambert = 0.5 * dot(worldN, worldLightDir) + 0.5;</span><br><span class="line">    fixed3 diffuseColor = tex2D(_RampTex, fixed2(halfLambert, halfLambert)).rgb;</span><br><span class="line">    fixed3 diffuse = _LightColor0.rgb * diffuseColor;</span><br><span class="line">    // 光照强度</span><br><span class="line">    float NdotL = dot(i.worldNormal, _WorldSpaceLightPos0);</span><br><span class="line">    float light = clamp(NdotL * _Contrast + (1 - _Contrast), 0, 1);</span><br><span class="line">    // 渐变混合</span><br><span class="line">    float4 col = fixed4(ambient + diffuse + light * lerp(_DownColor, _UpColor, clamp( (i.worldPos.y - _Skyline) / _WorldYDeno, 0, 1)), 1.0);</span><br><span class="line">    </span><br><span class="line">    return col;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>  最终，我们可以得到如下的效果（暂未加上渐变纹理贴图）：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/%E6%B8%90%E5%8F%981.gif" width="500/"><p>  可以看出效果不太好，并且在细节上表现的很不自然，画面的颜色很单一。如果加上渐变纹理的话可以得到更好的细节效果：</p><p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220205233646.png" width="308/"><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220205233913.png" width="300/"></p><p>  好，就是这样了。实际上，我们还可以在较远的物体表面加上一层<strong>雾</strong>。有关于雾效的实现，在下一篇demo文章中将会尝试一下。最终我们的材质球面板和面板各属性的控制情况如下所示：</p><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220206012239.png" width="400/"><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/%E6%B8%90%E5%8F%98%E6%BC%94%E7%A4%BA.gif">]]></content>
+      
+      
+      <categories>
+          
+          <category> 探索发现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> shader </tag>
+            
+            <tag> demo </tag>
+            
+            <tag> Unity </tag>
+            
+            <tag> ShaderLab </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C++速成：基本语法</title>
       <link href="/2022/01/29/C++%E9%80%9F%E6%88%90%EF%BC%9A%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/"/>
       <url>/2022/01/29/C++%E9%80%9F%E6%88%90%EF%BC%9A%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
@@ -51,9 +82,9 @@
             
             <tag> shader </tag>
             
-            <tag> demo </tag>
-            
             <tag> TA </tag>
+            
+            <tag> demo </tag>
             
         </tags>
       
@@ -113,9 +144,9 @@
             
             <tag> shader </tag>
             
-            <tag> demo </tag>
-            
             <tag> TA </tag>
+            
+            <tag> demo </tag>
             
         </tags>
       
@@ -146,9 +177,9 @@
             
             <tag> shader </tag>
             
-            <tag> demo </tag>
-            
             <tag> TA </tag>
+            
+            <tag> demo </tag>
             
         </tags>
       
@@ -179,9 +210,9 @@
             
             <tag> shader </tag>
             
-            <tag> demo </tag>
-            
             <tag> TA </tag>
+            
+            <tag> demo </tag>
             
         </tags>
       
@@ -212,9 +243,9 @@
             
             <tag> shader </tag>
             
-            <tag> demo </tag>
-            
             <tag> TA </tag>
+            
+            <tag> demo </tag>
             
         </tags>
       
@@ -245,9 +276,9 @@
             
             <tag> shader </tag>
             
-            <tag> demo </tag>
-            
             <tag> TA </tag>
+            
+            <tag> demo </tag>
             
         </tags>
       
@@ -278,9 +309,9 @@
             
             <tag> shader </tag>
             
-            <tag> demo </tag>
-            
             <tag> TA </tag>
+            
+            <tag> demo </tag>
             
         </tags>
       
@@ -419,9 +450,9 @@
             
             <tag> shader </tag>
             
-            <tag> demo </tag>
-            
             <tag> TA </tag>
+            
+            <tag> demo </tag>
             
         </tags>
       
@@ -452,9 +483,9 @@
             
             <tag> shader </tag>
             
-            <tag> demo </tag>
-            
             <tag> TA </tag>
+            
+            <tag> demo </tag>
             
         </tags>
       
@@ -485,9 +516,9 @@
             
             <tag> shader </tag>
             
-            <tag> demo </tag>
-            
             <tag> TA </tag>
+            
+            <tag> demo </tag>
             
         </tags>
       
@@ -814,9 +845,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 坐标空间 </tag>
-            
             <tag> 线性代数 </tag>
+            
+            <tag> 坐标空间 </tag>
             
         </tags>
       
