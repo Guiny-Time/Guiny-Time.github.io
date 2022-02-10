@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>C++速成：数据类型</title>
+      <link href="/2022/02/10/C++%E9%80%9F%E6%88%90%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+      <url>/2022/02/10/C++%E9%80%9F%E6%88%90%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="基本类型"><a class="markdownIt-Anchor" href="#基本类型"></a> 基本类型</h1><h2 id="变量"><a class="markdownIt-Anchor" href="#变量"></a> 变量</h2><p>  变量存在的意义是对不同的内存块进行命名、分类和操作。每个变量就是一小块内存。我们知道不同的变量可以用不同的数据类型来声明，比如说浮点数（单/双精度）、整型数据等等。C++有以下常见的数据类型：</p><ul><li>bool<br>布尔类型，同Java的Boolean和C#的bool</li><li>char<br>字符类型</li><li>int<br>4byte长的整型数据类型</li><li>short （int）<br>2byte长的短整型数据类型</li><li>longlong  （int）<br>8byte长的长整型数据类型</li><li>float<br>4byte长的单精度浮点数</li><li>double<br>8byte长的双精度浮点数</li><li>void<br>无类型</li><li>wchar_t<br>宽字符型，实际上的内存空间与short int等价，占2或4byte</li></ul><img src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220209204908.png" width="700/"><p>  我们可以<strong>用typeof来给数据类型命名</strong>。例如：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> feet;</span><br></pre></td></tr></table></figure><p>  之后我们就可以用feet a = 10;来代替int a = 10;了。<br>  说了这么多我们好像没有提到字符串（Java的String，C#的string），在IO流中输出字符串的时候也是直接用双引号就输出了。在C++中声明一串字符的方法有两种：</p><ul><li>C风格的字符数组，<strong>数组符号是标记在变量名上的</strong></li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> myStr1[] = <span class="string">&quot;Hello&quot;</span>;</span><br></pre></td></tr></table></figure><ul><li>C++风格的字符串，<strong>需要引用string头文件</strong></li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span>;</span></span><br><span class="line">...</span><br><span class="line">string myStr2 = <span class="string">&quot;World&quot;</span>;</span><br></pre></td></tr></table></figure><h2 id="常量"><a class="markdownIt-Anchor" href="#常量"></a> 常量</h2><p>  对于不可变的数据，我们可以用宏（#define）或者constant定义：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> a = 10;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span>;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    constant <span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>  当修改常量时会报错。</p><h1 id="用户输入变量"><a class="markdownIt-Anchor" href="#用户输入变量"></a> 用户输入变量</h1><p>  我们可以利用IO流的I（cin）来获取用户输入的数据：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int a = 0;</span><br><span class="line">cout &lt;&lt; &quot;请输入a的值: &quot; &lt;&lt; endl;</span><br><span class="line">cin &gt;&gt; a;</span><br><span class="line">cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; endl;</span><br></pre></td></tr></table></figure><h1 id="enum类型"><a class="markdownIt-Anchor" href="#enum类型"></a> Enum类型</h1><p>  枚举类型，和其他的高级程序语言一样表示一组用户定义类型的枚举集合：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">color</span> &#123;</span> red, green, blue &#125; c;</span><br><span class="line">c = red;</span><br></pre></td></tr></table></figure><p>  这代表枚举集合“color”中包含了red、green、blue三种类型，变量c是color集合的一个变量，值为red。类型具体是什么值并不重要，我们通常可以用枚举来进行状态机的模拟，只需要一个状态就好了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 语言学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>几何海洋实现</title>
       <link href="/2022/02/09/%E5%87%A0%E4%BD%95%E6%B5%B7%E6%B4%8B%E5%AE%9E%E7%8E%B0/"/>
       <url>/2022/02/09/%E5%87%A0%E4%BD%95%E6%B5%B7%E6%B4%8B%E5%AE%9E%E7%8E%B0/</url>
@@ -138,9 +163,9 @@
       
         <tags>
             
-            <tag> Unreal </tag>
-            
             <tag> 技术美术 </tag>
+            
+            <tag> Unreal </tag>
             
             <tag> shader </tag>
             
@@ -200,9 +225,9 @@
       
         <tags>
             
-            <tag> Unreal </tag>
-            
             <tag> 技术美术 </tag>
+            
+            <tag> Unreal </tag>
             
             <tag> shader </tag>
             
@@ -233,9 +258,9 @@
       
         <tags>
             
-            <tag> Unreal </tag>
-            
             <tag> 技术美术 </tag>
+            
+            <tag> Unreal </tag>
             
             <tag> shader </tag>
             
@@ -266,9 +291,9 @@
       
         <tags>
             
-            <tag> Unreal </tag>
-            
             <tag> 技术美术 </tag>
+            
+            <tag> Unreal </tag>
             
             <tag> shader </tag>
             
@@ -299,9 +324,9 @@
       
         <tags>
             
-            <tag> Unreal </tag>
-            
             <tag> 技术美术 </tag>
+            
+            <tag> Unreal </tag>
             
             <tag> shader </tag>
             
@@ -332,9 +357,9 @@
       
         <tags>
             
-            <tag> Unreal </tag>
-            
             <tag> 技术美术 </tag>
+            
+            <tag> Unreal </tag>
             
             <tag> shader </tag>
             
@@ -365,9 +390,9 @@
       
         <tags>
             
-            <tag> Unreal </tag>
-            
             <tag> 技术美术 </tag>
+            
+            <tag> Unreal </tag>
             
             <tag> shader </tag>
             
@@ -506,9 +531,9 @@
       
         <tags>
             
-            <tag> Unreal </tag>
-            
             <tag> 技术美术 </tag>
+            
+            <tag> Unreal </tag>
             
             <tag> shader </tag>
             
@@ -539,9 +564,9 @@
       
         <tags>
             
-            <tag> Unreal </tag>
-            
             <tag> 技术美术 </tag>
+            
+            <tag> Unreal </tag>
             
             <tag> shader </tag>
             
@@ -572,9 +597,9 @@
       
         <tags>
             
-            <tag> Unreal </tag>
-            
             <tag> 技术美术 </tag>
+            
+            <tag> Unreal </tag>
             
             <tag> shader </tag>
             
@@ -630,11 +655,11 @@
       
         <tags>
             
-            <tag> Unreal </tag>
-            
             <tag> 技术美术 </tag>
             
             <tag> PBR </tag>
+            
+            <tag> Unreal </tag>
             
             <tag> shader </tag>
             
@@ -690,9 +715,9 @@
             
             <tag> 技术美术 </tag>
             
-            <tag> PBR </tag>
-            
             <tag> 次世代渲染基础 </tag>
+            
+            <tag> PBR </tag>
             
             <tag> 基于物理的渲染 </tag>
             
@@ -808,11 +833,11 @@
       
         <tags>
             
+            <tag> 计算机图形学 </tag>
+            
             <tag> Unity Shader </tag>
             
             <tag> Unity </tag>
-            
-            <tag> 计算机图形学 </tag>
             
             <tag> 基础光照模型 </tag>
             
@@ -839,13 +864,13 @@
       
         <tags>
             
+            <tag> 计算机图形学 </tag>
+            
             <tag> Unity Shader </tag>
             
             <tag> Unity </tag>
             
             <tag> 纹理 </tag>
-            
-            <tag> 计算机图形学 </tag>
             
             <tag> 凹凸映射 </tag>
             
@@ -872,13 +897,13 @@
       
         <tags>
             
+            <tag> 计算机图形学 </tag>
+            
             <tag> Unity Shader </tag>
             
             <tag> Unity </tag>
             
             <tag> 纹理 </tag>
-            
-            <tag> 计算机图形学 </tag>
             
         </tags>
       
@@ -965,9 +990,9 @@
       
         <tags>
             
-            <tag> 计算机图形学 </tag>
-            
             <tag> 渲染管线 </tag>
+            
+            <tag> 计算机图形学 </tag>
             
         </tags>
       
