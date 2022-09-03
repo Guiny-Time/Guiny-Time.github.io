@@ -1,0 +1,70 @@
+class: 
+  class_name: 月光簇工作室
+  class_desc: Mooncluster Studio的小伙伴
+  link_list:
+    - name: 深红のweb之神
+      link: https://johnny7255.github.io
+      avatar: https://avatars.githubusercontent.com/u/70889911?s=60&v=4
+      descr: 这是web之神的博客
+    - name: 兰少
+      link: https://retenq.github.io/
+      avatar: https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220113160048.png
+      descr: 这是兰少的博客
+class2:
+  class_name: 友链
+  class_desc: 广告位持续招租ing
+  link_list:
+    - name: 神经元
+      link: https://www.zhihu.com/people/li-zi-yuan-46-23?utm_source=qq&utm_medium=social&utm_oi=651433984723259392
+      avatar: https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/1.png
+      descr: 这位便是终极大佬
+    - name: 轩の小窝
+      link: https://xuannp.top
+      avatar: https://i.postimg.cc/G3BMPb11/QQ-20220212234005.jpg
+      descr: 关于你想要的我这都有
+class3:
+  class_name: 实用工具
+  link_list:
+    - name: 空气糖果
+      link: https://tangguo.cyou/user/#/dashboard
+      avatar: https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/%E9%9D%A2-%E4%BA%91.png
+      descr: 枫存佬推荐的好用代理
+    - name: iconfont
+      link: https://www.iconfont.cn/home/index?spm=a313x.7781069.1998910419.2
+      avatar: https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220128004207.png
+      descr: 免费的图标库
+    - name: netlify
+      link: https://app.netlify.com/teams/guiny-time/overview
+      avatar: https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220128004432.png
+      descr: 博客域名部署工具
+    - name: git-book
+      link: https://app.gitbook.com/home
+      avatar: https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220128004857.png
+      descr: 文档/笔记编写工具
+    - name: LaTeX符号集
+      link: http://mohu.org/info/symbols/symbols.htm
+      avatar: https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220128005132.png
+      descr: LaTeX中几乎所有的符号写法
+    - name: UnityList
+      link: https://unitylist.com/
+      avatar: https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220128010715.png
+      descr: Unity开源项目中心
+    - name: 鸠摩
+      link: https://www.jiumodiary.com/
+      avatar: https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220128011540.png
+      descr: 电子书搜索中心
+class4:
+  class_name: 学习资料
+  link_list:
+    - name: UnityShader入门精要
+      link: https://www.bookstack.cn/read/shenjun-unity/0.md
+      avatar: https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220128010843.png
+      descr: 很多人的入门级教科书
+    - name: 西二在线
+      link: https://blog.w2fzu.com/
+      avatar: https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220128011053.png
+      descr: W2大佬们的博客
+    - name: LearnOpenGL
+      link: https://learnopengl-cn.github.io/
+      avatar: https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220128011301.png
+      descr: OpenGL中文学习文档
