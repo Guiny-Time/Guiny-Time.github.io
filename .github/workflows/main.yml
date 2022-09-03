@@ -29,7 +29,6 @@ jobs:
           git rm -rf .
           cd ..
           hexo g
-          cp -r ./404 ./public
           
       - name: Deploy
         run: |
