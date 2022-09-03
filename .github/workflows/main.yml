@@ -11,7 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-          
+      - uses: actions/checkout@v2
+
+      - name: Install
+        run: |
+          sudo apt-get update
+          sudo apt-get install nasm -y
+          npm install -g hexo-cli
+          npm install
+          npm install hexo-all-minifier --save
+
       - name: Build
         run: |
           hexo clean
