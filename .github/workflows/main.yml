@@ -25,5 +25,14 @@ jobs:
         run: |
           hexo clean
           hexo g
+          
+      - name: Deploy
+        run: |
+          cd public
+          git config --global user.email "10849282@qq.com"
+          git config --global user.name "Guiny-Time"
+          git add .
+          git commit -m "Automatic Deploy"
+          git push -f
           hexo d
         
