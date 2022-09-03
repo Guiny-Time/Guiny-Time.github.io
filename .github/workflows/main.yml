@@ -24,18 +24,6 @@ jobs:
       - name: Build
         run: |
           hexo clean
-          git clone https://oauth2:${{ secrets.GITHUB_TOKEN }}@github.com/Guiny-Time/Guiny-Time.github.io.git public -b main --depth=1 
-          cd public
-          git rm -rf .
-          cd ..
           hexo g
-          
-      - name: Deploy
-        run: |
-          cd public
-          git config --global user.email "bot@apc-library.xyz"
-          git config --global user.name "Auto Deploy Bot"
-          git add .
-          git commit -m "Automatic Deploy"
-          git push -f
+          hexo d
         
