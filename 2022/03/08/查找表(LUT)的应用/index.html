@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>查找表(LUT)的应用 | Guiny-Time</title><meta name="keywords" content="Unity,demo,LUT,计算机图形学"><meta name="author" content="时光"><meta name="copyright" content="时光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="颜色分级   当我们拿到了一个场景，而我们想要改变它的颜色该怎么办？比如说现在我们有一个暖色调的魔女小屋，但我们希望能够实现一个更阴暗一点的风格。想要置换场景中所有模型的贴图、改变光照显然是不合适的，它的工作量太过庞大，并且如果还想更改色调的话我们又需要重新绘制一套纹理，这显然是划不来的。    我们其实很容易的能够联想到一种与之关联的屏幕后处理（Post-Processing）效果，叫做颜色分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="查找表(LUT)的应用">
+<meta property="og:url" content="http://example.com/2022/03/08/%E6%9F%A5%E6%89%BE%E8%A1%A8(LUT)%E7%9A%84%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="Guiny-Time">
+<meta property="og:description" content="颜色分级   当我们拿到了一个场景，而我们想要改变它的颜色该怎么办？比如说现在我们有一个暖色调的魔女小屋，但我们希望能够实现一个更阴暗一点的风格。想要置换场景中所有模型的贴图、改变光照显然是不合适的，它的工作量太过庞大，并且如果还想更改色调的话我们又需要重新绘制一套纹理，这显然是划不来的。    我们其实很容易的能够联想到一种与之关联的屏幕后处理（Post-Processing）效果，叫做颜色分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/03/09/lNMtBhpDKQ82LS5.png">
+<meta property="article:published_time" content="2022-03-08T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-14T07:01:59.633Z">
+<meta property="article:author" content="时光">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="demo">
+<meta property="article:tag" content="LUT">
+<meta property="article:tag" content="计算机图形学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/03/09/lNMtBhpDKQ82LS5.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/03/08/%E6%9F%A5%E6%89%BE%E8%A1%A8(LUT)%E7%9A%84%E5%BA%94%E7%94%A8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '查找表(LUT)的应用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-14 15:01:59'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2022/03/09/lNMtBhpDKQ82LS5.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Guiny-Time</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">查找表(LUT)的应用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-08T00:00:00.000Z" title="发表于 2022-03-08 08:00:00">2022-03-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-14T07:01:59.633Z" title="更新于 2023-03-14 15:01:59">2023-03-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8E%A2%E7%B4%A2%E5%8F%91%E7%8E%B0/">探索发现</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="查找表(LUT)的应用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="颜色分级"><a class="markdownIt-Anchor" href="#颜色分级"></a> 颜色分级</h1>
+<p>  当我们拿到了一个场景，而我们想要改变它的颜色该怎么办？比如说现在我们有一个暖色调的魔女小屋，但我们希望能够实现一个更阴暗一点的风格。想要置换场景中所有模型的贴图、改变光照显然是不合适的，它的工作量太过庞大，并且如果还想更改色调的话我们又需要重新绘制一套纹理，这显然是划不来的。</p>
+<p><img src="https://s2.loli.net/2022/03/09/POpL6rgFTSAmeWb.png" width="500/"><img src="https://s2.loli.net/2022/03/09/vzjg9fp637tT5M8.png" width="500/"></p>
+<p>  我们其实很容易的能够联想到一种与之关联的屏幕后处理（Post-Processing）效果，叫做颜色分级（Color Grading）。颜色分级是一个功能非常强大的后处理效果，我们可以利用该效果给屏幕加上各种“滤镜”，得到想要的效果。这个组件比较复杂，在本文中不过多展开，详情可见官方文档：<a target="_blank" rel="noopener" href="https://docs.unity3d.com/2018.3/Documentation/Manual/PostProcessing-ColorGrading.html">https://docs.unity3d.com/2018.3/Documentation/Manual/PostProcessing-ColorGrading.html</a></p>
+<h1 id="lut"><a class="markdownIt-Anchor" href="#lut"></a> LUT</h1>
+<p>  有了这么强大的工具游戏开发者是不是就可以高枕无忧了呢？答案是：不可以！颜色分级虽然强大，但相对的它的开销也是很大的，在移动平台如果依赖颜色分级实现某些效果的话会出现手机发烫、掉电过快等问题，造成不好的用户体验。因此，为了模拟颜色分级的效果，我们需要使用查找表（Lookup Table），简称LUT。在颜色分级诞生之前，开发者基本都是用Custom LUT实现色彩改变的效果的。即使到了今天，在许多注重开销的平台上（例如视频渲染、手机游戏）也是利用Custom LUT来进行优化的。<br>
+  在旧版的Unity的Post-Processing Volum中还保存有User LUT的选项（后来被颜色分级所取代），它的面板长这样：</p>
+<img src="https://s2.loli.net/2022/03/09/PQhf725DbIHoXWp.png">
+<p>  可见，输入需要一张用户定义的LUT图，并可以控制其影响程度。那么，LUT图长什么样呢？随便从网上搜一下我们就能得到结果：</p>
+<img src="https://s2.loli.net/2022/03/09/lNMtBhpDKQ82LS5.png" width="300/">
+<p>  其中左上角和右下角并不陌生，他们分别是第三分量为0和第三分量为1时一组纹理坐标输出在表面的结果。所以易得，查找表其实是以纹理的左上角为原点，向下为正方向对第三分量创建一根数轴得到的结果，单位长度为1（一个格子的长度）。每行的格子其实完全相同，他们对应的第三个分量也是相同的。查找表将索引号与输出值创建联系，上图的LUT（或者称之为<strong>颜色表</strong>）用来确定特定图像中每一像素所要显示的颜色和强度，计算效率很高。那么我们又如何利用这个标准LUT得到自己想要的输出结果呢？</p>
+<h1 id="制作user-lut"><a class="markdownIt-Anchor" href="#制作user-lut"></a> 制作User LUT</h1>
+<p>  当我们用绘图软件（例如Photoshop）调试出想要的效果的时候，我们会使用到调整图层。使用调整图层的好处是我们可以随时修改效果的参数，并且可以很方便的添加和删除滤镜而不用担心造成不可逆的后果。还记得文章开头提到的两张风格迥然不同的魔女小屋吗？在Photoshop中，我使用了以下调整图层：</p>
+<img src="https://s2.loli.net/2022/03/09/2yHkFUAXsDqBIYf.png">
+<p>  接着，我们导入标准LUT，放到调整图层之下。隐藏掉魔女小屋的图片之后，我们就会得到经过调整图层处理过的LUT图：</p>
+<img src="https://s2.loli.net/2022/03/09/jCDoZ5harAvfiOR.png" width="300/">
+<p>  原本输出在屏幕上的颜色经过索引号在查找表上查询到的颜色然后输出。但现在索引号没有变化、查找表本身改变了（被调整图层影响了），因此输出的颜色也就是被影响过的颜色了。当所有颜色经过新的查找表输出，我们就得到了Photoshop里的处理过后的效果。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">时光</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/03/08/%E6%9F%A5%E6%89%BE%E8%A1%A8(LUT)%E7%9A%84%E5%BA%94%E7%94%A8/">http://example.com/2022/03/08/%E6%9F%A5%E6%89%BE%E8%A1%A8(LUT)%E7%9A%84%E5%BA%94%E7%94%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Guiny-Time</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Unity/">Unity</a><a class="post-meta__tags" href="/tags/demo/">demo</a><a class="post-meta__tags" href="/tags/LUT/">LUT</a><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">计算机图形学</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/03/09/lNMtBhpDKQ82LS5.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/09/13/%E6%B0%B4%E9%9D%A2%E3%80%81%E6%B3%A2%E6%B5%AA%E5%92%8C%E7%99%BD%E6%B2%AB/"><img class="prev-cover" src="https://yanxuan.nosdn.127.net/7d49c90ca43bdced9aee5da488ba615c.gif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">水面、波浪、白沫和焦散</div></div></a></div><div class="next-post pull-right"><a href="/2022/02/07/%E8%B4%B4%E5%9C%B0%E9%9B%BE%E6%95%88%E5%AE%9E%E7%8E%B0/"><img class="next-cover" src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220207004948.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">贴地雾效实现</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/09/20/元素宇宙 - 地图与人物关系设计/" title="Elemental Universe/元素宇宙 - 地图与人物关系设计"><img class="cover" src="https://yanxuan.nosdn.127.net/f70700f03461e64139112a4a41f24fdc.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-20</div><div class="title">Elemental Universe/元素宇宙 - 地图与人物关系设计</div></div></a></div><div><a href="/2022/02/01/全局渐变效果实现/" title="全局渐变效果实现"><img class="cover" src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220206014120.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-01</div><div class="title">全局渐变效果实现</div></div></a></div><div><a href="/2022/02/05/几何海洋实现/" title="几何海洋实现"><img class="cover" src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220207012357.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-05</div><div class="title">几何海洋实现</div></div></a></div><div><a href="/2022/09/29/基于Gerstner Wave算法的海洋实现/" title="基于Gerstner Wave算法的海洋实现"><img class="cover" src="https://yanxuan.nosdn.127.net/baa7feaaa2ab24875043e6659bc8ec1c.gif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-29</div><div class="title">基于Gerstner Wave算法的海洋实现</div></div></a></div><div><a href="/2022/09/30/基于快速傅里叶变换(FFT)的水体模拟（上）/" title="基于快速傅里叶变换(FFT)的水体模拟（上）"><img class="cover" src="https://yanxuan.nosdn.127.net/539c295644f3a1a2bd5526899a446bc3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-30</div><div class="title">基于快速傅里叶变换(FFT)的水体模拟（上）</div></div></a></div><div><a href="/2022/09/13/水面、波浪和白沫/" title="水面、波浪、白沫和焦散"><img class="cover" src="https://yanxuan.nosdn.127.net/7d49c90ca43bdced9aee5da488ba615c.gif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-13</div><div class="title">水面、波浪、白沫和焦散</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">时光</div><div class="author-info__description">时光光的个人博客</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2%E5%88%86%E7%BA%A7"><span class="toc-number">1.</span> <span class="toc-text"> 颜色分级</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lut"><span class="toc-number">2.</span> <span class="toc-text"> LUT</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%B6%E4%BD%9Cuser-lut"><span class="toc-number">3.</span> <span class="toc-text"> 制作User LUT</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2222/12/12/%E6%9C%88%E5%BA%A6%E8%AE%A1%E5%88%92%E5%85%AC%E7%A4%BA/" title="月度计划公示"><img src="https://yanxuan.nosdn.127.net/ec2c746c037063b0a66d6f8156757f9b.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="月度计划公示"/></a><div class="content"><a class="title" href="/2222/12/12/%E6%9C%88%E5%BA%A6%E8%AE%A1%E5%88%92%E5%85%AC%E7%A4%BA/" title="月度计划公示">月度计划公示</a><time datetime="2222-12-12T12:09:57.064Z" title="发表于 2222-12-12 20:09:57">2222-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/09/%E6%B8%B8%E6%88%8F%E5%BE%AA%E7%8E%AF/" title="第一章·游戏循环"><img src="https://image.baidu.com/search/down?url=https://tvax1.sinaimg.cn/large/006UcwnJly1hdtm6jxpcoj30xv0zkn28.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第一章·游戏循环"/></a><div class="content"><a class="title" href="/2023/05/09/%E6%B8%B8%E6%88%8F%E5%BE%AA%E7%8E%AF/" title="第一章·游戏循环">第一章·游戏循环</a><time datetime="2023-05-09T00:00:00.000Z" title="发表于 2023-05-09 08:00:00">2023-05-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/01/%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF(%E4%B8%8B)%EF%BC%9AGPU%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/" title="渲染管线(下)：GPU渲染流水线"><img src="https://yanxuan.nosdn.127.net/51fb7d95b02a30282ae84efc909ec467.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="渲染管线(下)：GPU渲染流水线"/></a><div class="content"><a class="title" href="/2022/11/01/%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF(%E4%B8%8B)%EF%BC%9AGPU%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/" title="渲染管线(下)：GPU渲染流水线">渲染管线(下)：GPU渲染流水线</a><time datetime="2022-11-01T08:30:17.165Z" title="发表于 2022-11-01 16:30:17">2022-11-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/01/%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF(%E4%B8%8A)%EF%BC%9ACPU%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/" title="渲染管线(上)：CPU渲染流水线"><img src="https://yanxuan.nosdn.127.net/c20bb329b08268650721dda0c2ef0b71.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="渲染管线(上)：CPU渲染流水线"/></a><div class="content"><a class="title" href="/2022/11/01/%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF(%E4%B8%8A)%EF%BC%9ACPU%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/" title="渲染管线(上)：CPU渲染流水线">渲染管线(上)：CPU渲染流水线</a><time datetime="2022-11-01T06:30:17.165Z" title="发表于 2022-11-01 14:30:17">2022-11-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/30/%E5%9F%BA%E4%BA%8E%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2(FFT)%E7%9A%84%E6%B0%B4%E4%BD%93%E6%A8%A1%E6%8B%9F%EF%BC%88%E4%B8%8A%EF%BC%89/" title="基于快速傅里叶变换(FFT)的水体模拟（上）"><img src="https://yanxuan.nosdn.127.net/539c295644f3a1a2bd5526899a446bc3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于快速傅里叶变换(FFT)的水体模拟（上）"/></a><div class="content"><a class="title" href="/2022/09/30/%E5%9F%BA%E4%BA%8E%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2(FFT)%E7%9A%84%E6%B0%B4%E4%BD%93%E6%A8%A1%E6%8B%9F%EF%BC%88%E4%B8%8A%EF%BC%89/" title="基于快速傅里叶变换(FFT)的水体模拟（上）">基于快速傅里叶变换(FFT)的水体模拟（上）</a><time datetime="2022-09-30T11:31:54.869Z" title="发表于 2022-09-30 19:31:54">2022-09-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 时光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
