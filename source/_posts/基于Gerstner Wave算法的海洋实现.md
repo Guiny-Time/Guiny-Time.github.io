@@ -1,8 +1,8 @@
 ---
 tags: ['demo','Unity','ShaderLab','shader','水体']
 title: 基于Gerstner Wave算法的海洋实现
-date: '2022-09-29T08:20:39.263Z'
-cover: https://yanxuan.nosdn.127.net/baa7feaaa2ab24875043e6659bc8ec1c.gif
+created: '2022-09-29T08:20:39.263Z'
+cover: https://tva3.sinaimg.cn/large/006UcwnJly1h6njjavxxdg30t70f6b2b.gif
 ---
 
 # 介绍

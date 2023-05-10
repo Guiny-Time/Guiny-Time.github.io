@@ -1,6 +1,6 @@
 ---
 title: 解决Z-Fighting
-date: '2022-01-12'
+created: '2022-01-12'
 tags: ['Unity','ShaderLab']
 categories: 探索发现
 cover: https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20220113154252.png

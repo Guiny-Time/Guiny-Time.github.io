@@ -1,7 +1,7 @@
 ---
 tags: ['Unity','LUT','demo','计算机图形学']
 title: 查找表(LUT)的应用
-date: '2022-03-08'
+created: '2022-03-08'
 categories: 探索发现
 cover: https://s2.loli.net/2022/03/09/lNMtBhpDKQ82LS5.png
 ---

@@ -114,7 +114,3 @@ markdown_it_plus:
       enable: true
       options:
         strict: false
-
-aplayer:
-  meting: true
-  asset_inject: false
