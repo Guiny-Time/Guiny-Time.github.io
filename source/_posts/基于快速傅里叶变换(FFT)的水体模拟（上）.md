@@ -1,11 +1,11 @@
 ---
 tags: ['demo','Unity','水体','快速傅里叶变换','FFT']
-title: 基于快速傅里叶变换(FFT)的水体模拟（上）
-created: '2022-09-30T11:31:54.869Z'
+title: 基于快速傅里叶变换(FFT)的水体模拟
+date: '2022-09-30T11:31:54.869Z'
 cover: https://tva3.sinaimg.cn/large/006UcwnJly1h71nel6hj8j31hc0u0e4c.jpg
 ---
 
-# 基于快速傅里叶变换(FFT)的水体模拟（上）
+# 基于快速傅里叶变换(FFT)的水体模拟
 {% note info simple %}
 **请注意**
 **本文含有大量公式，涉及大量理论和计算，建议阅读时自行推导**

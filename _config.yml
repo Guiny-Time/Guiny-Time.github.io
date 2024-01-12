@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Guiny-Time
+title: 猫猫窝工作室
 subtitle: '时间的旅者，无痕的过客'
-description: 时光光的个人博客
+description: Catty House
 keywords:
 author: 时光
 language: zh-CN
@@ -114,3 +114,7 @@ markdown_it_plus:
       enable: true
       options:
         strict: false
+
+# APlayer
+aplayer:
+  meting: true

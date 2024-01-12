@@ -1,7 +1,7 @@
 ---
 tags: ['Oculus', 'Quest', 'VR', '教程']
 title:  Oculus Quest电脑端有线连接教程
-created: '2021-10-25T08:20:39.263Z'
+date: '2021-10-25T08:20:39.263Z'
 categories: VR开发
 cover: https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20211101232023.png
 
