@@ -2,7 +2,8 @@
 tags: ['demo','Unity','水体','快速傅里叶变换','FFT']
 title: 基于快速傅里叶变换(FFT)的水体模拟
 date: '2022-09-30T11:31:54.869Z'
-cover: https://tva3.sinaimg.cn/large/006UcwnJly1h71nel6hj8j31hc0u0e4c.jpg
+katex: true
+cover: https://ae01.alicdn.com/kf/S5f8b7fa03c294214b18836980d87986aq.jpg
 ---
 
 # 基于快速傅里叶变换(FFT)的水体模拟
@@ -20,25 +21,25 @@ FFT全称为Fast Fourier Transform，即快速傅里叶变换，因其卓越的�
 用FFT写海洋需要非常多前置知识，例如傅里叶级数、傅里叶变换、离散傅里叶变换、快速傅里叶变换，此外还需要扎实的微积分基础。
 ## 傅里叶级数
 对任何一个**周期性的信号**，可以用一系列正弦函数相加的级数来拟合。信号与傅里叶级数的关系如下图所示
-<img src="https://tvax4.sinaimg.cn/large/006UcwnJly1h6ogcmqlkfj333e1otkjl.jpg" alt="image" width="700" data-width="4010" data-height="2189">
-<center><font size=2px color=grey>https://tikz.net/fourier_series/</font></center>
+![https://tikz.net/fourier_series/](https://ae01.alicdn.com/kf/Sea119b0dc8a94456982e3287883b3bef7.jpg)
 
 原始的信号图像称为**时域(Time Domain)**，表示该信号随时间变化表现的周期形式。傅里叶级数部分则表示为**频域(Frequency Domain)**，根据级数每一项的振幅A，可以绘制出对应的频域图。
 
 ## 傅里叶变换
 
-现在我们有一个很漂亮的周期函数，它的频率是3Hz。如果我们定义一个二维笛卡尔坐标系来表示这个波（从原点指向曲线，长度与波对应点的纵坐标相同），可以得到不同旋转周期一系列图像（例如下图表示为 $\frac{1}{3}$ 秒钟旋转 1 周，下图右表示为 2 秒中旋转 1 周）。
+现在我们有一个很漂亮的周期函数，它的频率是3Hz。如果我们定义一个二维笛卡尔坐标系来表示这个波（从原点指向曲线，长度与波对应点的纵坐标相同），可以得到不同旋转周期一系列图像。
 
-<img src="https://tvax2.sinaimg.cn/large/006UcwnJly1h6ogt7v3phj31hc0tundr.jpg" alt="image" width="380" data-width="1920" data-height="1074" style="display:inline"><img src="https://tvax1.sinaimg.cn/large/006UcwnJly1h6ohd6hysmj31hc0u0n9u.jpg" alt="image" width="380" data-width="1920" data-height="1080" style="display:inline">
+![1/3 秒钟旋转 1 周](https://ae01.alicdn.com/kf/S1bd4ad24f3ad488a9bec5c3c75d336dfv.jpg)
+![2 秒钟旋转 1 周](https://ae01.alicdn.com/kf/S4b16838773044d19a39dab7e533440dfD.jpg)
 
 找到图像的质心，可以以质心距离原点的偏移量画出图像。可以发现一个有趣的结论：当旋转周期的倒数与频率一致时，质心距离原点的偏移最大。而当我们把两个波叠加在一起之后，质心偏移的图像也同样叠加在一起了。也就是说，画出叠加后的波的质心偏移图像和直接将质心偏移图相加的结果是一样的：
 
-<img src="https://tvax1.sinaimg.cn/large/006UcwnJly1h6ogw4l3lkj31hc0u0ajm.jpg" alt="image" width="620" data-width="1920" data-height="1080">
+![](https://ae01.alicdn.com/kf/S9eb1073a560b4810b78c19a5c291b17ds.jpg)
 
 自然界中的许多东西都可以以信号的形式出现，最经典的例子就是声音，但声音信号往往是**非周期性**的。不过通过傅里叶变换公式，可以把非周期性的信号从时域转换到频域。下图显示了一段信号的转换，可见信号大多集中在低频段，高频段只有一个突出的波峰。
 同样的，如果我们有信号的频域信息，可以通过**逆傅里叶变换**反过来得到时域信息。
 
-<img src="https://tvax1.sinaimg.cn/large/006UcwnJly1h6r2ziupbgj31df0ng7bv.jpg" alt="image" width="620" data-width="1779" data-height="844">
+![逆傅里叶变换](https://ae01.alicdn.com/kf/Se1db9f1992f24775953907671487ce5aK.jpg)
 
 通过变换，我们可以用滤波器对频域进行过滤，例如音频处理中经典的高通滤波和低通滤波。
 
@@ -47,24 +48,25 @@ FFT全称为Fast Fourier Transform，即快速傅里叶变换，因其卓越的�
 $$\hat{g}(f)=\int_{-\infty}^{\infty}g(t)e^{-2\pi ift}dt$$
 这个公式指的是时域信号 $g(t)$ 与 $e^{-2\pi ift}$ 相乘后对其在正无穷到负无穷的范围上求积分，$\hat{g}(f)$ 就是得到的频域。这个 $e^{-2\pi ift}$ 是什么？实际上，如果将 $f(t) = e^{-2\pi ift}$ 画在虚数坐标系（x轴表示实部，y轴表示虚部）上的话会是一个圆，$f$ 指**频率**，$2\pi$ 指**周期**，负号则让t递增时点是以逆时针的形式画在圆上的（控制**方向**）。下图是圆上的一些特殊点：
 
-<img src="https://tva2.sinaimg.cn/large/006UcwnJly1h6r8btlsspj30r50edjur.jpg" alt="image" width="577" data-width="977" data-height="517">
+![特殊点](https://ae01.alicdn.com/kf/Se6d55d6a5fd144e3a146c5f932d92b80u.jpg)
 
 当 $g(t)$ 与 $e^{-2\pi ift}$ 相乘，我们得到了前文提到的曲线。随着截取频率 $f$ 的改变，相乘的结果 $\hat{g}(f)$ 也会随之改变，这和前文的变化是一样的。
 
-<img src="https://tvax1.sinaimg.cn/large/006UcwnJly1h6r8ll4cp5j314x0s37hf.jpg" alt="image" width="500" data-width="1473" data-height="1011">
+![](https://ae01.alicdn.com/kf/S3ef3cb12edca4fbcbae0bd4d034285280.jpg)
 
 随后，追踪曲线的重心坐标，就可以绘制出频域图。不过，有一些小小的修改。
 $$\frac{1}{t_{2}-t{1}} \int_{t_{1}}^{t_{2}} g(t)e^{-2\pi ift}dt$$
 $t_{2}$ 和 $t_{1}$指截取的两个时间点，上式的结果表示曲线的重心位置。然而真正的傅里叶变换公式舍弃了 $\frac{1}{t_{2}-t{1}}$ 的部分，表示质心坐标乘以该频率的持续时间。
-<img src="https://tvax1.sinaimg.cn/large/006UcwnJly1h6r9thktejj30hq0gvdnj.jpg" alt="image" width="238" data-width="638" data-height="607">
+
+![](https://ae01.alicdn.com/kf/Sda999aab5d794bd395eba23dade4cc8bE.jpg)
 
 但通常的，我们都是站在无穷的角度进行积分的，无穷包含了所有的时间段，即
 $$\int_{-\infty}^{\infty} g(t)e^{-2\pi ift}dt$$
 
 ## 离散傅里叶变换
-计算机中的信号往往用离散的数据表示，例如针对一个信号采样得到的点 $X_{0},X_{1},X_{2},...,X_{N}$ 。离散傅里叶变换其实是针对离散数据的傅里叶级数，和函数并没有关系
+计算机中的信号往往用离散的数据表示，例如针对一个信号采样得到的点 $X_{0},X_{1},X_{2},...,X_{N}$ 。离散傅里叶变换其实是针对离散数据的傅里叶级数，和函数并没有关系：
 
-<img src="https://tvax3.sinaimg.cn/large/006UcwnJly1h6s2dy005vj30g30aqdhd.jpg" alt="image" width="579" data-width="579" data-height="386">
+![离散傅里叶变换](https://ae01.alicdn.com/kf/Sd478c3d1792b4badbd881c4f34be4f110.jpg)
 
 ### 公式解读
 离散傅里叶变换公式为：
@@ -72,7 +74,7 @@ $$\hat{f}_{k} = \sum_{j = 0}^{N - 1} f_{j}e^{kj\frac{-2\pi i}{n}}$$
 $f_{j}$ 表示采样点 $X_{j}$ 对应的频率，相当于 $g(t_{j})$ 的值，$\hat{f}_{k}$ 表示截取频率为 $k$ 时的结果，表示为所有采样点计算结果的和。$n$ 表示采样点的总数， $e^{\frac{-2\pi i}{n}}$ 和前文的概念类似，除以 $n$ 使得在 $n > 1$ 时旋转一周的周期变大。
 
 > 下图展示了有10个采样点时的情况。可以看到原本为 $2\pi$ 的 $\omega$ 变成了 $20\pi$
-<img src="https://tva1.sinaimg.cn/large/006UcwnJly1h6s4hu4f8oj30sg0hkjxt.jpg" alt="image" width="600" data-width="1024" data-height="632">
+![](https://ae01.alicdn.com/kf/S5fc1b89eb15d4a278da00d9fc910fd93Q.jpg)
 
 其实我们可以写作矩阵乘法的形式，因为计算的是分立的每一项 $\hat{f_{k}}$，输入的结果也是离散的数据 $f_{j}$。令 $e^{\frac{-2\pi i}{n}} = \omega_{n}$ ，代入 $k$ 为不同频率时的特殊值，寻找其中的规律，可以推出：
 $$\begin{pmatrix}
@@ -116,7 +118,8 @@ $$X[k] = \sum_{n=0}^{N-1}x[2n]W^{k}_{\frac{N}{2}} +  W_{N}^{k}\sum_{n=0}^{N-1}x[
 $$X[k] = G[k] +  W_{N}^{k}H[k], k\in(0,1,...,\frac{N}{2}-1)$$
 $$X[k] = G[k-\frac{N}{2}] +  W_{N}^{k}H[k-\frac{N}{2}], k\in(\frac{N}{2},\frac{N}{2} + 1,...,N-1)$$
 假设N = 8，根据推导的结果，可以画出下图所示的关系网图：
-<img src="https://tvax2.sinaimg.cn/large/006UcwnJly1h6vkuhia9lj30yr0s9tf0.jpg" width=400/>
+
+![](https://ae01.alicdn.com/kf/Sd63e01d41365452384de5aeedd0ddecaz.jpg)
 
 现在得到了N --> N/2的图，还可以继续划分下去，直到每个分组只剩一个元素位置。取一个特殊点吧，假设k = 0，则直接展开$X[k] = G[k] +  W_{N}^{k}H[k]$科研得到：
 $$X[0] = x[0]W_{4}^{0} + x[2]W_{4}^{0} + x[4]W_{4}^{0} + x[6]W_{4}^{0} + W_{8}^{0}(x[1]W_{4}^{0} + x[3]W_{4}^{0} + x[5]W_{4}^{0} + x[7]W_{4}^{0})$$
@@ -124,13 +127,15 @@ $$X[0] = x[0]W_{4}^{0} + x[2]W_{4}^{0} + x[4]W_{4}^{0} + x[6]W_{4}^{0} + W_{8}^{
 $$X[0] = \textcolor{CornflowerBlue}{x[0]W_{2}^{0} + x[4]W_{2}^{0}} + W_{4}^{0}(\textcolor{LimeGreen}{x[2]W_{2}^{0} + x[6]W_{2}^{0}}) + W_{8}^{0}(\textcolor{CornflowerBlue}{x[1]W_{2}^{0} + x[5]W_{2}^{0}} + W_{4}^{0}(\textcolor{LimeGreen}{x[3]W_{2}^{0} + x[7]W_{2}^{0}}))$$
 
 通过推算，可以得到k为不同数时的结果，并可以根据结果画出蝶形网络。蝶形网络在N相同时表现的形式是一样的：
-<img src="https://tvax2.sinaimg.cn/large/006UcwnJly1h6vkxarlu5j30iw0cp41g.jpg" alt="image" width="500" data-width="680" data-height="457">
+
+![](https://ae01.alicdn.com/kf/S02fe4e95406e4aa0b2a76e67029eeda54.jpg)
 
 不过，在后续实际操作时使用到的是IDFT，所以说实际上是要倒过来求的...
 IDFT的公式为：
 $$f_{k} = \frac{1}{n} \sum_{j = 0}^{N - 1} \hat{f}_{j}e^{-2\pi ij\frac{k}{n}}$$
 类似于先前FFT的推导模式，应用于IFFT，可以推导出IFFT的蝶形网络如下所示：
-<img src="https://tvax4.sinaimg.cn/large/006UcwnJly1h6vorcfjryj30fz0cjjtd.jpg" alt="image" width="500" data-width="575" data-height="451">
+
+![IFFT的蝶形网络](https://ae01.alicdn.com/kf/Sdc2aa79eb857491aaeab0cbb29747c5fv.jpg)
 
 现在，可以利用IFFT进行后续的海面模拟了。
 
@@ -142,9 +147,9 @@ $$f_{k} = \frac{1}{n} \sum_{j = 0}^{N - 1} \hat{f}_{j}e^{-2\pi ij\frac{k}{n}}$$
 - JONSWAP Spectrum / JONSWAP频谱
 
 首次提出FFT模拟海浪的Simulating Ocean Water一文中使用菲利普频谱进行模拟，同时我查到的一篇2019年的博客也使用同样的菲利普频谱+FFT的方法模拟海浪，证明该方法在FFT模拟领域的经久不衰。不过我们还可以使用JONSWAP频谱 + 泊松分布的形式进行模拟。
-到这一步觉得已经差不多了？没有，后面还有很多计算（这也是为什么我这么久了还没更新视频的原因..
+到这一步觉得已经差不多了？没有，后面还有很多计算（
 
-<img src="https://tva3.sinaimg.cn/large/006UcwnJly1h71hti3zksj306905kmxg.jpg" alt="歪日啊沃土辣" width="225" data-width="225" data-height="200">
+![歪日啊沃土辣](https://ae01.alicdn.com/kf/Saf679e8830a6432b8b82ee9f2c5aef91v.jpg)
 
 先看看海面IDFT的公式吧：
 $$h(\vec{x}, t) = \sum_{\tilde{k}}\tilde{h}(\tilde{k},t)e^{i\vec{k}\vec{x}}$$
