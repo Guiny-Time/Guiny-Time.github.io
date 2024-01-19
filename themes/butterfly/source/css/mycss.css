@@ -1,0 +1,78 @@
+/*文章页*/
+.layout>#post{
+  background: rgba(255, 255, 255, 0.87);
+  box-shadow: -10px -10px rgba(255,247,194,.3);
+  backdrop-filter: blur(2px);
+}
+
+[data-theme=dark] .layout>#post{
+  background: rgba(25,25,25,.8);
+  box-shadow: -10px -10px rgba(255,247,194,.3);
+  backdrop-filter: blur(2px);
+}
+
+/*首页文章卡片*/
+#recent-posts > .recent-post-item{
+  background: linear-gradient(0deg,rgba(255,255,255,1),rgba(255,254,149,.7) 100%);
+  box-shadow: -10px -10px rgba(255,247,194,.3);
+  backdrop-filter: blur(2px);
+}
+[data-theme=dark] #recent-posts > .recent-post-item{
+  background: rgba(25,25,25,.8);
+  box-shadow: -10px -10px rgba(203, 201, 188, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+/*侧边栏页面*/
+#aside-content>.card-widget  {
+  background: rgba(255, 255, 255, 0.67);
+  box-shadow: 10px -10px rgba(203, 201, 188, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+[data-theme=dark] #aside-content>.card-widget  {
+  background: rgba(25,25,25,.8);
+  box-shadow: 10px -10px rgba(203, 201, 188, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+#aside-content>.sticky_layout>.card-widget{
+  background: rgba(255, 255, 255, 0.67);
+  box-shadow: 10px -10px rgba(203, 201, 188, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+[data-theme=dark] #aside-content>.sticky_layout>.card-widget{
+  background: rgba(25,25,25,.8);
+  box-shadow: 10px -10px rgba(203, 201, 188, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+#page-header {
+  animation: imgblur 3s 1 ease-in-out;
+}
+#web_bg {
+  filter: blur(3px);
+  animation: to_show 4s;
+}
+
+@keyframes to_show {
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+  100% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+}
+@keyframes imgblur {
+  0% {
+    filter: blur(5px);
+  }
+  100% {
+    filter: blur(0px);
+  }
+}
