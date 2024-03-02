@@ -118,3 +118,61 @@ markdown_it_plus:
 # APlayer
 aplayer:
   meting: true
+
+# tag-plugins-plus
+# see https://akilar.top/posts/615e2dec/
+tag_plugins:
+  enable: true # 开关
+  priority: 5 #过滤器优先权
+  issues: false #issues标签依赖注入开关
+  link:
+    placeholder: /img/link.png #link_card标签默认的图标图片
+  CDN:
+    anima: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css #动画标签anima的依赖
+    jquery: https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js #issues标签依赖
+    issues: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/issues.js #issues标签依赖
+    iconfont: //at.alicdn.com/t/font_2032782_8d5kxvn09md.js #参看https://akilar.top/posts/d2ebecef/
+    carousel: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js
+    tag_plugins_css: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css
+
+mmedia:
+  audio:
+    default:
+  video:
+    default:
+  aplayer:
+    js: https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.js
+    css: https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.css
+    default:
+      contents:
+  meting:
+    js: https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js
+    api:
+    default:
+  dplayer:
+    js: https://cdn.jsdelivr.net/npm/dplayer@1/dist/DPlayer.min.js
+    hls_js: https://cdn.jsdelivr.net/npm/hls.js/dist/hls.min.js
+    dash_js: https://cdn.jsdelivr.net/npm/dashjs/dist/dash.all.min.js
+    shaka_dash_js: https://cdn.jsdelivr.net/npm/shaka-player/dist/shaka-player.compiled.js
+    flv_js: https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js
+    webtorrent_js: https://cdn.jsdelivr.net/npm/webtorrent/webtorrent.min.js
+    default:
+      contents:
+  bilibili:
+    default:
+      page: 1
+      danmaku: true
+      allowfullscreen: allowfullscreen
+      sandbox: allow-top-navigation allow-same-origin allow-forms allow-scripts allow-popups
+      width: 100%
+      max_width: 850px
+      margin: auto
+  xigua:
+    default:
+      autoplay: false
+      startTime: 0
+      allowfullscreen: allowfullscreen
+      sandbox: allow-top-navigation allow-same-origin allow-forms allow-scripts allow-popups
+      width: 100%
+      max_width: 850px
+      margin: auto

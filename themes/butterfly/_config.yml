@@ -22,7 +22,7 @@ menu:
 # Code Blocks (代碼相關)
 # --------------------------------------
 
-highlight_theme: ocean #  darker / pale night / light / ocean / mac / mac light / false
+highlight_theme: pale night #  darker / pale night / light / ocean / mac / mac light / false
 highlight_copy: true # copy button
 highlight_lang: true # show the code language
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
@@ -44,7 +44,7 @@ favicon: /img/favicon.ico
 
 # Avatar (頭像)
 avatar:
-  img: https://ae01.alicdn.com/kf/S4949e21c450e4f4aaf1ee9500b829269O.png
+  img: https://img14.360buyimg.com/ddimg/jfs/t1/234616/4/14333/21745/65e033e7Fb50b5c10/c15dbb34cc5a6a24.jpg
   effect: false
 
 # Disable all banner image
@@ -640,7 +640,7 @@ tag_ui: # 留空或 index
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
-background: url(https://ae01.alicdn.com/kf/S49dd984327374c79a6b51466d5b9cdd5i.png)
+background: url(https://img13.360buyimg.com/ddimg/jfs/t1/91797/3/42462/168874/65e033b8F7ae856bb/ada1373307255253.jpg)
 
 # Footer Background
 footer_bg: true
