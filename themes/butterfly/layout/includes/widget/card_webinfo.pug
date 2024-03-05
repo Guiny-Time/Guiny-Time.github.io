@@ -32,4 +32,7 @@ if theme.aside.card_webinfo.enable
           .item-name= _p('aside.card_webinfo.last_push_date.name') + " :"
           .item-count#last-push-date(data-lastPushDate=date_xml(Date.now()))
             i.fa-solid.fa-spinner.fa-spin
+      if theme.aside.card_webinfo.card_map
+        .webinfo-item
+          <script type="text/javascript" src="//rf.revolvermaps.com/0/0/2.js?i=5znsjgfcazv&amp;m=1&amp;s=130&amp;c=ff0000&amp;t=1" async="async"></script>
 
