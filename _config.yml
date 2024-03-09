@@ -114,6 +114,18 @@ markdown_it_plus:
       enable: true
       options:
         strict: false
+        
+markdown:
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: true
+    linkify: true
+    typographer: true
+  plugins:
+  anchors:
+    level: 1
+    collisionSuffix: ''
 
 # APlayer
 aplayer:
