@@ -1,6 +1,6 @@
 (function($){
     $.fn.snow = function(options){
-    var $flake = $('<div id="snowbox" />').css({'position': 'absolute','z-index':'-2', 'top': '-50px'}).html('&#10052;'),
+    var $flake = $('<div id="snowbox" />').css({'position': 'absolute','z-index':'-2', 'top': '0px'}).html('&#10053;'),
     documentHeight  = $(document).height(),
     documentWidth   = $(document).width(),
     defaults = {
@@ -11,7 +11,7 @@
     },
     options = $.extend({}, defaults, options);
     var interval= setInterval( function(){
-    var startPositionLeft = Math.random() * documentWidth - 100,
+    var startPositionLeft = Math.random() * documentWidth - 10,
     startOpacity = 0.5 + Math.random(),
     sizeFlake = options.minSize + Math.random() * options.maxSize,
     endPositionTop = documentHeight - 200,
