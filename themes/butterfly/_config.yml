@@ -681,7 +681,7 @@ canvas_fluttering_ribbon:
 # canvas_nest
 # https://github.com/hustcc/canvas-nest.js
 canvas_nest:
-  enable: true
+  enable: false
   color: '255,255,255' #color of lines, default: '0,0,0'; RGB values: (R,G,B).(note: use ',' to separate.)
   opacity: 1 # the opacity of line (0~1), default: 0.5.
   zIndex: -1 # z-index property of the background, default: -1.
@@ -899,7 +899,16 @@ css_prefix: true
 inject:
   head:
     - <link rel="stylesheet" href="/css/mycss.css">
+    #背景宇宙星光
+    - <link rel="stylesheet" href="/css/universe.css">
+    - '<canvas id="universe" ></canvas>'
+    #背景雪花
+    # - <link rel="stylesheet" href="/css/snow.css">
+    # - '<canvas id="snow" ></canvas>'
   bottom:
+    - <script type="text/javascript" src="https://unpkg.zhimg.com/jquery@latest/dist/jquery.min.js"></script>
+    - '<script src="/js/snow.js"></script>' # 雪花效果
+    - '<script src="/js/universe.js"></script>' # 背景宇宙星光js文件
     - <div class="aplayer no-destroy" data-id="7263032154" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true" data-lrcType="-1"> </div>
 
 # CDN
