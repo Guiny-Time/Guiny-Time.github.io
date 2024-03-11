@@ -902,11 +902,11 @@ inject:
     #背景宇宙星光
     - <link rel="stylesheet" href="/css/universe.css">
     - '<canvas id="universe" ></canvas>'
-    #背景雪花
-    # - <link rel="stylesheet" href="/css/snow.css">
-    # - '<canvas id="snow" ></canvas>'
+    #鱼鱼蒸
+    - <link rel="stylesheet" href="/css/fish.css">
   bottom:
-    - <script type="text/javascript" src="https://unpkg.zhimg.com/jquery@latest/dist/jquery.min.js"></script>
+    - <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    - <script src="https://gcore.jsdelivr.net/gh/xiabo2/CDN@latest/fishes.js"></script>
     - '<script src="/js/snow.js"></script>' # 雪花效果
     - '<script src="/js/universe.js"></script>' # 背景宇宙星光js文件
     - <div class="aplayer no-destroy" data-id="7263032154" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true" data-lrcType="-1"> </div>

@@ -1,0 +1,7 @@
+/* 鱼塘固定宽度 */
+#ribbon-canvas {
+    margin-bottom: 0.5rem;
+    display: block;
+    width: 90%;
+    height: 160px
+}
