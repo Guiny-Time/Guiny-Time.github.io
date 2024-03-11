@@ -9,7 +9,6 @@ title: 欢迎光临！
 [![Scarlet7255's GitHub stats](https://github-readme-stats.vercel.app/api?username=Scarlet7255)](https://github.com/Scarlet7255/github-readme-stats)
 
 ##  成员({% label 时光 green %}/{% label 深红 red %})参与制作的作品
-游戏窗口请全屏游玩
 
 {% timeline 2020,color %}
 <!-- timeline 2020网易游戏高校MINI-GAME挑战赛 -->
