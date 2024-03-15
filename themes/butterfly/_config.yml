@@ -84,7 +84,7 @@ cover:
   archives_enable: true
   # the position of cover in home page (封面顯示的位置)
   # left/right/both
-  position: both
+  position: left
   # When cover is not set, the default cover is displayed (當沒有設置cover時，默認的封面顯示)
   default_cover:
     - https://ae01.alicdn.com/kf/S4949e21c450e4f4aaf1ee9500b829269O.png
