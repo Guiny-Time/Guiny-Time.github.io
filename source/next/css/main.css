@@ -1531,6 +1531,53 @@ pre code {
   top: -6px;
   transform: rotate(45deg);
 }
+.post-toc {
+  font-size: 0.875em;
+}
+.post-toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0 2px 0 10px;
+  text-align: left;
+}
+.post-toc ol > :last-child {
+  margin-bottom: 5px;
+}
+.post-toc ol > ol {
+  padding-left: 0;
+}
+.post-toc ol a {
+  transition: all 0.2s ease-in-out;
+}
+.post-toc .nav-item {
+  line-height: 1.8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.post-toc .nav .nav-child {
+  --height: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition-property: height, opacity, visibility;
+  transition: 0.2s ease-in-out;
+  visibility: hidden;
+}
+.post-toc .nav .active > .nav-child {
+  height: var(--height, auto);
+  opacity: 1;
+  visibility: unset;
+}
+.post-toc .nav .active > a {
+  border-bottom-color: #87daff;
+  color: #87daff;
+}
+.post-toc .nav .active-current > a {
+  color: #87daff;
+}
+.post-toc .nav .active-current > a:hover {
+  color: #87daff;
+}
 .site-state {
   display: flex;
   flex-wrap: wrap;
@@ -2680,7 +2727,7 @@ header.header {
   transition: all 0.2s ease-in-out;
 }
 .links-of-author a::before {
-  background: #b97144;
+  background: #ffc9f2;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);

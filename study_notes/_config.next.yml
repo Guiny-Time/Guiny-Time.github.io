@@ -73,7 +73,7 @@ social_icons:
   transition: true
 
 toc:
-  enable: false
+  enable: true
   number: true
   wrap: true
 

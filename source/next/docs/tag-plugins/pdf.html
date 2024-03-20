@@ -128,7 +128,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -141,6 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Settings"><span class="nav-number">1.</span> <span class="nav-text">Settings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Examples"><span class="nav-number">3.</span> <span class="nav-text">Examples</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,18 +220,15 @@
       
       
       <div class="post-body">
-          <h3 id="settings"><a class="markdownIt-Anchor" href="#settings"></a> Settings</h3>
-<figure class="highlight yml"><figcaption><span>NexT config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">pdf:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Default height</span></span><br><span class="line">  <span class="attr">height:</span> <span class="string">500px</span></span><br></pre></td></tr></table></figure>
-<h3 id="usage"><a class="markdownIt-Anchor" href="#usage"></a> Usage</h3>
-<figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">pdf</span> url [height] %&#125;</span></span><br></pre></td></tr></table></figure>
+          <h3 id="Settings"><a href="#Settings" class="headerlink" title="Settings"></a>Settings</h3><figure class="highlight yml"><figcaption><span>NexT config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">pdf:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Default height</span></span><br><span class="line">  <span class="attr">height:</span> <span class="string">500px</span></span><br></pre></td></tr></table></figure>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">pdf</span> url [height] %&#125;</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>url</code>      : The URL (Absolute path) of the PDF file.</li>
 <li><code>[height]</code> : <em>Optional parameter.</em> Height of the PDF display element, e.g. 800px.</li>
 </ul>
 <div class="note warning"><p>The loading of pdf.js or pdf file might be blocked by CORS policy. If you want to load resources from another website, make sure the Access-Control-Allow-Origin header is set correctly. See also <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSFRUUC9IZWFkZXJzL0FjY2Vzcy1Db250cm9sLUFsbG93LU9yaWdpbg==">Access-Control-Allow-Origin - HTTP | MDN<i class="fa fa-external-link-alt"></i></span>.</p>
 </div>
-<h3 id="examples"><a class="markdownIt-Anchor" href="#examples"></a> Examples</h3>
-<figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">pdf</span> https://example.com/sample.pdf %&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h3><figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">pdf</span> https://example.com/sample.pdf %&#125;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">pdf</span> /path/to/your/file.pdf 600px %&#125;</span></span><br></pre></td></tr></table></figure>
 
       </div>
