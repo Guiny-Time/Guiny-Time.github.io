@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/next/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/next/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/next/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/next/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="5AUIVYTbHIAuz-eQtxSfZbWW5eg9_EVZMSQycIuXrG0">
+
+<link rel="stylesheet" href="/next/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cattyhouse-guiny.xyz","root":"/next/","images":"/next/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":true,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/next/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/config.min.js"></script>
+
+    <meta name="description" content="计算机网络的概念及功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络(1)整体概念介绍">
+<meta property="og:url" content="https://cattyhouse-guiny.xyz/next/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-1-%E6%95%B4%E4%BD%93%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="笔记存放处">
+<meta property="og:description" content="计算机网络的概念及功能">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img11.360buyimg.com/ddimg/jfs/t1/184415/38/42968/76339/65f183f7F4e35ca9b/03ea0efc07cb7122.jpg">
+<meta property="og:image" content="https://img12.360buyimg.com/ddimg/jfs/t1/90758/30/45069/22193/65f18c00F2cf091db/df76dd09e5179bf5.jpg">
+<meta property="og:image" content="https://img11.360buyimg.com/ddimg/jfs/t1/232181/22/15139/41646/65f18f47F69746809/e3ba03fb71a25846.jpg">
+<meta property="og:image" content="https://www.researchgate.net/publication/238638509/figure/fig1/AS:392801603866627@1470662608756/Architecture-of-C-S-and-P2P.png">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/NetworkTopologies.svg/1200px-NetworkTopologies.svg.png">
+<meta property="og:image" content="https://img12.360buyimg.com/ddimg/jfs/t1/244318/38/6081/8670/65f5aae7F2de8152c/7469f6263e4eaec6.jpg">
+<meta property="og:image" content="https://img12.360buyimg.com/ddimg/jfs/t1/238136/7/13949/8403/65f5ad5fF17b446c4/eea738fb4fec5eab.jpg">
+<meta property="article:published_time" content="2024-03-11T11:05:58.000Z">
+<meta property="article:modified_time" content="2024-03-20T11:21:00.806Z">
+<meta property="article:author" content="Guiny-Time">
+<meta property="article:tag" content="计算机科学技术">
+<meta property="article:tag" content="面试相关">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img11.360buyimg.com/ddimg/jfs/t1/184415/38/42968/76339/65f183f7F4e35ca9b/03ea0efc07cb7122.jpg">
+
+
+<link rel="canonical" href="https://cattyhouse-guiny.xyz/next/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-1-%E6%95%B4%E4%BD%93%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://cattyhouse-guiny.xyz/next/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-1-%E6%95%B4%E4%BD%93%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/","path":"计算机网络-1-整体概念介绍/","title":"计算机网络(1)整体概念介绍"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>计算机网络(1)整体概念介绍 | 笔记存放处</title><meta name="robots" content="noindex">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/next/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/next/atom.xml" title="笔记存放处" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/next/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">笔记存放处</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-主站"><a href="https://cattyhouse-guiny.xyz/" rel="section"><i class="fa fa-snowflake fa-fw"></i>主站</a></li><li class="menu-item menu-item-home"><a href="/next/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/next/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">5</span></a></li><li class="menu-item menu-item-categories"><a href="/next/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a></li><li class="menu-item menu-item-archives"><a href="/next/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">2</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Guiny-Time"
+      src="https://img14.360buyimg.com/ddimg/jfs/t1/234616/4/14333/21745/65e033e7Fb50b5c10/c15dbb34cc5a6a24.jpg">
+  <p class="site-author-name" itemprop="name">Guiny-Time</p>
+  <div class="site-description" itemprop="description">计算机基础知识笔记存放处</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/next/archives/">
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/next/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/next/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0d1aW55LVRpbWU=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Guiny-Time"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOmd1aW55dGltZUBnbWFpbC5jb20=" title="E-Mail → mailto:guinytime@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cattyhouse-guiny.xyz/next/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-1-%E6%95%B4%E4%BD%93%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img14.360buyimg.com/ddimg/jfs/t1/234616/4/14333/21745/65e033e7Fb50b5c10/c15dbb34cc5a6a24.jpg">
+      <meta itemprop="name" content="Guiny-Time">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记存放处">
+      <meta itemprop="description" content="计算机基础知识笔记存放处">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="计算机网络(1)整体概念介绍 | 笔记存放处">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算机网络(1)整体概念介绍<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL0d1aW55LVRpbWUvR3VpbnktVGltZS5naXRodWIuaW8vdHJlZS9zb3VyY2Uvc3R1ZHlfbm90ZXMvc291cmNlL19wb3N0cy/orqHnrpfmnLrnvZHnu5wtMS3mlbTkvZPmpoLlv7Xku4vnu40ubWQ=" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-11 19:05:58" itemprop="dateCreated datePublished" datetime="2024-03-11T19:05:58+08:00">2024-03-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/next/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="计算机网络的概念及功能"><a class="markdownIt-Anchor" href="#计算机网络的概念及功能"></a> 计算机网络的概念及功能</h1>
+<img src="https://img11.360buyimg.com/ddimg/jfs/t1/184415/38/42968/76339/65f183f7F4e35ca9b/03ea0efc07cb7122.jpg" width="500" alt="计算机网络" title="计算机网络">
+<span id="more"></span>
+<h2 id="概念"><a class="markdownIt-Anchor" href="#概念"></a> 概念</h2>
+<blockquote>
+<p><strong>计算机网络</strong>（英语：computer network），通常也简称网络，是指容许节点分享资源的数字电信网络。在电脑网络，电脑设备会透过<strong>节点</strong>之间的连接（数据链路）互相交换数据，即收发（接收和发放）网络信息。</p>
+</blockquote>
+<blockquote>
+<p>A computer network is a <strong>system</strong> that connects two or more computing devices for transmitting and sharing information. Computing devices include everything from a mobile phone to a server. These devices are connected using physical wires such as fiber optics, but they can also be wireless.<br>
+“计算机网络是连接两台或多台计算设备以实现传输和共享信息目的的系统。计算设备包括手机、服务器等一系列设备，它们通过物理缆线（如光纤）或无线的方式相互连接。”</p>
+</blockquote>
+<p>以上概念分别引自维基百科和Spiceworks，维基的叙述方式比较学术，其中的一些概念（比如节点）会在后续介绍到。总的来说，计算机网络是一个将分散的、具有独立功能的<strong>计算机系统</strong>，通过<strong>通信设备</strong>（如路由器、中继器、交换机）与<strong>线路</strong>（有线或无线）连接起来，由功能完善的<strong>软件</strong>实现 <mark class="label success">资源共享</mark> 和 <mark class="label success">信息传递</mark> 的系统。</p>
+<details class="note warning"><summary><p>simple</p>
+</summary>
+<p>为什么是由功能完善的软件实现资源共享和信息传递的呢？</p>
+
+</details>
+<p>计算机网络是一个互连的、自治的计算机集合。其中，</p>
+<ul>
+<li><strong>互连</strong>：通过通信链路互联互通</li>
+<li><strong>自治</strong>：无主从关系、各个终端高度自治</li>
+</ul>
+<details class="note warning"><summary><p>计算机网络的具体功能</p>
+</summary>
+<p>计算机网络系统有以下具体功能：</p>
+<ul>
+<li><strong>数据通信</strong>：终端之间通过数据链路互相交换数据，即收发（接收和发放）网络信息。</li>
+<li><strong>资源共享</strong>：同一个计算机网络上的其他计算机可以使用某台计算机的计算机资源的行为，可以共享硬件、软件、数据。
+<ul>
+<li>硬件共享：使用学校的网络打印机</li>
+<li>软件共享：远程访问其他电脑，使用上面的软件（比如qq的远程控制）</li>
+<li>数据共享：云端数据库</li>
+</ul>
+</li>
+<li><strong>分布式处理</strong>：多台计算机各自承担同一工作任务的不同部分，使工作效率提高。</li>
+<li><strong>提高可靠性</strong>：这是分布式处理的一个优点，如果网络中的一台主机宕机，集群中还有其他机器可以顶替其工作。</li>
+<li><strong>负载均衡</strong>：这也是分布式处理的优点，可以让任务量分到多台计算机上。</li>
+</ul>
+
+</details>
+<h2 id="饭后消遣互联网的历史"><a class="markdownIt-Anchor" href="#饭后消遣互联网的历史"></a> 饭后消遣：互联网的历史</h2>
+<p>美苏冷战时期，为防止苏联针对性的破坏主机，美国国防部想出了将主机分散到各地并使用链路链接起来共享数据的办法。在这种情况下，即使苏联炸毁了一台主机，其他主机也保存有重要的军事资料，这个系统被成为“<strong>阿帕网</strong>”（ARPAnet）。随着各地<strong>网络</strong>（net）逐渐出现，美国国防部最后接受了TCP/IP协议，将这些网络互连，<strong>互联网</strong>（internet）初具规模。在这个阶段：<br>
+网络把许多计算机连接在一起，而互联网则把许多网络连接在一起，<strong>因特网</strong>（Internet）是世界上最大的互联网。</p>
+<ul>
+<li>网络：若干节点（如终端、交换机）、以及连接这些节点的链路</li>
+<li>互联网：若干网络通过<strong>路由器</strong>连接在一起</li>
+</ul>
+<p>1985年，美国简历了国家科学基金网，设计了计算机网络的三级结构。在美国的大部分学校以及研究所，如果用户想要连接到互连线，首先需要登录校园网或企业网，随后连接到地区网，再连接到主干网。</p>
+<img src="https://img12.360buyimg.com/ddimg/jfs/t1/90758/30/45069/22193/65f18c00F2cf091db/df76dd09e5179bf5.jpg" alt="三级结构" title="三级结构">
+<p>再后来，随着互联网规模的壮大，美国将网络服务移交给了一些网络服务提供商（ISP）。ISP是一个向广大用户综合提供互联网接入业务、信息业务和增值业务的公司，分为主干ISP、地区ISP和本地ISP。我国有名的提供商有中国移动、中国联通、中国电信等。<br>
+而我们平常交的“网费”，其实就是给各ISP的服务费，以通过ISP申请到可以上网的IP地址。</p>
+<img src="https://img11.360buyimg.com/ddimg/jfs/t1/232181/22/15139/41646/65f18f47F69746809/e3ba03fb71a25846.jpg" alt="多层次ISP结构" title="多层次ISP结构">
+<p>在多层次ISP结构中，有一个因特网交换点（IXP）的概念。IXP通过直接相连两个网络，允许用户AB通信时跳过图中的主干ISP。</p>
+<p>这基本就是今天互联网的模型。互联网依然是若干网络通过<strong>路由器</strong>连接在一起组成的。</p>
+<h1 id="组成及分类"><a class="markdownIt-Anchor" href="#组成及分类"></a> 组成及分类</h1>
+<h2 id="计算机网络的组成"><a class="markdownIt-Anchor" href="#计算机网络的组成"></a> 计算机网络的组成</h2>
+<p>计算机网络是由 <mark class="label warning">硬件</mark>、<mark class="label warning">软件</mark> 和 <mark class="label warning">协议</mark> 三大要素按照一系列规则和约定组成的集合。</p>
+<details class="note warning"><summary><p>硬件、软件和协议</p>
+</summary>
+<ul>
+<li><strong>硬件</strong><br>
+各类端系统（终端）、路由器、交换机等；</li>
+<li><strong>软件</strong><br>
+附加在端系统上、或中间设备上的计算机程序；</li>
+<li><strong>协议</strong><br>
+软件通过协议传输数据，协议规定了数据在计算机网络中流通的规则。</li>
+</ul>
+
+</details>
+<p>而从<strong>工作方式</strong>上，可以把计算机网络分为<mark class="label warning">边缘部分</mark> 和 <mark class="label warning">核心部分</mark>。</p>
+<details class="note warning"><summary><p>边缘部分和核心部分</p>
+</summary>
+<ul>
+<li>
+<p><strong>边缘部分</strong><br>
+由各类端系统组成，包括计算机、摄像头、服务器等需要使用网络的终端，位于计算机网络系统的边缘。边缘系统通过以下方式实现通信：</p>
+<ul>
+<li><strong>C/S方式</strong><br>
+C/S 即 <mark class="label info">Client</mark> 与 <mark class="label info">Server</mark>，服务器与客户端，是最古老的一种通信方式。例如：当我们用qq发送消息时，我们的端系统（C）会先将消息发送给腾讯服务器（S），服务器处理完消息后再发送给接收人（C）。<br>
+访问服务的人越多，服务就越慢。</li>
+<li><strong>B/S方式</strong><br>
+B/S 即 <mark class="label info">Broswer</mark> 与 <mark class="label info">Server</mark>。在这个场景中，客户端被换成了浏览器，其他部分与C/S相同。</li>
+<li><strong>P2P</strong><br>
+P2P 即 peer-to-peer ，<mark class="label info">对等连接</mark>。在这个模式中，端系统同时具有客户端与服务器的身份，可以彼此之间收发消息。在P2P网络中，主机的数量越多下载的速度就越快。<br>
+<img src="https://www.researchgate.net/publication/238638509/figure/fig1/AS:392801603866627@1470662608756/Architecture-of-C-S-and-P2P.png" width="500" alt="C/S方式（左）与对等连接（右）" title="C/S方式（左）与对等连接（右）"></li>
+</ul>
+</li>
+<li>
+<p><strong>核心部分</strong><br>
+为边缘部分提供服务，实现端与端之间的通信（即两个端系统之间的<strong>进程之间的通信</strong>）。其中包括路由器、中间设备等。</p>
+</li>
+</ul>
+
+</details>
+<p>从<strong>功能组成</strong>上，可以把计算机网络分为负责<strong>数据通信</strong>的 <mark class="label warning">通信子网</mark> 和负责<strong>资源共享</strong>或<strong>数据处理</strong>的 <mark class="label warning">资源子网</mark> 两部分。</p>
+<details class="note warning"><summary><p>通信子网和资源子网</p>
+</summary>
+<p>在 <mark class="label primary">OSI七层模型</mark> 中，下三层（<strong>网络层</strong>、<strong>数据链路层</strong>、<strong>物理层</strong>）代表了 <u> 通信子网 </u>；上三层（<strong>应用层</strong>、<strong>表示层</strong>、<strong>会话层</strong>）代表了 <u> 资源子网 </u>。</p>
+<blockquote>
+<p><strong>通信子网</strong></p>
+<ul>
+<li>由网络层的<strong>路由器</strong>、数据链路层的<strong>交换机</strong>和<strong>网桥</strong>、物理层的<strong>集线器</strong>和<strong>中继器</strong>组成。</li>
+<li>具有传输、交换、控制和存储的能力，可以实现联网计算机之间数据的通信。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>资源子网</strong></p>
+<ul>
+<li>实现资源共享功能的设备和软件的集合。</li>
+</ul>
+</blockquote>
+
+</details>
+<h2 id="计算机网络的分类"><a class="markdownIt-Anchor" href="#计算机网络的分类"></a> 计算机网络的分类</h2>
+<p>按照<strong>分布范围</strong>，计算机网络可以分成 <mark class="label success">广域网/WAN</mark>、<mark class="label success">城域网/MAN</mark> 、<mark class="label success">局域网/LAN</mark> 和 <mark class="label success">个人区域网/PAN</mark> 四种类型。</p>
+<details class="note warning"><summary><p>按照分布范围分类的四种计算机网络</p>
+</summary>
+<ol>
+<li>广域网<br>
+使用交换技术（通过路由器等设备转发、存储、交换）。<br>
+覆盖范围是几十时到几千公里，是因特网的主要组成部分，允许跨国传输数据。</li>
+<li>城域网<br>
+可以覆盖一个城市的网络。</li>
+<li>局域网<br>
+使用广播技术。<br>
+在地理上范围比较小，比如一个学校、公司。</li>
+<li>个人区域网<br>
+使用无线技术。<br>
+十米左右，基本指的是在个人电子设备（如手机、手环）相互连接。</li>
+</ol>
+
+</details>
+<p>按照<strong>使用者</strong>区分，可以分成 <mark class="label success">公用网</mark> 和 <mark class="label success">专用网</mark> (如军队、政府等)。<br>
+按照<strong>数据交换技术</strong>区分，则可以分成 <mark class="label success">电路交换</mark> 、<mark class="label success">报文交换</mark> 和 <mark class="label success">分组交换</mark> 三种类型。</p>
+<details class="note warning"><summary><p>按照数据交换技术分类的三种计算机网络</p>
+</summary>
+<ol>
+<li>电路交换<br>
+分为三个步骤（参考打电话）：建立连接、通话（期间一直占用连接，即<strong>占线</strong>）、释放连接。</li>
+<li>报文交换<br>
+使用了存储转发的技术，将报文传输给路由器A，再由路由器A根据最优路径原则转发给路由器B，最后转发到目的地。</li>
+<li>分组交换<br>
+与报文交换类似，其实“分组”就是将一整个完整的报文细分成小的“组”。</li>
+</ol>
+
+</details>
+<p>按照<strong>拓扑结构</strong>分类，还可以将网络分成 <mark class="label success">总线型</mark>、<mark class="label success">星型</mark> 、<mark class="label success">环型</mark> 和 <mark class="label success">网状型</mark>（广域网常用的拓扑结构） 等多种类型。在这种分类中，我们将端系统或路由器抽象成一个个<strong>节点</strong>、将通信链路抽象成<strong>线</strong>，二者相结合的结构就是网络的“<strong>拓扑结构</strong>”。</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/NetworkTopologies.svg/1200px-NetworkTopologies.svg.png" width="500" alt="几种不同的网络拓扑结构" title="几种不同的网络拓扑结构">
+<p>最后，按照<strong>传输技术</strong>区分，可以分成 <mark class="label success">广播式网络</mark> 和 <mark class="label success">点对点网络</mark> 。</p>
+<details class="note warning"><summary><p>按照传输技术分类的两种计算机网络</p>
+</summary>
+<ol>
+<li>广播式网络<br>
+共享公共通信信道，应用于局域网（通常使用总线型拓扑结构）。</li>
+<li>点对点网络<br>
+使用<strong>分组存储转发</strong>和<strong>路由选择</strong>机制，应用于广域网（需要众多节点实现这两个功能，因此是网状结构）。</li>
+</ol>
+
+</details>
+<h1 id="标准化工作及相关组织"><a class="markdownIt-Anchor" href="#标准化工作及相关组织"></a> 标准化工作及相关组织</h1>
+<p>在计算机网络领域，标准化非常重要，不同的设备直接能够互相连接的基础就是公用一套相同的标准。标准主要有以下两类：</p>
+<ul>
+<li><strong>法定标准</strong><br>
+由权威机构制定的正式的、合法的标准，例如 <mark class="label primary">OSI七层模型</mark>。</li>
+<li><strong>事实标准</strong><br>
+约定俗成的标准，通常由科技巨头牵头形成，例如 <mark class="label primary">TCP/IP模型</mark>。</li>
+</ul>
+<p>需要注意的是，所有因特网标准都是通过<strong>RFC</strong>（Request for comment）形式记录的。RFC是用来记录互联网规范、协议、过程等的标准文件，基本的互联网通信协议都有在RFC文件内详细说明。RFC中也有一些恶搞文档，比如“鸽联网”，那么RFC要怎么上升为真正的因特网正是标准呢？一般来说，需要经过以下五（四）个阶段：</p>
+<ol>
+<li><strong>因特网草案</strong><br>
+在这个阶段还不是RFC文档，只是一个构思。完成构思后，作者需要将其发送至RFC编辑的邮箱中。</li>
+<li><strong>建议标准</strong><br>
+当RFC编辑审核通过提案后，草案就成为了RFC文档，变成了“建议的标准”。</li>
+<li><strong>请求评论</strong><br>
+这也是为什么该文档被称为“RFC”的原因。在这一阶段，文档被发布到论坛上，世界各地的人都可以对文档提出建议，完善标准。</li>
+<li><strong>草案标准</strong>（该阶段已与2011年取消）<br>
+最终，草案交由<strong>IETF</strong>与<strong>IAB</strong>两个国际组织进行审核。</li>
+<li><strong>因特网标准</strong><br>
+审核通过后，草案成为了新的因特网标准！</li>
+</ol>
+<details class="note warning"><summary><p>与标准化工作相关的组织</p>
+</summary>
+<ol>
+<li><strong>国际标准化组织ISO</strong><br>
+最重要的组织，建立了OSI参考模型、HDLC协议。</li>
+<li><strong>国际电信联盟ITU</strong><br>
+制定了通信规则。</li>
+<li><strong>国际电气电子工程师学会IEEE</strong><br>
+是一个顶级学术机构，提出了IEEE802系列标准、5G标准协议等。</li>
+<li><strong>互联网工程任务组IETF</strong><br>
+负责因特网相关标准的制定，例如前文的RFC草案审批。</li>
+</ol>
+
+</details>
+<h1 id="性能指标"><a class="markdownIt-Anchor" href="#性能指标"></a> 性能指标</h1>
+<h2 id="速率"><a class="markdownIt-Anchor" href="#速率"></a> 速率</h2>
+<p><strong>速率</strong>，或称 <strong><mark class="label danger">数据传输率</mark></strong>、<strong><mark class="label danger">比特率</mark></strong>，是指连接在计算机网络上的 <strong>主机</strong> 在数字信道上传送数据 <strong>位数的速率</strong>。</p>
+<blockquote>
+<p><strong>比特</strong>(bit)<br>
+比特是数据传输的<strong>原子单位</strong>，只有 1 和 0 两种形式，单位为“<strong>位</strong>（b）”。</p>
+</blockquote>
+<p>比特率规定使用“<strong>比特每秒</strong>”（bit/s或bps）为单位，经常和国际单位制词头关联在一起，如“千”Kilo（kbit/s或kbps），“兆”Mega (百万)（Mbit/s或Mbps），“吉”Giga（Gbit/s或Gbps）和“太”Tera（Tbit/s或Tbps）。其中，相邻量级之间相差1000：</p>
+<img src="https://img12.360buyimg.com/ddimg/jfs/t1/244318/38/6081/8670/65f5aae7F2de8152c/7469f6263e4eaec6.jpg" alt="单位换算" title="单位换算">
+<details class="note warning"><summary><p>我怎么记得1MB=1024KB？</p>
+</summary>
+<p>容易产生这个混淆，是因为在<strong>存储容量</strong>领域中TB、GB、MB、KB、B确实是逐级相差1024（也就是2^10）倍的。<br>
+为啥呢？因为此“B”非彼“b”，存储容量中的“B”指的是Byte（字节），一个 Byte 包含了 8 个 bit（比特）。而之后的KB、MB、GB、…都是以“B”作为基础的。<br>
+而在<strong>数据传输速率</strong>上，你有没有发现所有单位的 b 都是<strong>小写</strong>的 b 呢？所以 1Kb 真的就是 1K 个 b ，也就是 1000b 的意思。<br>
+我们需要特别注意大小写的问题。</p>
+<img src="https://img12.360buyimg.com/ddimg/jfs/t1/238136/7/13949/8403/65f5ad5fF17b446c4/eea738fb4fec5eab.jpg" alt="存储容量单位" title="存储容量单位">
+
+</details>
+<h2 id="带宽"><a class="markdownIt-Anchor" href="#带宽"></a> 带宽</h2>
+<p><strong>带宽</strong>，在通信领域指某个<strong>信号</strong>具有的<strong>频带宽度</strong>，即最高频率与最低频率之差，单位是赫兹（Hz）。在计算机网络领域中，<strong>带宽</strong>指的则是网络的通信线路传送数据的能力，通常指单位时间内从网络中的某一点到另一点所能通过的“<strong><mark class="label danger">最高数据率</mark></strong>”，单位和速率一样。<br>
+从另一个角度说，带宽反映了网络设备所支持的<strong>最高速度</strong>。</p>
+<h2 id="吞吐量"><a class="markdownIt-Anchor" href="#吞吐量"></a> 吞吐量</h2>
+<p>吞吐量严格受到带宽和速率的影响。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">复习周期</th>
+<th style="text-align:center">1d</th>
+<th style="text-align:center">2d</th>
+<th style="text-align:center">7d</th>
+<th style="text-align:center">21d</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">/</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<!-- flag of hidden posts -->
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/next/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF/" rel="tag"># 计算机科学技术</a>
+              <a href="/next/tags/%E9%9D%A2%E8%AF%95%E7%9B%B8%E5%85%B3/" rel="tag"># 面试相关</a>
+              <a href="/next/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
+          </div>
+
+        
+
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2023 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">NexT</span>
+  </div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9tdXNlLw==">NexT.Muse</span> 强力驱动
+  </div><div class="footer-custom">
+Website source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG8tbmV4dC9oZXhvLW5leHQuZ2l0aHViLmlv">here</span>
+</div>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0d1aW55LVRpbWU=" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/comments.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/motion.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/schemes/muse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/next-boot.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/pjax.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/third-party/search/local-search.min.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.min.js","integrity":"sha256-TtLOdUA8mstPoO6sGvHIGx2ceXrrX4KgIItO06XOn8A="}}</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/third-party/tags/mermaid.min.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.4.0/wavedrom.min.js","integrity":"sha256-psuqlelzklLSAoqBmPNNdyJw8msJdKgKpUFJZQlJJjo="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.4.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/third-party/tags/wavedrom.min.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha256-UF1fgpAiu3tPJN/uCqEUHNe7pnr+QR0SQDNfgglgtcM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/third-party/math/katex.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Guiny-Time","repo":"Guiny-Time.github.io","client_id":"c814313c5d1b183c9c3e","client_secret":"a4a4fb04b96e4ea4e93304cf819b7b85d8a94f56","admin_user":"Guiny-Time","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"eec843b7c8583bf136525a4178ff09c1"}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/third-party/comments/gitalk.min.js"></script>
+
+</body>
+</html>
