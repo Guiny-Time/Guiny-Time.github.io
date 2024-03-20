@@ -27,6 +27,7 @@
     "hexo-renderer-ejs": "^1.0.0",
     "hexo-renderer-kramed": "^0.1.4",
     "hexo-renderer-markdown-it-katex": "^3.4.4",
+    "hexo-renderer-marked": "^6.2.0",
     "hexo-renderer-pug": "^1.0.0",
     "hexo-renderer-stylus": "^2.0.1",
     "hexo-server": "^2.0.0",
@@ -35,7 +36,9 @@
     "hexo-tag-mmedia": "^1.2.1",
     "hexo-theme-butterfly": "^3.7.8",
     "hexo-theme-landscape": "^0.0.3",
+    "hexo-theme-next": "^8.19.2",
     "hexo-wordcount": "^6.0.1",
+    "highlight.js": "^11.9.0",
     "vue-canvas-effect": "0.0.12"
   }
 }

@@ -15,6 +15,7 @@ menu:
   关于: /cats/ || fab fa-hubspot
   友链: /link/ || fab fa-connectdevelop
   内容||fas fa-list:
+    笔记: /next/ || fas fa-chevron-right
     分类: /categories/ || fas fa-folder-open
     标签: /categories/tags/ || fas fa-tags
     图片: /gallery/ || fas fa-hamburger
