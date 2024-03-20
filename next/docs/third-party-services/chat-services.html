@@ -128,7 +128,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -141,6 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Chatra"><span class="nav-number">1.</span> <span class="nav-text">Chatra</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tidio"><span class="nav-number">2.</span> <span class="nav-text">Tidio</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,13 +220,11 @@
       
       
       <div class="post-body">
-          <h3 id="chatra"><a class="markdownIt-Anchor" href="#chatra"></a> Chatra</h3>
-<p><span class="exturl" data-url="aHR0cHM6Ly9jaGF0cmEuY29t">Chatra<i class="fa fa-external-link-alt"></i></span> is a live chat messenger app for your website.</p>
+          <h3 id="Chatra"><a href="#Chatra" class="headerlink" title="Chatra"></a>Chatra</h3><p><span class="exturl" data-url="aHR0cHM6Ly9jaGF0cmEuY29t">Chatra<i class="fa fa-external-link-alt"></i></span> is a live chat messenger app for your website.</p>
 <div class="tabs" id="chatra"><ul class="nav-tabs"><li class="tab active"><a href="#chatra-1">Enable Chatra →</a></li><li class="tab"><a href="#chatra-2">Activate sidebar button</a></li></ul><div class="tab-content"><div class="tab-pane active" id="chatra-1"><p>Visit <span class="exturl" data-url="aHR0cHM6Ly9hcHAuY2hhdHJhLmlvL3NldHRpbmdzL2dlbmVyYWw=">Dashboard<i class="fa fa-external-link-alt"></i></span> to get your ChatraID.</p>
 <figure class="highlight yml"><figcaption><span>NexT config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Chatra Support</span></span><br><span class="line"><span class="attr">chatra:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">async:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">id:</span> <span class="string">&lt;ChatraID&gt;</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="chatra-2"><p>After Chatra enabled, you can set <code>chat.enable</code> to <code>true</code> in <mark class="label primary">NexT config file</mark>.</p>
 <figure class="highlight yml"><figcaption><span>NexT config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># A button to open designated chat widget in sidebar.</span></span><br><span class="line"><span class="comment"># Firstly, you need enable the chat service you want to activate its sidebar button.</span></span><br><span class="line"><span class="attr">chat:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">icon:</span> <span class="string">fa</span> <span class="string">fa-comment</span></span><br></pre></td></tr></table></figure></div></div></div>
-<h3 id="tidio"><a class="markdownIt-Anchor" href="#tidio"></a> Tidio</h3>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cudGlkaW8uY29tLw==">Tidio<i class="fa fa-external-link-alt"></i></span> is a live chat messenger app for your website.</p>
+<h3 id="Tidio"><a href="#Tidio" class="headerlink" title="Tidio"></a>Tidio</h3><p><span class="exturl" data-url="aHR0cHM6Ly93d3cudGlkaW8uY29tLw==">Tidio<i class="fa fa-external-link-alt"></i></span> is a live chat messenger app for your website.</p>
 <div class="tabs" id="tidio"><ul class="nav-tabs"><li class="tab active"><a href="#tidio-1">Enable Tidio →</a></li><li class="tab"><a href="#tidio-2">Activate sidebar button</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tidio-1"><p>Visit <span class="exturl" data-url="aHR0cHM6Ly93d3cudGlkaW8uY29tL3BhbmVsL2Rhc2hib2FyZA==">Dashboard<i class="fa fa-external-link-alt"></i></span> to get your Public Key.</p>
 <figure class="highlight yml"><figcaption><span>NexT config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Tidio Support</span></span><br><span class="line"><span class="attr">tidio:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">key:</span> <span class="string">&lt;Publick</span> <span class="string">Key&gt;</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tidio-2"><p>After Tidio enabled, you can set <code>chat.enable</code> to <code>true</code> in <mark class="label primary">NexT config file</mark>.</p>
 <figure class="highlight yml"><figcaption><span>NexT config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># A button to open designated chat widget in sidebar.</span></span><br><span class="line"><span class="comment"># Firstly, you need enable the chat service you want to activate its sidebar button.</span></span><br><span class="line"><span class="attr">chat:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">icon:</span> <span class="string">fa</span> <span class="string">fa-comment</span></span><br></pre></td></tr></table></figure></div></div></div>

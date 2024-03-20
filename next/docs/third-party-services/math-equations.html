@@ -128,7 +128,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -141,6 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Settings"><span class="nav-number">1.</span> <span class="nav-text">Settings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Render-Engines"><span class="nav-number">2.</span> <span class="nav-text">Render Engines</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Examples"><span class="nav-number">3.</span> <span class="nav-text">Examples</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Numbering-and-Referring-Equations-in-MathJax"><span class="nav-number">3.1.</span> <span class="nav-text">Numbering and Referring Equations in MathJax</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Simple-Equations"><span class="nav-number">3.2.</span> <span class="nav-text">Simple Equations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multi-line-Equations"><span class="nav-number">3.3.</span> <span class="nav-text">Multi-line Equations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multiple-Aligned-Equations"><span class="nav-number">3.4.</span> <span class="nav-text">Multiple Aligned Equations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Exclude-Equations-from-Numbering"><span class="nav-number">3.5.</span> <span class="nav-text">Exclude Equations from Numbering</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Use-tag-to-Tag-Equations"><span class="nav-number">3.6.</span> <span class="nav-text">Use \tag to Tag Equations</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,8 +220,7 @@
       
       
       <div class="post-body">
-          <h3 id="settings"><a class="markdownIt-Anchor" href="#settings"></a> Settings</h3>
-<figure class="highlight yml"><figcaption><span>NexT config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Math Formulas Render Support</span></span><br><span class="line"><span class="attr">math:</span></span><br><span class="line">  <span class="comment"># Default (false) will load mathjax / katex script on demand.</span></span><br><span class="line">  <span class="comment"># That is it only render those page which has `mathjax: true` in front-matter.</span></span><br><span class="line">  <span class="comment"># If you set it to true, it will load mathjax / katex script EVERY PAGE.</span></span><br><span class="line">  <span class="attr">every_page:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">mathjax:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Available values: none | ams | all</span></span><br><span class="line">    <span class="attr">tags:</span> <span class="string">none</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">katex:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment"># See: https://github.com/KaTeX/KaTeX/tree/master/contrib/copy-tex</span></span><br><span class="line">    <span class="attr">copy_tex:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+          <h3 id="Settings"><a href="#Settings" class="headerlink" title="Settings"></a>Settings</h3><figure class="highlight yml"><figcaption><span>NexT config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Math Formulas Render Support</span></span><br><span class="line"><span class="attr">math:</span></span><br><span class="line">  <span class="comment"># Default (false) will load mathjax / katex script on demand.</span></span><br><span class="line">  <span class="comment"># That is it only render those page which has `mathjax: true` in front-matter.</span></span><br><span class="line">  <span class="comment"># If you set it to true, it will load mathjax / katex script EVERY PAGE.</span></span><br><span class="line">  <span class="attr">every_page:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">mathjax:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Available values: none | ams | all</span></span><br><span class="line">    <span class="attr">tags:</span> <span class="string">none</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">katex:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment"># See: https://github.com/KaTeX/KaTeX/tree/master/contrib/copy-tex</span></span><br><span class="line">    <span class="attr">copy_tex:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 <p>The <code>every_page</code> option controls whether to render Math Equations every page.</p>
 <ul>
 <li><strong><code>false</code></strong> → Equations will be processed on demand. It will only render those posts which have <code>mathjax: true</code> in their front-matter.</li>
@@ -229,27 +229,23 @@
 <details class="note default"><summary><p><strong>Examples with <code>every_page: false</code> option</strong></p>
 </summary>
 <ul>
-<li>
-<p>This post will render the Math Equations</p>
+<li><p>This post will render the Math Equations</p>
   <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Will Render Math</span><br><span class="line"><span class="section">mathjax: true</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>This post will NOT render the Math Equations</p>
+<li><p>This post will NOT render the Math Equations</p>
   <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Not Render Math</span><br><span class="line"><span class="section">mathjax: false</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>This post will NOT render the Math Equations either</p>
+<li><p>This post will NOT render the Math Equations either</p>
   <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line"><span class="section">title: Not Render Math Either</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 
 </details>
 <p>The <code>mathjax</code> and <code>katex</code> options are used to set the rendering engine. Please read the detailed document below.</p>
-<h3 id="render-engines"><a class="markdownIt-Anchor" href="#render-engines"></a> Render Engines</h3>
-<p>For now, NexT provides two rendering engines for displaying Math Equations: <span class="exturl" data-url="aHR0cHM6Ly93d3cubWF0aGpheC5vcmc=">MathJax<i class="fa fa-external-link-alt"></i></span> and <span class="exturl" data-url="aHR0cHM6Ly9rYXRleC5vcmc=">KaTeX<i class="fa fa-external-link-alt"></i></span>.</p>
+<h3 id="Render-Engines"><a href="#Render-Engines" class="headerlink" title="Render Engines"></a>Render Engines</h3><p>For now, NexT provides two rendering engines for displaying Math Equations: <span class="exturl" data-url="aHR0cHM6Ly93d3cubWF0aGpheC5vcmc=">MathJax<i class="fa fa-external-link-alt"></i></span> and <span class="exturl" data-url="aHR0cHM6Ly9rYXRleC5vcmc=">KaTeX<i class="fa fa-external-link-alt"></i></span>.</p>
 <ul>
 <li>MathJax is a JavaScript display engine for mathematics that works in all browsers. It is highly modular on input and output. Use MathML, TeX, and ASCIImath as input and produce HTML+CSS, SVG, or MathML as output.</li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaW50bWF0aC5jb20vY2c1L2thdGV4LW1hdGhqYXgtY29tcGFyaXNvbi5waHA=">KaTeX is a faster<i class="fa fa-external-link-alt"></i></span> math rendering engine compared to MathJax 3. And it could survive without JavaScript. But, for now <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0thVGVYL0thVGVYL3dpa2kvVGhpbmdzLXRoYXQtS2FUZVgtZG9lcy1ub3QtKHlldCktc3VwcG9ydA==">KaTeX supports less features<i class="fa fa-external-link-alt"></i></span> than MathJax. Here is a list of <span class="exturl" data-url="aHR0cHM6Ly9rYXRleC5vcmcvZG9jcy9zdXBwb3J0ZWQuaHRtbA==">TeX functions supported by KaTeX<i class="fa fa-external-link-alt"></i></span>.</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaW50bWF0aC5jb20vY2c1L2thdGV4LW1hdGhqYXgtY29tcGFyaXNvbi5waHA=">KaTeX is a faster<i class="fa fa-external-link-alt"></i></span> math rendering engine compared to MathJax 3. And it could survive without JavaScript. But, for now <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0thVGVYL0thVGVYL3dpa2kvVGhpbmdzLXRoYXQtS2FUZVgtZG9lcy1ub3QtKHlldA==">KaTeX supports less features<i class="fa fa-external-link-alt"></i></span>-support) than MathJax. Here is a list of <span class="exturl" data-url="aHR0cHM6Ly9rYXRleC5vcmcvZG9jcy9zdXBwb3J0ZWQuaHRtbA==">TeX functions supported by KaTeX<i class="fa fa-external-link-alt"></i></span>.</li>
 </ul>
 <p>Firstly, you need to choose a rendering engine and turn on <code>enable</code> for it in <mark class="label primary">NexT config file</mark>. Then you need to install the <strong>corresponding Hexo Renderer</strong> to fully support the display of Math Equations - Only turn on <code>enable</code> <strong>may not let you see the displayed equations correctly</strong>.</p>
 <div class="tabs" id="render-engines"><ul class="nav-tabs"><li class="tab active"><a href="#render-engines-1">MathJax</a></li><li class="tab"><a href="#render-engines-2">KaTeX</a></li></ul><div class="tab-content"><div class="tab-pane active" id="render-engines-1"><p><strong>Renderer Choosing</strong></p>
@@ -261,18 +257,16 @@
 <div class="note warning"><p>If you are using other renderers, such as <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLXJlbmRlcmVyLW1hcmtlZA==">hexo-renderer-marked<i class="fa fa-external-link-alt"></i></span>, you need to be aware of the conflict between LaTeX and Markdown syntax. For example, an underscore (<code>_</code>) may be interpreted as the start of italic text in Markdown, or subscripted mark in TeX. To avoid syntax errors, please use escape characters (<code>\_</code>) instead:</p>
 <figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-$\epsilon_0$</span></span><br><span class="line"><span class="addition">+$\epsilon\_0$</span></span><br><span class="line"><span class="deletion">-\begin&#123;eqnarray*&#125;</span></span><br><span class="line"><span class="addition">+\begin&#123;eqnarray\*&#125;</span></span><br><span class="line"><span class="deletion">-\\</span></span><br><span class="line"><span class="addition">+\\\\</span></span><br></pre></td></tr></table></figure>
 </div>
+
 <p><strong>Installation</strong></p>
 <ol>
-<li>
-<p>Firstly, set <code>mathjax</code> as rendering engine in <mark class="label primary">NexT config file</mark>.</p>
+<li><p>Firstly, set <code>mathjax</code> as rendering engine in <mark class="label primary">NexT config file</mark>.</p>
  <figure class="highlight yml"><figcaption><span>NexT config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">math:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">  <span class="attr">mathjax:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>Then you need to uninstall the original renderer <code>hexo-renderer-marked</code>, and install <code>hexo-renderer-pandoc</code>:</p>
+<li><p>Then you need to uninstall the original renderer <code>hexo-renderer-marked</code>, and install <code>hexo-renderer-pandoc</code>:</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm un hexo-renderer-marked</span><br><span class="line">$ npm i hexo-renderer-pandoc</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pnbS9wYW5kb2M=">pandoc<i class="fa fa-external-link-alt"></i></span> is required for hexo-renderer-pandoc, here’s <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pnbS9wYW5kb2MvYmxvYi9tYXN0ZXIvSU5TVEFMTC5tZA==">how to install pandoc<i class="fa fa-external-link-alt"></i></span>.</p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pnbS9wYW5kb2M=">pandoc<i class="fa fa-external-link-alt"></i></span> is required for hexo-renderer-pandoc, here’s <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pnbS9wYW5kb2MvYmxvYi9tYXN0ZXIvSU5TVEFMTC5tZA==">how to install pandoc<i class="fa fa-external-link-alt"></i></span>.</p>
 </li>
 </ol>
 <p><strong>Plugins</strong></p>
@@ -284,12 +278,10 @@
 </ul>
 <p><strong>Installation</strong></p>
 <ol>
-<li>
-<p>Firstly, set <code>katex</code> as rendering engine in <mark class="label primary">NexT config file</mark>.</p>
+<li><p>Firstly, set <code>katex</code> as rendering engine in <mark class="label primary">NexT config file</mark>.</p>
  <figure class="highlight yml"><figcaption><span>NexT config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">math:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">  <span class="attr">katex:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>Then you need to uninstall the original renderer <code>hexo-renderer-marked</code> and install one of the renderer plugins:</p>
+<li><p>Then you need to uninstall the original renderer <code>hexo-renderer-marked</code> and install one of the renderer plugins:</p>
 </li>
 </ol>
 <div class="tabs" id="katex-renderer"><ul class="nav-tabs"><li class="tab active"><a href="#katex-renderer-1">hexo-renderer-markdown-it-plus</a></li><li class="tab"><a href="#katex-renderer-2">hexo-renderer-markdown-it</a></li></ul><div class="tab-content"><div class="tab-pane active" id="katex-renderer-1"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm un hexo-renderer-marked</span><br><span class="line">$ npm i hexo-renderer-markdown-it-plus</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="katex-renderer-2"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm un hexo-renderer-marked</span><br><span class="line">$ npm i hexo-renderer-markdown-it</span><br></pre></td></tr></table></figure>
@@ -297,18 +289,17 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i markdown-it-katex</span><br></pre></td></tr></table></figure>
 <p>And then in <mark class="label info">Hexo config file</mark> you need to add <code>markdown-it-katex</code> as a plugin for <code>hexo-renderer-markdown-it</code>:</p>
 <figure class="highlight yml"><figcaption><span>Hexo config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config of hexo-renderer-markdown-it</span></span><br><span class="line"><span class="attr">markdown:</span></span><br><span class="line">  <span class="attr">render:</span></span><br><span class="line">    <span class="attr">html:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">xhtmlOut:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">breaks:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">linkify:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">typographer:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">quotes:</span> <span class="string">&#x27;“”‘’&#x27;</span></span><br><span class="line">  <span class="attr">plugins:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">markdown-it-katex</span></span><br></pre></td></tr></table></figure></div></div></div>
+
 <p><strong>Plugins</strong></p>
 <p>Copy-tex extension for KaTeX modifies the copy/paste behavior in any browser supporting the Clipboard API so that, when selecting and copying whole KaTeX-rendered elements, the text content of the resulting clipboard renders KaTeX elements as their LaTeX source surrounded by specified delimiters. More information: <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0thVGVYL0thVGVYL3RyZWUvbWFzdGVyL2NvbnRyaWIvY29weS10ZXg=">Copy-tex extension<i class="fa fa-external-link-alt"></i></span>.</p>
 <figure class="highlight yml"><figcaption><span>NexT config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">math:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">  <span class="attr">katex:</span></span><br><span class="line">    <span class="comment"># See: https://github.com/KaTeX/KaTeX/tree/master/contrib/copy-tex</span></span><br><span class="line">    <span class="attr">copy_tex:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <div class="note danger"><p><strong>Known Issues</strong></p>
 <ol>
 <li>Firstly, please check <span class="exturl" data-url="aHR0cHM6Ly9rYXRleC5vcmcvZG9jcy9pc3N1ZXMuaHRtbA==">Common Issues<i class="fa fa-external-link-alt"></i></span> of KaTeX.</li>
-<li>Displayed Math (i.e. <code>$$...$$</code>) needs to started with new clear line.<br>
-In other words: you must not have any characters (except of whitespaces) <strong>before the opening <code>$$</code> and after the ending <code>$$</code></strong> (<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L3B1bGwvMzIjaXNzdWVjb21tZW50LTM1NzQ4OTUwOQ==">comment #32<i class="fa fa-external-link-alt"></i></span>).</li>
+<li>Displayed Math (i.e. <code>$$...$$</code>) needs to started with new clear line.<br> In other words: you must not have any characters (except of whitespaces) <strong>before the opening <code>$$</code> and after the ending <code>$$</code></strong> (<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L3B1bGwvMzIjaXNzdWVjb21tZW50LTM1NzQ4OTUwOQ==">comment #32<i class="fa fa-external-link-alt"></i></span>).</li>
 <li>Don’t support Unicode (<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L3B1bGwvMzIjaXNzdWVjb21tZW50LTM1NzQ4OTUwOQ==">comment #32<i class="fa fa-external-link-alt"></i></span>).</li>
-<li>Inline Math (…<code>$...$</code>) must not have white spaces <strong>after the opening <code>$</code> and before the ending <code>$</code></strong> (<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L3B1bGwvMzIjaXNzdWVjb21tZW50LTM1NzQ4OTUwOQ==">comment #32<i class="fa fa-external-link-alt"></i></span>).</li>
-<li>If you use math in Heading (i.e. <code>## Heading</code>).<br>
-Then in corresponding TOC item it will show the related LaTeX code 3 times (<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L3B1bGwvMzIjaXNzdWVjb21tZW50LTM1OTAxODY5NA==">comment #32<i class="fa fa-external-link-alt"></i></span>).</li>
+<li>Inline Math (..<code>$...$</code>) must not have white spaces <strong>after the opening <code>$</code> and before the ending <code>$</code></strong> (<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L3B1bGwvMzIjaXNzdWVjb21tZW50LTM1NzQ4OTUwOQ==">comment #32<i class="fa fa-external-link-alt"></i></span>).</li>
+<li>If you use math in Heading (i.e. <code>## Heading</code>).<br> Then in corresponding TOC item it will show the related LaTeX code 3 times (<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L3B1bGwvMzIjaXNzdWVjb21tZW50LTM1OTAxODY5NA==">comment #32<i class="fa fa-external-link-alt"></i></span>).</li>
 <li>If you use math in your post’s title, it will not be rendered (<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L3B1bGwvMzIjaXNzdWVjb21tZW50LTM1OTE0Mjg3OQ==">comment #32<i class="fa fa-external-link-alt"></i></span>).</li>
 </ol>
 </div></div></div></div>
@@ -317,66 +308,48 @@ Then in corresponding TOC item it will show the related LaTeX code 3 times (<spa
 </div>
 <div class="note warning"><p>Except for the required renderer, any other Hexo math plugins are unnecessary and there is no need to manually import any JS or CSS files. If you have installed plugins such as <code>hexo-math</code> or <code>hexo-katex</code>, they may conflict with the built-in rendering engine of NexT.</p>
 </div>
-<h3 id="examples"><a class="markdownIt-Anchor" href="#examples"></a> Examples</h3>
-<div class="note info"><p>The following examples are rendered by <code>mathjax</code> engine.</p>
+<h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h3><div class="note info"><p>The following examples are rendered by <code>mathjax</code> engine.</p>
 </div>
-<h4 id="numbering-and-referring-equations-in-mathjax"><a class="markdownIt-Anchor" href="#numbering-and-referring-equations-in-mathjax"></a> Numbering and Referring Equations in MathJax</h4>
-<p>In NexT v6.3.0, we have added feature to <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1hdGhqYXgub3JnL2VuL2xhdGVzdC9pbnB1dC90ZXgvZXFudW1iZXJzLmh0bWw=">automatic equation numbering<i class="fa fa-external-link-alt"></i></span> with opportunity to make reference to that equations.</p>
+<h4 id="Numbering-and-Referring-Equations-in-MathJax"><a href="#Numbering-and-Referring-Equations-in-MathJax" class="headerlink" title="Numbering and Referring Equations in MathJax"></a>Numbering and Referring Equations in MathJax</h4><p>In NexT v6.3.0, we have added feature to <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1hdGhqYXgub3JnL2VuL2xhdGVzdC9pbnB1dC90ZXgvZXFudW1iZXJzLmh0bWw=">automatic equation numbering<i class="fa fa-external-link-alt"></i></span> with opportunity to make reference to that equations.</p>
 <p>To enable this feature, you need to set <code>mathjax.tags</code> to <code>ams</code> in <mark class="label primary">NexT config file</mark>.</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">math:</span></span><br><span class="line">  <span class="attr">mathjax:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Available values: none | ams | all</span></span><br><span class="line">    <span class="attr">tags:</span> <span class="string">ams</span></span><br></pre></td></tr></table></figure>
 <p>And to make the automatic equation numbering work, you have to wrap your LaTeX equations in <code>equation</code> environment. Using the plain old style (i.e., wrap an equation with two dollar signs in each side) will not work. How to refer to an equation? Just give a <code>\label&#123;&#125;</code> tag and then in your later text, use <code>\ref&#123;&#125;</code> or <code>\eqref&#123;&#125;</code> to refer it. Using <code>\eqref&#123;&#125;</code> is preferred since if you use <code>\ref&#123;&#125;</code>, there are no parentheses around the equation number. Below are some of the common scenarios for equation numbering.</p>
-<h4 id="simple-equations"><a class="markdownIt-Anchor" href="#simple-equations"></a> Simple Equations</h4>
-<p>For simple equations, use the following form to give a tag,</p>
+<h4 id="Simple-Equations"><a href="#Simple-Equations" class="headerlink" title="Simple Equations"></a>Simple Equations</h4><p>For simple equations, use the following form to give a tag,</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span><span class="keyword">\begin</span>&#123;equation&#125; <span class="keyword">\label</span>&#123;eq1&#125;</span><br><span class="line">e=mc<span class="built_in">^</span>2</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;<span class="built_in">$</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
-<p class="katex-block katex-error" title="ParseError: KaTeX parse error: No such environment: equation at position 7: \begin{̲e̲q̲u̲a̲t̲i̲o̲n̲}̲ \label{eq1}
-e=…">\begin{equation} \label{eq1}
+<script type="math/tex; mode=display">\begin{equation} \label{eq1}
 e=mc^2
-\end{equation}</p>
-<p>Then, you can refer to this equation in your text easily by using something like:</p>
+\end{equation}</script><p>Then, you can refer to this equation in your text easily by using something like:</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The famous matter-energy equation <span class="built_in">$</span><span class="keyword">\eqref</span>&#123;eq1&#125;<span class="built_in">$</span> proposed by Einstein...</span><br></pre></td></tr></table></figure>
-<p>The famous matter-energy equation <span class="katex-error" title="ParseError: KaTeX parse error: Undefined control sequence: \eqref at position 1: \̲e̲q̲r̲e̲f̲{eq1}">\eqref{eq1}</span> proposed by Einstein…</p>
-<h4 id="multi-line-equations"><a class="markdownIt-Anchor" href="#multi-line-equations"></a> Multi-line Equations</h4>
-<p>For multi-line equations, inside the <code>equation</code> environment, you can use the <code>aligned</code> environment to split it into multiple lines:</p>
+<p>The famous matter-energy equation $\eqref{eq1}$ proposed by Einstein…</p>
+<h4 id="Multi-line-Equations"><a href="#Multi-line-Equations" class="headerlink" title="Multi-line Equations"></a>Multi-line Equations</h4><p>For multi-line equations, inside the <code>equation</code> environment, you can use the <code>aligned</code> environment to split it into multiple lines:</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span><span class="keyword">\begin</span>&#123;equation&#125; <span class="keyword">\label</span>&#123;eq2&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;aligned&#125;</span><br><span class="line">a <span class="built_in">&amp;</span>= b + c <span class="keyword">\\</span></span><br><span class="line">  <span class="built_in">&amp;</span>= d + e + f + g <span class="keyword">\\</span></span><br><span class="line">  <span class="built_in">&amp;</span>= h + i</span><br><span class="line"><span class="keyword">\end</span>&#123;aligned&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;<span class="built_in">$</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
-<p class="katex-block katex-error" title="ParseError: KaTeX parse error: No such environment: equation at position 7: \begin{̲e̲q̲u̲a̲t̲i̲o̲n̲}̲ \label{eq2}
-\b…">\begin{equation} \label{eq2}
+<script type="math/tex; mode=display">\begin{equation} \label{eq2}
 \begin{aligned}
-a &amp;= b + c \\\\
-  &amp;= d + e + f + g \\\\
-  &amp;= h + i
+a &= b + c \\\\
+  &= d + e + f + g \\\\
+  &= h + i
 \end{aligned}
-\end{equation}</p>
-<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Equation <span class="built_in">$</span><span class="keyword">\eqref</span>&#123;eq2&#125;<span class="built_in">$</span> is a multi-line equation.</span><br></pre></td></tr></table></figure>
-<p>Equation <span class="katex-error" title="ParseError: KaTeX parse error: Undefined control sequence: \eqref at position 1: \̲e̲q̲r̲e̲f̲{eq2}">\eqref{eq2}</span> is a multi-line equation.</p>
-<h4 id="multiple-aligned-equations"><a class="markdownIt-Anchor" href="#multiple-aligned-equations"></a> Multiple Aligned Equations</h4>
-<p>We can use <code>align</code> environment to align multiple equations. Each of these equations will get its own numbers.</p>
+\end{equation}</script><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Equation <span class="built_in">$</span><span class="keyword">\eqref</span>&#123;eq2&#125;<span class="built_in">$</span> is a multi-line equation.</span><br></pre></td></tr></table></figure>
+<p>Equation $\eqref{eq2}$ is a multi-line equation.</p>
+<h4 id="Multiple-Aligned-Equations"><a href="#Multiple-Aligned-Equations" class="headerlink" title="Multiple Aligned Equations"></a>Multiple Aligned Equations</h4><p>We can use <code>align</code> environment to align multiple equations. Each of these equations will get its own numbers.</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span><span class="keyword">\begin</span>&#123;align&#125;</span><br><span class="line">a <span class="built_in">&amp;</span>= b + c <span class="keyword">\label</span>&#123;eq3&#125; <span class="keyword">\\</span></span><br><span class="line">x <span class="built_in">&amp;</span>= yz <span class="keyword">\label</span>&#123;eq4&#125; <span class="keyword">\\</span></span><br><span class="line">l <span class="built_in">&amp;</span>= m - n <span class="keyword">\label</span>&#123;eq5&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;align&#125;<span class="built_in">$</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
-<p class="katex-block katex-error" title="ParseError: KaTeX parse error: No such environment: align at position 7: \begin{̲a̲l̲i̲g̲n̲}̲
-a &amp;= b + c \la…">\begin{align}
-a &amp;= b + c \label{eq3} \\\\
-x &amp;= yz \label{eq4} \\\\
-l &amp;= m - n \label{eq5}
-\end{align}</p>
-<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">There are three aligned equations: equation <span class="built_in">$</span><span class="keyword">\eqref</span>&#123;eq3&#125;<span class="built_in">$</span>, equation <span class="built_in">$</span><span class="keyword">\eqref</span>&#123;eq4&#125;<span class="built_in">$</span> and equation <span class="built_in">$</span><span class="keyword">\eqref</span>&#123;eq5&#125;<span class="built_in">$</span>.</span><br></pre></td></tr></table></figure>
-<p>There are three aligned equations: equation <span class="katex-error" title="ParseError: KaTeX parse error: Undefined control sequence: \eqref at position 1: \̲e̲q̲r̲e̲f̲{eq3}">\eqref{eq3}</span>, equation <span class="katex-error" title="ParseError: KaTeX parse error: Undefined control sequence: \eqref at position 1: \̲e̲q̲r̲e̲f̲{eq4}">\eqref{eq4}</span> and equation <span class="katex-error" title="ParseError: KaTeX parse error: Undefined control sequence: \eqref at position 1: \̲e̲q̲r̲e̲f̲{eq5}">\eqref{eq5}</span>.</p>
+<script type="math/tex; mode=display">\begin{align}
+a &= b + c \label{eq3} \\\\
+x &= yz \label{eq4} \\\\
+l &= m - n \label{eq5}
+\end{align}</script><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">There are three aligned equations: equation <span class="built_in">$</span><span class="keyword">\eqref</span>&#123;eq3&#125;<span class="built_in">$</span>, equation <span class="built_in">$</span><span class="keyword">\eqref</span>&#123;eq4&#125;<span class="built_in">$</span> and equation <span class="built_in">$</span><span class="keyword">\eqref</span>&#123;eq5&#125;<span class="built_in">$</span>.</span><br></pre></td></tr></table></figure>
+<p>There are three aligned equations: equation $\eqref{eq3}$, equation $\eqref{eq4}$ and equation $\eqref{eq5}$.</p>
 <p>Since <code>align</code> in and of itself is a complete equation environment (read <span class="exturl" data-url="aHR0cHM6Ly90ZXguc3RhY2tleGNoYW5nZS5jb20vcXVlc3Rpb25zLzk1NDAyL3doYXQtaXMtdGhlLWRpZmZlcmVuY2UtYmV0d2Vlbi1hbGlnbmVkLWluLWRpc3BsYXllZC1tb2RlLWFuZC1zdGFycmVkLWFsaWdu">here<i class="fa fa-external-link-alt"></i></span> about the difference between <code>aligned</code> and <code>align</code> in LaTeX). You do not need to wrap it with <code>equation</code> environment.</p>
-<h4 id="exclude-equations-from-numbering"><a class="markdownIt-Anchor" href="#exclude-equations-from-numbering"></a> Exclude Equations from Numbering</h4>
-<p>In the <code>align</code> environment, if you do not want to number one or some equations, just use <code>\nonumber</code> right behind these equations. Like the following:</p>
+<h4 id="Exclude-Equations-from-Numbering"><a href="#Exclude-Equations-from-Numbering" class="headerlink" title="Exclude Equations from Numbering"></a>Exclude Equations from Numbering</h4><p>In the <code>align</code> environment, if you do not want to number one or some equations, just use <code>\nonumber</code> right behind these equations. Like the following:</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span><span class="keyword">\begin</span>&#123;align&#125;</span><br><span class="line">-4 + 5x <span class="built_in">&amp;</span>= 2 + y <span class="keyword">\nonumber</span> <span class="keyword">\\</span></span><br><span class="line">w + 2 <span class="built_in">&amp;</span>= -1 + w <span class="keyword">\\</span></span><br><span class="line">ab <span class="built_in">&amp;</span>= cb</span><br><span class="line"><span class="keyword">\end</span>&#123;align&#125;<span class="built_in">$</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
-<p class="katex-block katex-error" title="ParseError: KaTeX parse error: No such environment: align at position 7: \begin{̲a̲l̲i̲g̲n̲}̲
--4 + 5x &amp;= 2 +…">\begin{align}
--4 + 5x &amp;= 2 + y \nonumber \\\\
-w + 2 &amp;= -1 + w \\\\
-ab &amp;= cb
-\end{align}</p>
-<h4 id="use-tag-to-tag-equations"><a class="markdownIt-Anchor" href="#use-tag-to-tag-equations"></a> Use <code>\tag</code> to Tag Equations</h4>
-<p>Sometimes, you want to use more «exotic» style to refer your equation. You can use <code>\tag&#123;&#125;</code> to achieve this. For example:</p>
+<script type="math/tex; mode=display">\begin{align}
+-4 + 5x &= 2 + y \nonumber \\\\
+w + 2 &= -1 + w \\\\
+ab &= cb
+\end{align}</script><h4 id="Use-tag-to-Tag-Equations"><a href="#Use-tag-to-Tag-Equations" class="headerlink" title="Use \tag to Tag Equations"></a>Use <code>\tag</code> to Tag Equations</h4><p>Sometimes, you want to use more «exotic» style to refer your equation. You can use <code>\tag&#123;&#125;</code> to achieve this. For example:</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span>x+1<span class="keyword">\over</span><span class="keyword">\sqrt</span>&#123;1-x<span class="built_in">^</span>2&#125; <span class="keyword">\tag</span>&#123;i&#125;<span class="keyword">\label</span>&#123;eq<span class="built_in">_</span>tag&#125;<span class="built_in">$</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
-<p class="katex-block katex-error" title="ParseError: KaTeX parse error: Undefined control sequence: \label at position 29: …{1-x^2} \tag{i}\̲l̲a̲b̲e̲l̲{eq_tag}
-">x+1\over\sqrt{1-x^2} \tag{i}\label{eq_tag}
-</p>
-<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Equation <span class="built_in">$</span><span class="keyword">\eqref</span>&#123;eq<span class="built_in">_</span>tag&#125;<span class="built_in">$</span> use `<span class="keyword">\tag</span>&#123;&#125;` instead of automatic numbering.</span><br></pre></td></tr></table></figure>
-<p>Equation <span class="katex-error" title="ParseError: KaTeX parse error: Undefined control sequence: \eqref at position 1: \̲e̲q̲r̲e̲f̲{eq_tag}">\eqref{eq_tag}</span> use <code>\tag&#123;&#125;</code> instead of automatic numbering.</p>
+<script type="math/tex; mode=display">x+1\over\sqrt{1-x^2} \tag{i}\label{eq_tag}</script><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Equation <span class="built_in">$</span><span class="keyword">\eqref</span>&#123;eq<span class="built_in">_</span>tag&#125;<span class="built_in">$</span> use `<span class="keyword">\tag</span>&#123;&#125;` instead of automatic numbering.</span><br></pre></td></tr></table></figure>
+<p>Equation $\eqref{eq_tag}$ use <code>\tag&#123;&#125;</code> instead of automatic numbering.</p>
 
       </div>
       

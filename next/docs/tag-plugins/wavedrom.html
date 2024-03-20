@@ -128,7 +128,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -141,6 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Settings"><span class="nav-number">1.</span> <span class="nav-text">Settings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Examples"><span class="nav-number">3.</span> <span class="nav-text">Examples</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,12 +220,9 @@
       
       
       <div class="post-body">
-          <h3 id="settings"><a class="markdownIt-Anchor" href="#settings"></a> Settings</h3>
-<figure class="highlight yml"><figcaption><span>NexT config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># WaveDrom tag</span></span><br><span class="line"><span class="attr">wavedrom:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h3 id="usage"><a class="markdownIt-Anchor" href="#usage"></a> Usage</h3>
-<figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">wavedrom</span> %&#125;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"></span><span class="template-tag">&#123;% <span class="name">endwavedrom</span> %&#125;</span></span><br></pre></td></tr></table></figure>
-<h3 id="examples"><a class="markdownIt-Anchor" href="#examples"></a> Examples</h3>
-<figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">wavedrom</span> %&#125;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">&#123; signal : [</span></span><br><span class="line"><span class="language-xml">  &#123; name: &quot;clk&quot;,  wave: &quot;p......&quot; &#125;,</span></span><br><span class="line"><span class="language-xml">  &#123; name: &quot;bus&quot;,  wave: &quot;x.34.5x&quot;,   data: &quot;head body tail&quot; &#125;,</span></span><br><span class="line"><span class="language-xml">  &#123; name: &quot;wire&quot;, wave: &quot;0.1..0.&quot; &#125;,</span></span><br><span class="line"><span class="language-xml">]&#125;</span></span><br><span class="line"><span class="language-xml"></span><span class="template-tag">&#123;% <span class="name">endwavedrom</span> %&#125;</span></span><br></pre></td></tr></table></figure>
+          <h3 id="Settings"><a href="#Settings" class="headerlink" title="Settings"></a>Settings</h3><figure class="highlight yml"><figcaption><span>NexT config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># WaveDrom tag</span></span><br><span class="line"><span class="attr">wavedrom:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">wavedrom</span> %&#125;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"></span><span class="template-tag">&#123;% <span class="name">endwavedrom</span> %&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h3><figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">wavedrom</span> %&#125;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">&#123; signal : [</span></span><br><span class="line"><span class="language-xml">  &#123; name: &quot;clk&quot;,  wave: &quot;p......&quot; &#125;,</span></span><br><span class="line"><span class="language-xml">  &#123; name: &quot;bus&quot;,  wave: &quot;x.34.5x&quot;,   data: &quot;head body tail&quot; &#125;,</span></span><br><span class="line"><span class="language-xml">  &#123; name: &quot;wire&quot;, wave: &quot;0.1..0.&quot; &#125;,</span></span><br><span class="line"><span class="language-xml">]&#125;</span></span><br><span class="line"><span class="language-xml"></span><span class="template-tag">&#123;% <span class="name">endwavedrom</span> %&#125;</span></span><br></pre></td></tr></table></figure>
 <div class="wavedrom"><script type="WaveDrom">
 { signal : [
   { name: "clk",  wave: "p......" },

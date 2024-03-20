@@ -128,7 +128,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -141,6 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Settings-amp-Their-Default-Values"><span class="nav-number">1.</span> <span class="nav-text">Settings &amp; Their Default Values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Undocumented-Front-matter-Variables"><span class="nav-number">2.</span> <span class="nav-text">Undocumented Front-matter Variables</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -220,15 +221,14 @@
       
       <div class="post-body">
           <blockquote>
-<p>Front-matter is a block of YAML or JSON at the beginning of the file that is used to configure settings for your writings. Front-matter is terminated by three dashes when written in YAML or three semicolons when written in JSON.<br>
-— from <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3MvZnJvbnQtbWF0dGVy">Hexo site<i class="fa fa-external-link-alt"></i></span>.</p>
+<p>Front-matter is a block of YAML or JSON at the beginning of the file that is used to configure settings for your writings. Front-matter is terminated by three dashes when written in YAML or three semicolons when written in JSON.<br>— from <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3MvZnJvbnQtbWF0dGVy">Hexo site<i class="fa fa-external-link-alt"></i></span>.</p>
 </blockquote>
 <p><strong>YAML</strong></p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2013</span><span class="string">/7/13</span> <span class="number">20</span><span class="string">:46:25</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
 <p><strong>JSON</strong></p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Hello World&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;date&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2013/7/13 20:46:25&quot;</span></span><br><span class="line">;;;</span><br></pre></td></tr></table></figure>
 <p>Next extends and provide more variables. It allows users to configure a single page.</p>
-<h3 id="settings-their-default-values"><a class="markdownIt-Anchor" href="#settings-their-default-values"></a> Settings &amp; Their Default Values</h3>
+<h3 id="Settings-amp-Their-Default-Values"><a href="#Settings-amp-Their-Default-Values" class="headerlink" title="Settings &amp; Their Default Values"></a>Settings &amp; Their Default Values</h3><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -313,11 +313,12 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>(1): They have the same structure as the options in <mark class="label primary">NexT config file</mark>.</p>
 <p><strong>Example</strong></p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">toc:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">number:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">max_depth:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">reward_settings:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">comment:</span> <span class="string">Buy</span> <span class="string">me</span> <span class="string">a</span> <span class="string">coffee</span></span><br><span class="line"><span class="attr">quicklink:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">delay:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">timeout:</span> <span class="number">3000</span></span><br><span class="line">  <span class="attr">priority:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h3 id="undocumented-front-matter-variables"><a class="markdownIt-Anchor" href="#undocumented-front-matter-variables"></a> Undocumented Front-matter Variables</h3>
-<p>The following variables are not mentioned in the Hexo documentation, but are required by <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLXRoZW1lLXVuaXQtdGVzdA==">hexo-theme-unit-test<i class="fa fa-external-link-alt"></i></span>.</p>
+<h3 id="Undocumented-Front-matter-Variables"><a href="#Undocumented-Front-matter-Variables" class="headerlink" title="Undocumented Front-matter Variables"></a>Undocumented Front-matter Variables</h3><p>The following variables are not mentioned in the Hexo documentation, but are required by <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLXRoZW1lLXVuaXQtdGVzdA==">hexo-theme-unit-test<i class="fa fa-external-link-alt"></i></span>.</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -339,6 +340,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 
       </div>
       
