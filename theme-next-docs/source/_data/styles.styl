@@ -1,0 +1,60 @@
+// toggle hider title
+.hider_title {
+    cursor: pointer;
+    background: #eeeeee;
+}
+
+// toggle indicators
+.close:before {
+    padding-left: .5em;
+    padding-right: .5em;
+    content: "▼";
+}
+.open:before {
+    padding-left: .5em;
+    padding-right: .5em;
+    content: "▲";
+}
+p code, .hider_title code {
+    color: #c71585;
+    background: #fffafa;
+    margin: 2px;
+}
+.text-center {
+  text-align: center;
+}
+
+.site-author-image {
+  background: white;
+  background-clip: content-box;
+}
+
+.sidebar .sidebar-button {
+  &:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  a {
+    button($orange);
+    border: 1px solid $orange;
+    border-radius: 4px;
+    // To make line-height in button mixin work
+    display: inline-block;
+
+    .fa, .fab, .far, .fas {
+      margin-right: 5px;
+    }
+
+    if (($scheme == 'Pisces') or ($scheme == 'Gemini')) {
+      border: 0;
+      color: $orange;
+      display: block;
+
+      &:hover {
+        background: none;
+        border: 0;
+        color: darken($orange, 20%);
+      }
+    }
+  }
+}

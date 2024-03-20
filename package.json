@@ -18,6 +18,7 @@
     "hexo": "^5.0.0",
     "hexo-asset-image": "github:xcodebuild/hexo-asset-image",
     "hexo-butterfly-tag-plugins-plus": "^1.0.17",
+    "hexo-cli": "^4.3.1",
     "hexo-deployer-git": "^3.0.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
