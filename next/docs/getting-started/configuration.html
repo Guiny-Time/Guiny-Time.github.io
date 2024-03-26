@@ -141,7 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#config-next-yml"><span class="nav-number">1.</span> <span class="nav-text">_config.next.yml</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Usage"><span class="nav-number">1.1.</span> <span class="nav-text">Usage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#theme-config"><span class="nav-number">2.</span> <span class="nav-text">theme_config</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Usage-1"><span class="nav-number">2.1.</span> <span class="nav-text">Usage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next-yml-Deprecated"><span class="nav-number">3.</span> <span class="nav-text">next.yml (Deprecated)</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#_confignextyml"><span class="nav-number">1.</span> <span class="nav-text"> _config.next.yml</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#usage"><span class="nav-number">1.1.</span> <span class="nav-text"> Usage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#theme_config"><span class="nav-number">2.</span> <span class="nav-text"> theme_config</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#usage-2"><span class="nav-number">2.1.</span> <span class="nav-text"> Usage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nextyml-deprecated"><span class="nav-number">3.</span> <span class="nav-text"> next.yml (Deprecated)</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -223,21 +223,31 @@
           <p>How to configure NexT theme? The traditional approach is to edit default theme config file (<code>themes/next/_config.yml</code> or <code>node_modules/hexo-theme-next/_config.yml</code>) directly. However, the config file will be overwritten when upgrade NexT theme via git or npm, which brings inconvenience to the configuration of the theme.</p>
 <p>At present, NexT encourages users to use the Alternate Theme Config. It’s a feature of Hexo and the documentation is here: <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3MvY29uZmlndXJhdGlvbi5odG1sI1VzaW5nLWFuLUFsdGVybmF0ZS1Db25maWc=">Hexo Configuration<i class="fa fa-external-link-alt"></i></span>.</p>
 <p>This tutorial shows you how to configure NexT using Alternate Theme Config. Please choose only one of the following solutions and resume next steps.</p>
-<h3 id="config-next-yml"><a href="#config-next-yml" class="headerlink" title="_config.next.yml"></a><code>_config.next.yml</code></h3><p>With this way, all your theme configurations locate in config file <code>/_config.[name].yml</code>. Replace <code>[name]</code> with the value of <code>theme</code> option in <mark class="label info">Hexo config file</mark>. For NexT theme, the file name is <code>_config.next.yml</code> by default.</p>
-<h4 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h4><ol>
-<li>Please ensure you are using Hexo 5.0 or later.</li>
-<li>Create the <mark class="label primary">NexT config file</mark> named <code>_config.next.yml</code> in <mark class="label info">site root directory</mark>.</li>
-<li><p>Copy needed NexT theme options from default theme config file into this config file. If it is the first time to install NexT, then copy the whole default theme config file by the following command:</p>
+<h3 id="_confignextyml"><a class="markdownIt-Anchor" href="#_confignextyml"></a> <code>_config.next.yml</code></h3>
+<p>With this way, all your theme configurations locate in config file <code>/_config.[name].yml</code>. Replace <code>[name]</code> with the value of <code>theme</code> option in <mark class="label info">Hexo config file</mark>. For NexT theme, the file name is <code>_config.next.yml</code> by default.</p>
+<h4 id="usage"><a class="markdownIt-Anchor" href="#usage"></a> Usage</h4>
+<ol>
+<li>
+<p>Please ensure you are using Hexo 5.0 or later.</p>
+</li>
+<li>
+<p>Create the <mark class="label primary">NexT config file</mark> named <code>_config.next.yml</code> in <mark class="label info">site root directory</mark>.</p>
+</li>
+<li>
+<p>Copy needed NexT theme options from default theme config file into this config file. If it is the first time to install NexT, then copy the whole default theme config file by the following command:</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Installed through npm</span></span><br><span class="line"><span class="built_in">cp</span> node_modules/hexo-theme-next/_config.yml _config.next.yml</span><br><span class="line"><span class="comment"># Installed through Git</span></span><br><span class="line"><span class="built_in">cp</span> themes/next/_config.yml _config.next.yml</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h3 id="theme-config"><a href="#theme-config" class="headerlink" title="theme_config"></a><code>theme_config</code></h3><p>With this way, all your Hexo and NexT configurations locate in main <mark class="label info">Hexo config file</mark>. You don’t need to edit default theme config file or create any new files. But you need to <strong><a href="/docs/troubleshooting.html#Keep-Up-Indentation">keep up indentation</a></strong> within <code>theme_config</code> option.</p>
-<h4 id="Usage-1"><a href="#Usage-1" class="headerlink" title="Usage"></a>Usage</h4><p>Copy needed NexT theme options from default theme config file into <mark class="label info">Hexo config file</mark>, then</p>
+<h3 id="theme_config"><a class="markdownIt-Anchor" href="#theme_config"></a> <code>theme_config</code></h3>
+<p>With this way, all your Hexo and NexT configurations locate in main <mark class="label info">Hexo config file</mark>. You don’t need to edit default theme config file or create any new files. But you need to <strong><a href="/docs/troubleshooting.html#Keep-Up-Indentation">keep up indentation</a></strong> within <code>theme_config</code> option.</p>
+<h4 id="usage-2"><a class="markdownIt-Anchor" href="#usage-2"></a> Usage</h4>
+<p>Copy needed NexT theme options from default theme config file into <mark class="label info">Hexo config file</mark>, then</p>
 <ol>
 <li>Move all these settings to the right with two spaces indentation (in Visual Studio Code: select all strings, <kbd>CTRL</kbd> + <kbd>]</kbd>).</li>
 <li>Add <code>theme_config:</code> parameter above all this settings.</li>
 </ol>
-<h3 id="next-yml-Deprecated"><a href="#next-yml-Deprecated" class="headerlink" title="next.yml (Deprecated)"></a><code>next.yml</code> (Deprecated)</h3><p>Older versions of NexT theme also provide another configuration method, which is to place the theme configuration in the <code>/source/_data/next.yml</code> file. This method is deprecated, please use <code>_config.next.yml</code> instead. If the <code>/source/_data/next.yml</code> file exists, move it to the Hexo root directory and rename it to <code>_config.next.yml</code>.</p>
+<h3 id="nextyml-deprecated"><a class="markdownIt-Anchor" href="#nextyml-deprecated"></a> <code>next.yml</code> (Deprecated)</h3>
+<p>Older versions of NexT theme also provide another configuration method, which is to place the theme configuration in the <code>/source/_data/next.yml</code> file. This method is deprecated, please use <code>_config.next.yml</code> instead. If the <code>/source/_data/next.yml</code> file exists, move it to the Hexo root directory and rename it to <code>_config.next.yml</code>.</p>
 
       </div>
       
