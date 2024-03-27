@@ -141,7 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Quick-Debug-Instructions"><span class="nav-number">1.</span> <span class="nav-text">Quick Debug Instructions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Keep-Up-Indentation"><span class="nav-number">2.</span> <span class="nav-text">Keep Up Indentation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-skip-render"><span class="nav-number">3.</span> <span class="nav-text">Set skip_render</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dark-Mode-not-Working"><span class="nav-number">4.</span> <span class="nav-text">Dark Mode not Working</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TOC-Issues"><span class="nav-number">5.</span> <span class="nav-text">TOC Issues</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Favicon-Set-but-Doesn%E2%80%99t-Work"><span class="nav-number">6.</span> <span class="nav-text">Favicon Set but Doesn’t Work</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#quick-debug-instructions"><span class="nav-number">1.</span> <span class="nav-text"> Quick Debug Instructions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#keep-up-indentation"><span class="nav-number">2.</span> <span class="nav-text"> Keep Up Indentation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set-skip_render"><span class="nav-number">3.</span> <span class="nav-text"> Set skip_render</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dark-mode-not-working"><span class="nav-number">4.</span> <span class="nav-text"> Dark Mode not Working</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toc-issues"><span class="nav-number">5.</span> <span class="nav-text"> TOC Issues</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#favicon-set-but-doesnt-work"><span class="nav-number">6.</span> <span class="nav-text"> Favicon Set but Doesn’t Work</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -215,7 +215,8 @@
       
       
       <div class="post-body">
-          <h3 id="Quick-Debug-Instructions"><a href="#Quick-Debug-Instructions" class="headerlink" title="Quick Debug Instructions"></a>Quick Debug Instructions</h3><p><strong>Before submitting an Issue on GitHub, you can follow the steps below to debug:</strong></p>
+          <h3 id="quick-debug-instructions"><a class="markdownIt-Anchor" href="#quick-debug-instructions"></a> Quick Debug Instructions</h3>
+<p><strong>Before submitting an Issue on GitHub, you can follow the steps below to debug:</strong></p>
 <p>If you get an error message from Hexo or your browser:</p>
 <ul>
 <li>If the error comes from a Hexo plugin, such as hexo-word-counter, please submit an Issue to its GitHub repository.</li>
@@ -240,22 +241,30 @@
 <li>Which version of Node, Hexo and NexT are you using? You can get the exact version by running <code>node -v</code>, <code>hexo version</code> in your terminal.</li>
 <li>Which packages do you have installed? You can get that list by copying the output from <code>npm ls --depth 0</code> in Hexo root directory.</li>
 </ul>
-<h3 id="Keep-Up-Indentation"><a href="#Keep-Up-Indentation" class="headerlink" title="Keep Up Indentation"></a>Keep Up Indentation</h3><p>When you edit any YAML configs, always need to keep up indents.<br>Currently, in all Hexo and NexT configuration files parameters uses <strong>2 spaces indents</strong> from parent option.</p>
+<h3 id="keep-up-indentation"><a class="markdownIt-Anchor" href="#keep-up-indentation"></a> Keep Up Indentation</h3>
+<p>When you edit any YAML configs, always need to keep up indents.<br>
+Currently, in all Hexo and NexT configuration files parameters uses <strong>2 spaces indents</strong> from parent option.</p>
 <p>If you encounter other yaml errors, you can also check if there is a syntax problem in the configuration file or front-matter.</p>
-<h3 id="Set-skip-render"><a href="#Set-skip-render" class="headerlink" title="Set skip_render"></a>Set <code>skip_render</code></h3><p>If you want to skip rendering for some files, you can set <code>skip_render</code> in the <mark class="label info">Hexo config file</mark>.</p>
+<h3 id="set-skip_render"><a class="markdownIt-Anchor" href="#set-skip_render"></a> Set <code>skip_render</code></h3>
+<p>If you want to skip rendering for some files, you can set <code>skip_render</code> in the <mark class="label info">Hexo config file</mark>.</p>
 <figure class="highlight yml"><figcaption><span>Hexo config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">skip_render:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">robots.txt</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">CNAME</span></span><br></pre></td></tr></table></figure>
-<h3 id="Dark-Mode-not-Working"><a href="#Dark-Mode-not-Working" class="headerlink" title="Dark Mode not Working"></a>Dark Mode not Working</h3><p>There are 3 prerequisites for Dark Mode to work:</p>
+<h3 id="dark-mode-not-working"><a class="markdownIt-Anchor" href="#dark-mode-not-working"></a> Dark Mode not Working</h3>
+<p>There are 3 prerequisites for Dark Mode to work:</p>
 <ol>
 <li>Enable <code>darkmode</code> in <mark class="label primary">NexT config file</mark>.</li>
 <li>Your browser supports <code>prefers-color-scheme</code> media query. (Supported by most browsers released after 2020)</li>
 <li>Enable Dark Mode in your operating system settings.</li>
 </ol>
 <p>In some operating systems, such as macOS, you can configure to enable dark mode at night. In other operating systems, the default color scheme is light, so you need to turn on Dark Mode in the system settings manually.</p>
-<h3 id="TOC-Issues"><a href="#TOC-Issues" class="headerlink" title="TOC Issues"></a>TOC Issues</h3><p>Do not write a skip-level heading in the post. For example, a third-tier heading <code>###</code> followed by a <code>#####</code> is not recommended.<br>See: <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L2lzc3Vlcy84ODI=">https://github.com/theme-next/hexo-theme-next/issues/882<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="toc-issues"><a class="markdownIt-Anchor" href="#toc-issues"></a> TOC Issues</h3>
+<p>Do not write a skip-level heading in the post. For example, a third-tier heading <code>###</code> followed by a <code>#####</code> is not recommended.<br>
+See: <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L2lzc3Vlcy84ODI=">https://github.com/theme-next/hexo-theme-next/issues/882<i class="fa fa-external-link-alt"></i></span></p>
 <p>If you are using <code>hexo-renderer-markdown-it</code>, it’s recommended to install <code>markdown-it-named-headings</code> to make the TOC work correctly.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install markdown-it-named-headings</span><br></pre></td></tr></table></figure>
-<p>See: <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L2lzc3Vlcy8xMTY4">https://github.com/theme-next/hexo-theme-next/issues/1168<i class="fa fa-external-link-alt"></i></span><br>Here is the <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLXJlbmRlcmVyLW1hcmtkb3duLWl0L3B1bGwvOTA=">Pull Request with bugfix for default config<i class="fa fa-external-link-alt"></i></span> of <code>hexo-renderer-markdown-it</code> plugin.</p>
-<h3 id="Favicon-Set-but-Doesn’t-Work"><a href="#Favicon-Set-but-Doesn’t-Work" class="headerlink" title="Favicon Set but Doesn’t Work"></a>Favicon Set but Doesn’t Work</h3><p>Put your <code>favicon</code> under <mark class="label info">site's</mark> <code>source</code> dir. If you find that your Favicon doesn’t work, please clean your browser’s cache first and then visit your Favicon’s URL directly, which should be <code>http(s)://your-domain.com/favicon.ico</code>.</p>
+<p>See: <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L2lzc3Vlcy8xMTY4">https://github.com/theme-next/hexo-theme-next/issues/1168<i class="fa fa-external-link-alt"></i></span><br>
+Here is the <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLXJlbmRlcmVyLW1hcmtkb3duLWl0L3B1bGwvOTA=">Pull Request with bugfix for default config<i class="fa fa-external-link-alt"></i></span> of <code>hexo-renderer-markdown-it</code> plugin.</p>
+<h3 id="favicon-set-but-doesnt-work"><a class="markdownIt-Anchor" href="#favicon-set-but-doesnt-work"></a> Favicon Set but Doesn’t Work</h3>
+<p>Put your <code>favicon</code> under <mark class="label info">site's</mark> <code>source</code> dir. If you find that your Favicon doesn’t work, please clean your browser’s cache first and then visit your Favicon’s URL directly, which should be <code>http(s)://your-domain.com/favicon.ico</code>.</p>
 <div class="note warning"><p>If your site is in a subdirectory please set it to <code>favicon: favicon.ico</code>.</p>
 </div>
 

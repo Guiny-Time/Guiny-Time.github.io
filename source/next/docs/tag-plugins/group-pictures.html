@@ -152,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage"><span class="nav-number">1.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Examples"><span class="nav-number">2.</span> <span class="nav-text">Examples</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#usage"><span class="nav-number">1.</span> <span class="nav-text"> Usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#examples"><span class="nav-number">2.</span> <span class="nav-text"> Examples</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -231,21 +231,27 @@
       
       
       <div class="post-body">
-          <h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">grouppicture</span> [number]-[layout] %&#125;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"></span><span class="template-tag">&#123;% <span class="name">endgrouppicture</span> %&#125;</span></span><br></pre></td></tr></table></figure>
+          <h3 id="usage"><a class="markdownIt-Anchor" href="#usage"></a> Usage</h3>
+<figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">grouppicture</span> [number]-[layout] %&#125;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"></span><span class="template-tag">&#123;% <span class="name">endgrouppicture</span> %&#125;</span></span><br></pre></td></tr></table></figure>
 <p>or</p>
 <figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">gp</span> [number]-[layout] %&#125;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"></span><span class="template-tag">&#123;% <span class="name">endgp</span> %&#125;</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>[number]</code> : <em>Optional parameter.</em> Total number of pictures to add in the group pictures.</li>
-<li><p><code>[layout]</code> : <em>Optional parameter.</em> The index of the layout, which can be obtained according to the figure below. For example, if you want to apply the second layout to 4 pictures, then use</p>
+<li>
+<p><code>[number]</code> : <em>Optional parameter.</em> Total number of pictures to add in the group pictures.</p>
+</li>
+<li>
+<p><code>[layout]</code> : <em>Optional parameter.</em> The index of the layout, which can be obtained according to the figure below. For example, if you want to apply the second layout to 4 pictures, then use</p>
   <figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">grouppicture</span> 4-2 %&#125;</span><span class="template-tag">&#123;% <span class="name">endgrouppicture</span> %&#125;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><img src="/images/group-picture-1.png" alt="Group Picture Layout"><br><img src="/images/group-picture-2.png" alt="Group Picture Layout"></p>
+<p><img src="/images/group-picture-1.png" alt="Group Picture Layout"><br>
+<img src="/images/group-picture-2.png" alt="Group Picture Layout"></p>
 <div class="note info"><p>It’s recommended to use Group Pictures with <a href="/docs/third-party-services/external-libraries.html#Fancybox">Fancybox</a> enabled.</p>
 </div>
 <div class="note warning"><p>Please use absolute paths for <code>&lt;img&gt;</code> inside group pictures. See <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvaGV4by10aGVtZS1uZXh0L2lzc3Vlcy82MzkjaXNzdWVjb21tZW50LTE1MTQzOTA0MzM=">this issue<i class="fa fa-external-link-alt"></i></span> for details.</p>
 </div>
-<h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h3><figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">grouppicture</span> 3-3 %&#125;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">![](/images/next.svg)</span></span><br><span class="line"><span class="language-xml">![](/images/next.svg)</span></span><br><span class="line"><span class="language-xml">![](/images/next.svg)</span></span><br><span class="line"><span class="language-xml"></span><span class="template-tag">&#123;% <span class="name">endgrouppicture</span> %&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="examples"><a class="markdownIt-Anchor" href="#examples"></a> Examples</h3>
+<figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">grouppicture</span> 3-3 %&#125;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">![](/images/next.svg)</span></span><br><span class="line"><span class="language-xml">![](/images/next.svg)</span></span><br><span class="line"><span class="language-xml">![](/images/next.svg)</span></span><br><span class="line"><span class="language-xml"></span><span class="template-tag">&#123;% <span class="name">endgrouppicture</span> %&#125;</span></span><br></pre></td></tr></table></figure>
 <div class="group-picture"><div class="group-picture-row"><div class="group-picture-column"><img src="/images/next.svg" alt></div><div class="group-picture-column"><img src="/images/next.svg" alt></div><div class="group-picture-column"><img src="/images/next.svg" alt></div></div></div>
 <figure class="highlight jinja"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">gp</span> 5-2 %&#125;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">![](/images/next.svg)</span></span><br><span class="line"><span class="language-xml">![](/images/next.svg)</span></span><br><span class="line"><span class="language-xml">![](/images/next.svg)</span></span><br><span class="line"><span class="language-xml">![](/images/next.svg)</span></span><br><span class="line"><span class="language-xml">![](/images/next.svg)</span></span><br><span class="line"><span class="language-xml"></span><span class="template-tag">&#123;% <span class="name">endgp</span> %&#125;</span></span><br></pre></td></tr></table></figure>
 <div class="group-picture"><div class="group-picture-row"><div class="group-picture-column"><img src="/images/next.svg" alt></div><div class="group-picture-column"><img src="/images/next.svg" alt></div></div><div class="group-picture-row"><div class="group-picture-column"><img src="/images/next.svg" alt></div></div><div class="group-picture-row"><div class="group-picture-column"><img src="/images/next.svg" alt></div><div class="group-picture-column"><img src="/images/next.svg" alt></div></div></div>

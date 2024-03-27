@@ -116,7 +116,7 @@ mobile_layout_economy: true
 
 codeblock:
   theme:
-    light: default
+    light: github
     dark: stackoverflow-dark
   copy_button:
     enable: true

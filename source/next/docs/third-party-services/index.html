@@ -141,7 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Adding-Plugins"><span class="nav-number">1.</span> <span class="nav-text">Adding Plugins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Math-Equations"><span class="nav-number">2.</span> <span class="nav-text">Math Equations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comment-Systems"><span class="nav-number">3.</span> <span class="nav-text">Comment Systems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Statistics-and-Analytics"><span class="nav-number">4.</span> <span class="nav-text">Statistics and Analytics</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Analytics"><span class="nav-number">4.1.</span> <span class="nav-text">Analytics</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Statistics"><span class="nav-number">4.2.</span> <span class="nav-text">Statistics</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Post-Widgets"><span class="nav-number">5.</span> <span class="nav-text">Post Widgets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Search-Services"><span class="nav-number">6.</span> <span class="nav-text">Search Services</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chat-Services"><span class="nav-number">7.</span> <span class="nav-text">Chat Services</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#External-Libraries"><span class="nav-number">8.</span> <span class="nav-text">External Libraries</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#adding-plugins"><span class="nav-number">1.</span> <span class="nav-text"> Adding Plugins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#math-equations"><span class="nav-number">2.</span> <span class="nav-text"> Math Equations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#comment-systems"><span class="nav-number">3.</span> <span class="nav-text"> Comment Systems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#statistics-and-analytics"><span class="nav-number">4.</span> <span class="nav-text"> Statistics and Analytics</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#analytics"><span class="nav-number">4.1.</span> <span class="nav-text"> Analytics</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#statistics"><span class="nav-number">4.2.</span> <span class="nav-text"> Statistics</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-widgets"><span class="nav-number">5.</span> <span class="nav-text"> Post Widgets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#search-services"><span class="nav-number">6.</span> <span class="nav-text"> Search Services</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chat-services"><span class="nav-number">7.</span> <span class="nav-text"> Chat Services</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#external-libraries"><span class="nav-number">8.</span> <span class="nav-text"> External Libraries</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,16 +219,20 @@
       
       
       <div class="post-body">
-          <p>Static website is limited in some functions, so we need third-party services to extend our site.<br>In any time you can extend needed functions by using third-party services supported by NexT.</p>
-<h3 id="Adding-Plugins"><a href="#Adding-Plugins" class="headerlink" title="Adding Plugins"></a>Adding Plugins</h3><p>Plugins extend and expand the functionality of NexT. There are two types of libraries: internal scripts and third-party plugins. The internal scripts are loaded from your site by default, they are required by the basic functions of NexT. Third-party plugins provide a large number of optional features. They are loaded from jsDelivr CDN by default, because it is fast in everywhere.</p>
+          <p>Static website is limited in some functions, so we need third-party services to extend our site.<br>
+In any time you can extend needed functions by using third-party services supported by NexT.</p>
+<h3 id="adding-plugins"><a class="markdownIt-Anchor" href="#adding-plugins"></a> Adding Plugins</h3>
+<p>Plugins extend and expand the functionality of NexT. There are two types of libraries: internal scripts and third-party plugins. The internal scripts are loaded from your site by default, they are required by the basic functions of NexT. Third-party plugins provide a large number of optional features. They are loaded from jsDelivr CDN by default, because it is fast in everywhere.</p>
 <p>Configuring these plugins is very easy. For example, if you want to use <code>pjax</code> in your site, just set <code>pjax</code> to <code>true</code> in <mark class="label primary">NexT config file</mark>:</p>
 <figure class="highlight yml"><figcaption><span>NexT config file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Easily enable fast Ajax navigation on your website.</span></span><br><span class="line"><span class="comment"># For more information: https://github.com/next-theme/pjax</span></span><br><span class="line"><span class="attr">pjax:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <p>If you want to specify the CDN provider for any plugins, you need to set / update the CDN URL. See <a href="/docs/advanced-settings/vendors.html">Advanced Settings</a> for more information.</p>
 <p>Detailed documentation about these plugins is listed below.</p>
-<h3 id="Math-Equations"><a href="#Math-Equations" class="headerlink" title="Math Equations"></a>Math Equations</h3><ul>
+<h3 id="math-equations"><a class="markdownIt-Anchor" href="#math-equations"></a> Math Equations</h3>
+<ul>
 <li><a href="/docs/third-party-services/math-equations.html">Math Equations</a></li>
 </ul>
-<h3 id="Comment-Systems"><a href="#Comment-Systems" class="headerlink" title="Comment Systems"></a>Comment Systems</h3><ul>
+<h3 id="comment-systems"><a class="markdownIt-Anchor" href="#comment-systems"></a> Comment Systems</h3>
+<ul>
 <li><a href="/docs/third-party-services/comments.html#Overview">Overview</a></li>
 <li><a href="/docs/third-party-services/comments.html#Disqus">Disqus</a></li>
 <li><a href="/docs/third-party-services/comments.html#DisqusJS">DisqusJS</a></li>
@@ -238,7 +242,9 @@
 <li><a href="/docs/third-party-services/comments.html#Utterances">Utterances</a></li>
 <li><a href="/docs/third-party-services/comments.html#Isso">Isso</a></li>
 </ul>
-<h3 id="Statistics-and-Analytics"><a href="#Statistics-and-Analytics" class="headerlink" title="Statistics and Analytics"></a>Statistics and Analytics</h3><h4 id="Analytics"><a href="#Analytics" class="headerlink" title="Analytics"></a>Analytics</h4><ul>
+<h3 id="statistics-and-analytics"><a class="markdownIt-Anchor" href="#statistics-and-analytics"></a> Statistics and Analytics</h3>
+<h4 id="analytics"><a class="markdownIt-Anchor" href="#analytics"></a> Analytics</h4>
+<ul>
 <li><a href="/docs/third-party-services/statistics-and-analytics.html#Google-Analytics">Google Analytics</a></li>
 <li><a href="/docs/third-party-services/statistics-and-analytics.html#Baidu-Analytics-China">Baidu Analytics (China)</a></li>
 <li><a href="/docs/third-party-services/statistics-and-analytics.html#Growingio-Analytics">Growingio Analytics</a></li>
@@ -248,24 +254,29 @@
 <li><a href="/docs/third-party-services/statistics-and-analytics.html#Umami-Analytics">Umami Analytics</a></li>
 <li><a href="/docs/third-party-services/statistics-and-analytics.html#Plausible-Analytics">Plausible Analytics</a></li>
 </ul>
-<h4 id="Statistics"><a href="#Statistics" class="headerlink" title="Statistics"></a>Statistics</h4><ul>
+<h4 id="statistics"><a class="markdownIt-Anchor" href="#statistics"></a> Statistics</h4>
+<ul>
 <li><a href="/docs/third-party-services/statistics-and-analytics.html#LeanCloud-China">LeanCloud (China)</a></li>
 <li><a href="/docs/third-party-services/statistics-and-analytics.html#Firebase">Firebase</a></li>
 <li><a href="/docs/third-party-services/statistics-and-analytics.html#Busuanzi-Counting-China">Busuanzi Counting</a></li>
 </ul>
-<h3 id="Post-Widgets"><a href="#Post-Widgets" class="headerlink" title="Post Widgets"></a>Post Widgets</h3><ul>
+<h3 id="post-widgets"><a class="markdownIt-Anchor" href="#post-widgets"></a> Post Widgets</h3>
+<ul>
 <li><a href="/docs/third-party-services/post-widgets.html#AddToAny">AddToAny</a></li>
 </ul>
-<h3 id="Search-Services"><a href="#Search-Services" class="headerlink" title="Search Services"></a>Search Services</h3><ul>
+<h3 id="search-services"><a class="markdownIt-Anchor" href="#search-services"></a> Search Services</h3>
+<ul>
 <li><a href="/docs/third-party-services/search-services.html#Algolia-Search">Algolia Search</a></li>
 <li><a href="/docs/third-party-services/search-services.html#Local-Search">Local Search</a></li>
 </ul>
-<h3 id="Chat-Services"><a href="#Chat-Services" class="headerlink" title="Chat Services"></a>Chat Services</h3><ul>
+<h3 id="chat-services"><a class="markdownIt-Anchor" href="#chat-services"></a> Chat Services</h3>
+<ul>
 <li><a href="/docs/third-party-services/chat-services.html#Chatra">Chatra</a></li>
 <li><a href="/docs/third-party-services/chat-services.html#Tidio">Tidio</a></li>
 <li><a href="/docs/third-party-services/chat-services.html#Gitter">Gitter</a></li>
 </ul>
-<h3 id="External-Libraries"><a href="#External-Libraries" class="headerlink" title="External Libraries"></a>External Libraries</h3><ul>
+<h3 id="external-libraries"><a class="markdownIt-Anchor" href="#external-libraries"></a> External Libraries</h3>
+<ul>
 <li><a href="/docs/third-party-services/external-libraries.html#PJAX">PJAX</a></li>
 <li><a href="/docs/third-party-services/external-libraries.html#Fancybox">Fancybox</a></li>
 <li><a href="/docs/third-party-services/external-libraries.html#Medium-Zoom">MediumZoom</a></li>
