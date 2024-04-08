@@ -20,16 +20,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"cattyhouse-guiny.xyz","root":"/next/","images":"/next/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":true,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/next/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/config.min.js"></script>
 
-    <meta name="description" content="与二叉树有关的问题，最常用的解决方法是递归。在二叉树相关的递归中，主要有自顶向下和自底向上两种模式。  自顶向下 自顶向下 -&gt; 先操作根节点（状态已知）-&gt; 前序遍历 上层数值将值传递给下层，直到最后一层停止递归  自底向上 自底向上 -&gt; 后操作根节点（状态可能未知）-&gt; 后续遍历 上层数值依赖于下层数值，最后得到两个值（根的左子树的深度和根的右子树的深度）取最大值即">
+    <meta name="description" content="与二叉树有关的问题，最常用的解决方法是递归。在二叉树相关的递归中，主要有 自顶向下 和 自底向上 两种模式。接下来我们将介绍这两种模式，并以计算二叉树的最大深度这道题为例，展示两种思想背后的差异。  自顶向下 在自顶向下类型的递归中，程序先操作根节点（相关状态已知），然后将根节点的状态一路传递下去。这种先检查根节点的思想其实和上一节中介绍的前序遍历思想是相吻合的。 其核心思路是：上层数值将值传递">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二叉树问题的基本思想">
 <meta property="og:url" content="https://cattyhouse-guiny.xyz/next/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%97%AE%E9%A2%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3/index.html">
 <meta property="og:site_name" content="笔记存放处">
-<meta property="og:description" content="与二叉树有关的问题，最常用的解决方法是递归。在二叉树相关的递归中，主要有自顶向下和自底向上两种模式。  自顶向下 自顶向下 -&gt; 先操作根节点（状态已知）-&gt; 前序遍历 上层数值将值传递给下层，直到最后一层停止递归  自底向上 自底向上 -&gt; 后操作根节点（状态可能未知）-&gt; 后续遍历 上层数值依赖于下层数值，最后得到两个值（根的左子树的深度和根的右子树的深度）取最大值即">
+<meta property="og:description" content="与二叉树有关的问题，最常用的解决方法是递归。在二叉树相关的递归中，主要有 自顶向下 和 自底向上 两种模式。接下来我们将介绍这两种模式，并以计算二叉树的最大深度这道题为例，展示两种思想背后的差异。  自顶向下 在自顶向下类型的递归中，程序先操作根节点（相关状态已知），然后将根节点的状态一路传递下去。这种先检查根节点的思想其实和上一节中介绍的前序遍历思想是相吻合的。 其核心思路是：上层数值将值传递">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img12.360buyimg.com/ddimg/jfs/t1/158523/31/43466/201208/6602bb0eF3a49da2f/7e37a5a8755d862f.jpg">
 <meta property="article:published_time" content="2024-03-26T12:07:12.000Z">
-<meta property="article:modified_time" content="2024-03-26T14:09:34.748Z">
+<meta property="article:modified_time" content="2024-03-27T08:14:02.980Z">
 <meta property="article:author" content="Guiny-Time">
 <meta property="article:tag" content="算法与数据结构">
 <meta property="article:tag" content="数据结构">
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B"><span class="nav-number">1.</span> <span class="nav-text"> 自顶向下</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A"><span class="nav-number">2.</span> <span class="nav-text"> 自底向上</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E9%80%92%E5%BD%92%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text"> 如何选择递归模式？</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -262,24 +262,30 @@
     
     
     <div class="post-body" itemprop="articleBody"><img src="https://img12.360buyimg.com/ddimg/jfs/t1/158523/31/43466/201208/6602bb0eF3a49da2f/7e37a5a8755d862f.jpg" width="600" alt="image.png" title="image.png">
-<p>与二叉树有关的问题，最常用的解决方法是<strong>递归</strong>。在二叉树相关的递归中，主要有<strong>自顶向下</strong>和<strong>自底向上</strong>两种模式。</p>
-<h1 id="自顶向下"><a class="markdownIt-Anchor" href="#自顶向下"></a> 自顶向下</h1>
-<p>自顶向下 -&gt; 先操作根节点（状态已知）-&gt; 前序遍历<br>
-上层数值将值传递给下层，直到最后一层停止递归</p>
-<h1 id="自底向上"><a class="markdownIt-Anchor" href="#自底向上"></a> 自底向上</h1>
-<p>自底向上 -&gt; 后操作根节点（状态可能未知）-&gt; 后续遍历<br>
-上层数值依赖于下层数值，最后得到两个值（根的左子树的深度和根的右子树的深度）取最大值即可</p>
+<p>与二叉树有关的问题，最常用的解决方法是<a href="/next/%E9%80%92%E5%BD%92%E6%80%9D%E6%83%B3/">递归</a>。在二叉树相关的递归中，主要有 <strong>自顶向下</strong> 和 <strong>自底向上</strong> 两种模式。接下来我们将介绍这两种模式，并以计算二叉树的最大深度这道题为例，展示两种思想背后的差异。</p>
+<ol>
+<li><strong>自顶向下</strong><br>
+在自顶向下类型的递归中，程序先操作根节点（相关状态已知），然后将根节点的状态一路传递下去。这种先检查根节点的思想其实和上一节中介绍的<strong>前序遍历</strong>思想是相吻合的。<br>
+其核心思路是：上层数值将值传递给下层，直到最后一层停止递归。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxDepthTopDown</span><span class="params">(TreeNode root, <span class="type">int</span> pram)</span>&#123;</span><br><span class="line">    <span class="comment">// 设置递归的终止条件(base case)</span></span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">null</span>)</span><br><span class="line">        <span class="keyword">return</span> pram;</span><br><span class="line">    <span class="comment">// 每往下一层，层数+1</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">leftD</span> <span class="operator">=</span> maxDepthButTopDown(root.left, pram + <span class="number">1</span>);</span><br><span class="line">    <span class="type">int</span> <span class="variable">rightD</span> <span class="operator">=</span> maxDepthButTopDown(root.right, pram + <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 返回左右子树的最大深度</span></span><br><span class="line">    <span class="keyword">return</span> Math.max(leftD, rightD);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>自底向上</strong><br>
+在自底向上类型的递归中，我们首先对所有子节点递归地调用函数，然后根据返回值和根节点本身的值得到答案。这个过程可以看作是<strong>后序遍历</strong>的一种。<br>
+上层数值依赖于下层返回的数值，最后得到两个值（根的左子树的深度和根的右子树的深度）取最大值即可</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxDepthDownTop</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    <span class="comment">// 设置递归的终止条件(base case)，返回底层节点的特殊值</span></span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">null</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 递归左右子树</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">leftD</span> <span class="operator">=</span> maxDepth(root.left);</span><br><span class="line">    <span class="type">int</span> <span class="variable">rightD</span> <span class="operator">=</span> maxDepth(root.right);</span><br><span class="line">    <span class="comment">// 返回当前深度，由于往上走，所以加一</span></span><br><span class="line">    <span class="keyword">return</span> Math.max(leftD, rightD) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="如何选择递归模式"><a class="markdownIt-Anchor" href="#如何选择递归模式"></a> 如何选择递归模式？</h1>
 <p>总的来说，当遇到树问题时，请先思考一下两个问题：</p>
 <ol>
 <li>你能确定一些参数，从该节点自身解决出发寻找答案吗？</li>
 <li>你可以使用这些参数和节点本身的值来决定什么应该是传递给它子节点的参数吗？</li>
 </ol>
-<p>如果答案都是肯定的，那么请尝试使用 “自顶向下” 的递归来解决此问题。</p>
-<p>或者你可以这样思考：</p>
+<p>如果答案都是肯定的，那么请尝试使用 “<strong>自顶向下</strong>” 的递归来解决此问题。或者你可以这样思考：</p>
 <ol>
 <li>对于树中的任意一个节点，如果你知道它子节点的答案，你能计算出该节点的答案吗？</li>
 </ol>
-<p>如果答案是肯定的，那么 “自底向上” 的递归可能是一个不错的解决方法。</p>
+<p>如果答案是肯定的，那么 “<strong>自底向上</strong>” 的递归可能是一个不错的解决方法。</p>
 <!-- flag of hidden posts -->
     </div>
 

@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"cattyhouse-guiny.xyz","root":"/next/","images":"/next/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":true,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/next/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/config.min.js"></script>
 
-    <meta name="description" content="二叉树中的遍历方式有前序遍历、中序遍历、后序遍历和层序遍历。其中前三种基于深度优先搜索(dfs)思想的遍历方式的名称中的“前”、“中”和“后”指的是根节点在遍历时所在的顺序。 二叉搜索树 与 堆  二叉搜索树是一种特殊的二叉树，其特点是对于每一个节点，它左子树的节点必然小于其本身，而右子树的节点则大于其本身。 联想到之前在堆排序中学习到的堆结构，是不是感觉和BST有一点点像？回忆一下堆的定义：">
+    <meta name="description" content="二叉树中的遍历方式有前序遍历、中序遍历、后序遍历和层序遍历。其中前三种基于深度优先搜索(dfs)思想的遍历方式的名称中的“前”、“中”和“后”指的是根节点在遍历时所在的顺序。 当我们知道一颗二叉树的中序遍历结果，我们就能唯一确定一颗二叉树。 二叉搜索树 与 堆  二叉搜索树是一种特殊的二叉树，其特点是对于每一个节点，它左子树的节点必然小于其本身，而右子树的节点则大于其本身。 联想到之前在堆排序中学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二叉树的遍历">
 <meta property="og:url" content="https://cattyhouse-guiny.xyz/next/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/index.html">
 <meta property="og:site_name" content="笔记存放处">
-<meta property="og:description" content="二叉树中的遍历方式有前序遍历、中序遍历、后序遍历和层序遍历。其中前三种基于深度优先搜索(dfs)思想的遍历方式的名称中的“前”、“中”和“后”指的是根节点在遍历时所在的顺序。 二叉搜索树 与 堆  二叉搜索树是一种特殊的二叉树，其特点是对于每一个节点，它左子树的节点必然小于其本身，而右子树的节点则大于其本身。 联想到之前在堆排序中学习到的堆结构，是不是感觉和BST有一点点像？回忆一下堆的定义：">
+<meta property="og:description" content="二叉树中的遍历方式有前序遍历、中序遍历、后序遍历和层序遍历。其中前三种基于深度优先搜索(dfs)思想的遍历方式的名称中的“前”、“中”和“后”指的是根节点在遍历时所在的顺序。 当我们知道一颗二叉树的中序遍历结果，我们就能唯一确定一颗二叉树。 二叉搜索树 与 堆  二叉搜索树是一种特殊的二叉树，其特点是对于每一个节点，它左子树的节点必然小于其本身，而右子树的节点则大于其本身。 联想到之前在堆排序中学">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-24T14:03:14.000Z">
-<meta property="article:modified_time" content="2024-03-26T09:16:08.428Z">
+<meta property="article:modified_time" content="2024-03-27T04:28:29.379Z">
 <meta property="article:author" content="Guiny-Time">
 <meta property="article:tag" content="算法与数据结构">
 <meta property="article:tag" content="数据结构">
@@ -259,7 +259,8 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>二叉树中的遍历方式有<mark class="label warning">前序遍历</mark>、<mark class="label success">中序遍历</mark>、<mark class="label info">后序遍历</mark>和<mark class="label danger">层序遍历</mark>。其中前三种基于<strong>深度优先搜索</strong>(dfs)思想的遍历方式的名称中的“<strong>前</strong>”、“<strong>中</strong>”和“<strong>后</strong>”指的是<strong>根节点</strong>在遍历时所在的顺序。</p>
+    <div class="post-body" itemprop="articleBody"><p>二叉树中的遍历方式有<mark class="label warning">前序遍历</mark>、<mark class="label success">中序遍历</mark>、<mark class="label info">后序遍历</mark>和<mark class="label danger">层序遍历</mark>。其中前三种基于<strong>深度优先搜索</strong>(dfs)思想的遍历方式的名称中的“<strong>前</strong>”、“<strong>中</strong>”和“<strong>后</strong>”指的是<strong>根节点</strong>在遍历时所在的顺序。<br>
+当我们知道一颗二叉树的<strong>中序遍历结果</strong>，我们就能<strong>唯一</strong>确定一颗二叉树。</p>
 <details class="note info"><summary><p><strong>二叉搜索树</strong> 与 <strong>堆</strong></p>
 </summary>
 <p>二叉搜索树是一种特殊的二叉树，其特点是对于每一个节点，它左子树的节点必然小于其本身，而右子树的节点则大于其本身。<br>
