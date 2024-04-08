@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/next/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/next/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/next/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/next/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="5AUIVYTbHIAuz-eQtxSfZbWW5eg9_EVZMSQycIuXrG0">
+
+<link rel="stylesheet" href="/next/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cattyhouse-guiny.xyz","root":"/next/","images":"/next/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":true,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/next/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/config.min.js"></script>
+
+    <meta name="description" content="什么是哈希表?  A hash table is a collection of items which are stored in such a way as to make it easy to find them later. 哈希表是一组数据的集合，该存储方式便于以后查找。  哈希表是根据哈希函数组织数据、通过键（Key）直接访问在存储器存储位置的数据结构，其基本原理如下图所示。哈希表通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="哈希表-设计哈希集合与哈希映射">
+<meta property="og:url" content="https://cattyhouse-guiny.xyz/next/%E5%93%88%E5%B8%8C%E8%A1%A8-%E8%AE%BE%E8%AE%A1%E5%93%88%E5%B8%8C%E9%9B%86%E5%90%88%E4%B8%8E%E5%93%88%E5%B8%8C%E6%98%A0%E5%B0%84/index.html">
+<meta property="og:site_name" content="笔记存放处">
+<meta property="og:description" content="什么是哈希表?  A hash table is a collection of items which are stored in such a way as to make it easy to find them later. 哈希表是一组数据的集合，该存储方式便于以后查找。  哈希表是根据哈希函数组织数据、通过键（Key）直接访问在存储器存储位置的数据结构，其基本原理如下图所示。哈希表通">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg/1200px-Hash_table_3_1_1_0_1_0_0_SP.svg.png">
+<meta property="og:image" content="https://img12.360buyimg.com/ddimg/jfs/t1/88738/20/41877/36929/660fad3eF3bb778a3/3e0ea4da352e81af.jpg">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Hash_table_4_1_1_0_0_1_0_LL.svg/1200px-Hash_table_4_1_1_0_0_1_0_LL.svg.png">
+<meta property="og:image" content="https://img13.360buyimg.com/ddimg/jfs/t1/227668/29/15888/14311/660fafcfF784e42f7/1a989d2060e730a3.jpg">
+<meta property="og:image" content="https://img10.360buyimg.com/ddimg/jfs/t1/196335/4/43418/9925/660fb126Fcb19f08b/e428ed82639dbc5e.jpg">
+<meta property="og:image" content="https://img13.360buyimg.com/ddimg/jfs/t1/134192/34/31926/18013/660fb282F3fce9485/aa7bdc0dcb50a5c2.jpg">
+<meta property="article:published_time" content="2024-03-31T11:46:22.000Z">
+<meta property="article:modified_time" content="2024-04-05T08:39:46.352Z">
+<meta property="article:author" content="Guiny-Time">
+<meta property="article:tag" content="算法与数据结构">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="计算机科学技术">
+<meta property="article:tag" content="面试相关">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg/1200px-Hash_table_3_1_1_0_1_0_0_SP.svg.png">
+
+
+<link rel="canonical" href="https://cattyhouse-guiny.xyz/next/%E5%93%88%E5%B8%8C%E8%A1%A8-%E8%AE%BE%E8%AE%A1%E5%93%88%E5%B8%8C%E9%9B%86%E5%90%88%E4%B8%8E%E5%93%88%E5%B8%8C%E6%98%A0%E5%B0%84/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://cattyhouse-guiny.xyz/next/%E5%93%88%E5%B8%8C%E8%A1%A8-%E8%AE%BE%E8%AE%A1%E5%93%88%E5%B8%8C%E9%9B%86%E5%90%88%E4%B8%8E%E5%93%88%E5%B8%8C%E6%98%A0%E5%B0%84/","path":"哈希表-设计哈希集合与哈希映射/","title":"哈希表-设计哈希集合与哈希映射"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>哈希表-设计哈希集合与哈希映射 | 笔记存放处</title><meta name="robots" content="noindex">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/next/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/next/atom.xml" title="笔记存放处" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/next/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">笔记存放处</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-主站"><a href="https://cattyhouse-guiny.xyz/" rel="section"><i class="fa fa-snowflake fa-fw"></i>主站</a></li><li class="menu-item menu-item-home"><a href="/next/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/next/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">5</span></a></li><li class="menu-item menu-item-categories"><a href="/next/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a></li><li class="menu-item menu-item-archives"><a href="/next/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">2</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text"> 什么是哈希表?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text"> 哈希函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%99%E6%95%B0%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text"> 余数法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E5%B9%B3%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text"> 中间平方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81-%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E"><span class="nav-number">3.</span> <span class="nav-text"> 哈希冲突 &#x2F; 哈希碰撞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%8E%A2%E6%B5%8B%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text"> 线性探测法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E5%9C%B0%E5%9D%80%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text"> 链地址法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B3%E6%96%B9%E6%8E%A2%E6%B5%8B"><span class="nav-number">3.3.</span> <span class="nav-text"> 平方探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E6%95%A3%E5%88%97"><span class="nav-number">3.4.</span> <span class="nav-text"> 双散列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BB%A1%E8%A1%A8%E6%89%A9%E5%AE%B9"><span class="nav-number">3.5.</span> <span class="nav-text"> 满表扩容</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E9%9B%86%E5%90%88"><span class="nav-number">4.</span> <span class="nav-text"> 哈希集合</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Guiny-Time"
+      src="https://img14.360buyimg.com/ddimg/jfs/t1/234616/4/14333/21745/65e033e7Fb50b5c10/c15dbb34cc5a6a24.jpg">
+  <p class="site-author-name" itemprop="name">Guiny-Time</p>
+  <div class="site-description" itemprop="description">计算机基础知识笔记存放处</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/next/archives/">
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/next/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/next/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0d1aW55LVRpbWU=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Guiny-Time"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOmd1aW55dGltZUBnbWFpbC5jb20=" title="E-Mail → mailto:guinytime@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cattyhouse-guiny.xyz/next/%E5%93%88%E5%B8%8C%E8%A1%A8-%E8%AE%BE%E8%AE%A1%E5%93%88%E5%B8%8C%E9%9B%86%E5%90%88%E4%B8%8E%E5%93%88%E5%B8%8C%E6%98%A0%E5%B0%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img14.360buyimg.com/ddimg/jfs/t1/234616/4/14333/21745/65e033e7Fb50b5c10/c15dbb34cc5a6a24.jpg">
+      <meta itemprop="name" content="Guiny-Time">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记存放处">
+      <meta itemprop="description" content="计算机基础知识笔记存放处">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="哈希表-设计哈希集合与哈希映射 | 笔记存放处">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          哈希表-设计哈希集合与哈希映射<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL0d1aW55LVRpbWUvR3VpbnktVGltZS5naXRodWIuaW8vdHJlZS9zb3VyY2Uvc3R1ZHlfbm90ZXMvc291cmNlL19wb3N0cy/lk4jluIzooagt6K6+6K6h5ZOI5biM6ZuG5ZCI5LiO5ZOI5biM5pig5bCELm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-31 19:46:22" itemprop="dateCreated datePublished" datetime="2024-03-31T19:46:22+08:00">2024-03-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/next/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法与数据结构</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="什么是哈希表"><a class="markdownIt-Anchor" href="#什么是哈希表"></a> 什么是哈希表?</h1>
+<blockquote>
+<p>A hash table is a collection of items which are stored in such a way as to make it easy to find them later.<br>
+<strong>哈希表是一组数据的集合，该存储方式便于以后查找。</strong></p>
+</blockquote>
+<p>哈希表是根据哈希函数组织数据、通过键（Key）直接访问在存储器存储位置的数据结构，其基本原理如下图所示。哈希表通过 <strong><mark class="label success">哈希函数</mark></strong> ，将不同的 <strong><mark class="label info">键</mark></strong> 映射到不同的 <strong><mark class="label primary">桶</mark></strong> 里面。</p>
+<ul>
+<li>空间复杂度O(n)</li>
+<li>时间复杂度O(1)
+<ul>
+<li>当存储容器为<strong>链表</strong>时，最坏时间复杂度为O(n)</li>
+<li>当存储容器为<strong>平衡二叉树</strong>时，最坏时间复杂度为O(logn)</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg/1200px-Hash_table_3_1_1_0_1_0_0_SP.svg.png" alt="哈希表原理"></p>
+<ul>
+<li><strong><mark class="label success">哈希函数</mark></strong>：<strong><mark class="label info">键</mark></strong> 输入 <strong><mark class="label success">哈希函数</mark></strong> 后，由函数计算出对应的 <strong><mark class="label danger">哈希值(Hash Value)</mark></strong></li>
+<li><strong><mark class="label info">键</mark></strong>：查找对应元素的索引，是唯一的</li>
+<li><strong><mark class="label primary">桶</mark></strong>：用来存放数据的容器，可以是数组或链表</li>
+<li><strong><mark class="label danger">哈希值</mark></strong>：<strong><mark class="label danger">哈希值</mark></strong> 是通过一个 <strong><mark class="label success">哈希函数</mark></strong> 把难以比较的字符串或者其他类型的数据映射成的一个整数。在使用奇形怪状的键进行查找时，底层逻辑会先将奇形怪状的键转换成哈希值再进行检索</li>
+</ul>
+<p>有两种不同类型的哈希表，分别是 <strong><mark class="label warning">哈希集合(HashSet)</mark></strong> 和 <strong><mark class="label warning">哈希映射(HashMap)</mark></strong>。我们会在接下来的文章中介绍它们。</p>
+<ul>
+<li><strong><mark class="label warning">哈希集合(HashSet)</mark></strong>：<strong>集合</strong>数据结构的实现之一，用于存储<strong>非重复值</strong>，可以用来存储 <strong>键/key</strong>。</li>
+<li><strong><mark class="label warning">哈希映射(HashMap)</mark></strong>：<strong>映射</strong>数据结构的实现之一，用于存储(key, value) <strong>键值对</strong>。</li>
+</ul>
+<h1 id="哈希函数"><a class="markdownIt-Anchor" href="#哈希函数"></a> 哈希函数</h1>
+<p>原始数据经过 <strong><mark class="label success">哈希函数</mark></strong> 的处理后获得 <strong><mark class="label danger">哈希值</mark></strong> ，这是用来在 <strong><mark class="label primary">桶</mark></strong> 中查找元素的索引。一个好的哈希函数应该具有以下三种特点：</p>
+<ul>
+<li>高效性，哈希函数需要简便高效、容易计算</li>
+<li>均匀性，计算结果应该均匀分布，避免产生哈希冲突或空间浪费</li>
+<li>一致性，同一个 <strong><mark class="label info">键</mark></strong> 经过 <strong><mark class="label success">哈希函数</mark></strong> 的处理产生相同的值</li>
+</ul>
+<p>那我们应该如何设置哈希函数呢？从经验的角度，一般有以下几种常见的哈希函数：</p>
+<h2 id="余数法"><a class="markdownIt-Anchor" href="#余数法"></a> 余数法</h2>
+<ol>
+<li>设置数组为 <strong><mark class="label primary">桶</mark></strong> 容器，数组长度可以是待处理数据的大小</li>
+<li><strong><mark class="label danger">哈希值</mark></strong> 即原始数据 x <strong>模</strong>（%） 数组长度的结果。</li>
+</ol>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hash</span> <span class="operator">=</span> x % 数组长度</span><br></pre></td></tr></table></figure>
+<h2 id="中间平方法"><a class="markdownIt-Anchor" href="#中间平方法"></a> 中间平方法</h2>
+<ol>
+<li>拿到需要hash的数，对其平方</li>
+<li>取平方完的数中间的数字再次平方</li>
+<li>重复多次上述操作，直到得到你想要的key。</li>
+</ol>
+<img src="https://img12.360buyimg.com/ddimg/jfs/t1/88738/20/41877/36929/660fad3eF3bb778a3/3e0ea4da352e81af.jpg" width="400" alt="CS211-1.png" title="CS211-1.png">
+<p>这种情况下得的key具有极大的随机性（如果初始输入很大的话）</p>
+<h1 id="哈希冲突-哈希碰撞"><a class="markdownIt-Anchor" href="#哈希冲突-哈希碰撞"></a> 哈希冲突 / 哈希碰撞</h1>
+<p>Hash Collision，这种灾难性的事件发生在当两个数据的 <strong><mark class="label info">键</mark></strong> 经过 <strong><mark class="label success">哈希函数</mark></strong> 处理后得到了相同的 <strong><mark class="label danger">哈希值</mark></strong>，如下图中的John Smith和Sandra Dee：</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Hash_table_4_1_1_0_0_1_0_LL.svg/1200px-Hash_table_4_1_1_0_0_1_0_LL.svg.png">
+<p>实际上，最简单的观察一个hash function是否会发生碰撞的方法就是看这个函数是否是<strong>单调递增/单调递减</strong>的。</p>
+<details class="note info"><summary><p>哈希表的<strong>负荷系数</strong>(Load Factor)</p>
+</summary>
+<p>负荷系数是衡量哈希表的负荷情况的系数，记作<strong>λ</strong><br>
+当哈希表装满时，λ = 1；当哈希表装了一半时，λ = 0.5</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">       已经填入哈希表的元素个数</span><br><span class="line">λ <span class="operator">=</span> ————————————————————————————</span><br><span class="line">             哈希表的大小</span><br></pre></td></tr></table></figure>
+<p>负荷系数越大，哈希表越满，也越可能发生哈希碰撞.</p>
+
+</details>
+<h2 id="线性探测法"><a class="markdownIt-Anchor" href="#线性探测法"></a> 线性探测法</h2>
+<p>我们可以用线性探测法处理哈希碰撞。</p>
+<ul>
+<li>存储哈希冲突的键的<strong>结构是数组</strong></li>
+<li>当遇到碰撞时，检查下一个位置，在原本计算得到的key的基础上 + 1 % 数组大小</li>
+</ul>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(h(key)</span> + <span class="number">1</span>) <span class="meta">%</span> table_size</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果再遇到，那就在<strong>最开始得到的key上</strong> + 2 % 数组大小</li>
+<li>相同思想递归</li>
+</ul>
+<details class="note warning"><summary><p>线性探测难题：删除问题</p>
+</summary>
+<blockquote>
+<p>当在同一个key处存在相同的碰撞，可能会导致连续的一个范围内都是这个key的线性延伸<br>
+此时，当我们删掉了这个线性延伸中间的一部分时，就可能会导致程序认为这个key的延伸已经没有了。请问怎么办呢？</p>
+</blockquote>
+<p>正确做法是使用一个<strong>占位符</strong>（如下图中的“墓碑”）标记该单元格是空的，并且之前被占用过</p>
+<ul>
+<li>查找时，不要停留在墓碑前，继续寻找</li>
+</ul>
+<ul>
+<li>需要小心环绕</li>
+</ul>
+<ul>
+<li>当插入时，请随意替换你遇到的任何墓碑</li>
+</ul>
+<img src="https://img13.360buyimg.com/ddimg/jfs/t1/227668/29/15888/14311/660fafcfF784e42f7/1a989d2060e730a3.jpg" width="300" alt="CS211-3.png" title="CS211-3.png">
+
+</details>
+<details class="note success"><summary><p>线性探测法的优缺点</p>
+</summary>
+<ul>
+<li><strong>优点</strong><br>
+在实践中，线性探测是最快的通用哈希策略之一。
+<ul>
+<li>低内存开销: 只需要一个数组和一个hash函数</li>
+<li>极佳的局部性: 当冲突发生时，我们只搜索数组中相邻的位置</li>
+<li>出色的缓存性能: 这是上述两个因素的结合</li>
+</ul>
+</li>
+<li><strong>缺点</strong>
+<ul>
+<li>线性探测在负载系数很高时表现出严重的性能下降</li>
+<li>碰撞的数量趋向于随着现有碰撞的数量而增长</li>
+</ul>
+</li>
+</ul>
+
+</details>
+<h2 id="链地址法"><a class="markdownIt-Anchor" href="#链地址法"></a> 链地址法</h2>
+<ul>
+<li>存储哈希冲突的键的<strong>结构是链表数组</strong></li>
+<li>当遇到碰撞时，把新的键放到原有的链表后</li>
+<li>如果再遇到，那就把新的键再放到原有的链表后</li>
+<li>相同思想递归</li>
+</ul>
+<img src="https://img10.360buyimg.com/ddimg/jfs/t1/196335/4/43418/9925/660fb126Fcb19f08b/e428ed82639dbc5e.jpg" width="350" alt="CS211-2.png" title="CS211-2.png">
+<h2 id="平方探测"><a class="markdownIt-Anchor" href="#平方探测"></a> 平方探测</h2>
+<ul>
+<li>表的<strong>结构是数组</strong></li>
+<li>当遇到碰撞时，在原本计算得到的 <strong><mark class="label danger">哈希值</mark></strong> 的基础上 + 1<sup>2</sup> % 数组大小</li>
+</ul>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(h(key)</span> + <span class="number">1</span>^<span class="number">2</span>) <span class="meta">%</span> table_size</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果再遇到，那就在<strong>最开始得到的key上</strong>+2<sup>2</sup> % 数组大小</li>
+<li>相同思想递归</li>
+<li><strong>为了保证您的平方探测最终将击中每一个可用点，表大小必须满足质数</strong></li>
+</ul>
+<h2 id="双散列"><a class="markdownIt-Anchor" href="#双散列"></a> 双散列</h2>
+<ul>
+<li>有<strong>两个</strong> <strong><mark class="label success">哈希函数</mark></strong></li>
+<li>表的<strong>结构是数组</strong></li>
+<li>当遇到碰撞时，在原本计算得到的 <strong><mark class="label danger">哈希值</mark></strong> 的基础上 + 1 * h2(value) % 数组大小，也就是用上了第二个函数（h2）来计算新的 <strong><mark class="label danger">哈希值</mark></strong> 。</li>
+<li>如果再遇到，那就在<strong>最开始得到的 <mark class="label danger">哈希值</mark> 上</strong> + 2 * h2(value) % 数组大小</li>
+<li>相同思想递归</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>(key) + <span class="selector-tag">i</span> * <span class="selector-tag">h2</span>(key)</span><br></pre></td></tr></table></figure>
+<details class="note info"><summary><p>几种方法的总结</p>
+</summary>
+<img src="https://img13.360buyimg.com/ddimg/jfs/t1/134192/34/31926/18013/660fb282F3fce9485/aa7bdc0dcb50a5c2.jpg" width="600" alt="CS211-4.png" title="CS211-4.png">
+</details>
+<h2 id="满表扩容"><a class="markdownIt-Anchor" href="#满表扩容"></a> 满表扩容</h2>
+<p>当负荷系数 λ 逐渐接近 1 (或者已经大于 1/2 )，我们就要考虑给哈希表扩容：</p>
+<ul>
+<li>创建更大的表</li>
+<li>扫描当前的表，移植到新的表里（使用新的hash函数）</li>
+</ul>
+<p>扩容将数据重新装进哈希表的时间复杂度为O(n)，因为一共有 n 个元素，每个元素hash的时间复杂度为O(1),每个元素插入的时间复杂度为O(1)，一共是 O(1) * N + O(N)</p>
+<h1 id="哈希集合"><a class="markdownIt-Anchor" href="#哈希集合"></a> 哈希集合</h1>
+<p><strong><mark class="label warning">哈希集合(HashSet)</mark></strong> 是 <strong>集合</strong> 数据结构的实现之一，用于存储 <strong>非重复值</strong>，可以用来存储 <strong>键/key</strong>。哈希集合主要的用途是<strong>检查一个元素是否只出现过一次</strong>，可以用来判断数据结构中是否存在重复元素。<br>
+很多编程语言中都内置了哈希集合的实现方法，例如 Java 中的 HashSet。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明哈希集</span></span><br><span class="line">Set&lt;Integer&gt; hashSet = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line"><span class="comment">// 添加元素</span></span><br><span class="line">hashSet.add(<span class="number">3</span>);</span><br><span class="line">hashSet.add(<span class="number">2</span>);</span><br><span class="line">hashSet.add(<span class="number">2</span>);      <span class="comment">// 无法添加重复元素</span></span><br><span class="line"><span class="comment">// 移除元素</span></span><br><span class="line">hashSet.remove(<span class="number">2</span>);</span><br><span class="line">hashSet.remove(<span class="number">2</span>);   <span class="comment">// 无法重复移除</span></span><br><span class="line"><span class="comment">// 判断是否包含</span></span><br><span class="line">System.out.println(hashSet.contains(<span class="number">2</span>));  <span class="comment">// false</span></span><br><span class="line"><span class="comment">// 哈希集大小</span></span><br><span class="line">System.out.println(hashSet.size());       <span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 迭代器遍历</span></span><br><span class="line"><span class="keyword">for</span>(Integer i : hashSet)&#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 判断哈希集是否为空</span></span><br><span class="line"><span class="keyword">if</span>(!hashSet.isEmpty())</span><br><span class="line">    hashSet.clear();     <span class="comment">// 清空哈希集</span></span><br></pre></td></tr></table></figure>
+<details class="note info"><summary><p>用HashSet检查重复元素</p>
+</summary>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="title function_">findDuplicartes</span><span class="params">(List&lt;T&gt; keys)</span>&#123;</span><br><span class="line">    Set&lt;T&gt; hashSet = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(T key : keys)&#123;</span><br><span class="line">       <span class="keyword">if</span>(hashSet.contains(key))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">            hashSet.add(key);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+<!-- flag of hidden posts -->
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/next/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 算法与数据结构</a>
+              <a href="/next/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/next/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF/" rel="tag"># 计算机科学技术</a>
+              <a href="/next/tags/%E9%9D%A2%E8%AF%95%E7%9B%B8%E5%85%B3/" rel="tag"># 面试相关</a>
+          </div>
+
+        
+
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2023 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">NexT</span>
+  </div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9tdXNlLw==">NexT.Muse</span> 强力驱动
+  </div><div class="footer-custom">
+Website source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG8tbmV4dC9oZXhvLW5leHQuZ2l0aHViLmlv">here</span>
+</div>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0d1aW55LVRpbWU=" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/comments.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/motion.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/schemes/muse.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/next-boot.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/pjax.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/third-party/search/local-search.min.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.min.js","integrity":"sha256-TtLOdUA8mstPoO6sGvHIGx2ceXrrX4KgIItO06XOn8A="}}</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/third-party/tags/mermaid.min.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.4.0/wavedrom.min.js","integrity":"sha256-psuqlelzklLSAoqBmPNNdyJw8msJdKgKpUFJZQlJJjo="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.4.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/third-party/tags/wavedrom.min.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha256-UF1fgpAiu3tPJN/uCqEUHNe7pnr+QR0SQDNfgglgtcM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/third-party/math/katex.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"Guiny-Time","repo":"Guiny-Time.github.io","client_id":"c814313c5d1b183c9c3e","client_secret":"a4a4fb04b96e4ea4e93304cf819b7b85d8a94f56","admin_user":"Guiny-Time","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"6a384e8d8e0a6e5280e4b8afd7053158"}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.19.2/third-party/comments/gitalk.min.js"></script>
+
+</body>
+</html>
