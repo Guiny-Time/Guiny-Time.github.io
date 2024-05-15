@@ -31,8 +31,12 @@
 <meta property="og:image" content="https://img10.360buyimg.com/ddimg/jfs/t1/241758/29/7032/37745/66138988Fc58692d0/ed7675035a8ed2e7.jpg">
 <meta property="og:image" content="https://img13.360buyimg.com/ddimg/jfs/t1/247333/28/7068/25547/661389d1F0206a9f5/f5a7dd3fd2a6fe08.jpg">
 <meta property="og:image" content="https://img11.360buyimg.com/ddimg/jfs/t1/247857/27/7205/4620/66138fa7Fedc84ebd/1d5bd53073f70d35.jpg">
+<meta property="og:image" content="https://static.s123-cdn-static-c.com/uploads/1887341/2000_5c5f54e402598.jpg">
+<meta property="og:image" content="http://localhost:4000/next/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1/image.png">
+<meta property="og:image" content="https://cattyhouse-guiny.xyz/next/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1/image.png">
+<meta property="og:image" content="https://img10.360buyimg.com/ddimg/jfs/t1/197042/17/34273/7230/661d267fF6f1c1ffd/235f3e272b93f526.jpg">
 <meta property="article:published_time" content="2024-04-08T05:43:16.000Z">
-<meta property="article:modified_time" content="2024-04-08T07:06:35.117Z">
+<meta property="article:modified_time" content="2024-05-15T15:54:55.894Z">
 <meta property="article:author" content="Guiny-Time">
 <meta property="article:tag" content="计算机科学技术">
 <meta property="article:tag" content="面试相关">
@@ -428,7 +432,100 @@
 </details>
 <h1 id="传输层"><a class="markdownIt-Anchor" href="#传输层"></a> 传输层</h1>
 <h1 id="网络层"><a class="markdownIt-Anchor" href="#网络层"></a> 网络层</h1>
+<details class="note success"><summary><p><strong>ip地址</strong></p>
+</summary>
+<p>ip 地址是一个数字标签，例如 192.0.2.1 ，用于与使用 ip 协议进行通信的计算机网络连接，IP 地址主要有两个作用：</p>
+<ol>
+<li>网络接口标识.</li>
+<li>地址寻址。</li>
+</ol>
+<p><strong>IPv4</strong> (Internet Protocol version 4) 定义 IP 地址为 32 位二进制数字组成，其中分为四组 8 位二进制数字，每 8 位二进制数字转为十进制，就是常见的 ip 地址的形式。</p>
+
+</details>
+<details class="note success"><summary><p><strong>五类ip地址</strong></p>
+</summary>
+<p><img src="https://static.s123-cdn-static-c.com/uploads/1887341/2000_5c5f54e402598.jpg" alt></p>
+<p>为了便于寻址以及层次化构建网络，每个 ip 地址包括两个标识码，即 <strong>网络id</strong> 和 <strong>主机id</strong>。同一个物理网络上的所有主机都使用同一个网络 id ，每个网络主机有一个唯一的主机 id ，根据网络 id 的不同将网络 ip 分为五类。</p>
+<ul>
+<li>A 类地址<br>
+由 1 字节的网络地址和 3 字节的主机地址组成，一个A类网络内理论上有 $$2^{24}$$ 个 ip 地址，为大型网络设计的。</li>
+</ul>
+<blockquote>
+<p>网络号范围为 <code>0 - 127</code>，其中 0 代表任何地址，127 为回环测试地址。</p>
+</blockquote>
+<ul>
+<li>B 类地址<br>
+由 2 个字节的网络地址和 2 个字节的主机地址组成，网络地址的最高位必须是“10”，地址范围从 128.0.0.0 到191.255.255.255。可用的B类网络有16382个，每个网络能容纳6万多个主机 。</li>
+<li>C类地址<br>
+由 3 字节的网络地址和1字节的主机地址组成，网络地址的最高位必须是“110”。范围从 192.0.0.0 到 223.255.255.255。C类网络可达 $$2^{21}$$（209 万余）个 IP 地址，每个网络能容纳 254 个主机。</li>
+<li>D 类地址<br>
+用于多点广播（Multicast），它标识一组计算机共享同一协议，可以一次性寻址多个接收者。D 类地址的第一个字节以“1110”开始，范围从 224.0.0.0 到 239.255.255.255 。这些地址被保留用于多点广播，不会分配给特定的网络或主机。</li>
+<li>E 类地址<br>
+以“11110”开始，为将来使用保留。</li>
+</ul>
+<blockquote>
+<p>全零(“0.0.0.0”)地址对应于当前主机。全“1”的IP地址(“255.255.255.255”)是当前子网的广播地址。</p>
+</blockquote>
+<p>在 IP 地址 3 种主要类型里，各保留了 3 个区域作为私有地址，其地址范围如下：</p>
+<ol>
+<li>A 类地址：10.0.0.0～10.255.255.255</li>
+<li>B 类地址：172.16.0.0～172.31.255.255</li>
+<li>C 类地址：192.168.0.0～192.168.255.255</li>
+</ol>
+
+</details>
+<details class="note success"><summary><p><strong>NAT v.s. ipv6</strong></p>
+</summary>
+<p>随着互联网的发展 ipv4 提供的 ip 地址不够用了，人们提出了两种解决方案：</p>
+<ul>
+<li>nat(network address translation)网络地址转换协议<br>
+将内网地址转为公网ip的协议，实现多层网络地址转换。</li>
+<li>ipv6<br>
+使用 128 位二进制数字作为 ip 地址。</li>
+</ul>
+<img src="http://localhost:4000/next/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1/image.png" class>
+<img src="https://cattyhouse-guiny.xyz/next/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AB%E8%82%A1/image.png" class>
+
+</details>
+<details class="note primary"><summary><p><strong>ARP协议</strong></p>
+</summary>
+<p>arp(address resolution protocol) 地址解析协议：根据主机的ip 地址获取主机的mac 地址。每个主机都有一个 ARP 高速缓存，里面有本局域网上的各主机和路由器的 IP 地址到 MAC 地址的映射表。</p>
+<p>有两台计算机 A 和 B 在局域网内通过以太网电缆和网络交换机相互连接，中间没有网关或路由器。A 有一个数据包要发送给 B，它确定 B 的 IP 地址，为了发送消息，它还需要 B 的 mac 地址。首先，A 使用缓存的 ARP 表根据 B 的 ip 地址查找 mac 地址，如果找到MAC 地址，就可以发送消息。如果没有，A 就会发送一个局域网广播的 ARP 请求 B 的 MAC的，这个消息被局域网内所有的计算机接受，B 返回一个包含 MAC 和 IP 地址的 ARP 响应消息。作为响应请求的一部分，B 可以将 A 的一个条目插入到它的 ARP 表中，以备将来使用。</p>
+
+</details>
+<details class="note primary"><summary><p><strong>ICMP协议</strong></p>
+</summary>
+<p>icmp(internet control message protocol) 因特网控制报文协议 ，主要是实现 IP 协议中未实现的部分功能，是一种网络层协议。该协议并不传输数据，只传输控制信息来辅助网络层通信。其主要的功能是验证网络是否畅通（确认接收方是否成功接收到 IP 数据包）以及辅助 IP 协议实现可靠传输（若发生 IP 丢包，ICMP 会通知发送方 IP 数据包被丢弃的原因，之后发送方会进行相应的处理。ping 和 traceroute 都是通过 icmp 协议实现的。</p>
+<ul>
+<li>ping<br>
+即因特网包探测器，是一种工作在网络层的服务命令，主要用于测试网络连接质量。</li>
+<li>traceroute<br>
+其主要用来跟踪一个分组从源点耗费最少 TTL到达目的地的路径。</li>
+</ul>
+
+</details>
 <h1 id="数据链路层"><a class="markdownIt-Anchor" href="#数据链路层"></a> 数据链路层</h1>
+<details class="note success"><summary><p><strong>数据链路层主要做什么事情</strong></p>
+</summary>
+<ol>
+<li>
+<p><strong>封装成帧</strong>：将网络层传下来的分组添加首部和尾部，用于标记帧的开始和结束。<br>
+<img src="https://img10.360buyimg.com/ddimg/jfs/t1/197042/17/34273/7230/661d267fF6f1c1ffd/235f3e272b93f526.jpg" alt="image.png" title="image.png"></p>
+</li>
+<li>
+<p><strong>透明传输</strong>：帧使用首部和尾部进行定界，如果帧的数据部分含有和首部尾部相同的内容，那么帧的开始和结束位置就会被错误的判定。需要在数据部分出现首部尾部相同的内容前面插入转义字符。如果数据部分出现转义字符，那么就在转义字符前面再加个转义字符。在接收端进行处理之后可以还原出原始数据。这个过程透明传输的内容是转义字符，用户察觉不到转义字符的存在。</p>
+</li>
+<li>
+<p><strong>差错检测</strong>：数据链路层广泛使用了循环冗余检验（CRC）来检查比特差错。</p>
+</li>
+</ol>
+
+</details>
+<details class="note success"><summary><p><strong>MAC 地址和 IP 地址分别有什么作用</strong></p>
+</summary>
+<p>物理层是 OSI 模型中最低的一层，也是最基本的一层。简单的说，网络的物理层面<strong>确保原始的数据可在各种物理媒体上传输</strong>。</p>
+
+</details>
 <h1 id="物理层"><a class="markdownIt-Anchor" href="#物理层"></a> 物理层</h1>
 <details class="note success"><summary><p><strong>物理层主要做什么事情</strong></p>
 </summary>
