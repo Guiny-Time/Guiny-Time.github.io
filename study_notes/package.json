@@ -27,7 +27,7 @@
   "homepage": "https://theme-next.js.org",
   "dependencies": {
     "hexo": "7.1.1",
-    "hexo-asset-image": "^1.0.0",
+    "hexo-asset-image": "github:xcodebuild/hexo-asset-image",
     "hexo-generator-archive": "2.0.0",
     "hexo-generator-feed": "3.0.0",
     "hexo-generator-index": "3.0.0",
