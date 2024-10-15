@@ -1,0 +1,357 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>用Unity简单实现明日方舟 | 猫窝工作室</title><meta name="author" content="时光"><meta name="copyright" content="时光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言 这次学校工作室的考核任务（是的还是考核）是复刻一款游戏，给出了三个游戏选择（饥荒&#x2F;杀戮尖塔&#x2F;元气骑士）不过我都没有玩过，于是想了想我决定做一个简陋版的明日方舟。之前在b站看到过大佬仅耗时48小时开发出明日方舟的战斗界面，感觉好像也不会很难吧……就去试了！ 但是做了之后才发现其实是很有挑战性的一次任务。先上两张游戏界面的图（p1p2）！   制作思路 场景： 最开始我的想法包括了五个场景：两个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Unity简单实现明日方舟">
+<meta property="og:url" content="http://example.com/2021/04/03/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/index.html">
+<meta property="og:site_name" content="猫窝工作室">
+<meta property="og:description" content="前言 这次学校工作室的考核任务（是的还是考核）是复刻一款游戏，给出了三个游戏选择（饥荒&#x2F;杀戮尖塔&#x2F;元气骑士）不过我都没有玩过，于是想了想我决定做一个简陋版的明日方舟。之前在b站看到过大佬仅耗时48小时开发出明日方舟的战斗界面，感觉好像也不会很难吧……就去试了！ 但是做了之后才发现其实是很有挑战性的一次任务。先上两张游戏界面的图（p1p2）！   制作思路 场景： 最开始我的想法包括了五个场景：两个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/04/03/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/image-3.png">
+<meta property="article:published_time" content="2021-04-03T11:37:33.000Z">
+<meta property="article:modified_time" content="2021-04-03T11:37:33.000Z">
+<meta property="article:author" content="时光">
+<meta property="article:tag" content="游戏编程">
+<meta property="article:tag" content="经验分享">
+<meta property="article:tag" content="项目复盘">
+<meta property="article:tag" content="Unity">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/04/03/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/image-3.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2021/04/03/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 时光","link":"链接: ","source":"来源: 猫窝工作室","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '用Unity简单实现明日方舟',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-04-03 19:37:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><link rel="stylesheet" href="/css/universe.css"><canvas id="universe" ></canvas><link rel="stylesheet" href="/css/fish.css"><!-- hexo injector head_end start --><script> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+
+preloader.initLoading()
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://img14.360buyimg.com/ddimg/jfs/t1/234616/4/14333/21745/65e033e7Fb50b5c10/c15dbb34cc5a6a24.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fab fa-hubspot"></i><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/cats/time/"><i class="fa-fw far fa-hourglass"></i><span> Time</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fab fa-connectdevelop"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 内容</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/next/"><i class="fa-fw fas fa-feather"></i><span> 笔记</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/categories/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-hamburger"></i><span> 图片</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/2021/04/03/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/image-3.png')"><nav id="nav"><span id="blog-info"><a href="/" title="猫窝工作室"><span class="site-name">猫窝工作室</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fab fa-hubspot"></i><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/cats/time/"><i class="fa-fw far fa-hourglass"></i><span> Time</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fab fa-connectdevelop"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 内容</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/next/"><i class="fa-fw fas fa-feather"></i><span> 笔记</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/categories/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-hamburger"></i><span> 图片</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">用Unity简单实现明日方舟<a class="post-edit-link" href="https://github.com/Guiny-Time/Guiny-Time.github.io/edit/source/source/_posts/用Unity简单实现明日方舟.md" title="编辑" target="_blank"><i class="fas fa-pencil-alt"></i></a></h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-04-03T11:37:33.000Z" title="发表于 2021-04-03 19:37:33">2021-04-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-03T11:37:33.000Z" title="更新于 2021-04-03 19:37:33">2021-04-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/">项目复盘</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="用Unity简单实现明日方舟"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言">前言</h1>
+<p>这次学校工作室的考核任务（是的还是考核）是复刻一款游戏，给出了三个游戏选择（饥荒/杀戮尖塔/元气骑士）不过我都没有玩过，于是想了想我决定做一个简陋版的明日方舟。之前在b站看到过大佬仅耗时48小时开发出明日方舟的战斗界面，感觉好像也不会很难吧……就去试了！</p>
+<p>但是做了之后才发现其实是很有挑战性的一次任务。先上两张游戏界面的图（p1p2）！</p>
+<p><img src="/2021/04/03/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/image.png" alt="p1"><br>
+<img src="/2021/04/03/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/image-1.png" alt="p2"></p>
+<h1 id="制作思路">制作思路</h1>
+<h2 id="场景：">场景：</h2>
+<p>最开始我的想法包括了五个场景：两个关卡、选择干员的界面、看板界面和登录起始界面（包括一些本地化的内容，工作量挺大的）。后来由于时间不够了就砍成了登录起始界面和一个关卡。</p>
+<h2 id="干员：2d骨骼-trail-renderer">干员：2D骨骼/Trail Renderer</h2>
+<p>选择什么干员来演示比较合适呢？方舟并没有公开模型，如果要获取对应的gif会比较麻烦，而自己画角色好像也很麻烦。</p>
+<p>纠结了半天我决定画三个自己的原创角色，并使用2D骨骼动画制作了相关的站立、战斗的动画（对2D骨骼感兴趣的同学可以在b站上找Michael老师的系列教程参考学习）</p>
+<p>在干员战斗的时候你会注意到一些秘制特效，这是用Unity自带的组件Trail Renderer做的。这个组件很强大，如果加上一点代码能得到非常酷的效果。</p>
+<h2 id="关卡：2-5d-正交相机-透视相机">关卡：2.5D/正交相机+透视相机</h2>
+<p>关卡界面我是完全按照方舟游戏本体的某一关来搭建的。</p>
+<p>我们知道舟游的地图是3D的，但是干员又是纸片人，这种不同维度的结合势必会带来一些问题。几番考虑我决定在2D场景中创建3D的地图（其实是某种意义上的2.5D），正好Unity默认的Cube长宽为1，完美契合了地图格子的对应位置，能够得到图3的效果：</p>
+<p><img src="/2021/04/03/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/image-2.png" alt></p>
+<p>因为想要得到近大远小的效果，所以渲染地图的相机必须是透视而不是正交的，但是这样会导致我方干员贴图在挪动到地图边缘的位置时出现扭曲的现象。为了解决这个问题，我额外引入了另一个正交像机专门用来渲染干员预制件，这样干员在拖拽实例化之后怎么看都像端端正正站立在地图上的。</p>
+<p>不过这样也会导致另外一个问题，那就是在靠近边缘的地方干员和格子可能无法很好的对应上。我认为是能找到一个数学模型来对应的，但是有点麻烦…</p>
+<p>后来在参考研究48h开发明日方舟的白斗七星大佬的作品时发现他只用了一个摄像机，但是这个摄像机的机位很巧妙，把近小远大的影响压到了最小。</p>
+<h1 id="具体实现">具体实现</h1>
+<p>标题场景比较简单，就是几个UI元素调到还行的布局，在此不多做论述。</p>
+<p><img src="/2021/04/03/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/image-3.png" alt="起始界面ui"></p>
+<p><img src="/2021/04/03/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/image-4.png" alt="代码结构"></p>
+<p>在上一期《用Unity简单实现合成大西瓜》一文中，我在代码结构的处理上非常糟糕，该封装的东西都没封装，导致整个代码结构特别复杂也特别乱。这次在这方面做了一些小小的努力，相对结构也还是能看的吧（笑～）</p>
+<h2 id="敌人相关">敌人相关</h2>
+<p>EnemyWaveController参（zhao）考（ban）了油管上Brackeys老师的教程，EnemyMove则使用了A* 算法。对于网格地图上的移动，除了A* 之外还有好几种其他的寻路算法，感兴趣可以上b站找Joe的视频参考学习。</p>
+<p>为了减小开销（在频繁销毁生成的资源很多的时候，这点非常重要），敌人的生成和死亡使用了对象池。</p>
+<h2 id="player相关">Player相关</h2>
+<p>第一次写接口（IPlayer）竟然是用在玩家的攻击和特殊攻击上。因为考虑到每个我方干员都有这两种攻击形式和一些属性，就整了这么个，后来用起来也还挺方便的。</p>
+<p>PlayerMgr里的玩家列表对“已上场的干员”、“还未上场的干员”、“攻击范围内的干员”都有着至关重要的作用。UI的玩家图像按钮就是依赖于这个列表。</p>
+<p>玩家信息则存放的是该干员的部署费用、名字等元素。</p>
+<h2 id="ui相关">UI相关</h2>
+<p>有很多按钮的OnClick事件和一些与数值有关的事件委托。</p>
+<p>其中最复杂的地方莫过于拖拽实例化+放置玩家+设置朝向。我的思路大概是这样的：</p>
+<p>点击玩家按钮列表，利用eventHandler的drag函数在鼠标的地方实例化出对应干员 à 拖的时候对应的地块颜色变成绿色（调整材质球的颜色） à 松开鼠标，如果在适合的位置就吸附到该格子中心 à 调整朝向，攻击范围也随之改变 à 放置完成</p>
+<p>想法挺简单的，写起来有点复杂…相信有更快更简洁的实现方式</p>
+<h1 id="回顾思考">回顾思考</h1>
+<p>值得改进的地方有许多，比如从代码角度出发，我的代码还不够精简（尤其是拖拽放置的那个模块），还不够OOP（</p>
+<p>此外，从可玩性的角度出发，如果地图和敌人能做到随机生成，那么游戏的可玩性和难度会大大提升的</p>
+<p>最后，感谢阅读到这里的你！如果你对这个项目有什么意见和建议欢迎在评论区和我探讨</p>
+<p>源码已上传GitHub：<a target="_blank" rel="noopener" href="https://github.com/Guiny-Time/Arknights">https://github.com/Guiny-Time/Arknights</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">时光</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/04/03/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/">http://example.com/2021/04/03/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">猫窝工作室</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B/">游戏编程</a><a class="post-meta__tags" href="/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a><a class="post-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/">项目复盘</a><a class="post-meta__tags" href="/tags/Unity/">Unity</a></div><div class="post_share"><div class="social-share" data-image="/2021/04/03/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/image-3.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/10/25/Oculus%20Quest%E7%94%B5%E8%84%91%E7%AB%AF%E6%9C%89%E7%BA%BF%E8%BF%9E%E6%8E%A5%E6%95%99%E7%A8%8B/" title="Oculus Quest电脑端有线连接教程"><img class="cover" src="https://raw.githubusercontent.com/Guiny-Time/PictureBed/main/20211101232023.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Oculus Quest电脑端有线连接教程</div></div></a></div><div class="next-post pull-right"><a href="/2021/01/30/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E5%90%88%E6%88%90%E5%A4%A7%E8%A5%BF%E7%93%9C/" title="用Unity简单实现合成大西瓜"><img class="cover" src="https://storage.googleapis.com/smiletaiwan-cms-cwg-tw/article/202308/article-64d459e0e8418.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">用Unity简单实现合成大西瓜</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/02/01/2024GGJ%F0%9F%8C%8F%20-%20CluckCluck%E5%A4%8D%E7%9B%98%E2%80%94%E2%80%94%E6%96%B0%E8%BE%93%E5%85%A5%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%89%8B%E6%9F%84%E6%8E%A7%E5%88%B6/" title="2024GGJ🌏 - CluckCluck复盘——新输入系统与手柄控制"><img class="cover" src="https://ae01.alicdn.com/kf/S0da7b43026144fa7862df33e82e6d23bw.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-01</div><div class="title">2024GGJ🌏 - CluckCluck复盘——新输入系统与手柄控制</div></div></a></div><div><a href="/2021/01/30/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E5%90%88%E6%88%90%E5%A4%A7%E8%A5%BF%E7%93%9C/" title="用Unity简单实现合成大西瓜"><img class="cover" src="https://storage.googleapis.com/smiletaiwan-cms-cwg-tw/article/202308/article-64d459e0e8418.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-30</div><div class="title">用Unity简单实现合成大西瓜</div></div></a></div><div><a href="/2024/07/19/%E7%8A%B6%E6%80%81%E5%90%8C%E6%AD%A5/" title="网络同步-帧同步&#x2F;状态同步"><img class="cover" src="/2024/07/19/%E7%8A%B6%E6%80%81%E5%90%8C%E6%AD%A5/Clipboard_2024-09-20-17-18-31.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-19</div><div class="title">网络同步-帧同步&#x2F;状态同步</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://img14.360buyimg.com/ddimg/jfs/t1/234616/4/14333/21745/65e033e7Fb50b5c10/c15dbb34cc5a6a24.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">时光</div><div class="author-info__description">Catty House</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Guiny-Time"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Guiny-Time" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:guinytime@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临猫猫窝！有关于本博客的详细信息请见<b>“关于”</b>。<br>本博客的访问方式：<a target="_blank" rel="noopener" href="https://cattyhouse-guiny.xyz/">https://cattyhouse-guiny.xyz/</a> <br><a target="_blank" rel="noopener" href="https://guiny-time.github.io/">https://guiny-time.github.io/</a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E6%80%9D%E8%B7%AF"><span class="toc-number">2.</span> <span class="toc-text">制作思路</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">场景：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B2%E5%91%98%EF%BC%9A2d%E9%AA%A8%E9%AA%BC-trail-renderer"><span class="toc-number">2.2.</span> <span class="toc-text">干员：2D骨骼&#x2F;Trail Renderer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E5%8D%A1%EF%BC%9A2-5d-%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA-%E9%80%8F%E8%A7%86%E7%9B%B8%E6%9C%BA"><span class="toc-number">2.3.</span> <span class="toc-text">关卡：2.5D&#x2F;正交相机+透视相机</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%8C%E4%BA%BA%E7%9B%B8%E5%85%B3"><span class="toc-number">3.1.</span> <span class="toc-text">敌人相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#player%E7%9B%B8%E5%85%B3"><span class="toc-number">3.2.</span> <span class="toc-text">Player相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ui%E7%9B%B8%E5%85%B3"><span class="toc-number">3.3.</span> <span class="toc-text">UI相关</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9E%E9%A1%BE%E6%80%9D%E8%80%83"><span class="toc-number">4.</span> <span class="toc-text">回顾思考</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/2021/04/03/%E7%94%A8Unity%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/image-3.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 时光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">2</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    btf.addModeChange('mermaid', () => {
+      window.runMermaid()
+    })
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: 'c814313c5d1b183c9c3e',
+      clientSecret: 'a4a4fb04b96e4ea4e93304cf819b7b85d8a94f56',
+      repo: 'Guiny-Time.github.io',
+      owner: 'Guiny-Time',
+      admin: ['Guiny-Time'],
+      id: 'af5fd14b1b418f0074c467366aa31970',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.textContent= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script><script defer data-pjax src="https://gcore.jsdelivr.net/gh/xiabo2/CDN@latest/fishes.js"></script><script src="/js/universe.js"></script><div class="aplayer no-destroy" data-id="7263032154" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false" data-lrcType="-1"> </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body></html>
