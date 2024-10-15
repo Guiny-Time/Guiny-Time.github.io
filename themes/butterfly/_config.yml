@@ -13,7 +13,6 @@ menu:
   主页: / || fas fa-home
   归档: /archives/ || fas fa-archive
   关于||fab fa-hubspot:
-    工作室: /cats/ || fas fa-icons
     Time: /cats/time/ || far fa-hourglass
   友链: /link/ || fab fa-connectdevelop
   内容||fas fa-list:
@@ -911,9 +910,9 @@ inject:
     - <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     # 鱼塘
     - <script defer data-pjax src="https://gcore.jsdelivr.net/gh/xiabo2/CDN@latest/fishes.js"></script>
-    - '<script src="/js/snow.js"></script>' # 雪花效果
     - '<script src="/js/universe.js"></script>' # 背景宇宙星光js文件
-    - <div class="aplayer no-destroy" data-id="7263032154" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true" data-lrcType="-1"> </div>
+    - <div class="aplayer no-destroy" data-id="7263032154" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false" data-lrcType="-1"> </div>
+    # - '<script src="/js/snow.js"></script>' # 雪花效果
 
 markdown:
   render:

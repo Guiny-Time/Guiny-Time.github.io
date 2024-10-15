@@ -1,7 +1,6 @@
 ---
 title: Portfolio
 date: 2024-07-25 16:58:59
-tags:
 cover: orion2010_spitzer.jpg
 top: true
 ---
