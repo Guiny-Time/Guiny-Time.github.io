@@ -2,7 +2,7 @@
 tags: [游戏开发/通用]
 title: 游戏AI-状态机与行为树
 date: 2023-05-10
-update: 2023-05-17
+updated: 2023-05-17
 cover: https://cdn.midjourney.com/584b8b41-24d2-4b71-a4bc-78e123c4eec2/0_0.png
 ---
 

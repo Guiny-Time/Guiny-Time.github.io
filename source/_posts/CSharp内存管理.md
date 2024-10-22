@@ -2,7 +2,7 @@
 tags: [游戏开发/通用]
 title: CSHARP内存管理
 date: 2024-09-16
-update: 2024-09-16
+updated: 2024-09-16
 cover: https://imgix.datadoghq.com/img/blog/engineering/dotnet-continuous-profiler-part-4/il-1313-net-profiler-blog-pt4-240520-final.png
 ---
 
