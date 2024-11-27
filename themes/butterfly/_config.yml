@@ -53,7 +53,7 @@ avatar:
 disable_top_img: false
 
 # The banner image of home page
-index_img: https://ae01.alicdn.com/kf/S707ba15c18cd4e328789e2e25439ced1V.jpg
+index_img: /img/head_page.png
 
 # If the banner of page not setting, it will show the top_img
 default_top_img: https://ae01.alicdn.com/kf/S54233858870e4e94b84c9639c1b524edp.jpg
@@ -236,7 +236,7 @@ aside:
       link: https://github.com/Guiny-Time
   card_announcement:
     enable: true
-    content: 欢迎光临猫猫窝！有关于本博客的详细信息请见<b>“关于”</b>。<br>本博客的访问方式：<a href="https://cattyhouse-guiny.xyz/">https://cattyhouse-guiny.xyz/</a> <br><a href="https://guiny-time.github.io/">https://guiny-time.github.io/</a>
+    content: 欢迎光临时光的博客！有关于本博客的详细信息请见<b>“关于”</b>。<br>本博客的访问方式：<a href="https://cattyhouse-guiny.xyz/">https://cattyhouse-guiny.xyz/</a> <br><a href="https://guiny-time.github.io/">https://guiny-time.github.io/</a>
   card_recent_post:
     enable: false
     limit: 4 # if set 0 will show all
@@ -643,7 +643,7 @@ tag_ui: # 留空或 index
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
-background: url(https://img13.360buyimg.com/ddimg/jfs/t1/91797/3/42462/168874/65e033b8F7ae856bb/ada1373307255253.jpg)
+background: url(/img/head_page.png)
 
 # Footer Background
 footer_bg: true
