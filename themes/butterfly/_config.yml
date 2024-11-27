@@ -46,7 +46,7 @@ favicon: /img/favicon.ico
 
 # Avatar (頭像)
 avatar:
-  img: https://img14.360buyimg.com/ddimg/jfs/t1/234616/4/14333/21745/65e033e7Fb50b5c10/c15dbb34cc5a6a24.jpg
+  img: /img/head.jpg
   effect: false
 
 # Disable all banner image
