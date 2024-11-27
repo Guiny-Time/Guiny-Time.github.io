@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ECS设计模式 | 几/何/冰/川</title><meta name="author" content="时光"><meta name="copyright" content="时光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="什么是ECS？为什么我们需要它？在传统游戏开发中，开发者习惯于将每个功能写成一个class，例如玩家控制器（PlayerController）。在这个脚本中不但包含了玩家自身的数据（data，例如速度、血量等），还包含了针对这些数据的处理逻辑（behavior）。 有时作为开发者，我们需要在极短时间完成原型发开来验证玩法的可行性（或者我们只是打了个game jam），一些能够被重复利用的“轮子”">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ECS设计模式 | 几/何/冰/川</title><meta name="author" content="时光"><meta name="copyright" content="时光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="什么是ECS？为什么我们需要它？ 在传统游戏开发中，开发者习惯于将每个功能写成一个class，例如玩家控制器（PlayerController）。在这个脚本中不但包含了玩家自身的数据（data，例如速度、血量等），还包含了针对这些数据的处理逻辑（behavior）。 有时作为开发者，我们需要在极短时间完成原型发开来验证玩法的可行性（或者我们只是打了个game jam），一些能够被重复利用的“轮子">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ECS设计模式">
 <meta property="og:url" content="http://example.com/2024/08/09/ECS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="几&#x2F;何&#x2F;冰&#x2F;川">
-<meta property="og:description" content="什么是ECS？为什么我们需要它？在传统游戏开发中，开发者习惯于将每个功能写成一个class，例如玩家控制器（PlayerController）。在这个脚本中不但包含了玩家自身的数据（data，例如速度、血量等），还包含了针对这些数据的处理逻辑（behavior）。 有时作为开发者，我们需要在极短时间完成原型发开来验证玩法的可行性（或者我们只是打了个game jam），一些能够被重复利用的“轮子”">
+<meta property="og:description" content="什么是ECS？为什么我们需要它？ 在传统游戏开发中，开发者习惯于将每个功能写成一个class，例如玩家控制器（PlayerController）。在这个脚本中不但包含了玩家自身的数据（data，例如速度、血量等），还包含了针对这些数据的处理逻辑（behavior）。 有时作为开发者，我们需要在极短时间完成原型发开来验证玩法的可行性（或者我们只是打了个game jam），一些能够被重复利用的“轮子">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://docs.unity3d.com/Packages/com.unity.entities@0.3/manual/images/WhatIsECSinfographic0000.png">
 <meta property="article:published_time" content="2024-08-08T16:00:00.000Z">
@@ -180,74 +180,121 @@ if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
 }</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://img14.360buyimg.com/ddimg/jfs/t1/234616/4/14333/21745/65e033e7Fb50b5c10/c15dbb34cc5a6a24.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">26</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fab fa-hubspot"></i><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/cats/time/"><i class="fa-fw far fa-hourglass"></i><span> Time</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fab fa-connectdevelop"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 内容</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/next/"><i class="fa-fw fas fa-feather"></i><span> 笔记</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/categories/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-hamburger"></i><span> 图片</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://docs.unity3d.com/Packages/com.unity.entities@0.3/manual/images/WhatIsECSinfographic0000.png')"><nav id="nav"><span id="blog-info"><a href="/" title="几/何/冰/川"><span class="site-name">几/何/冰/川</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fab fa-hubspot"></i><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/cats/time/"><i class="fa-fw far fa-hourglass"></i><span> Time</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fab fa-connectdevelop"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 内容</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/next/"><i class="fa-fw fas fa-feather"></i><span> 笔记</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/categories/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-hamburger"></i><span> 图片</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">ECS设计模式<a class="post-edit-link" href="https://github.com/Guiny-Time/Guiny-Time.github.io/edit/source/source/_posts/ECS设计模式.md" title="编辑" target="_blank"><i class="fas fa-pencil-alt"></i></a></h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-08T16:00:00.000Z" title="发表于 2024-08-09 00:00:00">2024-08-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-16T15:12:52.466Z" title="更新于 2024-10-16 23:12:52">2024-10-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="ECS设计模式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src="https://miro.medium.com/v2/resize:fit:795/1*u4_kgaIkyGWY5r0ijLazeQ.png" alt></p>
-<h1 id="什么是ECS？为什么我们需要它？"><a href="#什么是ECS？为什么我们需要它？" class="headerlink" title="什么是ECS？为什么我们需要它？"></a>什么是ECS？为什么我们需要它？</h1><p>在传统游戏开发中，开发者习惯于将每个功能写成一个class，例如玩家控制器（PlayerController）。在这个脚本中不但包含了玩家自身的<strong>数据</strong>（data，例如速度、血量等），还包含了针对这些数据的处理<strong>逻辑</strong>（behavior）。</p>
+<h1 id="什么是ecs？为什么我们需要它？">什么是ECS？为什么我们需要它？</h1>
+<p>在传统游戏开发中，开发者习惯于将每个功能写成一个class，例如玩家控制器（PlayerController）。在这个脚本中不但包含了玩家自身的<strong>数据</strong>（data，例如速度、血量等），还包含了针对这些数据的处理<strong>逻辑</strong>（behavior）。</p>
 <p>有时作为开发者，我们需要在极短时间完成原型发开来验证玩法的可行性（或者我们只是打了个game jam），一些能够被重复利用的“轮子”是相当重要的。我们前面所提到的每个功能一个 class 的做法其实很不适合拓展，因为数据和行为是耦合的，不便于修改。</p>
 <p>有没有更好的设计模式呢？接下来让我们隆重推出本文的主角——<strong>ECS设计模式</strong>！本文将参照轻量级 ECS 解决方案 <strong>Entitas</strong> 对该设计模式从源码层面进行介绍。首先，什么是<em>ECS</em> ？ECS 即 <strong>Entity-Component-System</strong>，指“<strong>实体-组件-系统</strong>”设计模式，是一种有别于传统 <strong>OOP</strong>（面向对象）类型的设计模式，它是 <strong>DOP</strong>（面向数据）的。</p>
 <ul>
-<li><strong>E</strong>ntity/实体<br>实体类似于 GameObject，可以简单理解为“游戏对象”。</li>
-<li><strong>C</strong>omponent/组件<br>组件包含了实体的数据（Data）。组件有且仅有数据，不包含任何逻辑，如：位置组件（记录位置信息）、运动组件（记录速度/加速度等）等等。</li>
-<li><strong>S</strong>ystem/系统<br>系统包含了游戏逻辑，比如运动系统负责计算速度变化等等。</li>
+<li><strong>E</strong>ntity/实体<br>
+实体类似于 GameObject，可以简单理解为“游戏对象”。</li>
+<li><strong>C</strong>omponent/组件<br>
+组件包含了实体的数据（Data）。组件有且仅有数据，不包含任何逻辑，如：位置组件（记录位置信息）、运动组件（记录速度/加速度等）等等。</li>
+<li><strong>S</strong>ystem/系统<br>
+系统包含了游戏逻辑，比如运动系统负责计算速度变化等等。</li>
 </ul>
 <p>同时，为了便于管理，Entitas中有以下概念：</p>
 <ul>
-<li>Context/上下文环境<br>上下文环境包含了所有实体，开发者可以往其中添加/移除实体。同时，Context 还存储了一些全局状态（例如关卡进度、唯一玩家等等）。</li>
-<li>Group/组<br>组可以视为 context 的子集，如果说 context 是一个数据库，group 就是通过 SELECT 从 context 中筛选出的特定类型的实体。我们可以把一类对象归为一个组（例如玩家组、子弹组），这有助于提高查询速度。</li>
+<li>Context/上下文环境<br>
+上下文环境包含了所有实体，开发者可以往其中添加/移除实体。同时，Context 还存储了一些全局状态（例如关卡进度、唯一玩家等等）。</li>
+<li>Group/组<br>
+组可以视为 context 的子集，如果说 context 是一个数据库，group 就是通过 SELECT 从 context 中筛选出的特定类型的实体。我们可以把一类对象归为一个组（例如玩家组、子弹组），这有助于提高查询速度。</li>
 </ul>
-<p>ECS 把数据和逻辑解耦，各个实体上的组件中只保留了数据。逻辑运算由一个系统负责，在特定的时间点对每个它旗下的所有组件执行，那么理所当然的，每个实体上的组件里的数据不同，逻辑运算后的结果也就不同了。<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">+-----------------+                                            +------------+</span><br><span class="line">|<span class="string">     Context     </span>|<span class="string">                                            </span>|<span class="string"> ComponentA </span>|</span><br><span class="line">|<span class="string">-----------------</span>|<span class="string">                                            </span>|<span class="string">------------</span>|</span><br><span class="line">|<span class="string">    e       e    </span>|<span class="string">      +------------+                        </span>|<span class="string">    Data    </span>|</span><br><span class="line">|<span class="string">       e      e--</span>|<span class="string">----&gt; </span>|<span class="string">   Entity   </span>|<span class="string">                        +------------+          </span></span><br><span class="line"><span class="string"></span>|<span class="string">  e        e     </span>|<span class="string">      </span>|<span class="string">------------</span>|<span class="string">                               ^</span></span><br><span class="line"><span class="string"></span>|<span class="string">     e  e     e  </span>|<span class="string">      </span>|<span class="string"> ComponentA </span>|<span class="string">                               </span>|</span><br><span class="line">|<span class="string"> e          e    </span>|<span class="string">      </span>|<span class="string">            </span>|<span class="string">      +------------+      +---------+       +------------+</span></span><br><span class="line"><span class="string"></span>|<span class="string">    e     e      </span>|<span class="string">      </span>|<span class="string"> ComponentB-</span>|<span class="string">----&gt; </span>|<span class="string"> ComponentA </span>|<span class="string">&lt;---- </span>|<span class="string"> ASystem </span>|<span class="string"> ----&gt; </span>|<span class="string"> ComponentA </span>|</span><br><span class="line">|<span class="string">  e    e    e    </span>|<span class="string">      </span>|<span class="string">            </span>|<span class="string">      </span>|<span class="string">------------</span>|<span class="string">      +---------+       </span>|<span class="string">------------</span>|</span><br><span class="line">|<span class="string">    e    e     e </span>|<span class="string">      </span>|<span class="string"> ComponentC </span>|<span class="string">      </span>|<span class="string">    Data    </span>|<span class="string">   calculate behavior   </span>|<span class="string">    Data    </span>|</span><br><span class="line">+-----------------+      +------------+      +------------+                        +------------+</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>ECS 把数据和逻辑解耦，各个实体上的组件中只保留了数据。逻辑运算由一个系统负责，在特定的时间点对每个它旗下的所有组件执行，那么理所当然的，每个实体上的组件里的数据不同，逻辑运算后的结果也就不同了。</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">+-----------------+                                            +------------+</span><br><span class="line">|<span class="string">     Context     </span>|<span class="string">                                            </span>|<span class="string"> ComponentA </span>|</span><br><span class="line">|<span class="string">-----------------</span>|<span class="string">                                            </span>|<span class="string">------------</span>|</span><br><span class="line">|<span class="string">    e       e    </span>|<span class="string">      +------------+                        </span>|<span class="string">    Data    </span>|</span><br><span class="line">|<span class="string">       e      e--</span>|<span class="string">----&gt; </span>|<span class="string">   Entity   </span>|<span class="string">                        +------------+          </span></span><br><span class="line"><span class="string"></span>|<span class="string">  e        e     </span>|<span class="string">      </span>|<span class="string">------------</span>|<span class="string">                               ^</span></span><br><span class="line"><span class="string"></span>|<span class="string">     e  e     e  </span>|<span class="string">      </span>|<span class="string"> ComponentA </span>|<span class="string">                               </span>|</span><br><span class="line">|<span class="string"> e          e    </span>|<span class="string">      </span>|<span class="string">            </span>|<span class="string">      +------------+      +---------+       +------------+</span></span><br><span class="line"><span class="string"></span>|<span class="string">    e     e      </span>|<span class="string">      </span>|<span class="string"> ComponentB-</span>|<span class="string">----&gt; </span>|<span class="string"> ComponentA </span>|<span class="string">&lt;---- </span>|<span class="string"> ASystem </span>|<span class="string"> ----&gt; </span>|<span class="string"> ComponentA </span>|</span><br><span class="line">|<span class="string">  e    e    e    </span>|<span class="string">      </span>|<span class="string">            </span>|<span class="string">      </span>|<span class="string">------------</span>|<span class="string">      +---------+       </span>|<span class="string">------------</span>|</span><br><span class="line">|<span class="string">    e    e     e </span>|<span class="string">      </span>|<span class="string"> ComponentC </span>|<span class="string">      </span>|<span class="string">    Data    </span>|<span class="string">   calculate behavior   </span>|<span class="string">    Data    </span>|</span><br><span class="line">+-----------------+      +------------+      +------------+                        +------------+</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>区分后，代码的可读性和可维护性上得到了提升，这样一来我们可以为每个系统编写各类行为（函数）的轮子，提升开发效率了。当然，ECS的优点并不只有这么些，它真正的优点是：当面对<strong>大量游戏对象</strong>（例如1000个）时，采用ECS架构比传统的架构开销更小。为什么？</p>
-<h2 id="针对大量游戏对象的优化"><a href="#针对大量游戏对象的优化" class="headerlink" title="针对大量游戏对象的优化"></a>针对大量游戏对象的优化</h2><p><img src="https://cdn.mos.cms.futurecdn.net/mz2NU5EYiqXGEKzm9ejTF.jpg" alt></p>
+<h2 id="针对大量游戏对象的优化">针对大量游戏对象的优化</h2>
+<p><img src="https://cdn.mos.cms.futurecdn.net/mz2NU5EYiqXGEKzm9ejTF.jpg" alt></p>
 <p>在RTS等类型的一些游戏中，场景内有时会同时存在大量的游戏对象。如果我们为每个游戏对象的prefab都添加了脚本Enemy，假设我们需要在脚本的 Update 函数中更新游戏对象的信息，会发生什么事呢？答案是：游戏的<strong>帧率可能出现严重下滑</strong>，特别是对于处理器性能较差的低端机型来说。</p>
 <p>Unity 生命周期函数是基于类反射实现的，并且这一过程会在运行时不停对所有MonoBehaviour遍历进行。反射在这种情况下允许 Unity 在运行时动态调用对象的特定方法（如 Start、Update 等），而不需要编译时确定。这种方法灵活，但性能上可能稍有影响，因为反射操作通常比直接调用<strong>慢</strong>。这导致当场景中存在 1000 个游戏对象时，执行 1000 次 Update 将严重拖垮游戏帧率。</p>
 <p>而在 ECS 中，我们只需要通过执行一次旋转<strong>系统</strong>中的 Update 函数对所有存在旋转<strong>组件</strong>的<strong>实体</strong>进行更新就可以了，不需要执行 1000 次 Update。ECS 主要的开销集中在查询和提取包含特定组件的实体上，我们可以用 pool（Entitas 中的 group） 的思想来优化这一过程。</p>
 <figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">+-----------------+</span><br><span class="line">|<span class="string">     Context     </span>|</span><br><span class="line">|<span class="string">-----------------</span>|</span><br><span class="line">|<span class="string">    e       e    </span>|</span><br><span class="line">|<span class="string">       e      e  </span>|</span><br><span class="line">|<span class="string">  e        e     </span>|</span><br><span class="line">|<span class="string">     e  e     e  </span>|</span><br><span class="line">|<span class="string"> e          e    </span>|</span><br><span class="line">|<span class="string">    e     e      </span>|</span><br><span class="line">|<span class="string">  e    e    e    </span>|</span><br><span class="line">|<span class="string">    e    e     e </span>|</span><br><span class="line">+-----------------+</span><br><span class="line">  |<span class="string"></span></span><br><span class="line"><span class="string">  </span>|<span class="string">     +-------------+  Groups:</span></span><br><span class="line"><span class="string">  </span>|<span class="string">     </span>|<span class="string">      e      </span>|<span class="string">  Subsets of entities in the context</span></span><br><span class="line"><span class="string">  </span>|<span class="string">     </span>|<span class="string">   e     e   </span>|<span class="string">  for blazing fast querying</span></span><br><span class="line"><span class="string">  +---&gt; </span>|<span class="string">        +------------+</span></span><br><span class="line"><span class="string">        </span>|<span class="string">     e  </span>|<span class="string">    </span>|<span class="string">       </span>|</span><br><span class="line">        |<span class="string">  e     </span>|<span class="string"> e  </span>|<span class="string">  e    </span>|</span><br><span class="line">        +--------|<span class="string">----+    e  </span>|</span><br><span class="line">                 |<span class="string">     e      </span>|</span><br><span class="line">                 |<span class="string">  e     e   </span>|</span><br><span class="line">                 +------------+</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p><strong>生命周期函数居然是基于反射实现的？</strong><br>Uniy 引擎整体是架设在 mono IDE 基础上的，支持通过 string 来查找方法，且和真正的反射一样是能够查找调用<strong>私有方法</strong>，当找到这些方法后会存下函数指针待之后使用。在 Unity 内部存在一张表，这张表的形成是通过在场景中查找全部 MonoBehaviour 类型脚本然后遍历里面的方法，将需要的调用的方法全部记录下来然后再进行调用，防止那些不需要调用的 MonoBehaviour 中的方法占用空间，节省资源开耗。</p>
-<p><strong>为什么不采用多态？</strong><br>反射实际上是开销非常大的调用方式，比虚方法来说要高得多。Unity 使用这种事件机制的根本原因是出于对灵活性的考虑，因为并非所有的 MonoBehaviour 都需要 Update（或 Start，Awake 等等）。Unity 会维护一个需要 Update 的 Behaviour 列表，藉此避免进行空的虚函数调用，提高性能。Unity 采用组件式设计，触发一个事件，需要通知到相应 gameobject 的所有组件。如果使用多态来实现，则必须假设所有组件都派生自包含此事件的基类，或者筛选出派生自此基类的组件逐一通知。这样一来是麻烦，二来则容易带来复杂的继承关系，与组件式这种倡导用聚合代替继承的设计从理念上就是相悖的。</p>
+<p><strong>生命周期函数居然是基于反射实现的？</strong><br>
+Uniy 引擎整体是架设在 mono IDE 基础上的，支持通过 string 来查找方法，且和真正的反射一样是能够查找调用<strong>私有方法</strong>，当找到这些方法后会存下函数指针待之后使用。在 Unity 内部存在一张表，这张表的形成是通过在场景中查找全部 MonoBehaviour 类型脚本然后遍历里面的方法，将需要的调用的方法全部记录下来然后再进行调用，防止那些不需要调用的 MonoBehaviour 中的方法占用空间，节省资源开耗。</p>
 </blockquote>
-<h2 id="在ECS中实现事件系统"><a href="#在ECS中实现事件系统" class="headerlink" title="在ECS中实现事件系统"></a>在ECS中实现事件系统</h2><p>为了严格贯彻 ECS 思想，我们需要分离数据和行为，因此我们无法采取传统的组件思想。</p>
-<h3 id="如果我们直接遍历所有实体"><a href="#如果我们直接遍历所有实体" class="headerlink" title="如果我们直接遍历所有实体"></a>如果我们直接遍历所有实体</h3><p>如何在 ECS 中触发事件呢？例如，当一个游戏对象的 y 值超出游戏可视边界（屏幕）的 y 值时，我们希望该对象被销毁，此时应该怎么办？或许我们可以直接在 system 中遍历某类 group 下的所有实体并进行检查。<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span>&#123;</span><br><span class="line">  Execute();  <span class="comment">// 执行逻辑</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Execute</span>()</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> edgePos = pool.edgeEntity.position;   <span class="comment">// 获取边缘位置</span></span><br><span class="line">  <span class="keyword">foreach</span>(<span class="keyword">var</span> entity <span class="keyword">in</span> positionGroup.GetEntities())&#123; <span class="comment">// 对所有具有位置组件的实体</span></span><br><span class="line">    <span class="keyword">if</span>(entity.position.y &gt;= edgePos.y)&#123;  <span class="comment">//超出边界</span></span><br><span class="line">      entity.isDestory = <span class="literal">true</span>;  <span class="comment">// 销毁</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>假设存在一个针对子弹的系统 BullteSystem，在执行过程中会不断遍历所有存活的子弹 group，那么我们可以在 update 中对每个子弹的位置和每个敌人的位置进行判断，如果子弹的位置与敌人重合（举个例子）则认为子弹击中敌人。这样想想，如果不采取四叉树/八叉树缩小检索范围，开销还是很大的。</p>
-<h3 id="如果我们专门为事件拟定一个系统"><a href="#如果我们专门为事件拟定一个系统" class="headerlink" title="如果我们专门为事件拟定一个系统"></a>如果我们专门为事件拟定一个系统</h3><p>假设我们不愿意逐帧判断，而是仅在某些变化发生的时候对事件进行响应呢？这便是 ReactiveSystem（响应系统），它会对 context 的变化（例如全局状态上的改变）做出反应，而不是类似于一般系统那样在 Update 中逐帧执行。</p>
-<p>举个例子，当玩家到达出口的位置时，当前关卡 + 1的实现逻辑如下：<br><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 触发器，用于标记玩家和玩家的位置组件</span></span><br><span class="line">TriggerOnEvent IReactiveSystem.trigger&#123;</span><br><span class="line">  <span class="keyword">get</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Matcher.AllOf(Matcher.Player, Matcher.Position).OnEntityAdded();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 当玩家位置改变时，遍历所有 exitGroup 中出口的位置进行检查</span></span><br><span class="line"><span class="keyword">void</span> IReactiveExecuteSystem.Excute(List&lt;Entity&gt; entities)&#123;</span><br><span class="line">  <span class="keyword">var</span> playerPos = context.playerEntity.position;</span><br><span class="line">  <span class="keyword">foreach</span>(<span class="keyword">var</span> exit <span class="keyword">in</span> exitGroup.GetEntities())&#123;</span><br><span class="line">    <span class="keyword">if</span>(playerPos.Equals(exit.position))&#123;</span><br><span class="line">      <span class="built_in">int</span> curLevel = context.level.level;</span><br><span class="line">      context.ReplaceLevel(curLevel + <span class="number">1</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="Entitas源码学习"><a href="#Entitas源码学习" class="headerlink" title="Entitas源码学习"></a>Entitas源码学习</h1><h2 id="核心模块"><a href="#核心模块" class="headerlink" title="核心模块"></a>核心模块</h2><p>在Entitas源码的核心组成中，我们可以找到以下八个模块：</p>
+<blockquote>
+<p><strong>为什么不采用多态？</strong><br>
+反射实际上是开销非常大的调用方式，比虚方法来说要高得多。Unity 使用这种事件机制的根本原因是出于对灵活性的考虑，因为并非所有的 MonoBehaviour 都需要 Update（或 Start，Awake 等等）。Unity 会维护一个需要 Update 的 Behaviour 列表，藉此避免进行空的虚函数调用，提高性能。Unity 采用组件式设计，触发一个事件，需要通知到相应 gameobject 的所有组件。如果使用多态来实现，则必须假设所有组件都派生自包含此事件的基类，或者筛选出派生自此基类的组件逐一通知。这样一来是麻烦，二来则容易带来复杂的继承关系，与组件式这种倡导用聚合代替继承的设计从理念上就是相悖的。</p>
+</blockquote>
+<h2 id="在ecs中实现事件系统">在ECS中实现事件系统</h2>
+<p>为了严格贯彻 ECS 思想，我们需要分离数据和行为，因此我们无法采取传统的组件思想。</p>
+<h3 id="如果我们直接遍历所有实体">如果我们直接遍历所有实体</h3>
+<p>如何在 ECS 中触发事件呢？例如，当一个游戏对象的 y 值超出游戏可视边界（屏幕）的 y 值时，我们希望该对象被销毁，此时应该怎么办？或许我们可以直接在 system 中遍历某类 group 下的所有实体并进行检查。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span>&#123;</span><br><span class="line">  Execute();  <span class="comment">// 执行逻辑</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Execute</span>()</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> edgePos = pool.edgeEntity.position;   <span class="comment">// 获取边缘位置</span></span><br><span class="line">  <span class="keyword">foreach</span>(<span class="keyword">var</span> entity <span class="keyword">in</span> positionGroup.GetEntities())&#123; <span class="comment">// 对所有具有位置组件的实体</span></span><br><span class="line">    <span class="keyword">if</span>(entity.position.y &gt;= edgePos.y)&#123;  <span class="comment">//超出边界</span></span><br><span class="line">      entity.isDestory = <span class="literal">true</span>;  <span class="comment">// 销毁</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>假设存在一个针对子弹的系统 BullteSystem，在执行过程中会不断遍历所有存活的子弹 group，那么我们可以在 update 中对每个子弹的位置和每个敌人的位置进行判断，如果子弹的位置与敌人重合（举个例子）则认为子弹击中敌人。这样想想，如果不采取四叉树/八叉树缩小检索范围，开销还是很大的。</p>
+<h3 id="如果我们专门为事件拟定一个系统">如果我们专门为事件拟定一个系统</h3>
+<p>假设我们不愿意逐帧判断，而是仅在某些变化发生的时候对事件进行响应呢？这便是 ReactiveSystem（响应系统），它会对 context 的变化（例如全局状态上的改变）做出反应，而不是类似于一般系统那样在 Update 中逐帧执行。</p>
+<p>举个例子，当玩家到达出口的位置时，当前关卡 + 1的实现逻辑如下：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 触发器，用于标记玩家和玩家的位置组件</span></span><br><span class="line">TriggerOnEvent IReactiveSystem.trigger&#123;</span><br><span class="line">  <span class="keyword">get</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Matcher.AllOf(Matcher.Player, Matcher.Position).OnEntityAdded();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 当玩家位置改变时，遍历所有 exitGroup 中出口的位置进行检查</span></span><br><span class="line"><span class="keyword">void</span> IReactiveExecuteSystem.Excute(List&lt;Entity&gt; entities)&#123;</span><br><span class="line">  <span class="keyword">var</span> playerPos = context.playerEntity.position;</span><br><span class="line">  <span class="keyword">foreach</span>(<span class="keyword">var</span> exit <span class="keyword">in</span> exitGroup.GetEntities())&#123;</span><br><span class="line">    <span class="keyword">if</span>(playerPos.Equals(exit.position))&#123;</span><br><span class="line">      <span class="built_in">int</span> curLevel = context.level.level;</span><br><span class="line">      context.ReplaceLevel(curLevel + <span class="number">1</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="entitas源码学习">Entitas源码学习</h1>
+<h2 id="核心模块">核心模块</h2>
+<p>在Entitas源码的核心组成中，我们可以找到以下八个模块：</p>
 <ol>
-<li><strong>Collector</strong><br>Collector可以根据特定的组事件（groupEvent）观察并收集同一个上下文环境中一个或多个组的变化实体，用于实现ECS的事件系统。<br>上文中提到的TriggerOnEvent就归属于Collector模块。</li>
-<li><strong>Context</strong><br>上下文环境，在一些关于Entitas的早期文档中被称为池子（pool），管理实体和组的生命周期。<br>可以创建和销毁实体，并获取实体组。<br>创建上下文的首选方法是使用代码生成器（code generator，我会在下文介绍）生成的方法，例如 var context = new GameContext()；</li>
-<li><strong>Entity</strong><br>实体，即游戏对象。程序员可以通过 context.CreateEntity / entity.Destory 的方式创建 / 销毁实体。用户可以增加/替换/移除实体上的组件。</li>
-<li><strong>EntityIndex</strong><br>为实体创建一个基于键值对的索引，目的是加速实体查询。它将实体与某个键（如组件中的某个值）关联起来，允许通过键快速找到相关实体集。EntityIndex 支持单个键或多个键的映射，并提供增删实体的操作。这对于大规模实体管理场景下的高效查询非常有用，特别是在需要频繁根据某个属性查找实体时。<ul>
+<li><strong>Collector</strong><br>
+Collector可以根据特定的组事件（groupEvent）观察并收集同一个上下文环境中一个或多个组的变化实体，用于实现ECS的事件系统。<br>
+上文中提到的TriggerOnEvent就归属于Collector模块。</li>
+<li><strong>Context</strong><br>
+上下文环境，在一些关于Entitas的早期文档中被称为池子（pool），管理实体和组的生命周期。<br>
+可以创建和销毁实体，并获取实体组。<br>
+创建上下文的首选方法是使用代码生成器（code generator，我会在下文介绍）生成的方法，例如 var context = new GameContext()；</li>
+<li><strong>Entity</strong><br>
+实体，即游戏对象。程序员可以通过 context.CreateEntity / entity.Destory 的方式创建 / 销毁实体。用户可以增加/替换/移除实体上的组件。</li>
+<li><strong>EntityIndex</strong><br>
+为实体创建一个基于键值对的索引，目的是加速实体查询。它将实体与某个键（如组件中的某个值）关联起来，允许通过键快速找到相关实体集。EntityIndex 支持单个键或多个键的映射，并提供增删实体的操作。这对于大规模实体管理场景下的高效查询非常有用，特别是在需要频繁根据某个属性查找实体时。
+<ul>
 <li>为实体建立索引。</li>
 <li>提供高效的查找机制。</li>
 <li>实体的增删操作自动更新索引。</li>
 </ul>
 </li>
-<li><strong>Extentions</strong><br>工具类，包含移除字符串后缀（用于异常）和单一实体收集器。</li>
-<li><strong>Group</strong><br>使用 context.GetGroup(matcher) 获取与指定匹配器匹配的实体组。使用相同的匹配器调用 context.GetGroup(matcher) 将始终返回相同的组实例。<br>创建的组由上下文管理，并且始终是最新的。<br>它会自动添加与匹配器匹配的实体，或者在实体不再与匹配器匹配时立即将其删除。</li>
-<li><strong>Matcher</strong><br>匹配器，用于匹配实体组件的工具，它的作用是通过<strong>组件索引</strong>匹配实体，来判断某个实体是否具备特定条件。它的主要功能包括：<ul>
+<li><strong>Extentions</strong><br>
+工具类，包含移除字符串后缀（用于异常）和单一实体收集器。</li>
+<li><strong>Group</strong><br>
+使用 context.GetGroup(matcher) 获取与指定匹配器匹配的实体组。使用相同的匹配器调用 context.GetGroup(matcher) 将始终返回相同的组实例。<br>
+创建的组由上下文管理，并且始终是最新的。<br>
+它会自动添加与匹配器匹配的实体，或者在实体不再与匹配器匹配时立即将其删除。</li>
+<li><strong>Matcher</strong><br>
+匹配器，用于匹配实体组件的工具，它的作用是通过<strong>组件索引</strong>匹配实体，来判断某个实体是否具备特定条件。它的主要功能包括：
+<ul>
 <li>AllOf: 匹配具有指定所有组件的实体。</li>
 <li>AnyOf: 匹配具有指定任意组件的实体。</li>
 <li>NoneOf: 匹配不具备指定组件的实体。</li>
 </ul>
 </li>
-<li><strong>Systems</strong><br>系统模块为系统分组提供了一种便捷的方式。<br>开发者可以添加 IInitializeSystem、IExecuteSystem、ICleanupSystem、ITearDownSystem、ReactiveSystem 和其他嵌套系统实例，所有系统都将按照开发者添加的顺序进行初始化和执行。</li>
+<li><strong>Systems</strong><br>
+系统模块为系统分组提供了一种便捷的方式。<br>
+开发者可以添加 IInitializeSystem、IExecuteSystem、ICleanupSystem、ITearDownSystem、ReactiveSystem 和其他嵌套系统实例，所有系统都将按照开发者添加的顺序进行初始化和执行。</li>
 </ol>
-<h3 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h3><blockquote>
-<p>A context manages the lifecycle of entities and groups.<br>You can create and destroy entities and get groups of entities.<br>The preferred way to create a context is to use the generated methods from the code generator, e.g. var context = new GameContext();<br>上下文管理实体和组的生命周期。<br>您可以创建和销毁实体，并获取实体组。<br>创建上下文的首选方法是使用代码生成器生成的方法，例如 var context = new GameContext()；</p>
+<h3 id="context">Context</h3>
+<blockquote>
+<p>A context manages the lifecycle of entities and groups.<br>
+You can create and destroy entities and get groups of entities.<br>
+The preferred way to create a context is to use the generated methods from the code generator, e.g. var context = new GameContext();<br>
+上下文管理实体和组的生命周期。<br>
+您可以创建和销毁实体，并获取实体组。<br>
+创建上下文的首选方法是使用代码生成器生成的方法，例如 var context = new GameContext()；</p>
 </blockquote>
-<h4 id="Context-cs"><a href="#Context-cs" class="headerlink" title="Context.cs"></a><strong>Context.cs</strong></h4><ul>
-<li>包含了两类（实体与组）的 4 个事件<ul>
+<h4 id="context-cs"><strong>Context.cs</strong></h4>
+<ul>
+<li>包含了两类（实体与组）的 4 个事件
+<ul>
 <li>实体创建</li>
 <li>实体将被销毁</li>
 <li>实体销毁</li>
 <li>组创建</li>
 </ul>
 </li>
-<li>规定了实体的相关设置<ul>
+<li>规定了实体的相关设置
+<ul>
 <li>实体所能搭载的最大组件数量</li>
 <li>管理组件池（这是针对每一种类型的组件而言的 stack 结构的池，用于组件的复用）</li>
 </ul>
 </li>
-<li>管理实体与组<ul>
+<li>管理实体与组
+<ul>
 <li>维护 context 中的实体、可复用实体（位于对象池中）、被其他对象（如 group、collector、ReactiveSystem）保留的实体数量</li>
-<li>创建实体<ol>
+<li>创建实体
+<ol>
 <li>检查是否存在可复用的实体，如果不存在再创建新实体并根据相关设置进行初始化</li>
 <li>加入 context 维护的实体列表，保留实体。保留/释放是 AERC（自动实体参照计数）的一部分，内部用于防止将保留的实体集中起来。如果手动使用保留，也必须在某些时候手动释放。</li>
 <li>清空缓存（entitiesCache）。这是一个泛型实体数组 TEntity[]，用于居埃苏返回当前 context 中的所有实体。由于数组的特性，每次创建新的实体时需要清空缓存，并在需要的时候重新创建一次。</li>
@@ -255,7 +302,8 @@ if (true) {
 <li>触发实体创建事件，返回实体对象</li>
 </ol>
 </li>
-<li>销毁所有实体<ol>
+<li>销毁所有实体
+<ol>
 <li>获取 context 中的所有实体（TEntity[]）</li>
 <li>逐个 Destroy，最后清空维护的实体表</li>
 <li>如果存在被保留的实体，则返回报错</li>
@@ -272,35 +320,46 @@ if (true) {
 <li>清空所有组件池</li>
 </ul>
 </li>
-<li>上下文手动创建方法<br>Entitas的作者并不建议我们通过手动方式进行创建，而是建议我们使用代码生成器。如果采用手动方式，我们需要人为</li>
-<li>重置上下文<ul>
+<li>上下文手动创建方法<br>
+Entitas的作者并不建议我们通过手动方式进行创建，而是建议我们使用代码生成器。如果采用手动方式，我们需要人为</li>
+<li>重置上下文
+<ul>
 <li>摧毁所有实体</li>
 <li>重置实体 id 编号（creationIndex）</li>
 </ul>
 </li>
 <li>移除所有事件监听</li>
 </ul>
-<h4 id="ContextInfo-cs"><a href="#ContextInfo-cs" class="headerlink" title="ContextInfo.cs"></a><strong>ContextInfo.cs</strong></h4><ul>
-<li>包含了上下文的信息，主要用途是提供更好的报错信息。<ol>
+<h4 id="contextinfo-cs"><strong>ContextInfo.cs</strong></h4>
+<ul>
+<li>包含了上下文的信息，主要用途是提供更好的报错信息。
+<ol>
 <li>上下文名称 Name</li>
 <li>组件名称数组 ComponentNames</li>
 <li>组件类型数组 ComponentTypes</li>
 </ol>
 </li>
 </ul>
-<h3 id="Entity"><a href="#Entity" class="headerlink" title="Entity"></a>Entity</h3><blockquote>
-<p>Use context.CreateEntity() to create a new entity and entity.Destroy() to destroy it.<br>You can add, replace and remove IComponent to an entity.<br>使用 context.CreateEntity() 创建新实体，使用 entity.Destroy() 销毁实体。<br>您可以在实体中添加、替换和删除 IComponent。</p>
+<h3 id="entity">Entity</h3>
+<blockquote>
+<p>Use context.CreateEntity() to create a new entity and entity.Destroy() to destroy it.<br>
+You can add, replace and remove IComponent to an entity.<br>
+使用 context.CreateEntity() 创建新实体，使用 entity.Destroy() 销毁实体。<br>
+您可以在实体中添加、替换和删除 IComponent。</p>
 </blockquote>
-<h4 id="Entity-cs"><a href="#Entity-cs" class="headerlink" title="Entity.cs"></a>Entity.cs</h4><ul>
+<h4 id="entity-cs">Entity.cs</h4>
+<ul>
 <li>包含了 5 个事件（组建添加/组件移除/组件替换/实体释放/实体摧毁）</li>
-<li>实体属性<ul>
+<li>实体属性
+<ul>
 <li>实体所能搭载的最大组件数量</li>
 <li>id（是唯一的，在context中创建实体时被设置）</li>
 <li>isEnable（表示实体的生存状态）</li>
 <li>RetainCount / 引用计数（保留此实体的对象数量）</li>
 </ul>
 </li>
-<li>组件方法<ul>
+<li>组件方法
+<ul>
 <li>根据组件 id 添加组件</li>
 <li>根据组件 id 移除组件</li>
 <li>根据组件 id 替换组件</li>
@@ -315,34 +374,50 @@ if (true) {
 <li>根据组件 id 获取对应的组件池中的组件（如果不存在就创建一个）</li>
 </ul>
 </li>
-<li>AERC管理方法<ul>
+<li>AERC管理方法
+<ul>
 <li>保留该实体。一个所有者（owner）只能保留一次同一实体</li>
 <li>释放该实体</li>
 <li>摧毁实体</li>
 </ul>
 </li>
 </ul>
-<h4 id="EntityEqualityComparer-cs"><a href="#EntityEqualityComparer-cs" class="headerlink" title="EntityEqualityComparer.cs"></a>EntityEqualityComparer.cs</h4><p>实现了 IEqualityComparer\<TEntity\> 接口，用于</TEntity\></p>
+<h4 id="entityequalitycomparer-cs">EntityEqualityComparer.cs</h4>
+<p>实现了 IEqualityComparer&lt;TEntity&gt; 接口，用于</p>
 <ul>
 <li>比较两个 Entity 对象的相等性。它重写了 Equals 方法来判断两个实体对象是否相等（直接比较引用）</li>
 <li>重写了 GetHashCode 方法返回实体的 ID 作为哈希码</li>
 </ul>
-<h4 id="AERC（Automatic-Entity-Reference-Counting）"><a href="#AERC（Automatic-Entity-Reference-Counting）" class="headerlink" title="AERC（Automatic Entity Reference Counting）"></a>AERC（Automatic Entity Reference Counting）</h4><p>实体模块里最有趣的一个功能是AERC（自动实体引用计数），是一个在内部执行的有助于调试和优化性能的功能。<br>在Entitas框架中，自动实体引用计数（AERC）的作用是跟踪实体的<strong>引用数量</strong>，以防止实体在被使用时被错误回收、在计数为0时将实体返回到对象池中以释放资源。具体而言，引用计数通过 Retain 和 Release 方法来管理：</p>
+<h4 id="aerc-automatic-entity-reference-counting">AERC（Automatic Entity Reference Counting）</h4>
+<p>实体模块里最有趣的一个功能是AERC（自动实体引用计数），是一个在内部执行的有助于调试和优化性能的功能。<br>
+在Entitas框架中，自动实体引用计数（AERC）的作用是跟踪实体的<strong>引用数量</strong>，以防止实体在被使用时被错误回收、在计数为0时将实体返回到对象池中以释放资源。具体而言，引用计数通过 Retain 和 Release 方法来管理：</p>
 <ol>
 <li><strong>Retain</strong>：增加实体的引用计数，表示该实体被某个系统或对象“保留”。</li>
 <li><strong>Release</strong>：减少引用计数，表示系统或对象不再使用该实体。 当引用计数为零时，实体才会被回收到对象池中，从而避免使用中的实体被错误回收。</li>
 </ol>
 <p>AERC 在实现思路上参考了 CG 的引用计数机制，分为 SafeAERC 和 UnsafeAERC 两种实现方式。SafeAERC 额外记录了谁保留了实体，提供更安全的管理，而 UnsafeAERC 只维护计数，不追踪具体的所有者。</p>
 <ul>
-<li><strong>SafeAERC</strong><br>SafeAERC 会检查实体是否已被保留或释放。它比 UnsafeAERC 慢，但可以保留所有者的信息。<br>每个实体在被保留（Retain）或释放（Release）时，SafeAERC 会记录和跟踪拥有它的对象。SafeAERC 通过一个哈希集合_owners 存储了所有保留实体的对象；Retain 方法会检查实体是否已经被当前对象保留，防止重复保留，而 Release 则确保只能由已保留该实体的对象进行释放。</li>
-<li><strong>UnsafeAERC</strong><br>UnsafeAERC 不会检查实体是否已被保留或释放。它比 SafeAERC 快，但会丢失有关所有者的信息。<br>UnsafeAERC 只管理引用计数，Retain 和 Release 操作会简单增加或减少计数，不检查是否已被保留或释放，也不记录哪个对象在保留实体。因此，它更快，但无法追踪所有者。</li>
+<li><strong>SafeAERC</strong><br>
+SafeAERC 会检查实体是否已被保留或释放。它比 UnsafeAERC 慢，但可以保留所有者的信息。<br>
+每个实体在被保留（Retain）或释放（Release）时，SafeAERC 会记录和跟踪拥有它的对象。SafeAERC 通过一个哈希集合_owners 存储了所有保留实体的对象；Retain 方法会检查实体是否已经被当前对象保留，防止重复保留，而 Release 则确保只能由已保留该实体的对象进行释放。</li>
+<li><strong>UnsafeAERC</strong><br>
+UnsafeAERC 不会检查实体是否已被保留或释放。它比 SafeAERC 快，但会丢失有关所有者的信息。<br>
+UnsafeAERC 只管理引用计数，Retain 和 Release 操作会简单增加或减少计数，不检查是否已被保留或释放，也不记录哪个对象在保留实体。因此，它更快，但无法追踪所有者。</li>
 </ul>
-<h3 id="System"><a href="#System" class="headerlink" title="System"></a>System</h3><blockquote>
-<p>Systems provide a convenient way to group systems.<br>You can add IInitializeSystem, IExecuteSystem, ICleanupSystem, ITearDownSystem, ReactiveSystem and other nested Systems instances.<br>All systems will be initialized and executed based on the order you added them.<br>系统为系统分组提供了一种便捷的方式。<br>您可以添加 IInitializeSystem、IExecuteSystem、ICleanupSystem、ITearDownSystem、ReactiveSystem 和其他嵌套系统实例。<br>所有系统都将按照您添加的顺序进行初始化和执行。</p>
+<h3 id="system">System</h3>
+<blockquote>
+<p>Systems provide a convenient way to group systems.<br>
+You can add IInitializeSystem, IExecuteSystem, ICleanupSystem, ITearDownSystem, ReactiveSystem and other nested Systems instances.<br>
+All systems will be initialized and executed based on the order you added them.<br>
+系统为系统分组提供了一种便捷的方式。<br>
+您可以添加 IInitializeSystem、IExecuteSystem、ICleanupSystem、ITearDownSystem、ReactiveSystem 和其他嵌套系统实例。<br>
+所有系统都将按照您添加的顺序进行初始化和执行。</p>
 </blockquote>
-<h4 id="System-cs"><a href="#System-cs" class="headerlink" title="System.cs"></a>System.cs</h4><p>System.cs 方便管理和执行四种类型的系统，分别是：初始化/执行/清理和终止。</p>
+<h4 id="system-cs">System.cs</h4>
+<p>System.cs 方便管理和执行四种类型的系统，分别是：初始化/执行/清理和终止。</p>
 <ul>
-<li>初始化系统<br>顾名思义，包含一个Initialize方法，可以实现各类“初始化”功能，例如“在上下文中创建一个玩家实体，并为其初始化生命值和位置”</li>
+<li>初始化系统<br>
+顾名思义，包含一个Initialize方法，可以实现各类“初始化”功能，例如“在上下文中创建一个玩家实体，并为其初始化生命值和位置”</li>
 <li>执行系统</li>
 <li>清理系统</li>
 <li>终止系统</li>
@@ -350,41 +425,67 @@ if (true) {
 <p>代码中的每个函数在执行时，会遍历（因此是有序的）特定类型的系统列表，调用相应的初始化、执行、清理或终止操作。</p>
 <ul>
 <li>添加/移除系统到对应列表</li>
-<li>按顺序执行所有特定类型系统的对应方法<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Initialize</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; _initializeSystems.Count; i++)</span><br><span class="line">    _initializeSystems[i].Initialize();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>按顺序执行所有特定类型系统的对应方法</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Initialize</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; _initializeSystems.Count; i++)</span><br><span class="line">    _initializeSystems[i].Initialize();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
 <li>激活所有响应系统（ReactiveSystem）</li>
 <li>停用所有响应系统</li>
 <li>仅清除所有响应系统</li>
 </ul>
-<h4 id="ReactiveSystem-cs"><a href="#ReactiveSystem-cs" class="headerlink" title="ReactiveSystem.cs"></a>ReactiveSystem.cs</h4><p>如果根据指定的收集器发生了变化，响应系统就会调用 Execute(entities)，并且只会传入发生变化的实体。<br>常见的用例是对变化做出反应，例如，实体位置发生变化时，会更新相关游戏对象的 gameObject.transform.position。</p>
-<h4 id="ParallelSystem-cs"><a href="#ParallelSystem-cs" class="headerlink" title="ParallelSystem.cs"></a>ParallelSystem.cs</h4><p>并行系统使用实体子集调用 Execute(entities)，并将工作量分配给多个线程。<br>在 Entitas 中编写多线程代码时，不要使用 AddXyz() 和 ReplaceXyz() 等生成的方法。</p>
-<h3 id="Group"><a href="#Group" class="headerlink" title="Group"></a>Group</h3><blockquote>
-<p>Use context.GetGroup(matcher) to get a group of entities which match the specified matcher. Calling context.GetGroup(matcher) with the same matcher will always return the same instance of the group.<br>The created group is managed by the context and will always be up to date.<br>It will automatically add entities that match the matcher or remove entities as soon as they don’t match the matcher anymore.<br>使用 context.GetGroup(matcher) 可以获取与指定匹配器匹配的实体组。使用相同的匹配器调用 context.GetGroup(matcher) 将始终返回相同的组实例。<br>创建的组由上下文管理，并且始终是最新的。<br>它将自动添加与匹配器匹配的实体，或在实体不再与匹配器匹配时立即将其删除。</p>
+<h4 id="reactivesystem-cs">ReactiveSystem.cs</h4>
+<p>如果根据指定的收集器发生了变化，响应系统就会调用 Execute(entities)，并且只会传入发生变化的实体。<br>
+常见的用例是对变化做出反应，例如，实体位置发生变化时，会更新相关游戏对象的 gameObject.transform.position。</p>
+<h4 id="parallelsystem-cs">ParallelSystem.cs</h4>
+<p>并行系统使用实体子集调用 Execute(entities)，并将工作量分配给多个线程。<br>
+在 Entitas 中编写多线程代码时，不要使用 AddXyz() 和 ReplaceXyz() 等生成的方法。</p>
+<h3 id="group">Group</h3>
+<blockquote>
+<p>Use context.GetGroup(matcher) to get a group of entities which match the specified matcher. Calling context.GetGroup(matcher) with the same matcher will always return the same instance of the group.<br>
+The created group is managed by the context and will always be up to date.<br>
+It will automatically add entities that match the matcher or remove entities as soon as they don’t match the matcher anymore.<br>
+使用 context.GetGroup(matcher) 可以获取与指定匹配器匹配的实体组。使用相同的匹配器调用 context.GetGroup(matcher) 将始终返回相同的组实例。<br>
+创建的组由上下文管理，并且始终是最新的。<br>
+它将自动添加与匹配器匹配的实体，或在实体不再与匹配器匹配时立即将其删除。</p>
 </blockquote>
-<p>Group 用于管理和跟踪符合特定 Matcher 的实体集合，实现动态管理实体的添加、移除和更新，并通过事件系统触发相关的回调。<br>主要功能和函数：</p>
+<p>Group 用于管理和跟踪符合特定 Matcher 的实体集合，实现动态管理实体的添加、移除和更新，并通过事件系统触发相关的回调。<br>
+主要功能和函数：</p>
 <ol>
-<li>事件系统<br>OnEntityAdded、OnEntityRemoved 和 OnEntityUpdated 事件分别在实体被添加、移除或更新时触发，通知订阅者发生的变化。</li>
-<li>构造函数<br>Group(IMatcher<TEntity> matcher)：初始化时使用 matcher 匹配实体。<br>HandleEntity/UpdateEntity</TEntity></li>
-<li>处理实体的添加、移除或更新逻辑，动态管理实体是否应该存在于组中。<br>AddEntity/RemoveEntity</li>
-<li>添加或移除符合条件的实体，并触发相应事件。<br>GetEntities() / GetSingleEntity()：</li>
+<li>事件系统<br>
+OnEntityAdded、OnEntityRemoved 和 OnEntityUpdated 事件分别在实体被添加、移除或更新时触发，通知订阅者发生的变化。</li>
+<li>构造函数<br>
+Group(IMatcher<TEntity> matcher)：初始化时使用 matcher 匹配实体。<br>
+HandleEntity/UpdateEntity</TEntity></li>
+<li>处理实体的添加、移除或更新逻辑，动态管理实体是否应该存在于组中。<br>
+AddEntity/RemoveEntity</li>
+<li>添加或移除符合条件的实体，并触发相应事件。<br>
+GetEntities() / GetSingleEntity()：</li>
 </ol>
 <p>返回当前组内所有实体，或返回唯一的实体（如果组内只有一个实体）。</p>
-<h3 id="Matcher"><a href="#Matcher" class="headerlink" title="Matcher"></a>Matcher</h3><h4 id="Matcher-cs"><a href="#Matcher-cs" class="headerlink" title="Matcher.cs"></a>Matcher.cs</h4><p>Matcher<TEntity> 类主要用于匹配实体的<strong>组件</strong>。它允许定义三个类型的组件条件：AllOf、AnyOf 和 NoneOf。</TEntity></p>
+<h3 id="matcher">Matcher</h3>
+<h4 id="matcher-cs">Matcher.cs</h4>
+<p>Matcher<TEntity> 类主要用于匹配实体的<strong>组件</strong>。它允许定义三个类型的组件条件：AllOf、AnyOf 和 NoneOf。</TEntity></p>
 <p>属性：</p>
 <ul>
 <li>Indexes: 返回合并后的索引数组，使用 ??= 操作符进行初始化。</li>
-<li>AllOfIndexes, AnyOfIndexes, NoneOfIndexes: 返回各自的组件索引。<ul>
+<li>AllOfIndexes, AnyOfIndexes, NoneOfIndexes: 返回各自的组件索引。</li>
 <li>构造函数</li>
-<li>匹配方法</li>
-</ul>
-</li>
+<li>匹配方法
+<ul>
 <li>AnyOf(params int[] indexes): 设置满足条件的任何组件的索引。</li>
 <li>AnyOf(params IMatcher<TEntity>[] matchers): 允许使用其他匹配器的索引。</TEntity></li>
 <li>NoneOf(params int[] indexes): 设置不满足条件的组件的索引。</li>
 <li>NoneOf(params IMatcher<TEntity>[] matchers): 允许使用其他匹配器的索引。</TEntity></li>
-<li>Matches(TEntity entity): 检查一个实体是否满足 AllOf、AnyOf 和 NoneOf 的条件。<br>总结<br>这个类通过提供灵活的组件匹配功能，支持复杂的实体查询和操作。</li>
+<li>Matches(TEntity entity): 检查一个实体是否满足 AllOf、AnyOf 和 NoneOf 的条件。<br>
+总结<br>
+这个类通过提供灵活的组件匹配功能，支持复杂的实体查询和操作。</li>
 </ul>
-<h3 id="Collector"><a href="#Collector" class="headerlink" title="Collector"></a>Collector</h3><blockquote>
-<p>A Collector can observe one or more groups from the same context and collects changed entities based on the specified groupEvent.<br>收集器可观察同一上下文中的一个或多个组，并根据指定的 groupEvent 收集已更改的实体。</p>
+</li>
+</ul>
+<h3 id="collector">Collector</h3>
+<blockquote>
+<p>A Collector can observe one or more groups from the same context and collects changed entities based on the specified groupEvent.<br>
+收集器可观察同一上下文中的一个或多个组，并根据指定的 groupEvent 收集已更改的实体。</p>
 </blockquote>
 <p>作用是收集符合特定条件的<strong>组</strong>，并通过监听组的<strong>变化事件</strong>来进行实体的收集。每个 Collector 会关联一个或多个组和事件类型（如实体添加、移除或添加/移除），从而<strong>在这些事件发生时将实体收集到集合中</strong>。</p>
 <p>主要函数解释：</p>
@@ -394,15 +495,24 @@ if (true) {
 <li>Deactivate()：停止监听事件，并清空已收集的实体集合。</li>
 <li>ClearCollectedEntities()：释放所有已收集的实体，并清空集合。</li>
 </ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总的来说，在游戏开发中的 ECS 设计模式有以下优点：</p>
+<h1 id="总结">总结</h1>
+<p>总的来说，在游戏开发中的 ECS 设计模式有以下优点：</p>
 <ol>
 <li>性能优化：ECS将数据和逻辑分离，通过缓存友好的内存布局提高CPU缓存利用率，从而优化性能。</li>
 <li>模块化和可扩展性：逻辑通过系统处理，数据通过组件管理，方便不同功能模块独立开发和调试。</li>
 <li>数据驱动：实体仅是ID，组件存储数据，系统执行逻辑，可以轻松增加或移除组件来改变实体行为，灵活处理游戏状态。</li>
 <li>并行处理：系统可独立处理各类组件，利于多线程优化（这指的是通过 Unity ECS 的 JobSystem 来进行多线程并发处理）。</li>
 </ol>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://github.com/sschmid/Entitas/wiki/Unity-Tutorial-Hello-World">https://github.com/sschmid/Entitas/wiki/Unity-Tutorial-Hello-World</a><br><a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.entities@0.3/manual/index.html">https://docs.unity3d.com/Packages/com.unity.entities@0.3/manual/index.html</a><br><a target="_blank" rel="noopener" href="https://github.com/sschmid/Entitas">https://github.com/sschmid/Entitas</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jQEXETwgPDs">https://www.youtube.com/watch?v=jQEXETwgPDs</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/morning-lee/p/7509018.html">https://www.cnblogs.com/morning-lee/p/7509018.html</a><br><a target="_blank" rel="noopener" href="https://medium.com/%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC%E9%9A%A8%E7%AD%86/unity-ecs-%E8%9C%BB%E8%9C%93%E9%BB%9E%E6%B0%B4-e259ccf02d09">https://medium.com/%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC%E9%9A%A8%E7%AD%86/unity-ecs-%E8%9C%BB%E8%9C%93%E9%BB%9E%E6%B0%B4-e259ccf02d09</a><br><a target="_blank" rel="noopener" href="https://paakmau.github.io/202002110101/">https://paakmau.github.io/202002110101/</a><br><a target="_blank" rel="noopener" href="https://yimicgh.top/%E7%BF%BB%E8%AF%91/ECS-01-Core/">https://yimicgh.top/%E7%BF%BB%E8%AF%91/ECS-01-Core/</a></p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">时光</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/08/09/ECS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">http://example.com/2024/08/09/ECS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">几/何/冰/川</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91-%E9%80%9A%E7%94%A8/">游戏开发/通用</a></div><div class="post_share"><div class="social-share" data-image="https://docs.unity3d.com/Packages/com.unity.entities@0.3/manual/images/WhatIsECSinfographic0000.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/09/16/CSharp%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="CSHARP内存管理"><img class="cover" src="https://imgix.datadoghq.com/img/blog/engineering/dotnet-continuous-profiler-part-4/il-1313-net-profiler-blog-pt4-240520-final.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CSHARP内存管理</div></div></a></div><div class="next-post pull-right"><a href="/2024/07/25/Portfolio-EN/" title="Portfolio"><img class="cover" src="/2024/07/25/Portfolio-EN/orion2010_spitzer.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Portfolio</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/09/16/CSharp%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="CSHARP内存管理"><img class="cover" src="https://imgix.datadoghq.com/img/blog/engineering/dotnet-continuous-profiler-part-4/il-1313-net-profiler-blog-pt4-240520-final.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-16</div><div class="title">CSHARP内存管理</div></div></a></div><div><a href="/2023/05/10/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA%E4%B8%8E%E8%A1%8C%E4%B8%BA%E6%A0%91/" title="游戏AI-状态机与行为树"><img class="cover" src="https://cdn.midjourney.com/584b8b41-24d2-4b71-a4bc-78e123c4eec2/0_0.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-10</div><div class="title">游戏AI-状态机与行为树</div></div></a></div><div><a href="/2021/05/19/MVC%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="MVC设计模式"><img class="cover" src="https://assets.toptal.io/images?url=https%3A%2F%2Fbs-uploads.toptal.io%2Fblackfish-uploads%2Fcomponents%2Fblog_post_page%2F4084336%2Fcover_image%2Fretina_500x200%2Fcover-unity-with-mvc-how-to-level-up-your-game-development-46aaec316442778385f4c4149a0f5273.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-19</div><div class="title">MVC设计模式</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://img14.360buyimg.com/ddimg/jfs/t1/234616/4/14333/21745/65e033e7Fb50b5c10/c15dbb34cc5a6a24.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">时光</div><div class="author-info__description">Catty House</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">26</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Guiny-Time"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Guiny-Time" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:guinytime@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临时光的博客！有关于本博客的详细信息请见<b>“关于”</b>。<br>本博客的访问方式：<a target="_blank" rel="noopener" href="https://cattyhouse-guiny.xyz/">https://cattyhouse-guiny.xyz/</a> <br><a target="_blank" rel="noopener" href="https://guiny-time.github.io/">https://guiny-time.github.io/</a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFECS%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%AE%83%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是ECS？为什么我们需要它？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E5%A4%A7%E9%87%8F%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BC%98%E5%8C%96"><span class="toc-number">1.1.</span> <span class="toc-text">针对大量游戏对象的优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8ECS%E4%B8%AD%E5%AE%9E%E7%8E%B0%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.</span> <span class="toc-text">在ECS中实现事件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E6%88%91%E4%BB%AC%E7%9B%B4%E6%8E%A5%E9%81%8D%E5%8E%86%E6%89%80%E6%9C%89%E5%AE%9E%E4%BD%93"><span class="toc-number">1.2.1.</span> <span class="toc-text">如果我们直接遍历所有实体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E6%88%91%E4%BB%AC%E4%B8%93%E9%97%A8%E4%B8%BA%E4%BA%8B%E4%BB%B6%E6%8B%9F%E5%AE%9A%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.2.</span> <span class="toc-text">如果我们专门为事件拟定一个系统</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Entitas%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.</span> <span class="toc-text">Entitas源码学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97"><span class="toc-number">2.1.</span> <span class="toc-text">核心模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Context"><span class="toc-number">2.1.1.</span> <span class="toc-text">Context</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Context-cs"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">Context.cs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ContextInfo-cs"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">ContextInfo.cs</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Entity"><span class="toc-number">2.1.2.</span> <span class="toc-text">Entity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Entity-cs"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">Entity.cs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EntityEqualityComparer-cs"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">EntityEqualityComparer.cs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AERC%EF%BC%88Automatic-Entity-Reference-Counting%EF%BC%89"><span class="toc-number">2.1.2.3.</span> <span class="toc-text">AERC（Automatic Entity Reference Counting）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#System"><span class="toc-number">2.1.3.</span> <span class="toc-text">System</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#System-cs"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">System.cs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ReactiveSystem-cs"><span class="toc-number">2.1.3.2.</span> <span class="toc-text">ReactiveSystem.cs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ParallelSystem-cs"><span class="toc-number">2.1.3.3.</span> <span class="toc-text">ParallelSystem.cs</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Group"><span class="toc-number">2.1.4.</span> <span class="toc-text">Group</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Matcher"><span class="toc-number">2.1.5.</span> <span class="toc-text">Matcher</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Matcher-cs"><span class="toc-number">2.1.5.1.</span> <span class="toc-text">Matcher.cs</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collector"><span class="toc-number">2.1.6.</span> <span class="toc-text">Collector</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://docs.unity3d.com/Packages/com.unity.entities@0.3/manual/images/WhatIsECSinfographic0000.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 时光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">2</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+<h1 id="参考资料">参考资料</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/sschmid/Entitas/wiki/Unity-Tutorial-Hello-World">https://github.com/sschmid/Entitas/wiki/Unity-Tutorial-Hello-World</a><br>
+<a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.entities@0.3/manual/index.html">https://docs.unity3d.com/Packages/com.unity.entities@0.3/manual/index.html</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/sschmid/Entitas">https://github.com/sschmid/Entitas</a><br>
+<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jQEXETwgPDs">https://www.youtube.com/watch?v=jQEXETwgPDs</a><br>
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/morning-lee/p/7509018.html">https://www.cnblogs.com/morning-lee/p/7509018.html</a><br>
+<a target="_blank" rel="noopener" href="https://medium.com/%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC%E9%9A%A8%E7%AD%86/unity-ecs-%E8%9C%BB%E8%9C%93%E9%BB%9E%E6%B0%B4-e259ccf02d09">https://medium.com/遊戲開發隨筆/unity-ecs-蜻蜓點水-e259ccf02d09</a><br>
+<a target="_blank" rel="noopener" href="https://paakmau.github.io/202002110101/">https://paakmau.github.io/202002110101/</a><br>
+<a target="_blank" rel="noopener" href="https://yimicgh.top/%E7%BF%BB%E8%AF%91/ECS-01-Core/">https://yimicgh.top/翻译/ECS-01-Core/</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">时光</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/08/09/ECS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">http://example.com/2024/08/09/ECS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">几/何/冰/川</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91-%E9%80%9A%E7%94%A8/">游戏开发/通用</a></div><div class="post_share"><div class="social-share" data-image="https://docs.unity3d.com/Packages/com.unity.entities@0.3/manual/images/WhatIsECSinfographic0000.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/09/16/CSharp%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="CSHARP内存管理"><img class="cover" src="https://imgix.datadoghq.com/img/blog/engineering/dotnet-continuous-profiler-part-4/il-1313-net-profiler-blog-pt4-240520-final.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CSHARP内存管理</div></div></a></div><div class="next-post pull-right"><a href="/2024/07/25/Portfolio-EN/" title="Portfolio"><img class="cover" src="/2024/07/25/Portfolio-EN/orion2010_spitzer.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Portfolio</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/09/16/CSharp%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="CSHARP内存管理"><img class="cover" src="https://imgix.datadoghq.com/img/blog/engineering/dotnet-continuous-profiler-part-4/il-1313-net-profiler-blog-pt4-240520-final.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-16</div><div class="title">CSHARP内存管理</div></div></a></div><div><a href="/2023/05/10/%E6%B8%B8%E6%88%8FAI-%E7%8A%B6%E6%80%81%E6%9C%BA%E4%B8%8E%E8%A1%8C%E4%B8%BA%E6%A0%91/" title="游戏AI-状态机与行为树"><img class="cover" src="https://cdn.midjourney.com/584b8b41-24d2-4b71-a4bc-78e123c4eec2/0_0.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-10</div><div class="title">游戏AI-状态机与行为树</div></div></a></div><div><a href="/2021/05/19/MVC%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="MVC设计模式"><img class="cover" src="https://assets.toptal.io/images?url=https%3A%2F%2Fbs-uploads.toptal.io%2Fblackfish-uploads%2Fcomponents%2Fblog_post_page%2F4084336%2Fcover_image%2Fretina_500x200%2Fcover-unity-with-mvc-how-to-level-up-your-game-development-46aaec316442778385f4c4149a0f5273.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-19</div><div class="title">MVC设计模式</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://img14.360buyimg.com/ddimg/jfs/t1/234616/4/14333/21745/65e033e7Fb50b5c10/c15dbb34cc5a6a24.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">时光</div><div class="author-info__description">Catty House</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">26</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Guiny-Time"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Guiny-Time" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:guinytime@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临时光的博客！有关于本博客的详细信息请见<b>“关于”</b>。<br>本博客的访问方式：<a target="_blank" rel="noopener" href="https://cattyhouse-guiny.xyz/">https://cattyhouse-guiny.xyz/</a> <br><a target="_blank" rel="noopener" href="https://guiny-time.github.io/">https://guiny-time.github.io/</a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFecs%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%AE%83%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是ECS？为什么我们需要它？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E5%A4%A7%E9%87%8F%E6%B8%B8%E6%88%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BC%98%E5%8C%96"><span class="toc-number">1.1.</span> <span class="toc-text">针对大量游戏对象的优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8ecs%E4%B8%AD%E5%AE%9E%E7%8E%B0%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.</span> <span class="toc-text">在ECS中实现事件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E6%88%91%E4%BB%AC%E7%9B%B4%E6%8E%A5%E9%81%8D%E5%8E%86%E6%89%80%E6%9C%89%E5%AE%9E%E4%BD%93"><span class="toc-number">1.2.1.</span> <span class="toc-text">如果我们直接遍历所有实体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E6%88%91%E4%BB%AC%E4%B8%93%E9%97%A8%E4%B8%BA%E4%BA%8B%E4%BB%B6%E6%8B%9F%E5%AE%9A%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.2.</span> <span class="toc-text">如果我们专门为事件拟定一个系统</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#entitas%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.</span> <span class="toc-text">Entitas源码学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97"><span class="toc-number">2.1.</span> <span class="toc-text">核心模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#context"><span class="toc-number">2.1.1.</span> <span class="toc-text">Context</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#context-cs"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">Context.cs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#contextinfo-cs"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">ContextInfo.cs</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#entity"><span class="toc-number">2.1.2.</span> <span class="toc-text">Entity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#entity-cs"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">Entity.cs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#entityequalitycomparer-cs"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">EntityEqualityComparer.cs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#aerc-automatic-entity-reference-counting"><span class="toc-number">2.1.2.3.</span> <span class="toc-text">AERC（Automatic Entity Reference Counting）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#system"><span class="toc-number">2.1.3.</span> <span class="toc-text">System</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#system-cs"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">System.cs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#reactivesystem-cs"><span class="toc-number">2.1.3.2.</span> <span class="toc-text">ReactiveSystem.cs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#parallelsystem-cs"><span class="toc-number">2.1.3.3.</span> <span class="toc-text">ParallelSystem.cs</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#group"><span class="toc-number">2.1.4.</span> <span class="toc-text">Group</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#matcher"><span class="toc-number">2.1.5.</span> <span class="toc-text">Matcher</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#matcher-cs"><span class="toc-number">2.1.5.1.</span> <span class="toc-text">Matcher.cs</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#collector"><span class="toc-number">2.1.6.</span> <span class="toc-text">Collector</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://docs.unity3d.com/Packages/com.unity.entities@0.3/manual/images/WhatIsECSinfographic0000.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 时光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">2</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
   const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
   if ($mermaidWrap.length) {
     window.runMermaid = () => {
