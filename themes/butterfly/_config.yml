@@ -24,7 +24,7 @@ menu:
 # Code Blocks (代碼相關)
 # --------------------------------------
 
-highlight_theme: pale night #  darker / pale night / light / ocean / mac / mac light / false
+highlight_theme: light #  darker / pale night / light / ocean / mac / mac light / false
 highlight_copy: true # copy button
 highlight_lang: true # show the code language
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
@@ -56,28 +56,28 @@ disable_top_img: false
 index_img: /img/head_page.png
 
 # If the banner of page not setting, it will show the top_img
-default_top_img: https://ae01.alicdn.com/kf/S54233858870e4e94b84c9639c1b524edp.jpg
+default_top_img: /img/118833862_p0.jpg
 
 # The banner image of archive page
-archive_img: https://ae01.alicdn.com/kf/S93859503d376451e9504416705e564efH.png
+archive_img: /img/123083284_p0.jpg
 
 # If the banner of tag page not setting, it will show the top_img
 # note: tag page, not tags page (子標籤頁面的 top_img)
-tag_img: https://ae01.alicdn.com/kf/S93859503d376451e9504416705e564efH.png
+tag_img: /img/123083284_p0.jpg
 
 # The banner image of tag page
 # format:
 #  - tag name: xxxxx
-tag_per_img: https://ae01.alicdn.com/kf/S93859503d376451e9504416705e564efH.png
+tag_per_img: /img/123083284_p0.jpg
 
 # If the banner of category page not setting, it will show the top_img
 # note: category page, not categories page (子分類頁面的 top_img)
-category_img: 
+category_img: /img/123083284_p0.jpg
 
 # The banner image of category page
 # format:
 #  - category name: xxxxx
-category_per_img: 
+category_per_img: /img/123083284_p0.jpg
 
 cover:
   # display the cover or not (是否顯示文章封面)
@@ -800,15 +800,16 @@ abcjs:
   enable: false
   per_page: true
 
-# mermaid
-# see https://github.com/mermaid-js/mermaid
+# Mermaid
+# https://github.com/mermaid-js/mermaid
 mermaid:
   enable: true
-  # built-in themes: default/forest/dark/neutral
-  theme:
-    light: default
-    dark: dark
+  # Write Mermaid diagrams using code blocks
   code_write: true
+  # built-in themes: default / forest / dark / neutral
+  theme:
+    light: forest
+    dark: dark
 
 # Note (Bootstrap Callout)
 note:
