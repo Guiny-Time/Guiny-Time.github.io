@@ -1,6 +1,7 @@
 ---
-tags: [游戏开发/通用]
+tags: ['设计模式','游戏开发','ECS','框架']
 title: ECS设计模式
+categories: 设计模式
 date: 2024-08-09
 update: 2024-08-15
 cover: https://docs.unity3d.com/Packages/com.unity.entities@0.3/manual/images/WhatIsECSinfographic0000.png

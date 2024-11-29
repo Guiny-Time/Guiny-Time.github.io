@@ -1,5 +1,6 @@
 ---
-tags: [游戏开发/通用]
+tags: ['设计模式','游戏开发','MVC','框架','Unity','UI']
+categories: 设计模式
 title: MVC设计模式
 date: 2021-05-19
 update: 2021-05-25
