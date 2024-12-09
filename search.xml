@@ -39,7 +39,7 @@
     
     
     <entry>
-      <title>CSHARP内存管理</title>
+      <title>C#内存管理</title>
       <link href="/2024/09/16/CSharp%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
       <url>/2024/09/16/CSharp%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
       
@@ -59,13 +59,13 @@
             
             <tag> C# </tag>
             
+            <tag> 语言基础 </tag>
+            
             <tag> .NET </tag>
             
             <tag> GC </tag>
             
             <tag> 内存管理 </tag>
-            
-            <tag> 语言基础 </tag>
             
         </tags>
       
@@ -247,6 +247,41 @@
             <tag> NGUI </tag>
             
             <tag> FGUI </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>两个经典的容器：C++ map与C# Dictionary</title>
+      <link href="/2023/06/24/C-map%E4%B8%8EC-dictionary%E7%9A%84%E5%BC%82%E5%90%8C/"/>
+      <url>/2023/06/24/C-map%E4%B8%8EC-dictionary%E7%9A%84%E5%BC%82%E5%90%8C/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>为什么要单独说说map和Dictionary呢？因为这两个容器非常经典也很常使用到。对于一个开发者来说，了解它们如何实现是有必要的，官方文档中对二者的定义如下：</p><div class="note success **map** flat"><p><code>map</code>用于存储和检索集合中的数据，此集合中的每个元素均为包含<strong>数据值</strong>和<strong>排序键</strong>的元素对，大小可变。<br>键的值是<strong>唯一</strong>的，用于<strong>自动排序数据</strong>。可以直接更改映射中的元素值。键值是常量，不能更改。<br>必须先删除与旧元素关联的键值，才能为新元素插入新键值。<br>map是可逆的，因为提供了双向迭代器来访问其元素。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">Key</span>,</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Type</span>,</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Traits</span> = less&lt;Key&gt;,</span><br><span class="line">    <span class="keyword">class</span> Allocator=allocator&lt;pair &lt;<span class="type">const</span> Key, Type&gt;&gt;&gt;</span><br><span class="line"><span class="keyword">class</span> map;</span><br></pre></td></tr></table></figure><p>其中<code>Traits</code>代表了自动排序的规则（默认为less），<code>Allocator</code>则是一种表示存储的分配器对象的类型（默认对，pair）。</p></div><div class="note info **dictionary** flat"><p><code>dictionary</code>表示键和值的集合，是一个泛型集合，它以<strong>不特定的顺序</strong>存储键值对。<br>字典不能包含重复键 或 null键，而值可以是重复键或null键。键必须是唯一的，否则将引发运行时异常。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Dictionary</span>&lt;<span class="title">TKey</span>,<span class="title">TValue</span>&gt; : </span><br><span class="line"><span class="title">System.Collections.Generic.ICollection</span>&lt;<span class="title">System.Collections.Generic.KeyValuePair</span>&lt;<span class="title">TKey</span>,<span class="title">TValue</span>&gt;&gt;, </span><br><span class="line"><span class="title">System.Collections.Generic.IDictionary</span>&lt;<span class="title">TKey</span>,<span class="title">TValue</span>&gt;, </span><br><span class="line"><span class="title">System.Collections.Generic.IEnumerable</span>&lt;<span class="title">System.Collections.Generic.KeyValuePair</span>&lt;<span class="title">TKey</span>,<span class="title">TValue</span>&gt;&gt;, </span><br><span class="line"><span class="title">System.Collections.Generic.IReadOnlyCollection</span>&lt;<span class="title">System.Collections.Generic.KeyValuePair</span>&lt;<span class="title">TKey</span>,<span class="title">TValue</span>&gt;&gt;, </span><br><span class="line"><span class="title">System.Collections.Generic.IReadOnlyDictionary</span>&lt;<span class="title">TKey</span>,<span class="title">TValue</span>&gt;, <span class="title">System.Collections.IDictionary</span>, </span><br><span class="line"><span class="title">System.Runtime.Serialization.IDeserializationCallback</span>, </span><br><span class="line"><span class="title">System.Runtime.Serialization.ISerializable</span></span><br></pre></td></tr></table></figure></div><p>从文档的介绍来看，<code>map</code> 和 <code>dictionary</code> 都是存放键值对的大小可变的容器，不同的是 <code>map</code> 是有序的而 <code>dictionary</code> 是无序的。为什么一个容器有序而一个无序呢？这要从这两种容器底层的数据结构说起。</p><h1 id="底层数据结构">底层数据结构</h1><p>map的底层是<strong>红黑树</strong>，这是一种特殊的自平衡二叉搜索树（Balanced Binary Search Tree），其中插入、删除、搜索的时间复杂度均为指数级的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(logn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>，且由于其特殊规则而不会像普通的二叉搜索树（BST）那样退化成链表，是一种效率极高（特别是插入和删除）的二叉树。</p><p>dictionary的底层则是耳熟能详的<strong>哈希表</strong>，是一种散列表，通过哈希函数来计算键的哈希值并决定将键值对存放在哪个位置。</p><h2 id="红黑树">红黑树</h2><img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Red-black_tree_example.svg"><p>红黑树是具有以下性质的特殊二叉树：</p><ul><li>节点只有两种颜色，红色和黑色</li><li>根节点一定是黑色的</li><li>红色节点的父节点和子节点必须是黑色的</li><li>从当前节点(包括它本身)出发走到nil，不论哪条路径所经过的黑色节点数目相同</li></ul><p>在数据量庞大的时候，红黑树依然能快速搜索出想要寻找的元素，而且它是自平衡的二叉搜索树。在规则被打破时，红黑树通过<strong>重新着色</strong>和<strong>旋转</strong>（分为左旋、右旋、左右旋、右左旋）的方式实现自平衡。红黑树插入和删除效率更高的原因是<strong>旋转的次数更少</strong>。AVL树是“<strong>严格平衡</strong>”的二叉搜索树，需要更多的旋转来调整；红黑树只保证了“<strong>黑平衡</strong>”（从任意节点出发到叶子节点经过的黑点数量相同，但经过的红节点数量不确定，最差的情况下经过的红节点和黑节点一样多），是以牺牲部分搜索性能换取增删性能的折中方案，用非严格的平衡换取旋转次数的减少。</p><p>在C++中，std库底层默认通过less than（＜）比较各个元素，将节点落于红黑树中的正确位置。开发者也可以自定义比较器（比如改成＞）更改键的排序规则。对于一颗二叉搜索树，其<strong>中序遍历</strong>的结果就是<strong>有序</strong>的。</p><blockquote><p>对于C++中的string，由于默认的string是系统的xstring对象没有定义 <code>＜</code> 操作符，因此需要开发者自行定义一个。</p></blockquote><p>因为map的迭代总是有序的，所以它适合需要有序存储或按范围查询的场景。在实际使用中，如果所维护的树需要频繁增删节点，红黑树会更加合适。在频繁按键查找元素的场景下，map并没有dictionary优秀，原因会在下一小节给出。</p><h2 id="哈希表">哈希表</h2><p>在介绍C# Dictionary方面有一篇非常好的<a href="https://www.cnblogs.com/InCerry/p/10325290.html">文章</a>，我在此仅作一些归纳总结。</p><p>哈希表是一种散列表，其中的数据是无序的。在将一个数据（键值对，即entry）存入哈希表时，会发生下面的步骤：</p><ul><li>将键（key）输入<strong>哈希函数</strong>中，计算出<strong>哈希值</strong>（hash value）</li><li>根据哈希值和<strong>哈希桶算法</strong>确定键值对应该被放入哪个<strong>桶</strong>（bucket）中</li><li>如果桶中已经有元素了，利用<strong>碰撞处理方法</strong>解决碰撞（冲突）</li><li>当频繁碰撞或桶满了，需要对哈希表进行扩容，执行<strong>rehash</strong></li></ul><p>哈希表搜索的时间复杂度是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>，因为每个元素都有对应的key值，直接抓出key值就是对应元素了。</p><blockquote><p>entry<br>Entry是一个结构体，它的定义如下代码所示。这是Dictionary种存放数据的最小单位，调用Add(Key,Value)方法添加的元素都会被封装在这样的一个结构体中。</p></blockquote><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">struct</span> Entry &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> hashCode;    <span class="comment">// 除符号位以外的31位hashCode值, 如果该Entry没有被使用，那么为-1</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> next;        <span class="comment">// 下一个元素的下标索引，如果没有下一个就为-1</span></span><br><span class="line">    <span class="keyword">public</span> TKey key;        <span class="comment">// 存放元素的键</span></span><br><span class="line">    <span class="keyword">public</span> TValue <span class="keyword">value</span>;    <span class="comment">// 存放元素的值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAba9d3b928b246c98dc8269b8f0587c20.png" alt="keys经过哈希函数计算得到哈希值，每个哈希值对应一个bucket，bucket里装的是具体的键值对"><p>我们遇到了不少名词，下面将详细介绍一下。</p><h3 id="哈希函数">哈希函数</h3><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA9968a2b599269a0ace58dc0c36431311.png" width="480"><p>哈希函数是一种摘要算法（把消息或数据压缩成摘要，使得数据量变小），具有<strong>幂等性</strong>，且不可逆（无法通过哈希值逆推键），不同的键通过哈希函数可能计算出相同的哈希值，这也为之后的冲突埋下了伏笔。一个好的hash function应该具有以下几种功能：</p><ol><li>容易计算</li><li>均匀分布</li><li>减少碰撞</li></ol><p>常见的哈希函数有直接寻址法、平方取中法、折叠法、随机数法、除留余数法（这也是常在题目中出现的哈希函数）等。</p><h3 id="哈希桶算法">哈希桶算法</h3><p>经过哈希函数计算出的哈希值可能非常大，而实际上哈希表并没有那么多桶和这些哈希值一一对应。为了能把哈希值映射到桶里，哈希桶算法会对哈希值取余数。</p><blockquote><p>桶的数量和哈希表的容量有关，未指定具体初始大小时C#默认的哈希表大小为4。</p></blockquote><h3 id="哈希冲突与解决方法">哈希冲突与解决方法</h3><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA8763e6a459949d3c7ab9afdd05740b9c.png"><p>当两个不同的键通过哈希函数与哈希桶函数的计算后得到的结果一样时，就代表发生了碰撞，两个键值对被指向了同一个桶，这就是<strong>哈希冲突</strong>。常见的解决方法有拉链法(这也是Dictionary采用的)、开放定址法、再Hash法等。</p><p>拉链法也叫链式冲突解决法，这种方法的思路是将产生冲突的元素建立一个<strong>单链表</strong>，并将头指针地址存储至Hash表对应桶的位置。这样定位到Hash表桶的位置后可通过遍历单链表的形式来查找元素。</p><h3 id="满表扩容">满表扩容</h3><p>当哈希碰撞次数到达一个阈值（100次）或者哈希表满了的时候会触发扩容操作。在C# dictionary的扩容中，</p><ol><li>申请两倍于现在大小的buckets、entries</li><li>将现有的元素拷贝到新的entries</li><li>如果是因为达到碰撞阈值扩容，使用新哈希函数重新计算Hash值</li></ol><p>虽然换了新的哈希函数，但仍可能发生大量哈希碰撞。在JDK中，HashMap如果碰撞的次数太多了，那么会将单链表转换为<strong>红黑树</strong>提升查找性能。<a href="http://xn--ihq86hzy5b70u.Net">不过目前.Net</a> Framwork中还没有这样的优化。</p><h2 id="unordered-map？sorteddictionary？">unordered_map？SortedDictionary？</h2><p>C++中对于键值对的存储还有一种实现—— <code>unordered_map</code>。它与C#的 <code>dictionary</code> 类似，是通过哈希表实现的。<br><code>unordered_map</code> 相较于 <code>dictionary</code> 的一些区别是：</p><ul><li>哈希碰撞时采用开地址法</li><li>不同编译器下的扩容规则不同，有8/2.x倍扩容的</li></ul><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA8b3e2608f29456618c4432c4999ebdf1.png" alt="8倍扩容" width="550"><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAfd0bf623006340966b5f28a41ed504f1.png" alt="2.x倍扩容"><p>SortedDictionary是C#中对map的方案，底层同样也用了红黑树。由于排序的存在，它的各项性能其实并不如Dictionary。</p><h1 id="参考资料">参考资料</h1><p><a href="https://learn.microsoft.com/zh-cn/cpp/standard-library/map-class?view=msvc-170">https://learn.microsoft.com/zh-cn/cpp/standard-library/map-class?view=msvc-170</a><br><a href="https://learn.microsoft.com/zh-cn/dotnet/api/system.collections.generic.dictionary-2?view=net-9.0">https://learn.microsoft.com/zh-cn/dotnet/api/system.collections.generic.dictionary-2?view=net-9.0</a><br><a href="https://www.cainiaoplus.com/csharp/csharp-dictionary.html">https://www.cainiaoplus.com/csharp/csharp-dictionary.html</a><br><a href="https://www.cnblogs.com/InCerry/p/10325290.html">https://www.cnblogs.com/InCerry/p/10325290.html</a><br><a href="https://blog.csdn.net/jingyi130705008/article/details/82633778">https://blog.csdn.net/jingyi130705008/article/details/82633778</a><br><a href="https://zhuanlan.zhihu.com/p/95892351">https://zhuanlan.zhihu.com/p/95892351</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 语言 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C# </tag>
+            
+            <tag> C++ </tag>
+            
+            <tag> 数据结构 </tag>
+            
+            <tag> map </tag>
+            
+            <tag> hashmap </tag>
+            
+            <tag> 语言基础 </tag>
             
         </tags>
       
