@@ -4,10 +4,13 @@ categories: 设计模式
 title: 游戏中的单例模式
 date: '2022-01-02T05:54:50.681Z'
 updated: '2022-01-02T07:58:54.814Z'
-cover: https://res.cloudinary.com/ddxwdqwkr/image/upload/f_auto/v1614961724/patterns.dev/singleton-pattern.jpg
+cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA94bb26a6c980a9f4e938ce16ee290a6a.png
 ---
 
 # 什么是单例模式？
+
+<img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA94bb26a6c980a9f4e938ce16ee290a6a.png" />
+
 这学期开始教设计模式这门课程，其中第一节课所介绍的就是所有设计模式中最简单也最好理解的**单例模式**。单例模式是几大设计模式中最常被使用的模式之一，在游戏编程的实战中也有很多用途，比如说维护一个**全局唯一**的UI管理器、**全局唯一**的特效/音效控制器等等。该模式适合针对“有唯一需求，不希望存在多个”的系统。也就是说，**单例模式的实例同时只能存在 0 个或者 1 个**，实例化的过程分为懒实例（懒汉式）、饥渴实例（饥饿式）等。
 
 > 《游戏编程模式》对于单例模式的定义为：“确保一个类只有一个实例， 并为其提供一个全局访问入口。”
