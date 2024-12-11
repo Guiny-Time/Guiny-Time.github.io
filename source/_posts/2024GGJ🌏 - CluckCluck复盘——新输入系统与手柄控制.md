@@ -5,7 +5,7 @@ categories: 项目复盘
 date: '2024-02-01'
 updated: '2024-02-16'
 copyright_author: 时光
-cover: https://ae01.alicdn.com/kf/S0da7b43026144fa7862df33e82e6d23bw.png
+cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA858c8347ff07ec951cb49ffb04eea56b.png
 ---
 
 # 新输入系统(Input System)
