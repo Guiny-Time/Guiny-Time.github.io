@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>在终面之后——更好的关卡系统</title>
+      <link href="/2024/12/12/%E5%9C%A8%E7%BB%88%E9%9D%A2%E4%B9%8B%E5%90%8E%E2%80%94%E2%80%94%E6%9B%B4%E5%A5%BD%E7%9A%84%E5%85%B3%E5%8D%A1%E7%B3%BB%E7%BB%9F/"/>
+      <url>/2024/12/12/%E5%9C%A8%E7%BB%88%E9%9D%A2%E4%B9%8B%E5%90%8E%E2%80%94%E2%80%94%E6%9B%B4%E5%A5%BD%E7%9A%84%E5%85%B3%E5%8D%A1%E7%B3%BB%E7%BB%9F/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>之前聊过了战斗系统的优化，今天聊聊《终面》中的关卡系统，关于我是如何实现的，以及应该怎么去优化它。</p><p>首先，《终面》的关卡结构是下面这样的一颗固定的树状结构：</p><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA49f8f386782e5d2295ded68ec022f407.png"><p>可以看到，不包括开场CG，整个游戏一共有24个关卡（场景），每个关卡有独立的编号、类型，以及所指向的后续关卡（这是固定的）。</p><h1 id="我的做法">我的做法</h1><p>由于每个场景的房间布局是确定的，因此我为每种类型的关卡创建了一个场景：</p><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA7216f4f6d305dfe4ff30be2f6e6b81e0.png"><p>其中 <code>0_Driver</code> 只会在刚进入游戏时加载一次，用于各种系统（包括关卡系统）的<strong>初始化</strong>。这个场景存在的目的是避免过场景不销毁的一些组件在游戏返回标题时与新建的组件产生冲突。</p><p>关卡的数据结构是一个结构体：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">System.Serializable</span>]<span class="keyword">public</span> <span class="keyword">struct</span> LevelStruct &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> name; <span class="comment">// 关卡类型</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> id;      <span class="comment">// 关卡id（用来确定进度）</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span>[] childId;   <span class="comment">// 子关卡id</span></span><br><span class="line">    <span class="comment">// 构造</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LevelStruct</span>(<span class="params"><span class="built_in">string</span> n, <span class="built_in">int</span> i, <span class="built_in">int</span>[] p</span>)</span> &#123;</span><br><span class="line">        name = n;</span><br><span class="line">        id = i;</span><br><span class="line">        childId = p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>随后，在关卡管理器中维护一个记录了所有关卡结构体信息的列表：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">SerializeField</span>] <span class="keyword">public</span> List&lt;LevelStruct&gt; levels = <span class="keyword">new</span> List&lt;LevelStruct&gt;();</span><br></pre></td></tr></table></figure><p>然后我们就可以在 <code>0_Driver</code> 场景为关卡管理器手动填写所有关卡的信息，如下所示：</p><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA33ea762b0dd0e200b8df0466b1f7c3b8.png" width="400"><p>通过当前关卡的id和子关卡id，就可以确定玩家在完成关卡后进行房间选择时，接下来去的关卡是什么房间。房间门上的logo也会根据id对应的房间名称而改变。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">int</span> curID;</span><br><span class="line"><span class="keyword">public</span> List&lt;<span class="built_in">int</span>&gt; nextLevel;</span><br><span class="line"><span class="keyword">public</span> FinishLevel[] gates; <span class="comment">// 这是管理场景切换逻辑的“房门”</span></span><br></pre></td></tr></table></figure><p>这样的写法虽然可以实现关卡树的逻辑，但需要开发者手动将内容填入检查器中的脚本里，比较麻烦也不好看。经过一段时间的思考，我想到了对于关卡树实现的一种更好的优化方式。</p><h1 id="优化">优化</h1><p>首先，关卡的基本结构不需要改变，按照之前的就可以：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Level</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> name; <span class="comment">// 关卡类型</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> id;      <span class="comment">// 关卡id（用来确定进度）</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span>[] childId;   <span class="comment">// 子关卡id</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>然后我们可以配置一个本地文件（JSON或者xml都可以），用来存放所有的关卡：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">let level = <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;id&quot;</span> <span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;CG&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;childId&quot;</span> <span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;id&quot;</span> <span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;Tutorial&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;childId&quot;</span> <span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;id&quot;</span> <span class="punctuation">:</span> <span class="number">2</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;Normal1&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;childId&quot;</span> <span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;id&quot;</span> <span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;Normal2&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;childId&quot;</span> <span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">5</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="comment">// 所有关卡</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></table></figure><p>把关卡配置放在配置文件的好处是方便策划等其他人员修改，而且JSON的可读性比较高（看起来比较直观），不然每次想要修改关卡都要打开Unity编辑器的 <code>0_Driver</code> 场景，有点麻烦。</p><p>我们仍然需要 LevelManager 脚本来管理当前的关卡进度。在 LevelManager 中，我们读取JSON配置文件把它存到脚本中。然后，我们就可以根据当前的房间 <code>id</code> 拿取 <code>level</code> 中对应 <code>id</code> 的对象（当前关卡信息），进而得到它的子关卡 <code>id</code> 数组信息，然后我们就可以根据信息做别的操作（例如设置房间门的logo）了。</p><p>关于如何维护 <code>id</code> 其实很简单，由 <code>0_Driver</code> 、“返回标题”按钮、玩家死亡时回回到CG场景，这时触发重开游戏的事件，调用重置关卡管理器 <code>id</code> 为 0 （也就是对应第0个关卡）的回调函数即可。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 项目复盘 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
+            
+            <tag> 项目复盘 </tag>
+            
+            <tag> Unity </tag>
+            
+            <tag> 系统 </tag>
+            
+            <tag> 关卡 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>在终面之后——更精确的战斗系统</title>
       <link href="/2024/11/23/%E5%9C%A8%E7%BB%88%E9%9D%A2%E4%B9%8B%E5%90%8E%E2%80%94%E2%80%94%E6%9B%B4%E5%A5%BD%E7%9A%84%E6%88%98%E6%96%97%E7%B3%BB%E7%BB%9F/"/>
       <url>/2024/11/23/%E5%9C%A8%E7%BB%88%E9%9D%A2%E4%B9%8B%E5%90%8E%E2%80%94%E2%80%94%E6%9B%B4%E5%A5%BD%E7%9A%84%E6%88%98%E6%96%97%E7%B3%BB%E7%BB%9F/</url>
@@ -378,6 +413,8 @@
             
             <tag> C# </tag>
             
+            <tag> 语言基础 </tag>
+            
             <tag> C++ </tag>
             
             <tag> 数据结构 </tag>
@@ -385,8 +422,6 @@
             <tag> map </tag>
             
             <tag> hashmap </tag>
-            
-            <tag> 语言基础 </tag>
             
         </tags>
       
@@ -477,9 +512,9 @@
             
             <tag> C# </tag>
             
-            <tag> 语言基础 </tag>
-            
             <tag> 特性 </tag>
+            
+            <tag> 语言基础 </tag>
             
             <tag> 事件 </tag>
             
@@ -508,11 +543,11 @@
             
             <tag> C# </tag>
             
-            <tag> 语言基础 </tag>
-            
             <tag> 委托 </tag>
             
             <tag> 特性 </tag>
+            
+            <tag> 语言基础 </tag>
             
         </tags>
       
@@ -539,9 +574,9 @@
             
             <tag> C# </tag>
             
-            <tag> 语言基础 </tag>
-            
             <tag> 特性 </tag>
+            
+            <tag> 语言基础 </tag>
             
             <tag> 反射 </tag>
             
@@ -570,9 +605,9 @@
             
             <tag> C# </tag>
             
-            <tag> 语言基础 </tag>
-            
             <tag> 特性 </tag>
+            
+            <tag> 语言基础 </tag>
             
             <tag> 闭包 </tag>
             
@@ -884,9 +919,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 原型模式 </tag>
-            
             <tag> 设计模式 </tag>
+            
+            <tag> 原型模式 </tag>
             
         </tags>
       
@@ -956,9 +991,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 设计模式 </tag>
-            
             <tag> 单例模式 </tag>
+            
+            <tag> 设计模式 </tag>
             
         </tags>
       
