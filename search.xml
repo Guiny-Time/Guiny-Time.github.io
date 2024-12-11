@@ -109,7 +109,7 @@
       <link href="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/"/>
       <url>/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="及时性的通用解决方案-可靠UDP"><a href="#及时性的通用解决方案-可靠UDP" class="headerlink" title="及时性的通用解决方案-可靠UDP"></a>及时性的通用解决方案-可靠UDP</h1><p>经过前两篇文章的学习，我们已经对网络同步中实现<strong>一致性</strong>的两种方式——帧同步和状态同步有了一定了解。现在我们需要考虑一下“<strong>及时性</strong>”，为同步算法选择一个恰当的网络协议了。传输层有两个协议：<code>TCP</code> 和 <code>UDP</code>。在能保证 UDP 传输可靠性的前提下，我们可以有“<strong>可靠UDP</strong>（RUDP）”。那么，该选择 <strong>TCP</strong> 还是 <strong>RUDP</strong> 呢？</p><center><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-16-56-52.png" width="450"></center><p>可以看到，在不同的网络环境下，RUDP 的平均延迟都是要好于 TCP 的，这是为什么呢？</p><ol><li>TCP 虽然以稳定著称，但因为 TCP 的 Nagle 算法，默认情况下会收集尽量多的小包，然后再一次性发送。这样虽然这样可以减少带宽，但会导致及时性变差（不过我们可以通过 <code>TCP_NODELAY</code> 选项去关闭这个功能）。</li><li>TCP 具有超时重传机制。当客户端或服务端有一帧的包没有收到的话，直到这个包被重传到端之前，游戏的逻辑是无法正常执行的。即使使用 TCP 的快重传机制（即收到三个重复ACK时立马重传），产生的时延相比UDP来说还是太久了。</li><li>当出现丢包之后，TCP 的拥塞控制机制会触发慢启动和拥塞避免，这会限制发包的速度。</li></ol><p>因此在实际开发的过程中，一般选择 RUDP 作为传输层协议。那么，应该怎么实现可靠UDP呢？</p><h2 id="基于ARQ（自动重传请求）"><a href="#基于ARQ（自动重传请求）" class="headerlink" title="基于ARQ（自动重传请求）"></a>基于ARQ（自动重传请求）</h2><p>首先，我们需要了解以下几个概念：</p><ul><li><strong>RTT</strong>（Round Trip Time）<br>RTT指的是从客户端发送数据包到客户端收到服务端返回确认数据包（ACK包）的时间间隔，这段时间被称为<strong>往返时间</strong>（RTT）。</li></ul><center><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-17-14-14.png" width="300"></center><ul><li><strong>RTO</strong>（Retransmission Timeout）<br>RTO指的是<strong>超时重传时间</strong>，即在客户端发送数据包后，在RTO时间内未收到服务端的ACK包，就会重新发送一个数据包过去。一般来说，RTO = 1.5RTT。</li></ul><center><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-17-17-23.png" width="300"></center><ul><li><strong>最小丢包延时</strong><br>当丢包发生时，接收方最终收到发送的数据包的最小延时（也就是RTO后发送的包到达接收方的时间）。一般来说，<strong>最小丢包延时</strong> = 2RTT。</li></ul><center><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-17-24-59.png" width="300"></center><p>基于上面的三个概念，我们可以发展出以下三种实现RUDP的方式：</p><ol><li><strong>等待式</strong><br>每次客户端发送一个包，都要等到收到服务端的ACK包后才发送下一个。这种实现模式对信道的浪费比较严重，大部分时间信道都很空闲。</li></ol><p><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-17-50-11.png" width="300"></p><ol><li><strong>后退N步</strong><br>客户端每次发一堆包，收到服务器的一堆ACK包后检查有没有哪个漏了，有的话<strong>从漏掉的包开始重新发送</strong>（服务器会丢弃缺漏包后的所有包）。这种模式对流量的占用较大，导致信道繁忙。</li></ol><p><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-17-50-28.png" width="300"></p><ol><li><strong>选择重发</strong><br>和后退N步类似，但只<strong>选择性地重发未收到</strong>ACK包的包，服务器不会丢弃其他包。</li></ol><p><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-17-51-55.png" width="300"></p><p>在ARQ中，已经有了大量现成的解决方案（如KCP），但其 <u>最小丢包时延较高</u>。</p><h2 id="基于FEC（前向冗余纠错）"><a href="#基于FEC（前向冗余纠错）" class="headerlink" title="基于FEC（前向冗余纠错）"></a>基于FEC（前向冗余纠错）</h2><p><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-17-53-45.png" width="500"></p><p>在FEC中，最小丢包延迟比ARQ的小，但它只适用于<strong>帧同步</strong>中，并且实现算法比较复杂、没有现成的实现方案（需要自己造轮子）。</p><h1 id="丢包时应该怎么办？"><a href="#丢包时应该怎么办？" class="headerlink" title="丢包时应该怎么办？"></a>丢包时应该怎么办？</h1><p>丢包分为两种：相关性丢包和随机性丢包。</p><ol><li><strong>相关性丢包</strong><br>这种丢包通常是由链路拥塞、路由器负载过高、无线信号衰减、基站/场景切换等程序员无法干预的情况导致的。我们知道丢包的原因，但无法解决。</li><li><strong>随机性丢包</strong><br>这种丢包通常是由于二进制信道噪声产生的，完全是随机出现的，将近90%的丢包都属于这种类型。<br>基于吉尔伯特模型，我们可以计算出连续K次丢包的概率（随着k的增加，概率是会越来越低的）。因此，为了避免随机性丢包，我们可以连发2次同一个包（如果2次不够就发送3次）。</li></ol><blockquote><p><strong>UDP包与MTU</strong><br>由于网络信道存在MTU的概念，当一个UDP包的大小超过MTU时，打包就会被拆成IP分片小包，在收到时再重组成UDP大包。<br>但分成小包进行传输，其实是很容易遇到丢包的情况的。一旦IP分片中有一个包丢失了，系统就会丢弃整个UDP大包。<br>因此，我们有时候需要人为地将一个UDP大包拆成小包发送，并留意信道的MTU大小。经验MTU大小为<strong>470字节</strong>。</p></blockquote><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://gameinstitute.qq.com/course/detail/10242">https://gameinstitute.qq.com/course/detail/10242</a><br><a href="https://www.youxituoluo.com/528021.html">https://www.youxituoluo.com/528021.html</a></p>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="及时性的通用解决方案-可靠UDP"><a href="#及时性的通用解决方案-可靠UDP" class="headerlink" title="及时性的通用解决方案-可靠UDP"></a>及时性的通用解决方案-可靠UDP</h1><p>经过前两篇文章的学习，我们已经对网络同步中实现<strong>一致性</strong>的两种方式——帧同步和状态同步有了一定了解。现在我们需要考虑一下“<strong>及时性</strong>”，为同步算法选择一个恰当的网络协议了。传输层有两个协议：<code>TCP</code> 和 <code>UDP</code>。在能保证 UDP 传输可靠性的前提下，我们可以有“<strong>可靠UDP</strong>（RUDP）”。那么，该选择 <strong>TCP</strong> 还是 <strong>RUDP</strong> 呢？</p><center><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-16-56-52.png" width="450"></center><p>可以看到，在不同的网络环境下，RUDP 的平均延迟都是要好于 TCP 的，这是为什么呢？</p><ol><li>TCP 虽然以稳定著称，但因为 TCP 的 Nagle 算法，默认情况下会收集尽量多的小包，然后再一次性发送。这样虽然这样可以减少带宽，但会导致及时性变差（不过我们可以通过 <code>TCP_NODELAY</code> 选项去关闭这个功能）。</li><li>TCP 具有超时重传机制。当客户端或服务端有一帧的包没有收到的话，直到这个包被重传到端之前，游戏的逻辑是无法正常执行的。即使使用 TCP 的快重传机制（即收到三个重复ACK时立马重传），产生的时延相比UDP来说还是太久了。</li><li>当出现丢包之后，TCP 的拥塞控制机制会触发慢启动和拥塞避免，这会限制发包的速度。</li></ol><p>因此在实际开发的过程中，一般选择 RUDP 作为传输层协议。那么，应该怎么实现可靠UDP呢？</p><h2 id="基于ARQ（自动重传请求）"><a href="#基于ARQ（自动重传请求）" class="headerlink" title="基于ARQ（自动重传请求）"></a>基于ARQ（自动重传请求）</h2><p>首先，我们需要了解以下几个概念：</p><ul><li><strong>RTT</strong>（Round Trip Time）<br>RTT指的是从客户端发送数据包到客户端收到服务端返回确认数据包（ACK包）的时间间隔，这段时间被称为<strong>往返时间</strong>（RTT）。</li></ul><center><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-17-14-14.png" width="300"></center><ul><li><strong>RTO</strong>（Retransmission Timeout）<br>RTO指的是<strong>超时重传时间</strong>，即在客户端发送数据包后，在RTO时间内未收到服务端的ACK包，就会重新发送一个数据包过去。一般来说，RTO = 1.5RTT。</li></ul><center><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-17-17-23.png" width="300"></center><ul><li><strong>最小丢包延时</strong><br>当丢包发生时，接收方最终收到发送的数据包的最小延时（也就是RTO后发送的包到达接收方的时间）。一般来说，<strong>最小丢包延时</strong> = 2RTT。</li></ul><center><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-17-24-59.png" width="300"></center><p>基于上面的三个概念，我们可以发展出以下三种实现RUDP的方式：</p><ol><li><strong>等待式</strong><br>每次客户端发送一个包，都要等到收到服务端的ACK包后才发送下一个。这种实现模式对信道的浪费比较严重，大部分时间信道都很空闲。</li></ol><p><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-17-50-11.png" width="300"></p><ol><li><strong>后退N步</strong><br>客户端每次发一堆包，收到服务器的一堆ACK包后检查有没有哪个漏了，有的话<strong>从漏掉的包开始重新发送</strong>（服务器会丢弃缺漏包后的所有包）。这种模式对流量的占用较大，导致信道繁忙。</li></ol><p><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-17-50-28.png" width="300"></p><ol><li><strong>选择重发</strong><br>和后退N步类似，但只<strong>选择性地重发未收到</strong>ACK包的包，服务器不会丢弃其他包。</li></ol><p><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-17-51-55.png" width="300"></p><p>在ARQ中，已经有了大量现成的解决方案（如KCP），但其 <u>最小丢包时延较高</u>。关于KCP有篇很好的文章：<a href="https://luyuhuang.tech/2020/12/09/kcp.html#%E5%8F%91%E9%80%81-%E6%8E%A5%E6%94%B6%E4%B8%8E%E9%87%8D%E4%BC%A0">https://luyuhuang.tech/2020/12/09/kcp.html#%E5%8F%91%E9%80%81-%E6%8E%A5%E6%94%B6%E4%B8%8E%E9%87%8D%E4%BC%A0</a></p><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">KCP报文结构：</span><br><span class="line"><span class="section">0               4   5   6       8 (BYTE)</span></span><br><span class="line"><span class="section">+---------------+---+---+-------+</span></span><br><span class="line">|     conv      |cmd|frg|  wnd  |</span><br><span class="line"><span class="code">+---------------+</span>---<span class="code">+---+</span>-------+   8</span><br><span class="line">|     ts        |     sn        |</span><br><span class="line"><span class="code">+---------------+</span>---------------+  16</span><br><span class="line">|     una       |     len       |</span><br><span class="line"><span class="code">+---------------+</span>---------------+  24</span><br><span class="line">|                               |</span><br><span class="line">|        DATA (optional)        |</span><br><span class="line"><span class="section">|                               |</span></span><br><span class="line"><span class="section">+-------------------------------+</span></span><br></pre></td></tr></table></figure><ul><li>conv 4 字节: 连接标识.</li><li>cmd 1 字节: Command.</li><li>frg 1 字节: 分片数量，表示随后还有多少个报文属于同一个包.</li><li>wnd 2 字节: 发送方剩余<strong>接收窗口</strong>的大小，有助于对端控制发送速率.</li><li>ts 4 字节: 时间戳，可以用来估算 RTT 和 RTO.</li><li>sn 4 字节: 报文编号.</li><li>una 4 字节: 发送方的接收缓冲区中<strong>最小</strong>还未收到的报文段的编号. 也就是说, <strong>编号比它小的报文段都已全部接收</strong>.</li><li>len 4 字节: 数据段长度.</li><li>data: 数据段. 只有数据报文会有这个字段</li></ul><p><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAe7614553a30e4477c20cfc11f919a868.png" alt="KCP示意图" width="500"></p><h2 id="基于FEC（前向冗余纠错）"><a href="#基于FEC（前向冗余纠错）" class="headerlink" title="基于FEC（前向冗余纠错）"></a>基于FEC（前向冗余纠错）</h2><p><img src="/2024/07/26/%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5-%E5%8F%AF%E9%9D%A0UDP/Clipboard_2024-09-21-17-53-45.png" width="500"></p><p>在FEC中，最小丢包延迟比ARQ的小，但它只适用于<strong>帧同步</strong>中，并且实现算法比较复杂、没有现成的实现方案（需要自己造轮子）。</p><h1 id="丢包时应该怎么办？"><a href="#丢包时应该怎么办？" class="headerlink" title="丢包时应该怎么办？"></a>丢包时应该怎么办？</h1><p>丢包分为两种：相关性丢包和随机性丢包。</p><ol><li><strong>相关性丢包</strong><br>这种丢包通常是由链路拥塞、路由器负载过高、无线信号衰减、基站/场景切换等程序员无法干预的情况导致的。我们知道丢包的原因，但无法解决。</li><li><strong>随机性丢包</strong><br>这种丢包通常是由于二进制信道噪声产生的，完全是随机出现的，将近90%的丢包都属于这种类型。<br>基于吉尔伯特模型，我们可以计算出连续K次丢包的概率（随着k的增加，概率是会越来越低的）。因此，为了避免随机性丢包，我们可以连发2次同一个包（如果2次不够就发送3次）。</li></ol><blockquote><p><strong>UDP包与MTU</strong><br>由于网络信道存在MTU的概念，当一个UDP包的大小超过MTU时，打包就会被拆成IP分片小包，在收到时再重组成UDP大包。<br>但分成小包进行传输，其实是很容易遇到丢包的情况的。一旦IP分片中有一个包丢失了，系统就会丢弃整个UDP大包。<br>因此，我们有时候需要人为地将一个UDP大包拆成小包发送，并留意信道的MTU大小。经验MTU大小为<strong>470字节</strong>。</p></blockquote><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://gameinstitute.qq.com/course/detail/10242">https://gameinstitute.qq.com/course/detail/10242</a><br><a href="https://www.youxituoluo.com/528021.html">https://www.youxituoluo.com/528021.html</a></p>]]></content>
       
       
       <categories>
@@ -376,8 +376,6 @@
             
             <tag> C# </tag>
             
-            <tag> 语言基础 </tag>
-            
             <tag> C++ </tag>
             
             <tag> 数据结构 </tag>
@@ -385,6 +383,8 @@
             <tag> map </tag>
             
             <tag> hashmap </tag>
+            
+            <tag> 语言基础 </tag>
             
         </tags>
       
@@ -442,9 +442,9 @@
             
             <tag> C# </tag>
             
-            <tag> 特性 </tag>
-            
             <tag> 语言基础 </tag>
+            
+            <tag> 特性 </tag>
             
             <tag> 事件 </tag>
             
@@ -473,11 +473,11 @@
             
             <tag> C# </tag>
             
+            <tag> 语言基础 </tag>
+            
             <tag> 委托 </tag>
             
             <tag> 特性 </tag>
-            
-            <tag> 语言基础 </tag>
             
         </tags>
       
@@ -504,9 +504,9 @@
             
             <tag> C# </tag>
             
-            <tag> 特性 </tag>
-            
             <tag> 语言基础 </tag>
+            
+            <tag> 特性 </tag>
             
             <tag> 反射 </tag>
             
@@ -535,9 +535,9 @@
             
             <tag> C# </tag>
             
-            <tag> 特性 </tag>
-            
             <tag> 语言基础 </tag>
+            
+            <tag> 特性 </tag>
             
             <tag> 闭包 </tag>
             
