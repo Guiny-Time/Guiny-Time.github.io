@@ -1,6 +1,6 @@
 ---
 tags: ['AI', '状态机','行为树','游戏开发']
-categories: 探索发现
+categories: 项目复盘
 title: 游戏AI-状态机与行为树
 date: 2023-05-10
 updated: 2023-05-17

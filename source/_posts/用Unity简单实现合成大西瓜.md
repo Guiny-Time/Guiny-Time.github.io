@@ -4,7 +4,7 @@ date: 2021-01-30 23:13:22
 updated: 2021-01-30 23:13:22
 tags: ['游戏编程','经验分享','项目复盘','Unity']
 categories: 项目复盘
-cover: https://storage.googleapis.com/smiletaiwan-cms-cwg-tw/article/202308/article-64d459e0e8418.jpg
+cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA4ba3c038673dd0ed730ddf48bec5eb09.png
 ---
 
 最近一款名叫“合成大西瓜”的游戏风靡空间，大家在真香之后都笑称自己为“西瓜人”，随后各种恶搞大西瓜的趣图、大西瓜bot更是接踵而至，甚至诞生了“合成大西瓜护肝版”、“合成小葡萄”、“合成大国家”等一系列衍生体......本文将主要探讨如何用Unity做一个“合成大西瓜”。
