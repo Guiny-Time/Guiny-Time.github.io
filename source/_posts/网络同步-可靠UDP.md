@@ -1,7 +1,7 @@
 ---
 title: 网络同步-可靠UDP
 tags: ['游戏编程','网络','UDP','TCP','可靠UDP','KCP','经验分享']
-categories: 探索发现
+categories: 网络同步
 date: 2024-07-26
 updated: 2024-07-28
 cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA382e16bf402c8d4453dcbd706a1ffafa.png
