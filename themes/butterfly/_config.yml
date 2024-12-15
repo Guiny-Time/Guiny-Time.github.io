@@ -646,7 +646,7 @@ tag_ui: # 留空或 index
 background: url(/img/head_page.png)
 
 # Footer Background
-footer_bg: true
+footer_bg: false
 
 # the position of bottom right button/default unit: px (右下角按鈕距離底部的距離/默認單位為px)
 rightside-bottom:
@@ -763,11 +763,11 @@ subtitle:
 
 # Loading Animation (加載動畫)
 preloader:
-  enable: true
+  enable: false
   # source
   # 1. fullpage-loading
   # 2. pace (progress bar)
-  source: 1
+  source: 2
   # pace theme (see https://codebyzach.github.io/pace/)
   pace_css_url:
 
@@ -902,7 +902,7 @@ css_prefix: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-    - <link rel="stylesheet" href="/css/mycss.css">
+    - <link rel="stylesheet" href="/css/mycss.css" media="defer" onload="this.media='all'">
     #背景宇宙星光
     - <link rel="stylesheet" href="/css/universe.css">
     - '<canvas id="universe" ></canvas>'

@@ -1,3 +1,27 @@
+/* 页脚与头图透明 */
+#footer {
+  background: transparent !important;
+}
+#page-header {
+  background: transparent !important;
+}
+
+/* 白天模式遮罩透明 */
+#footer::before {
+  background: transparent !important;
+}
+#page-header::before {
+  background: transparent !important;
+}
+
+/* 夜间模式遮罩透明 */
+[data-theme="dark"] #footer::before {
+  background: transparent !important;
+}
+[data-theme="dark"] #page-header::before {
+  background: transparent !important;
+}
+
 /*文章页*/
 .layout>#post{
   background: rgba(255, 255, 255, 0.87);
@@ -48,12 +72,9 @@
   backdrop-filter: blur(2px);
 }
 
-#page-header {
-  animation: imgblur 3s 1 ease-in-out;
-}
 #web_bg {
-  filter: blur(3px);
-  animation: to_show 4s;
+  animation: imgblur 3s 1 ease-in-out;
+  filter: blur(2px);
 }
 
 @keyframes to_show {
@@ -73,6 +94,6 @@
     filter: blur(5px);
   }
   100% {
-    filter: blur(0px);
+    filter: blur(2px);
   }
 }
