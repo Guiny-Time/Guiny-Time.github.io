@@ -4,6 +4,7 @@
 }
 #page-header {
   background: transparent !important;
+  height: 20px;
 }
 
 /* 白天模式遮罩透明 */
@@ -12,6 +13,7 @@
 }
 #page-header::before {
   background: transparent !important;
+  height: 20px;
 }
 
 /* 夜间模式遮罩透明 */
@@ -20,6 +22,11 @@
 }
 [data-theme="dark"] #page-header::before {
   background: transparent !important;
+  height: 20px;
+}
+
+#page-header.full_page{
+  height: 55vh;
 }
 
 /*文章页*/

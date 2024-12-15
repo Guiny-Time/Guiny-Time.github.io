@@ -908,6 +908,8 @@ inject:
     - '<canvas id="universe" ></canvas>'
     #鱼鱼蒸
     - <link rel="stylesheet" href="/css/fish.css">
+    #波浪
+    - <link rel="stylesheet" href="/css/wave.css">
   bottom:
     - <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     # 鱼塘
