@@ -2,8 +2,8 @@
 tags: ['C#', '.NET', 'Unity', 'GC', '内存管理', '语言基础']
 categories: 语言
 title: C#内存管理
-date: 2024-09-16
-updated: 2024-09-16
+date: 2024-10-16
+updated: 2024-10-16
 cover: https://imgix.datadoghq.com/img/blog/engineering/dotnet-continuous-profiler-part-4/il-1313-net-profiler-blog-pt4-240520-final.png
 ---
 

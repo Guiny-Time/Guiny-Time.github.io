@@ -1,7 +1,7 @@
 ---
 title: 热更新其二：AssetBundle初窥
 date: '2024-09-12'
-tags: ['Lua','xLua','编程', '热更新', 'demo', 'Unity']
+tags: ['AssetBundle','打包','资源管理', '热更新', 'Unity']
 categories: 探索发现
 cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAbb638bd203617ec12ceff2586949cccd.png
 ---
