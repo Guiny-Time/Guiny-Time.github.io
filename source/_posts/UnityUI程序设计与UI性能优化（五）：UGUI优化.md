@@ -1,7 +1,7 @@
 ---
-title: UnityUI程序设计与UI性能优化（四）：UGUI性能优化
+title: UnityUI程序设计与UI性能优化（五）：UGUI性能优化
 tags: ['UI','UGUI','优化','Unity']
-categories: 探索发现
+categories: UnityUI程序设计与UI性能优化
 date: '2023-07-20T11:23:22.046Z'
 updated: '2023-07-22T12:52:10.543Z'
 cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA1fc5ff9e9083059d3dab93de58d27b40.png

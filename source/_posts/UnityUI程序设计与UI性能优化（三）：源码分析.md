@@ -1,41 +1,126 @@
 ---
-title: UnityUI程序设计与UI性能优化（三）：UGUI的渲染
+title: UnityUI程序设计与UI性能优化（三）：UGUI的渲染流程
 tags: ['UI','UGUI','源码','Unity']
-categories: 探索发现
+categories: UnityUI程序设计与UI性能优化
 date: '2023-07-11T11:23:22.046Z'
-updated: '2023-07-12T12:52:10.543Z'
+updated: '2023-07-20T12:52:10.543Z'
 cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA96d03380d5b9586247c6962d0c4f1351.jpg
 ---
 
 # UGUI的渲染过程
 
-Unity中渲染的物体都是由网格(Mesh)构成的，而网格的绘制单元是图元(点、线、三角面)。在 unity 中渲染一个 2d 或 3d 对象时，需要由 CPU 提起一个 `draw call`，经过一个完整的<a href="https://cattyhouse-guiny.xyz/2021/07/13/%C2%A71-1%EF%BC%9A%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/">渲染管线流程</a>，经由 GPU 处理最后输出像素到屏幕上。那么对于 UGUI 元素（例如Image）来说是不是也是一样的呢？
+Unity中渲染的物体都是由**网格**(Mesh)构成的，而网格的绘制单元是**图元**(点、线、三角面)。在 Unity 中渲染一个 2D 或 3D 对象时，需要由 CPU 提起一个 `draw call`（绘制调用），经过一个完整的<a href="https://cattyhouse-guiny.xyz/2021/07/13/%C2%A71-1%EF%BC%9A%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/">渲染管线流程</a>，经由 GPU 处理最后输出像素到屏幕上。那么对于 UGUI 元素（例如Image）来说是不是也是一样的呢？
 
 <img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAc097eec523b5f6b5740979bd3eb56945.png" alt="和未来的同学们一起为GMTK 2023做的游戏的标题页面，其中渐变部分就是一张半透明的UI Image" width=456 />
 
+绘制一个 UI，简而言之就是绘制 UI 的形状与图元：
+
+1. **生成 mesh**：mesh 由顶点和三角形组成，顶点里包括 UV 坐标、顶点颜色。
+2. **渲染图元**：将纹理渲染到 mesh 上。
+
+我们将以绘制一张 Image 为例，学习 UGUI 的渲染过程。
+
 <img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA815cca8fdee931369f6554f005da7e24.png" alt="新建一个Image默认搭载的脚本" width=300 />
 
-可以看到，新建一个 `Image` 对象，默认挂载了**Rect Transform**、**Canvas Renderer** 和 **Image** 三个组件。Image 的源码位于 Runtime/UI/Core/Image.cs。这个文件有1000多行，初见感觉挺吓人的，但其实大部分都是注释。Image 继承自 **MaskableGraphic**（同样继承自此抽象类的还有 `RawImage` 和 `Text`，顾名思义它们都是可被遮罩的），MaskableGraphic 继承自 **Graphic**，再往上就是所有 UI 元素都要继承的 **UIBehavior** 了。
+可以看到，新建一个 `Image` 对象，默认挂载了**Rect Transform**、**Canvas Renderer** 和 **Image** 三个组件。Image 的源码位于 Runtime/UI/Core/Image.cs，这个文件有 1000 多行，初见感觉挺吓人的，但其实大部分都是注释。Image 继承自 **MaskableGraphic**（同样继承自此抽象类的还有 `RawImage` 和 `Text`，顾名思义它们都是可被遮罩的），MaskableGraphic 继承自 **Graphic**，再往上就是所有 UI 元素都要继承的 **UIBehavior** 了。
 
-<img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAce1e88f42c973d369ae744f85c54b56f.png" width=250 />
+<img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAce1e88f42c973d369ae744f85c54b56f.png" alt="Image的继承信息" width=250 />
 
-UGUI的源码很长，这里就不一一展开详细分析了，在本小节只聊 UGUI 的渲染过程（以 Image 为例）。UGUI 的渲染器是 **Canvas Renderer**，和用于渲染 2D sprite 的 **Sprite Renderer** 有所不（渲染器的不同也是 Image 和 2D Sprite 之间的主要差异）。我们可以在检查器上找到 **Canvas Renderer**，但是没有展示任何属性。这个类提供了许多关键绘制信息，比如被渲染物体的颜色、材质和 Mesh 等，主要作用就是渲染包含在 Canvas 中的 UI 对象。
+**Canvas Renderer** 是 UGUI 的渲染器，和用于渲染 2D sprite 的 **Sprite Renderer** 有所不同（渲染器的不同也是 **Image** 和 **2D Sprite** 之间的主要差异）。每个 Canvas 都挂载有 Canvas Renderer，因为 UGUI 是**以 Canvas 为单位进行合批渲染**的，换句话说，每个 Canvas 都会开始一个全新的 DrawCall。我们可以在检查器上找到 **Canvas Renderer**，但是没有展示任何属性。这个类提供了许多关键绘制信息，比如被渲染物体的颜色、材质和 Mesh 等，主要作用就是渲染包含在 Canvas 中的 UI 对象。
 
-在渲染画布前，UGUI 会进行三个操作：**重建布局**（Rebuild Layout）、**重建画布图形**（Rebuild Canvas Graphics）和注册到 **CanvasUpdateRegistry**（一个简单的注册处，可以获取指定Canvas所包含的Graphic）上。
+在渲染画布前，UGUI 会进行三个操作：**重建布局**（Rebuild Layout）、**重建画布图形**（Rebuild Canvas Graphics）和注册到 **CanvasUpdateRegistry**（一个注册处，可以获取指定 Canvas 所包含的 Graphic）上。
 
-> **布局重建**（Layout Rebuild）：
+{% note pink 'fas fa-lightbulb' %}
+**布局重建**（Layout Rebuild）：
 当UI元素的尺寸、位置、或布局规则发生变化时，会触发布局重建。
-例如，改变RectTransform的尺寸或位置、修改布局组件（如Grid Layout、Vertical Layout Group）等。
+例如改变 RectTransform 的尺寸或位置、修改布局组件（如Grid Layout、Vertical Layout Group）等。
+{% endnote %}
 
-> **绘制重建**（Graphic Rebuild）：
+{% note orange 'fas fa-lightbulb' %}
+**绘制重建**（Graphic Rebuild）：
 当UI元素的外观发生变化时，会触发绘制重建。
-例如，改变UI元素的颜色、纹理、或其他图形属性。
+例如改变UI元素的颜色、纹理、或其他图形属性。
+{% endnote %}
 
-一个 UI 若要重建，必须继承自 **ICanvasElement** 接口，因为执行重建操作的时候会调用接口中的 `Rebuild` 函数。**CanvasUpdateRegistry** 监听了 Canvas 的 willRenderCanvases 事件，该事件会**每帧调用**并执行 `PerformUpdate` 函数。`PerformUpdate` 被调用时会遍历 `RebuildQueue` 中需要进行重建的 UI 元素，并调用元素的 `Rebuild` 方法。
+{% note green 'fas fa-lightbulb' %}
+**CanvasUpdateRegistry**：
+CanvasUpdateRegistry 中注册了当前一帧需要重新绘制的 Canvas，具体实现方式是在 `CanvasUpdateRegistry()` 方法中，为 `Canvas.willRenderCanvases` 添加 `PerformUpdate` 函数。
+```C#
+protected CanvasUpdateRegistry() {
+    Canvas.willRenderCanvases += PerformUpdate;
+}
+```
+{% endnote %}
+
+由上文可知，**CanvasUpdateRegistry** 监听了 Canvas 的 `willRenderCanvases` 事件，该事件会**每帧调用**并执行 `PerformUpdate` 函数。这个 `PerformUpdate` 就是我们实现**布局重建**和**图元重绘**的方法了，除此之外它还实现了**裁剪**（Culling）的功能。
+
+```C#
+private void PerformUpdate() {
+    UISystemProfilerApi.BeginSample(UISystemProfilerApi.SampleType.Layout);
+    CleanInvalidItems();
+
+    m_PerformingLayoutUpdate = true;
+
+    m_LayoutRebuildQueue.Sort(s_SortLayoutFunction);
+    // 布局重建，遍历 m_LayoutRebuildQueue 中的 UI 元素，执行重建
+    for (int i = 0; i <= (int)CanvasUpdate.PostLayout; i++) {
+        for (int j = 0; j < m_LayoutRebuildQueue.Count; j++) {
+            var rebuild = instance.m_LayoutRebuildQueue[j];
+            try {
+                // 重建
+                if (ObjectValidForUpdate(rebuild))
+                    rebuild.Rebuild((CanvasUpdate)i);
+            }
+            catch (Exception e) {
+                Debug.LogException(e, rebuild.transform);
+            }
+        }
+    }
+    // 布局重建完成
+    for (int i = 0; i < m_LayoutRebuildQueue.Count; ++i)
+        m_LayoutRebuildQueue[i].LayoutComplete();
+    // 清空队列
+    instance.m_LayoutRebuildQueue.Clear();
+    m_PerformingLayoutUpdate = false;
+
+    // 执行裁剪
+    ClipperRegistry.instance.Cull();
+    // 图元重建，遍历 m_GraphicRebuildQueue 中的 UI 元素，执行重建
+    m_PerformingGraphicUpdate = true;
+    for (var i = (int)CanvasUpdate.PreRender; i < (int)CanvasUpdate.MaxUpdateValue; i++) {
+        for (var k = 0; k < instance.m_GraphicRebuildQueue.Count; k++) {
+            try {
+                // 重建
+                var element = instance.m_GraphicRebuildQueue[k];
+                if (ObjectValidForUpdate(element))
+                    element.Rebuild((CanvasUpdate)i);
+            }
+            catch (Exception e) {
+                Debug.LogException(e, instance.m_GraphicRebuildQueue[k].transform);
+            }
+        }
+    }
+    // 图元重建完成
+    for (int i = 0; i < m_GraphicRebuildQueue.Count; ++i)
+        m_GraphicRebuildQueue[i].GraphicUpdateComplete();
+
+    instance.m_GraphicRebuildQueue.Clear();
+    m_PerformingGraphicUpdate = false;
+    UISystemProfilerApi.EndSample(UISystemProfilerApi.SampleType.Layout);
+}
+```
 
 <img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA26cd71eb726cfeb7a6839ad4fc09e57d.png" />
 
-如果我们点开 Image 的源码并通过断点调试，会发现调用栈最终来到了位于 **Graphic** 脚本的 `Rebuild` 函数：
+- **布局重建**：当 UI 的布局元素发生改变时，设置脏数据，将其放入 **m_LayoutRebuildQueue** 队列中执行重建，调用元素的 `Rebuild` 方法。
+- **裁剪**：即 `ClipperRegistry.instance.Cull()` 方法执行裁剪，只绘制布局未被遮挡的 UI 以优化性能。
+- **图元重建**：类似布局重建，当 UI 的外观发生改变时，设置脏数据，将其放入 **m_GraphicRebuildQueue** 队列中执行重建，调用元素的 `Rebuild` 方法。
+
+{% note warning %}
+**注意**，一个 UI 元素若要重建，必须继承自 **ICanvasElement** 接口，因为执行重建操作的时候会调用该接口中的 `Rebuild` 函数。
+{% endnote %}
+
+来看看 `Rebuild` 函数吧：
 
 ```C#
 public virtual void Rebuild(CanvasUpdate update) {
@@ -57,7 +142,7 @@ public virtual void Rebuild(CanvasUpdate update) {
 }
 ```
 
-这个函数主要做两件事情：一是检查 **Canvas Renderer** 是否存在，二是在渲染前检查画布对象的**顶点**和**材质**是否发生了改变（通过调用**SetVerticesDirty** 和 **SetMaterialDirty**），如果发生变化则进行**更新**。
+这个函数主要做两件事情：一是检查 **Canvas Renderer** 是否存在，二是在渲染前检查画布对象的**顶点**和**材质**是否发生了改变（包括改变颜色、大小、材质参数等），可以在其他地方通过调用**SetVerticesDirty** 和 **SetMaterialDirty** 将数据标记为“脏”来实现。如果发生变化，则进行**更新**。
 
 对于 Image 来说，它也存在顶点（及其构成的**网格**）和材质，这是渲染它的关键要素。
 
@@ -308,3 +393,4 @@ https://jonyzhao.gitbooks.io/gamedev/content/Unity/UGUI/UGUIRenderSystem.html
 https://discussions.unity.com/t/whats-canvasupdate/548584/4
 https://zhuanlan.zhihu.com/p/398813288
 https://zhuanlan.zhihu.com/p/448293298
+https://zhuanlan.zhihu.com/p/5051331939
