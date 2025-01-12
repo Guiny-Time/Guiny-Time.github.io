@@ -488,6 +488,41 @@
     
     
     <entry>
+      <title>Hold-ON！复盘：物理材质</title>
+      <link href="/2023/09/17/Hold-ON%EF%BC%81%E5%A4%8D%E7%9B%98%EF%BC%9A%E7%89%A9%E7%90%86%E6%9D%90%E8%B4%A8/"/>
+      <url>/2023/09/17/Hold-ON%EF%BC%81%E5%A4%8D%E7%9B%98%EF%BC%9A%E7%89%A9%E7%90%86%E6%9D%90%E8%B4%A8/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="什么是物理材质">什么是物理材质</h1><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAa4c61ca03a695b11fd05c44a75f8ad24.png" alt="FEEL中的一个物理材质"><p><img src="/2023/09/17/Hold-ON%EF%BC%81%E5%A4%8D%E7%9B%98%EF%BC%9A%E7%89%A9%E7%90%86%E6%9D%90%E8%B4%A8/pm.gif" alt="将该物理材质应用于地面的效果"></p><p>物理材质定义了<strong>刚体表面的弹性和摩擦力</strong>，包括以下几项：</p><ul><li><p><strong>Dynamic Friction</strong>（动摩擦）<br>在移动时使用的摩擦力，动摩擦将尝试在与另一个对象接触时减慢对象的速度。<code>Dynamic Friction</code> 通常为 <code>0</code> 到 <code>1</code> 之间的值。</p><ul><li>值为 <code>0</code> 时表面就像冰一样滑</li><li>值为 <code>1</code> 将使对象迅速静止（除非用很大的力或重力推动对象）。</li></ul></li><li><p><strong>Static Friction</strong>（静摩擦）<br>当对象静止在表面上时使用的摩擦力，静摩擦力会阻止对象开始移动，如果向对象施加足够大的力，对象才会开始移动。<code>Static Friction</code> 通常为 <code>0</code> 到 <code>1</code> 之间的值。</p><ul><li>值为 <code>0</code> 时表面就像冰一样滑</li><li>值为 <code>1</code> 时物体将很难移动。</li></ul></li><li><p><strong>Bounciness</strong>（弹性）<br>表面的弹性如何？值为 0 将不会反弹。值为 1 将在反弹时不产生任何能量损失，预计会有一些近似值，但可能只会给模拟增加少量能量。</p></li></ul><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAba09b744bcfe0bb789265cf359009f92.png" alt="组合选项"><p>除此之外，还有一个 <code>Friction Combine</code> 和 <code>Bounce Combine</code>。这两个“组合”表示了<strong>两个碰撞对象之间摩擦力/弹性的组合方式</strong>，Unity 将根据所选择的模式对两个物体施加<strong>相同</strong>的弹性和摩擦力效果。以 <code>Friction Combine</code> 为例，上图中的四个组合选项的含义分别是：</p><ul><li><strong>Average</strong>：对两个刚体的摩擦值求平均值。</li><li><strong>Minimum</strong>：使用两个值中的最小值。</li><li><strong>Maximum</strong>：使用两个值中的最大值。</li><li><strong>Multiply</strong>：两个刚体的摩擦值相乘。</li></ul><p>对于弹性来说也适用。</p><div class="note info flat"><p><strong>如果两个对象的组合模式不同怎么办？</strong></p><p>在这种情况下，Unity 将使用优先级最高的组合模式，这四个模式的优先级是：<code>Average</code> &lt; <code>Minimum</code> &lt; <code>Multiply</code> &lt; <code>Maximum</code>。<br>例如：如果一种材质设置了 <code>Average</code>，但另一种材质设置了 <code>Maximum</code>，那么要使用的组合函数是 <code>Maximum</code>，因为它具有更高的优先级。</p></div><div class="note warning flat"><p><strong>注意</strong></p><p>Nvidia PhysX 引擎使用的摩擦力模型针对模拟的性能和稳定性进行了调整，并不一定代表真实物理的高度近似值。具体而言，大于单个点的接触面（例如两个相互叠放在一起的盒子）将计算为具有两个接触点，其摩擦力将是现实世界物理学中的两倍。在这种情况下，可能希望将摩擦系数乘以 0.5 以获得更真实的结果。<br>同样的逻辑适用于弹性模型。由于各种模拟细节（如位置校正），Nvidia PhysX 无法保证完美的能量守恒效果。因此，比如说，如果受重力影响的对象的弹性值为 1，并与弹性为 1 的地面碰撞，则对象的弹跳高度应该会高于初始位置。</p></div><h1 id="为项目设置默认物理材质">为项目设置默认物理材质</h1><p>如果我们希望整个项目都采用某种物理材质的话，一个一个为刚体进行设置是非常麻烦的。为此，我们可以在 <strong>Edit &gt; Project Settings &gt; Physics</strong> 里找到 Default Material（默认材质）属性，为其选择默认物理材质。</p><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAee930dc7d1511f1a31441ebc794b6e27.png" alt="设置默认物理材质"><h1 id="参考资料">参考资料</h1><p><a href="https://docs.unity3d.com/cn/2019.4/Manual/class-PhysicMaterial.html">https://docs.unity3d.com/cn/2019.4/Manual/class-PhysicMaterial.html</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 引擎功能 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Unity </tag>
+            
+            <tag> 游戏开发 </tag>
+            
+            <tag> 物理 </tag>
+            
+            <tag> 物理模拟 </tag>
+            
+            <tag> 引擎 </tag>
+            
+            <tag> 物理材质 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hold-ON！复盘：物理关节</title>
       <link href="/2023/09/03/Hold-ON%EF%BC%81%E5%A4%8D%E7%9B%98%EF%BC%9A%E5%85%B3%E8%8A%82%E4%B8%8E%E9%93%B0%E9%93%BE/"/>
       <url>/2023/09/03/Hold-ON%EF%BC%81%E5%A4%8D%E7%9B%98%EF%BC%9A%E5%85%B3%E8%8A%82%E4%B8%8E%E9%93%B0%E9%93%BE/</url>
@@ -731,8 +766,6 @@
             
             <tag> C# </tag>
             
-            <tag> 语言基础 </tag>
-            
             <tag> C++ </tag>
             
             <tag> 数据结构 </tag>
@@ -740,6 +773,8 @@
             <tag> map </tag>
             
             <tag> hashmap </tag>
+            
+            <tag> 语言基础 </tag>
             
         </tags>
       
@@ -830,9 +865,9 @@
             
             <tag> C# </tag>
             
-            <tag> 特性 </tag>
-            
             <tag> 语言基础 </tag>
+            
+            <tag> 特性 </tag>
             
             <tag> 事件 </tag>
             
@@ -861,11 +896,11 @@
             
             <tag> C# </tag>
             
+            <tag> 语言基础 </tag>
+            
             <tag> 委托 </tag>
             
             <tag> 特性 </tag>
-            
-            <tag> 语言基础 </tag>
             
         </tags>
       
@@ -892,9 +927,9 @@
             
             <tag> C# </tag>
             
-            <tag> 特性 </tag>
-            
             <tag> 语言基础 </tag>
+            
+            <tag> 特性 </tag>
             
             <tag> 反射 </tag>
             
@@ -923,9 +958,9 @@
             
             <tag> C# </tag>
             
-            <tag> 特性 </tag>
-            
             <tag> 语言基础 </tag>
+            
+            <tag> 特性 </tag>
             
             <tag> 闭包 </tag>
             
@@ -1301,6 +1336,8 @@
             
             <tag> Unity </tag>
             
+            <tag> 设计模式 </tag>
+            
             <tag> 简单工厂模式 </tag>
             
             <tag> 抽象工厂模式 </tag>
@@ -1308,8 +1345,6 @@
             <tag> 工厂方法模式 </tag>
             
             <tag> 工厂模式 </tag>
-            
-            <tag> 设计模式 </tag>
             
         </tags>
       
@@ -1340,9 +1375,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 设计模式 </tag>
-            
             <tag> 单例模式 </tag>
+            
+            <tag> 设计模式 </tag>
             
         </tags>
       
