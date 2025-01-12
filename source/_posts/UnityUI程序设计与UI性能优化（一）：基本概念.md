@@ -1,6 +1,6 @@
 ---
 tags: ['UI','UGUI','NGUI','FGUI','Unity']
-categories: UnityUI程序设计与UI性能优化
+categories: 引擎功能
 title: UnityUI程序设计与UI性能优化（一）：基本概念
 date: '2023-06-30'
 updated: '2023-06-03T13:27:51.533Z'

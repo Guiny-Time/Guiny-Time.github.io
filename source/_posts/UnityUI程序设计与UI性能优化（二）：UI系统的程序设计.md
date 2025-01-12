@@ -1,6 +1,6 @@
 ---
 tags: ['UI','系统','框架','设计','Unity']
-categories: UnityUI程序设计与UI性能优化
+categories: 引擎功能
 title: UnityUI程序设计与UI性能优化（二）：UI系统的程序设计
 date: '2023-07-03T13:51:22.046Z'
 updated: '2023-07-04T05:52:10.543Z'

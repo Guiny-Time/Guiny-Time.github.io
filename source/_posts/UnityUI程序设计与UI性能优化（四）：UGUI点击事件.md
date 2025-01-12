@@ -3,7 +3,7 @@ title: UnityUI程序设计与UI性能优化（四）：UGUI的点击事件
 date: 2023-07-15 16:41:18
 updated: 
 tags: ['UI','UGUI','源码','Unity']
-categories: UnityUI程序设计与UI性能优化
+categories: 引擎功能
 cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAa198651e59fd8df47130a8f8b489dbc5.png
 ---
 

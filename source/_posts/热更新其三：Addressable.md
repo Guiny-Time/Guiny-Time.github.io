@@ -2,7 +2,7 @@
 title: 热更新其三：Addressables
 date: '2024-09-14'
 tags: ['AssetBundle','Addressable', '打包','资源管理', '热更新', 'Unity']
-categories: 探索发现
+categories: 引擎功能
 cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA48c2de74555de8353a4c348854ec99c7.png
 ---
 

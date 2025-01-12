@@ -2,7 +2,7 @@
 title: 热更新其二：AssetBundle初窥
 date: '2024-09-12'
 tags: ['AssetBundle','打包','资源管理', '热更新', 'Unity']
-categories: 探索发现
+categories: 引擎功能
 cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAbb638bd203617ec12ceff2586949cccd.png
 ---
 

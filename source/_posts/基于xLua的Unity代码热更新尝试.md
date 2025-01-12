@@ -2,7 +2,7 @@
 title: 热更新其一：基于xLua的Unity代码热更新尝试
 date: '2024-09-10T11:23:22.046Z'
 tags: ['Lua','xLua','编程', '热更新', 'demo', 'Unity']
-categories: 探索发现
+categories: 引擎功能
 cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA9084d78948da0d4d0bc77e1bfeb0ea1c.png
 ---
 
