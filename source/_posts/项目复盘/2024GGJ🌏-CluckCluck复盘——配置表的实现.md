@@ -2,7 +2,8 @@
 title: "2024GGJ\U0001F30F - CluckCluck复盘——配置表的实现"
 date: '2024-02-11'
 updated: '2024-02-15'
-tags:
+tags: ['游戏编程','经验分享','项目复盘','配置表']
+categories: 项目复盘
 cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAcf0538525ce9dc3d4b37bf124f74df47.png
 ---
 

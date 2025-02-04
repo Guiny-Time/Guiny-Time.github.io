@@ -18,7 +18,7 @@ menu:
   内容||fas fa-list:
     笔记: /next/ || fas fa-feather
     分类: /categories/ || fas fa-folder-open
-    标签: /categories/tags/ || fas fa-tags
+    标签: /tags/ || fas fa-tags
     图片: /gallery/ || fas fa-hamburger
 
 # Code Blocks (代碼相關)
