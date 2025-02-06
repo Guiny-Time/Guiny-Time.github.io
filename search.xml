@@ -80,9 +80,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
             
@@ -115,9 +115,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
             
@@ -150,9 +150,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
             
@@ -220,17 +220,17 @@
       
         <tags>
             
-            <tag> 热更新 </tag>
-            
             <tag> Unity </tag>
             
+            <tag> 热更新 </tag>
+            
             <tag> AssetBundle </tag>
+            
+            <tag> Addressable </tag>
             
             <tag> 打包 </tag>
             
             <tag> 资源管理 </tag>
-            
-            <tag> Addressable </tag>
             
         </tags>
       
@@ -255,9 +255,9 @@
       
         <tags>
             
-            <tag> 热更新 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 热更新 </tag>
             
             <tag> AssetBundle </tag>
             
@@ -288,6 +288,8 @@
       
         <tags>
             
+            <tag> Unity </tag>
+            
             <tag> Lua </tag>
             
             <tag> xLua </tag>
@@ -297,8 +299,6 @@
             <tag> 热更新 </tag>
             
             <tag> demo </tag>
-            
-            <tag> Unity </tag>
             
         </tags>
       
@@ -570,15 +570,52 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
             
             <tag> 项目复盘 </tag>
             
             <tag> 新输入系统 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mono &amp; IL2CPP</title>
+      <link href="/2023/10/02/Mono-IL2CPP/"/>
+      <url>/2023/10/02/Mono-IL2CPP/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAbfaee249f1d3c5d59577cd3af31683fd.png" alt="一次构建，到处运行"><p>1995 年，Java 编程语言横空出世，依托<strong>虚拟机</strong>（<strong>JVM</strong>）的 Java 打着“<strong>一次编写，到处运行</strong>”的<strong>跨平台</strong>旗号，迅速赢得了开发者的青睐，成为当今应用最广泛的十大编程语言之一。</p><p>Unity 同样做到了跨平台的特性，它允许开发者在完成游戏开发工作后将其打包发布到多达 27 个目标平台上（如上图所示）<s>Unreal做得到吗</s>。那么 Unity 是如何实现跨平台的操作呢？它也使用到了类似 JVM 的概念吗？这就要提到 Unity 的<strong>脚本后端处理</strong>（Scripting Backend）了。Unity 具有两个脚本后端：<strong>Mono</strong> 和 <strong>IL2CPP</strong> (Intermediate Language To C++)，它们各自使用不同的编译技术，也是今天本文探讨的主题。在正式开始之前先学习一下 .NET 是怎么被编译成目标平台的代码的：</p><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAde5206458a07165b33de269678ebf4f6.png" alt="C#的编译过程"><ol><li>编写 C# 代码</li><li>C# 编译器编译代码（在 Unity 中就是每次更改完代码之后漫长的进度条等待环节）后得到了中间语言（Intermediate Language Code，IL）。</li><li>IL 经过公共语言运行时（CLR）和即时编译器（JIT）的编译，得到目标平台的可执行程序集。</li></ol><p>可见跨平台的关键就在中间语言到程序集的中间，也就是 CLR 所负责的部分。Mono 和 IL2CPP 是不是对这里下刀的呢？</p><h1 id="mono">Mono</h1><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAe966e7a325b7e39f033df6c4725e4623.png" alt="mono logo" width="100"><p>Mono 是基于 .NET 框架的开源开发平台，是 CLR 的开源实现。Mono 允许开发人员构建具有提高开发人员生产率的跨平台应用程序，由以下几个部分组成：</p><ul><li><strong>C# 编译器</strong>：用于编译 C# 代码。</li><li><strong>Mono 运行时</strong>：在一些地方也被称作 <strong>Mono VM</strong>（Mono 虚拟机），实现了 CLI，提供 JIT（即时编译器）、AOT（提前编译器）、GC、库加载程序、线程系统等。</li><li><strong>.NET Framework 类库</strong>：一套与 Microsoft .NET Framework 兼容的类库，提供了构建应用程序所需的基础类，包括集合、输入/输出、网络、安全等。</li><li><strong>Mono 类库</strong>：Mono 项目中超出 .NET Framework 类库的部分，提供了许多额外的功能。</li></ul><div class="note info flat"><p><strong>什么是类库（Class Library）？</strong></p><p><strong>类库</strong>是面向对象编程中一组<strong>预先编写好的类的集合</strong>，这些类可以被开发者在编写程序时直接使用，是十分有用的工具。在 Unity 开发的过程中，我们经常能用到的 <code>System.Collections</code>、<code>System.IO</code> 等命名空间就源自 .NET Framework 类库。</p></div><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA9056fe7f474e85c6f3a09582e5bb71cc.png" width="500"><p>由上图可见，在 Unity 中 Mono 的工作流程如下：</p><ol><li>C#，Unity Spcript 和 Boo 通过各自的编译器转成中间语言（IL）</li><li>IL 在 Mono 虚拟机上被编译成目标平台代码</li><li>运行程序</li></ol><p>Mono 虚拟机提供了两种编译方式：<strong>即时编译</strong>（JIT，在运行时按需编译代码）和<strong>提前编译</strong>（AOT）。在打包时，选择 JIT 或 AOT 会在第二步上产生一些差异：</p><ul><li><strong>JIT 模式</strong>下 IL 与 Mono 虚拟机会一起打入包中，IL 在应用程序中通过 Mono 虚拟机解释代码，将指令映射到虚拟内存中执行（ios 禁止了这一行为，因此必须使用 AOT）</li><li><strong>AOT 模式</strong>会生成相应平台的<strong>机器码</strong>，不会将 Mono 虚拟机打入包中。</li></ul><p>使用 Mono AOT 编译模式可以提高应用程序的<strong>启动速度</strong>和<strong>运行时性能</strong>，因为它将 IL 代码编译为本地机器码，减少了运行时的解释和优化过程。但这样 C# 就和编译型语言或者解释型语言没有区别了，失去了<strong>动态代码特性</strong>（例如反射、动态生成优化代码等）。</p><p>既然 Mono 是一个强大的跨平台工具，为什么 Unity 还要推出 IL2CPP 呢？主要有以下几个原因：</p><ol><li>运行效率一般。</li><li>由于版权原因，Unity 无法使用最新版本的 Mono，这限制了开发者对 .NET 新特性的使用。</li><li>Mono VM 在各个平台移植、维护非常耗时，有时甚至不可能完成。</li></ol><blockquote><p>Mono 的跨平台是通过 Mono VM 实现的，有几个平台，就要实现几个VM，像Unity这样支持多平台的引擎，Mono 官方的 VM 肯定是不能满足需求的。所以针对不同的新平台，Unity 的项目组就要把 VM 给移植一遍，同时解决 VM 里面发现的 bug。这非常耗时耗力。这些能移植的平台还好说，还有比如 WebGL 这样基于浏览器的平台。要让 WebGL 支持 Mono 的 VM 几乎是不可能的。</p></blockquote><div class="note orange icon-padding flat"><i class="note-icon fas fa-lightbulb"></i><p><strong>为什么有了 CLR 还需要用 Mono？它们的功能不是一样的吗？</strong></p><p>相信很多人在刚接触 Mono 的时候都会有这样的疑问。CLR 最初<strong>仅支持 Windows</strong>，没有办法做到把游戏发布到多平台上。Mono 在这样的历史前提下诞生了，它最初的设计目标就是实现<strong>跨平台</strong>。<br>相比于现代（.NET 5+）CLR，Mono 自身还是存在不足之处的，例如它的性能（<strong>CG</strong>、<strong>JIT</strong> 等方面）不如原生 CLR。随着 .NET Core 的崛起，Mono 逐渐被边缘化。</p></div><h1 id="il2cpp">IL2CPP</h1><p><strong>IL2CPP</strong> (Intermediate Language To C++) 是一种由 Unity 开发的新脚本后端，可在为各种平台构建项目时<strong>替代</strong> Mono。使用 IL2CPP 构建项目时，IL2CPP 会将 IL 转换为 <strong>C++</strong>，然后利用目标平台的 <strong>C++ 编译器</strong>生成本地可执行文件。由于 C++ 是一种<strong>编译型语言</strong>，需要在程序运行之前通过编译器将源代码转换为机器码或目标代码，因此 IL2CPP 使用<strong>提前编译</strong>（AOT），在运行之前编译整个应用程序，可以提高项目的性能、安全性和平台兼容性。 相较于 Mono，IL2CPP 主要有以下优点：</p><ul><li><strong>性能提升</strong><br>IL2CPP 将 IL 转换为 C++ 代码，然后使用平台特定的 C++ 编译器进行优化。同时 C++ 代码可以直接运行在本地环境中，减少了与虚拟机相关的开销。根据 Unity 官方的数据，使用 IL2CPP 后程序的运行效率可以提高 <strong>1.5</strong> 到 <strong>2</strong> 倍。</li><li><strong>安全性</strong><br>IL2CPP 生成的 C++ 代码更加难以被反编译，这意味着游戏代码更加安全，难以被破解或修改。</li><li><strong>平台兼容性</strong><br>IL2CPP 能够支持更多的平台，包括那些不支持 Mono VM 的平台（如 WebGL）。</li><li><strong>版权问题</strong><br>IL2CPP 是 Unity 自己开发的，不像 Mono 那样会受到版本授权的限制，开发者可以使用最新的 C# 特性。</li></ul><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA00daf86ed09f6c0455857dfe9c1a277f.png" width="500"><p>由上图可见，IL2CPP 打包的主要流程如下：</p><ol><li>C#，Unity Spcript 和 Boo 通过各自的编译器转成中间语言（IL）</li><li>IL2CPP 将 IL 转换为 C++，并保留类型信息、方法调用等关键信息</li><li>生成的 C++ 代码经过优化和整理后生产本地源码</li><li>由于 C++ 没有 GC 一类的功能，生成的本地源码还包含了一些 <strong>IL2CPP 运行时库</strong>（即上图中的 <strong>IL2CPP VM</strong>）的功能，将 .NET 的垃圾回收等功能嵌入到生成的 C++ 代码中，以便在运行时管理内存的分配和释放<ul><li>IL2CPP VM 在应用程序运行时起作用，它主要负责处理应用程序的运行时行为，包括<strong>内存管理</strong>、<strong>线程创建</strong>、<strong>类型转换</strong>、<strong>异常处理</strong>等服务性工作。由于不需要动态解析 IL，IL2CPP 的大小可以很小（降低最终包体）</li><li>IL2CPP VM 是作为编译后的应用程序的一部分打包到最终的可执行文件中的，而不是作为独立的组件进行加载</li></ul></li></ol><p>当然，IL2CPP 也存在缺点。因为是通过 AOT 而非 JIT 模式编译的，开发者无法在程序中使用动态语言特性（例如运行时生成代码）。</p><h1 id="参考资料">参考资料</h1><p><a href="https://zh.wikipedia.org/wiki/Java">https://zh.wikipedia.org/wiki/Java</a><br><a href="https://docs.unity3d.com/cn/2021.1/Manual/scripting-backends.html">https://docs.unity3d.com/cn/2021.1/Manual/scripting-backends.html</a><br><a href="https://www.mono-project.com/docs/about-mono/">https://www.mono-project.com/docs/about-mono/</a><br>Unity将来时：IL2CPP是什么？ - <a href="https://zhuanlan.zhihu.com/p/19972689">https://zhuanlan.zhihu.com/p/19972689</a><br>【Unity游戏开发】Mono和IL2CPP的区别 - <a href="https://zhuanlan.zhihu.com/p/352463394">https://zhuanlan.zhihu.com/p/352463394</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 探索发现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Unity </tag>
+            
+            <tag> 跨平台 </tag>
+            
+            <tag> Mono </tag>
+            
+            <tag> IL2CPP </tag>
+            
+            <tag> 编译 </tag>
+            
+            <tag> C# </tag>
+            
+            <tag> C++ </tag>
             
         </tags>
       
@@ -797,9 +834,9 @@
       
         <tags>
             
-            <tag> 设计 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 设计 </tag>
             
             <tag> 框架 </tag>
             
@@ -863,17 +900,17 @@
       
         <tags>
             
-            <tag> 数据结构 </tag>
-            
             <tag> C# </tag>
             
-            <tag> 语言基础 </tag>
-            
             <tag> C++ </tag>
+            
+            <tag> 数据结构 </tag>
             
             <tag> map </tag>
             
             <tag> hashmap </tag>
+            
+            <tag> 语言基础 </tag>
             
         </tags>
       
@@ -898,9 +935,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
             
@@ -964,9 +1001,9 @@
             
             <tag> C# </tag>
             
-            <tag> 特性 </tag>
-            
             <tag> 语言基础 </tag>
+            
+            <tag> 特性 </tag>
             
             <tag> 事件 </tag>
             
@@ -995,11 +1032,11 @@
             
             <tag> C# </tag>
             
+            <tag> 语言基础 </tag>
+            
             <tag> 委托 </tag>
             
             <tag> 特性 </tag>
-            
-            <tag> 语言基础 </tag>
             
         </tags>
       
@@ -1026,9 +1063,9 @@
             
             <tag> C# </tag>
             
-            <tag> 特性 </tag>
-            
             <tag> 语言基础 </tag>
+            
+            <tag> 特性 </tag>
             
             <tag> 反射 </tag>
             
@@ -1057,9 +1094,9 @@
             
             <tag> C# </tag>
             
-            <tag> 特性 </tag>
-            
             <tag> 语言基础 </tag>
+            
+            <tag> 特性 </tag>
             
             <tag> 闭包 </tag>
             
@@ -1086,9 +1123,9 @@
       
         <tags>
             
-            <tag> demo </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> demo </tag>
             
             <tag> ShaderLab </tag>
             
@@ -1119,9 +1156,9 @@
       
         <tags>
             
-            <tag> demo </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> demo </tag>
             
             <tag> ShaderLab </tag>
             
@@ -1183,9 +1220,9 @@
       
         <tags>
             
-            <tag> demo </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> demo </tag>
             
             <tag> ShaderLab </tag>
             
@@ -1245,9 +1282,9 @@
       
         <tags>
             
-            <tag> demo </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> demo </tag>
             
             <tag> ShaderLab </tag>
             
@@ -1305,9 +1342,9 @@
       
         <tags>
             
-            <tag> demo </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> demo </tag>
             
             <tag> ShaderLab </tag>
             
@@ -1336,9 +1373,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 优化 </tag>
             
@@ -1400,9 +1437,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
             
@@ -1433,9 +1470,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
             
@@ -1466,11 +1503,13 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> Unity </tag>
             
+            <tag> 经验分享 </tag>
+            
             <tag> 游戏编程 </tag>
+            
+            <tag> 设计模式 </tag>
             
             <tag> 简单工厂模式 </tag>
             
@@ -1479,8 +1518,6 @@
             <tag> 工厂方法模式 </tag>
             
             <tag> 工厂模式 </tag>
-            
-            <tag> 设计模式 </tag>
             
         </tags>
       
@@ -1505,15 +1542,15 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
             
-            <tag> 设计模式 </tag>
-            
             <tag> 单例模式 </tag>
+            
+            <tag> 设计模式 </tag>
             
         </tags>
       
@@ -1538,11 +1575,11 @@
       
         <tags>
             
+            <tag> Unity </tag>
+            
             <tag> 教程 </tag>
             
             <tag> 经验分享 </tag>
-            
-            <tag> Unity </tag>
             
             <tag> 动画 </tag>
             
@@ -1577,11 +1614,11 @@
       
         <tags>
             
+            <tag> Unity </tag>
+            
             <tag> 教程 </tag>
             
             <tag> 经验分享 </tag>
-            
-            <tag> Unity </tag>
             
             <tag> 状态机 </tag>
             
@@ -1651,9 +1688,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
             
@@ -1905,9 +1942,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
             
@@ -1936,9 +1973,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
             
