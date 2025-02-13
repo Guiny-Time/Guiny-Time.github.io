@@ -327,9 +327,9 @@
             
             <tag> 游戏开发 </tag>
             
-            <tag> ECS </tag>
-            
             <tag> 框架 </tag>
+            
+            <tag> ECS </tag>
             
         </tags>
       
@@ -640,9 +640,9 @@
       
         <tags>
             
-            <tag> Unity </tag>
-            
             <tag> 游戏开发 </tag>
+            
+            <tag> Unity </tag>
             
             <tag> 物理 </tag>
             
@@ -675,9 +675,9 @@
       
         <tags>
             
-            <tag> Unity </tag>
-            
             <tag> 游戏开发 </tag>
+            
+            <tag> Unity </tag>
             
             <tag> 物理 </tag>
             
@@ -708,9 +708,9 @@
       
         <tags>
             
-            <tag> Unity </tag>
-            
             <tag> 游戏开发 </tag>
+            
+            <tag> Unity </tag>
             
             <tag> 物理 </tag>
             
@@ -743,9 +743,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 优化 </tag>
-            
             <tag> UI </tag>
+            
+            <tag> 优化 </tag>
             
             <tag> UGUI </tag>
             
@@ -834,13 +834,13 @@
       
         <tags>
             
-            <tag> 设计 </tag>
+            <tag> 框架 </tag>
             
             <tag> Unity </tag>
             
-            <tag> 框架 </tag>
-            
             <tag> UI </tag>
+            
+            <tag> 设计 </tag>
             
             <tag> 系统 </tag>
             
@@ -906,11 +906,11 @@
             
             <tag> 数据结构 </tag>
             
+            <tag> 语言基础 </tag>
+            
             <tag> map </tag>
             
             <tag> hashmap </tag>
-            
-            <tag> 语言基础 </tag>
             
         </tags>
       
@@ -999,9 +999,9 @@
       
         <tags>
             
-            <tag> Cinemachine </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> Cinemachine </tag>
             
             <tag> 相机 </tag>
             
@@ -1040,9 +1040,9 @@
             
             <tag> C# </tag>
             
-            <tag> 语言基础 </tag>
-            
             <tag> 特性 </tag>
+            
+            <tag> 语言基础 </tag>
             
             <tag> 事件 </tag>
             
@@ -1071,11 +1071,11 @@
             
             <tag> C# </tag>
             
-            <tag> 语言基础 </tag>
-            
             <tag> 委托 </tag>
             
             <tag> 特性 </tag>
+            
+            <tag> 语言基础 </tag>
             
         </tags>
       
@@ -1102,9 +1102,9 @@
             
             <tag> C# </tag>
             
-            <tag> 语言基础 </tag>
-            
             <tag> 特性 </tag>
+            
+            <tag> 语言基础 </tag>
             
             <tag> 反射 </tag>
             
@@ -1133,9 +1133,9 @@
             
             <tag> C# </tag>
             
-            <tag> 语言基础 </tag>
-            
             <tag> 特性 </tag>
+            
+            <tag> 语言基础 </tag>
             
             <tag> 闭包 </tag>
             
@@ -1476,13 +1476,13 @@
       
         <tags>
             
+            <tag> 设计模式 </tag>
+            
             <tag> Unity </tag>
             
             <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
-            
-            <tag> 设计模式 </tag>
             
             <tag> 命令模式 </tag>
             
@@ -1509,13 +1509,13 @@
       
         <tags>
             
+            <tag> 设计模式 </tag>
+            
             <tag> Unity </tag>
             
             <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
-            
-            <tag> 设计模式 </tag>
             
             <tag> 原型模式 </tag>
             
@@ -1542,13 +1542,13 @@
       
         <tags>
             
+            <tag> 设计模式 </tag>
+            
             <tag> Unity </tag>
             
             <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
-            
-            <tag> 设计模式 </tag>
             
             <tag> 简单工厂模式 </tag>
             
@@ -1581,6 +1581,8 @@
       
         <tags>
             
+            <tag> 设计模式 </tag>
+            
             <tag> Unity </tag>
             
             <tag> 经验分享 </tag>
@@ -1588,8 +1590,6 @@
             <tag> 游戏编程 </tag>
             
             <tag> 单例模式 </tag>
-            
-            <tag> 设计模式 </tag>
             
         </tags>
       
@@ -1727,13 +1727,13 @@
       
         <tags>
             
+            <tag> 设计模式 </tag>
+            
             <tag> Unity </tag>
             
             <tag> 经验分享 </tag>
             
             <tag> 游戏编程 </tag>
-            
-            <tag> 设计模式 </tag>
             
             <tag> 项目复盘 </tag>
             
@@ -1930,11 +1930,11 @@
     
     
     <entry>
-      <title>MVC设计模式</title>
-      <link href="/2021/05/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/MVC%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-      <url>/2021/05/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/MVC%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
+      <title>MVVM设计模式</title>
+      <link href="/2021/06/13/MVVM%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <url>/2021/06/13/MVVM%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>MVC 模式的全称是 Model-View-Controller，即模型-视图-控制器。严格来说，MVC并不是GoF（四人帮）归纳出的一种独立设计模式，而是组合模式（UI界面的构建）、策略模式（VC之间的一对多关系）和观察者模式（MV间的事件触发）的组合。<br>这种设计模型通常用于用户图形界面的图形/数据/逻辑分离（是不是感觉在某些方面很像 ECS？），因此在游戏领域中常被用于 UI 相关的功能上。那么，什么是 M / V / C 呢？</p><ul><li><strong>M</strong>（模型）<br>模型层（M 层）负责<strong>存放数据</strong>，类似于 ECS 中的 C（组件）。</li><li><strong>V</strong>（视图）<br>视图层（V 层）负责<strong>展示用户图形界面</strong>，类似于 ECS 中的 E（实体），是用户与之直接交互的元素。</li><li><strong>C</strong>（控制器）<br>控制层（C 层）负责<strong>处理数据逻辑</strong>，类似于 ECS 中的 S（系统），包含了所有数据计算的部分，负责更新M层的数据。</li></ul><p>使用 MVC 模式的目的是将 M 和 V 的实现代码分离，从而使同一个程序可以使用不同的表现形式。比如一批统计数据可以分别用柱状图、饼图来表示。C 存在的目的则是确保 M 和 V 的同步，一旦 M 改变，V 应该同步更新。</p><h1 id="unity中的mvc">Unity中的MVC</h1><p><img src="https://img-blog.csdnimg.cn/20181106152450894.png" alt><br><img src="http://xpsuper.com/upload/2021/10/MVC01-da44a1398db94f8987ec9aa716cb1725.png" alt></p><p>以上述框架为例，假设我们要做一个点击按钮更新金币数量（即点击一次金币数 +1 ）和清空当前金币的功能：</p><p><img src="https://velog.velcdn.com/images/suhan0304/post/d6333381-8221-4cae-9f3c-f7d21ed3e978/image.png" alt></p><h2 id="m">M</h2><p>M 层存放所有数据，包括静态数据、变量、资源（如贴图、游戏对象等）等。在这个例子中，M 层中只有金币数量的数据。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">CoinModel</span> : <span class="title">Monobehavior</span>&#123;</span><br><span class="line">  <span class="comment">// 金币数据</span></span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">int</span> _coins&#123;<span class="keyword">get</span>; <span class="keyword">set</span>;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="v">V</h2><p>V 层负责为拿取所有 UI 组件对象，并为它们声明相关的事件：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">CoinView</span> : <span class="title">Monobehavior</span>&#123;</span><br><span class="line">  CoinController coinCtrl = GameObject.Find(<span class="string">&quot;#VisualElement&quot;</span>).GetComponent(<span class="string">&quot;CoinController&quot;</span>);</span><br><span class="line">  <span class="comment">// 拿取所有组件obj</span></span><br><span class="line">  <span class="keyword">public</span> Text coin_num;</span><br><span class="line">  <span class="keyword">public</span> Button b_add;</span><br><span class="line">  <span class="keyword">public</span> Button b_reset;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Awake</span>()</span>&#123;</span><br><span class="line">    coin_num = GameObject.Find(<span class="string">&quot;#Label--Coin&quot;</span>);</span><br><span class="line">    b_add = GameObject.Find(<span class="string">&quot;#Button--Coin&quot;</span>);</span><br><span class="line">    b_reset = GameObject.Find(<span class="string">&quot;#Button--Reset&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 声明点击事件</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Update</span>()</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Intput.GetMouseButtonDown(<span class="number">0</span>))&#123;</span><br><span class="line">      <span class="comment">// 触发硬币+1</span></span><br><span class="line">      <span class="keyword">if</span>(b_add.OnePointColliderObject() != <span class="literal">null</span>)&#123;</span><br><span class="line">        coinCtrl.AddCoin();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 触发硬币重置</span></span><br><span class="line">      <span class="keyword">if</span>(b_reset.OnePointColliderObject() != <span class="literal">null</span>)&#123;</span><br><span class="line">        coinCtrl.ResetCoin();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="c">C</h2><p>C 层负责业务逻辑相关功能（在本例中为“金币 +1 ”和“清空金币”两大功能）的实现，获取Model的数据，通知View层更新数据。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CoinController</span>&#123;</span><br><span class="line">  <span class="comment">// 获取M层和V层 </span></span><br><span class="line">  CoinModel coinMod = GameObject.Find(<span class="string">&quot;#VisualElement&quot;</span>).GetComponent(<span class="string">&quot;CoinModel&quot;</span>);</span><br><span class="line">  CoinView coinVie = GameObject.Find(<span class="string">&quot;#VisualElement&quot;</span>).GetComponent(<span class="string">&quot;CoinView&quot;</span>);</span><br><span class="line">  <span class="comment">// 硬币++</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">AddCoin</span>()</span>&#123;</span><br><span class="line">    coinMod._coins++;</span><br><span class="line">    coinVie.coin_num.text = coinMod._coins;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 重置硬币</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ResetCoin</span>()</span>&#123;</span><br><span class="line">    coinMod._coins = <span class="number">0</span>;</span><br><span class="line">    coinVie.coin_num.text = coinMod._coins;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>实际上，MVC不仅可以用于UI系统（只是在大部分情况下，它天然地适合于此），也可以拓展引用到其他模块上，例如<a href="https://github.com/jskyzero/MVC.DotNet/tree/master">这个仓库</a>所展示的玩家系统。</p><h1 id="参考资料">参考资料</h1><p><a href="https://bbs.huaweicloud.com/blogs/306798">https://bbs.huaweicloud.com/blogs/306798</a></p>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA70e3f6985946ceb0408050be41d3d099.png" width="500"><p>我们在<a href="https://cattyhouse-guiny.xyz/2021/05/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/mvc%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">上一篇文章</a>中提到了 <strong>MVC</strong>（Model-View-Controller）设计模式。在 Unity 中，MVC 模式通常体现在将游戏数据（M）和表现（V）分开，而 C 则负责管理输入和调度更新，在代码中更新 UI 的状态。</p><p>在这篇文章中，我将介绍另一种设计模式 <strong>MVVM</strong>（<strong>Model</strong> - <strong>View</strong> - <strong>ViewModel</strong>）。MVVM 是一种将用户界面与业务逻辑分离的设计模式，与 MVC 模式相比，MVVM 模式在 MVC 的基础上进一步解耦了 View 和 Model，取代 Controller 的 ViewModel 层（VM 层）作为中介层提供了<strong>数据绑定</strong>的能力，使 View 层可以<strong>自动同步</strong> ViewModel 中的数据。</p><table><thead><tr><th>维度</th><th>MVC</th><th>MVVM</th></tr></thead><tbody><tr><td><strong>核心思想</strong></td><td>关注点分离</td><td>数据驱动视图</td></tr><tr><td><strong>数据流向</strong></td><td>单向（View → Controller → Model）</td><td>双向（View ↔ ViewModel ↔ Model）</td></tr><tr><td><strong>耦合度</strong></td><td>中（V 层与 C 层直接交互）</td><td>低（通过数据绑定解耦）</td></tr><tr><td><strong>适用场景</strong></td><td>简单UI交互</td><td>复杂数据驱动型UI</td></tr><tr><td><strong>Unity实现</strong></td><td>需要手动更新视图</td><td>自动响应数据变化</td></tr></tbody></table><p>在 Unity 中，采用 MVVM 架构可以让 UI 开发更加响应式，当 Model 发生变化时，通过 ViewModel 自动更新 UI。我们还是以上篇文章中的金币案例为例，分析一下 MVVM 框架的代码结构。</p><h1 id="model-m">Model（M）</h1><p>MVVM 中的 M 层与 MVC 中的 M 层相同，都负责了<strong>数据存储</strong>和相关<strong>业务逻辑</strong>：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">System.Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CoinModel</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> _coins; <span class="comment">// 数据</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">event</span> Action&lt;<span class="built_in">int</span>&gt; OnCoinsChanged;    <span class="comment">// 数据改变事件</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 业务逻辑</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">AddCoins</span>(<span class="params"><span class="built_in">int</span> amount</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        _coins += amount;</span><br><span class="line">        OnCoinsChanged?.Invoke(_coins);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ResetCoins</span>()</span> &#123;</span><br><span class="line">        _coins = <span class="number">0</span>;</span><br><span class="line">        OnCoinsChanged?.Invoke(_coins);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="view-v">View（V）</h1><p>V 层负责了用户图像界面的展示，通过<strong>绑定器</strong>与 ViewModel 层连接：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CoinView</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 这部分和 MVC 一样，都需要获取非静态 UI</span></span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> TextMeshProUGUI _coinText;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> Button _addButton;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> Button _resetButton;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过绑定器连接ViewModel</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Initialize</span>(<span class="params">CoinViewModel vm</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 数据绑定</span></span><br><span class="line">        vm.Coins.Bind(<span class="keyword">value</span> =&gt; _coinText.text = <span class="keyword">value</span>.ToString());</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 命令绑定</span></span><br><span class="line">        _addButton.onClick.AddListener(() =&gt; vm.AddCoinCommand.Execute());</span><br><span class="line">        _resetButton.onClick.AddListener(() =&gt; vm.ResetCoinsCommand.Execute());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 MVC 中，我们是通过 <code>Initialize</code> 方法直接实现 UI 对象和事件的绑定的，而在 MVVM 中则是使用了绑定器的思想，在 <code>Initialize</code> 中绑定<strong>数据</strong>和<strong>命令</strong>。</p><h1 id="viewmodel-vm">ViewModel（VM）</h1><p>VM 层是联系 M 层和 V 层的核心桥梁，实现了数据转换与命令处理：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CoinViewModel</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> CoinModel _model;   <span class="comment">// 持有model</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 可绑定属性（暴露给View绑定）</span></span><br><span class="line">    <span class="keyword">public</span> BindableProperty&lt;<span class="built_in">int</span>&gt; Coins &#123; <span class="keyword">get</span>; &#125; = <span class="keyword">new</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 可绑定命令（暴露给View绑定）</span></span><br><span class="line">    <span class="keyword">public</span> ICommand AddCoinCommand &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> ICommand ResetCoinsCommand &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CoinViewModel</span>(<span class="params">PlayerModel model</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        _model = model;</span><br><span class="line">        <span class="comment">// 数据</span></span><br><span class="line">        _model.OnCoinsChanged += coins =&gt; Coins.Value = coins;</span><br><span class="line">        <span class="comment">// 命令</span></span><br><span class="line">        AddCoinCommand = <span class="keyword">new</span> RelayCommand(() =&gt; _model.AddCoins(<span class="number">1</span>));</span><br><span class="line">        ResetCoinsCommand = <span class="keyword">new</span> RelayCommand(() =&gt; _model.ResetCoins());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 VM 的示例代码中，我们看到了 <code>ICommand</code> 和 <code>BindableProperty&lt;T&gt;</code>，分别实现了命令和数据的绑定。</p><h2 id="数据绑定器-bindableproperty-t">数据绑定器 BindableProperty&lt;T&gt;</h2><p>数据绑定器 <strong>BindableProperty&lt;T&gt;</strong> 实现了在所绑定的属性变更时发出通知。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BindableProperty</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> T _value;   <span class="comment">// 绑定的值</span></span><br><span class="line">    <span class="keyword">public</span> T Value</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span> =&gt; _value;</span><br><span class="line">        <span class="keyword">set</span></span><br><span class="line">        &#123;</span><br><span class="line">            _value = <span class="keyword">value</span>;</span><br><span class="line">            OnValueChanged?.Invoke(<span class="keyword">value</span>);  <span class="comment">// 值发生改变时，事件触发</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">event</span> Action&lt;T&gt; OnValueChanged;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绑定逻辑</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bind</span>(<span class="params">Action&lt;T&gt; callback</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        OnValueChanged += callback;</span><br><span class="line">        callback(Value); <span class="comment">// 初始化回调</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="命令绑定器-icommand">命令绑定器 ICommand</h2><p>熟悉<strong>命令模式</strong>的同学看到 <strong>ICommand</strong> 这个名字的时候，大概就能想到这是一系列命令的接口，包含了命令的执行逻辑 <code>Execute</code>（如果需要，也可以为命令模式加上重做逻辑 <code>Redo</code>）。</p><p>RelayCommand封装了操作请求的独立对象，是一个具体<strong>命令的包装器</strong>，可以将任意方法包装成符合 ICommand 接口的对象。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 命令接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICommand</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Execute</span>()</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 具体命令包装器</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">RelayCommand</span> : <span class="title">ICommand</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> Action _execute;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RelayCommand</span>(<span class="params">Action execute</span>)</span> =&gt; _execute = execute;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Execute</span>()</span> =&gt; _execute?.Invoke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="实际应用">实际应用</h1><p>由于同一个 ViewModel 可以绑定不同 View，因此我们可以建立一个管理器来管理 MVVM：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用示例</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">UIManager</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> CoinView _view;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> CoinModel _model;</span><br><span class="line">    <span class="keyword">private</span> CoinViewModel _viewModel;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        _viewModel = <span class="keyword">new</span> CoinViewModel(_model);</span><br><span class="line">        _view.Initialize(_viewModel); <span class="comment">// 显式初始化</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>MVVM 的交互流程如下所示：</p><div class="mermaid-wrap"><pre class="mermaid-src" hidden>  pie  </pre></div><pre class="mermaid">sequenceDiagram    participant View as 视图层    participant ViewModel as 视图模型    participant Model as 数据层    View->>ViewModel: 绑定命令和数据    View->>ViewModel: 用户点击按钮触发命令    ViewModel->>Model: 执行 AddCoin()    Model->>ViewModel: 触发 OnCoinsChanged    ViewModel->>View: 通过 BindableProperty 更新数值</pre><p>在 Unity 中，MVVM 的优势体现在以下三个方面：</p><ol><li><strong>自动同步</strong>：当 Model 数据变化时，View 自动更新。</li><li><strong>解耦视图逻辑</strong>：ViewModel 不直接操作UI组件。</li><li><strong>复用性</strong>：同一 ViewModel 可绑定不同 View。</li></ol><h1 id="参考资料">参考资料</h1><p><a href="https://docs.unity3d.com/Packages/com.unity.dt.app-ui@0.3/manual/mvvm-intro.html">https://docs.unity3d.com/Packages/com.unity.dt.app-ui@0.3/manual/mvvm-intro.html</a><br><a href="https://medium.com/etermax-technology/embracing-changes-with-mvvm-14fcf6d35468">https://medium.com/etermax-technology/embracing-changes-with-mvvm-14fcf6d35468</a></p>]]></content>
       
       
       <categories>
@@ -1946,7 +1946,40 @@
       
         <tags>
             
+            <tag> 设计模式 </tag>
+            
+            <tag> 游戏开发 </tag>
+            
+            <tag> MVVM </tag>
+            
+            <tag> 框架 </tag>
+            
             <tag> Unity </tag>
+            
+            <tag> UI </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MVC设计模式</title>
+      <link href="/2021/05/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/MVC%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <url>/2021/05/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/MVC%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>MVC 模式的全称是 Model-View-Controller，即模型-视图-控制器。严格来说，MVC并不是GoF（四人帮）归纳出的一种独立设计模式，而是一种架构模式。这种模式常用于用户图形界面的图形 / 数据 / 逻辑分离，因此在游戏开发领域中常被用于 UI 相关的功能上。那么，什么是 M / V / C 呢？</p><ul><li><strong>M</strong>（模型）<br>模型层（M 层）负责<strong>存放数据</strong>和<strong>业务逻辑</strong>。</li><li><strong>V</strong>（视图）<br>视图层（V 层）负责<strong>展示用户图形界面</strong>，是用户与之直接交互的元素。</li><li><strong>C</strong>（控制器）<br>控制层（C 层）负责<strong>响应用户输入或事件</strong>，更新 M 的数据并让 V 展示的界面刷新。</li></ul><p>使用 MVC 模式的目的是将 M 和 V 的实现代码分离，从而使同一个程序可以使用不同的表现形式。比如一批统计数据可以分别用柱状图、饼图来表示。C 存在的目的则是确保 M 和 V 的同步，一旦 M 改变，V 应该同步更新。</p><h1 id="unity中的mvc">Unity中的MVC</h1><p><img src="https://img-blog.csdnimg.cn/20181106152450894.png" alt><br><img src="http://xpsuper.com/upload/2021/10/MVC01-da44a1398db94f8987ec9aa716cb1725.png" alt></p><p>以上述框架为例，假设我们要做一个点击按钮更新金币数量（即点击一次金币数 +1 ）和清空当前金币的功能：</p><p><img src="https://velog.velcdn.com/images/suhan0304/post/d6333381-8221-4cae-9f3c-f7d21ed3e978/image.png" alt></p><h2 id="model-m">Model（M）</h2><p>M 层是<strong>纯数据类</strong>，不继承 Monobehavior，主要作用是存放所有数据，包括静态数据、变量、资源（如贴图、游戏对象等）等。对于 Model 的数据管理，可以通过<strong>序列化</strong>或 <strong>ScriptableObject</strong> 管理数据。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">System.Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CoinModel</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> Coins &#123; <span class="keyword">get</span>; <span class="keyword">private</span> <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">event</span> Action&lt;<span class="built_in">int</span>&gt; OnCoinsChanged;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">AddCoin</span>()</span> &#123;</span><br><span class="line">        Coins++;</span><br><span class="line">        OnCoinsChanged?.Invoke(Coins);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ResetCoins</span>()</span> &#123;</span><br><span class="line">        Coins = <span class="number">0</span>;</span><br><span class="line">        OnCoinsChanged?.Invoke(Coins);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>既然我们强调 M 是<strong>纯数据类</strong>，为什么这里出现了增加金币和重置金币的逻辑 <code>AddCoin</code> 和 <code>ResetCoins</code> 呢？</p><blockquote><p>其实在刚接触 MVC 时，我对 MVC 和 ECS 两个设计模式产生了混淆，认为 M 层类似 ECS 中的 Entity 只能存放数据，而业务逻辑应该放在 C 层（或者说 ECS 的 System），这其实是不对的。</p></blockquote><p>M 层通常既包含数据，也包含与这些数据相关的业务逻辑，主要原因有下：</p><ol><li><p>避免<strong>贫血模型</strong><br>如果 Model 只存储数据，而所有业务逻辑都放到 Controller 中，那么 M 层就沦为了一种数据结构，这在很多架构思想中被称为“贫血模型”，容易导致业务逻辑分散在各个 Controller 中，后期维护和测试都不便。</p></li><li><p>Model 应该表达<strong>某个业务</strong>（例如金币相关管理）<br>一般来说，Model 不仅仅是数据的容器，它往往是对现实业务的抽象，包括该业务对象的属性和行为。在例子中的金币场景里，“增加金币”和“重置金币”就是金币的业务行为，与金币这个实体强相关，放在 CoinModel 中更符合面向对象的思路（而非 ECS 的面向数据思维），也让逻辑更清晰可测试。</p></li><li><p>Controller 应该负责<strong>调度</strong><br>Controller 的职责是响应用户输入、调用 Model 的方法或更新 Model 的数据，然后让 View 去刷新到用户界面上。C 层通常不承担具体的业务运算，而是调用 Model 中的方法。如果把所有业务逻辑都丢给 Controller，会造成 Controller 过度膨胀，跟 View 绑定得更死，后期扩展也会麻烦。</p></li></ol><h2 id="view-v">View（V）</h2><p>V 层负责管理所有 UI 组件对象，并为它们声明相关的事件：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// View（管理 UI组件，监听 Model 变化）</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CoinView</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> Text coinText;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> Button addButton;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> Button resetButton;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Initialize</span>(<span class="params">CoinModel model, Action onAdd, Action onReset</span>)</span> &#123;</span><br><span class="line">        model.OnCoinsChanged += coins =&gt; coinText.text = coins.ToString();</span><br><span class="line">        addButton.onClick.AddListener(() =&gt; onAdd?.Invoke());</span><br><span class="line">        resetButton.onClick.AddListener(() =&gt; onReset?.Invoke());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 V 层中，我们添加了所有需要更新的和可以和玩家发生交互的 UI 组件（非静态 UI），例如上面的按钮和金币文本。除了手动一个个赋值之外，也可以在 <code>Start</code> 函数中通过 <code>Find</code> 方法查找并赋值。</p><p><code>Initialize</code> 方法则为 UI 元素绑定了相应的事件，该方法在 Controller 中被初始化。</p><h2 id="controller-c">Controller（C）</h2><p>C 层负责持有对 Model 和 View 的引用，响应用户输入或事件，更新 Model 并让 View 刷新。从下面的代码可以看出，Controller 确实只起到了调度和协调的作用，是 M 层和 V 层之间的桥梁。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Controller（协调 Model 和 View）</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CoinController</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> CoinModel model;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> CoinView view;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span>()</span> &#123;</span><br><span class="line">        view.Initialize(model, model.AddCoin, model.ResetCoins);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>在用户点击增加金币的按钮时，MVC 架构下的 UI 发生了这样一系列的事情：</p><ol><li>按钮被点击，触发 <code>OnClick</code> 事件，通知所有订阅者</li><li>View 中绑定的 <code>onAdd</code> 回调被执行</li><li>Model 中的 <code>AddCoin</code> 函数被执行，更新金币数量同时触发 <code>OnCoinsChanged</code> 事件</li><li>View 中绑定的回调被执行，更新金币文本</li></ol><p>实际上，MVC 模式不仅可以用于 UI 系统（只是在大部分情况下，它天然地适合于此），也可以拓展引用到其他模块上，例如<a href="https://github.com/jskyzero/MVC.DotNet/tree/master">这个仓库</a>所展示的玩家系统。</p><h1 id="参考资料">参考资料</h1><p><a href="https://bbs.huaweicloud.com/blogs/306798">https://bbs.huaweicloud.com/blogs/306798</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 设计模式 </category>
+          
+      </categories>
+      
+      
+        <tags>
             
             <tag> 设计模式 </tag>
             
@@ -1954,9 +1987,11 @@
             
             <tag> 框架 </tag>
             
-            <tag> MVC </tag>
+            <tag> Unity </tag>
             
             <tag> UI </tag>
+            
+            <tag> MVC </tag>
             
         </tags>
       
