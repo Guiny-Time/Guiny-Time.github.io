@@ -82,9 +82,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 项目复盘 </tag>
             
@@ -117,9 +117,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 项目复盘 </tag>
             
@@ -152,9 +152,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 项目复盘 </tag>
             
@@ -383,9 +383,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 网络 </tag>
             
@@ -433,9 +433,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 网络 </tag>
             
@@ -466,9 +466,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 网络 </tag>
             
@@ -512,9 +512,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
         </tags>
       
@@ -539,9 +539,9 @@
       
         <tags>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 项目复盘 </tag>
             
@@ -572,9 +572,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 项目复盘 </tag>
             
@@ -906,11 +906,11 @@
             
             <tag> 数据结构 </tag>
             
-            <tag> 语言基础 </tag>
-            
             <tag> map </tag>
             
             <tag> hashmap </tag>
+            
+            <tag> 语言基础 </tag>
             
         </tags>
       
@@ -937,9 +937,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 项目复盘 </tag>
             
@@ -1001,6 +1001,8 @@
             
             <tag> Unity </tag>
             
+            <tag> 经验分享 </tag>
+            
             <tag> Cinemachine </tag>
             
             <tag> 相机 </tag>
@@ -1010,8 +1012,6 @@
             <tag> 角色 </tag>
             
             <tag> 3C </tag>
-            
-            <tag> 经验分享 </tag>
             
             <tag> 引擎功能 </tag>
             
@@ -1040,9 +1040,9 @@
             
             <tag> C# </tag>
             
-            <tag> 特性 </tag>
-            
             <tag> 语言基础 </tag>
+            
+            <tag> 特性 </tag>
             
             <tag> 事件 </tag>
             
@@ -1071,11 +1071,11 @@
             
             <tag> C# </tag>
             
-            <tag> 委托 </tag>
+            <tag> 语言基础 </tag>
             
             <tag> 特性 </tag>
             
-            <tag> 语言基础 </tag>
+            <tag> 委托 </tag>
             
         </tags>
       
@@ -1102,11 +1102,11 @@
             
             <tag> C# </tag>
             
-            <tag> 特性 </tag>
-            
             <tag> 语言基础 </tag>
             
             <tag> 反射 </tag>
+            
+            <tag> 特性 </tag>
             
         </tags>
       
@@ -1133,9 +1133,9 @@
             
             <tag> C# </tag>
             
-            <tag> 特性 </tag>
-            
             <tag> 语言基础 </tag>
+            
+            <tag> 特性 </tag>
             
             <tag> 闭包 </tag>
             
@@ -1480,9 +1480,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 命令模式 </tag>
             
@@ -1513,9 +1513,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 原型模式 </tag>
             
@@ -1546,9 +1546,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 简单工厂模式 </tag>
             
@@ -1585,9 +1585,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 单例模式 </tag>
             
@@ -1731,9 +1731,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 项目复盘 </tag>
             
@@ -1934,7 +1934,7 @@
       <link href="/2021/06/13/MVVM%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
       <url>/2021/06/13/MVVM%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA70e3f6985946ceb0408050be41d3d099.png" width="500"><p>我们在<a href="https://cattyhouse-guiny.xyz/2021/05/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/mvc%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">上一篇文章</a>中提到了 <strong>MVC</strong>（Model-View-Controller）设计模式。在 Unity 中，MVC 模式通常体现在将游戏数据（M）和表现（V）分开，而 C 则负责管理输入和调度更新，在代码中更新 UI 的状态。</p><p>在这篇文章中，我将介绍另一种设计模式 <strong>MVVM</strong>（<strong>Model</strong> - <strong>View</strong> - <strong>ViewModel</strong>）。MVVM 是一种将用户界面与业务逻辑分离的设计模式，与 MVC 模式相比，MVVM 模式在 MVC 的基础上进一步解耦了 View 和 Model，取代 Controller 的 ViewModel 层（VM 层）作为中介层提供了<strong>数据绑定</strong>的能力，使 View 层可以<strong>自动同步</strong> ViewModel 中的数据。</p><table><thead><tr><th>维度</th><th>MVC</th><th>MVVM</th></tr></thead><tbody><tr><td><strong>核心思想</strong></td><td>关注点分离</td><td>数据驱动视图</td></tr><tr><td><strong>数据流向</strong></td><td>单向（View → Controller → Model）</td><td>双向（View ↔ ViewModel ↔ Model）</td></tr><tr><td><strong>耦合度</strong></td><td>中（V 层与 C 层直接交互）</td><td>低（通过数据绑定解耦）</td></tr><tr><td><strong>适用场景</strong></td><td>简单UI交互</td><td>复杂数据驱动型UI</td></tr><tr><td><strong>Unity实现</strong></td><td>需要手动更新视图</td><td>自动响应数据变化</td></tr></tbody></table><p>在 Unity 中，采用 MVVM 架构可以让 UI 开发更加响应式，当 Model 发生变化时，通过 ViewModel 自动更新 UI。我们还是以上篇文章中的金币案例为例，分析一下 MVVM 框架的代码结构。</p><h1 id="model-m">Model（M）</h1><p>MVVM 中的 M 层与 MVC 中的 M 层相同，都负责了<strong>数据存储</strong>和相关<strong>业务逻辑</strong>：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">System.Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CoinModel</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> _coins; <span class="comment">// 数据</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">event</span> Action&lt;<span class="built_in">int</span>&gt; OnCoinsChanged;    <span class="comment">// 数据改变事件</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 业务逻辑</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">AddCoins</span>(<span class="params"><span class="built_in">int</span> amount</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        _coins += amount;</span><br><span class="line">        OnCoinsChanged?.Invoke(_coins);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ResetCoins</span>()</span> &#123;</span><br><span class="line">        _coins = <span class="number">0</span>;</span><br><span class="line">        OnCoinsChanged?.Invoke(_coins);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="view-v">View（V）</h1><p>V 层负责了用户图像界面的展示，通过<strong>绑定器</strong>与 ViewModel 层连接：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CoinView</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 这部分和 MVC 一样，都需要获取非静态 UI</span></span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> TextMeshProUGUI _coinText;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> Button _addButton;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> Button _resetButton;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过绑定器连接ViewModel</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Initialize</span>(<span class="params">CoinViewModel vm</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 数据绑定</span></span><br><span class="line">        vm.Coins.Bind(<span class="keyword">value</span> =&gt; _coinText.text = <span class="keyword">value</span>.ToString());</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 命令绑定</span></span><br><span class="line">        _addButton.onClick.AddListener(() =&gt; vm.AddCoinCommand.Execute());</span><br><span class="line">        _resetButton.onClick.AddListener(() =&gt; vm.ResetCoinsCommand.Execute());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 MVC 中，我们是通过 <code>Initialize</code> 方法直接实现 UI 对象和事件的绑定的，而在 MVVM 中则是使用了绑定器的思想，在 <code>Initialize</code> 中绑定<strong>数据</strong>和<strong>命令</strong>。</p><h1 id="viewmodel-vm">ViewModel（VM）</h1><p>VM 层是联系 M 层和 V 层的核心桥梁，实现了数据转换与命令处理：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CoinViewModel</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> CoinModel _model;   <span class="comment">// 持有model</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 可绑定属性（暴露给View绑定）</span></span><br><span class="line">    <span class="keyword">public</span> BindableProperty&lt;<span class="built_in">int</span>&gt; Coins &#123; <span class="keyword">get</span>; &#125; = <span class="keyword">new</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 可绑定命令（暴露给View绑定）</span></span><br><span class="line">    <span class="keyword">public</span> ICommand AddCoinCommand &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> ICommand ResetCoinsCommand &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CoinViewModel</span>(<span class="params">PlayerModel model</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        _model = model;</span><br><span class="line">        <span class="comment">// 数据</span></span><br><span class="line">        _model.OnCoinsChanged += coins =&gt; Coins.Value = coins;</span><br><span class="line">        <span class="comment">// 命令</span></span><br><span class="line">        AddCoinCommand = <span class="keyword">new</span> RelayCommand(() =&gt; _model.AddCoins(<span class="number">1</span>));</span><br><span class="line">        ResetCoinsCommand = <span class="keyword">new</span> RelayCommand(() =&gt; _model.ResetCoins());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 VM 的示例代码中，我们看到了 <code>ICommand</code> 和 <code>BindableProperty&lt;T&gt;</code>，分别实现了命令和数据的绑定。</p><h2 id="数据绑定器-bindableproperty-t">数据绑定器 BindableProperty&lt;T&gt;</h2><p>数据绑定器 <strong>BindableProperty&lt;T&gt;</strong> 实现了在所绑定的属性变更时发出通知。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BindableProperty</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> T _value;   <span class="comment">// 绑定的值</span></span><br><span class="line">    <span class="keyword">public</span> T Value</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span> =&gt; _value;</span><br><span class="line">        <span class="keyword">set</span></span><br><span class="line">        &#123;</span><br><span class="line">            _value = <span class="keyword">value</span>;</span><br><span class="line">            OnValueChanged?.Invoke(<span class="keyword">value</span>);  <span class="comment">// 值发生改变时，事件触发</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">event</span> Action&lt;T&gt; OnValueChanged;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绑定逻辑</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bind</span>(<span class="params">Action&lt;T&gt; callback</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        OnValueChanged += callback;</span><br><span class="line">        callback(Value); <span class="comment">// 初始化回调</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="命令绑定器-icommand">命令绑定器 ICommand</h2><p>熟悉<strong>命令模式</strong>的同学看到 <strong>ICommand</strong> 这个名字的时候，大概就能想到这是一系列命令的接口，包含了命令的执行逻辑 <code>Execute</code>（如果需要，也可以为命令模式加上重做逻辑 <code>Redo</code>）。</p><p>RelayCommand封装了操作请求的独立对象，是一个具体<strong>命令的包装器</strong>，可以将任意方法包装成符合 ICommand 接口的对象。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 命令接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICommand</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Execute</span>()</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 具体命令包装器</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">RelayCommand</span> : <span class="title">ICommand</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> Action _execute;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RelayCommand</span>(<span class="params">Action execute</span>)</span> =&gt; _execute = execute;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Execute</span>()</span> =&gt; _execute?.Invoke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="实际应用">实际应用</h1><p>由于同一个 ViewModel 可以绑定不同 View，因此我们可以建立一个管理器来管理 MVVM：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用示例</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">UIManager</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> CoinView _view;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> CoinModel _model;</span><br><span class="line">    <span class="keyword">private</span> CoinViewModel _viewModel;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        _viewModel = <span class="keyword">new</span> CoinViewModel(_model);</span><br><span class="line">        _view.Initialize(_viewModel); <span class="comment">// 显式初始化</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>MVVM 的交互流程如下所示：</p><div class="mermaid-wrap"><pre class="mermaid-src" hidden>  pie  </pre></div><pre class="mermaid">sequenceDiagram    participant View as 视图层    participant ViewModel as 视图模型    participant Model as 数据层    View->>ViewModel: 绑定命令和数据    View->>ViewModel: 用户点击按钮触发命令    ViewModel->>Model: 执行 AddCoin()    Model->>ViewModel: 触发 OnCoinsChanged    ViewModel->>View: 通过 BindableProperty 更新数值</pre><p>在 Unity 中，MVVM 的优势体现在以下三个方面：</p><ol><li><strong>自动同步</strong>：当 Model 数据变化时，View 自动更新。</li><li><strong>解耦视图逻辑</strong>：ViewModel 不直接操作UI组件。</li><li><strong>复用性</strong>：同一 ViewModel 可绑定不同 View。</li></ol><h1 id="参考资料">参考资料</h1><p><a href="https://docs.unity3d.com/Packages/com.unity.dt.app-ui@0.3/manual/mvvm-intro.html">https://docs.unity3d.com/Packages/com.unity.dt.app-ui@0.3/manual/mvvm-intro.html</a><br><a href="https://medium.com/etermax-technology/embracing-changes-with-mvvm-14fcf6d35468">https://medium.com/etermax-technology/embracing-changes-with-mvvm-14fcf6d35468</a></p>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA70e3f6985946ceb0408050be41d3d099.png" width="500"><p>我们在<a href="https://cattyhouse-guiny.xyz/2021/05/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/mvc%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">上一篇文章</a>中提到了 <strong>MVC</strong>（Model-View-Controller）设计模式。在 Unity 中，MVC 模式通常体现在将游戏数据（M）和表现（V）分开，而 C 则负责管理输入和调度更新，在代码中更新 UI 的状态。</p><p>在这篇文章中，我将介绍另一种设计模式 <strong>MVVM</strong>（<strong>Model</strong> - <strong>View</strong> - <strong>ViewModel</strong>）。MVVM 是一种将用户界面与业务逻辑分离的设计模式，与 MVC 模式相比，MVVM 模式在 MVC 的基础上进一步解耦了 View 和 Model，取代 Controller 的 ViewModel 层（VM 层）作为中介层提供了<strong>数据绑定</strong>的能力，使 View 层可以<strong>自动同步</strong> ViewModel 中的数据。</p><table><thead><tr><th>维度</th><th>MVC</th><th>MVVM</th></tr></thead><tbody><tr><td><strong>核心思想</strong></td><td>关注点分离</td><td>数据驱动视图</td></tr><tr><td><strong>数据流向</strong></td><td>单向（View → Controller → Model）</td><td>双向（View ↔ ViewModel ↔ Model）</td></tr><tr><td><strong>耦合度</strong></td><td>中（V 层与 C 层直接交互）</td><td>低（通过数据绑定解耦）</td></tr><tr><td><strong>适用场景</strong></td><td>简单UI交互</td><td>复杂数据驱动型UI</td></tr><tr><td><strong>Unity实现</strong></td><td>需要手动更新视图</td><td>自动响应数据变化</td></tr></tbody></table><p>在 Unity 中，采用 MVVM 架构可以让 UI 开发更加响应式，当 Model 发生变化时，通过 ViewModel 自动更新 UI。我们还是以上篇文章中的金币案例为例，分析一下 MVVM 框架的代码结构。</p><div class="mermaid-wrap"><pre class="mermaid-src" hidden>  pie  </pre></div><pre class="mermaid">classDiagram    class UIManager{        +CoinView _view        +CoinModel _model        +CoinViewModel _viewModel        +Start()    }    class CoinModel{        -int _coins        +event OnCoinsChanged        +AddCoins(int)        +ResetCoins()    }    class CoinViewModel{        -CoinModel _model        +BindableProperty<int> Coins        +ICommand AddCoinCommand        +ICommand ResetCommand        +CoinViewModel(CoinModel)    }    class CoinView{        +TMP_Text _coinText        +Button _addButton        +Initialize(CoinViewModel)    }    UIManager --> CoinViewModel    UIManager --> CoinView    UIManager --> CoinModel    CoinViewModel --> CoinModel    CoinView --> CoinViewModel</int></pre><h1 id="model-m">Model（M）</h1><p>MVVM 中的 M 层与 MVC 中的 M 层相同，都负责了<strong>数据存储</strong>和相关<strong>业务逻辑</strong>：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">System.Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CoinModel</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> _coins; <span class="comment">// 数据</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">event</span> Action&lt;<span class="built_in">int</span>&gt; OnCoinsChanged;    <span class="comment">// 数据改变事件</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 业务逻辑</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">AddCoins</span>(<span class="params"><span class="built_in">int</span> amount</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        _coins += amount;</span><br><span class="line">        OnCoinsChanged?.Invoke(_coins);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ResetCoins</span>()</span> &#123;</span><br><span class="line">        _coins = <span class="number">0</span>;</span><br><span class="line">        OnCoinsChanged?.Invoke(_coins);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="view-v">View（V）</h1><p>V 层负责了用户图像界面的展示，通过<strong>绑定器</strong>与 ViewModel 层连接：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CoinView</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 这部分和 MVC 一样，都需要获取非静态 UI</span></span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> TextMeshProUGUI _coinText;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> Button _addButton;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> Button _resetButton;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过绑定器连接ViewModel</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Initialize</span>(<span class="params">CoinViewModel vm</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 数据绑定</span></span><br><span class="line">        vm.Coins.Bind(<span class="keyword">value</span> =&gt; _coinText.text = <span class="keyword">value</span>.ToString());</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 命令绑定</span></span><br><span class="line">        _addButton.onClick.AddListener(() =&gt; vm.AddCoinCommand.Execute());</span><br><span class="line">        _resetButton.onClick.AddListener(() =&gt; vm.ResetCoinsCommand.Execute());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 MVC 中，我们是通过 <code>Initialize</code> 方法直接实现 UI 对象和事件的绑定的，而在 MVVM 中则是使用了绑定器的思想，在 <code>Initialize</code> 中绑定<strong>数据</strong>和<strong>命令</strong>。</p><h1 id="viewmodel-vm">ViewModel（VM）</h1><p>VM 层是联系 M 层和 V 层的核心桥梁，实现了数据转换与命令处理：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CoinViewModel</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> CoinModel _model;   <span class="comment">// 持有model</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 可绑定属性（暴露给View绑定）</span></span><br><span class="line">    <span class="keyword">public</span> BindableProperty&lt;<span class="built_in">int</span>&gt; Coins &#123; <span class="keyword">get</span>; &#125; = <span class="keyword">new</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 可绑定命令（暴露给View绑定）</span></span><br><span class="line">    <span class="keyword">public</span> ICommand AddCoinCommand &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> ICommand ResetCoinsCommand &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CoinViewModel</span>(<span class="params">PlayerModel model</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        _model = model;</span><br><span class="line">        <span class="comment">// 数据</span></span><br><span class="line">        _model.OnCoinsChanged += coins =&gt; Coins.Value = coins;</span><br><span class="line">        <span class="comment">// 命令</span></span><br><span class="line">        AddCoinCommand = <span class="keyword">new</span> RelayCommand(() =&gt; _model.AddCoins(<span class="number">1</span>));</span><br><span class="line">        ResetCoinsCommand = <span class="keyword">new</span> RelayCommand(() =&gt; _model.ResetCoins());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 VM 的示例代码中，我们看到了 <code>ICommand</code> 和 <code>BindableProperty&lt;T&gt;</code>，分别实现了命令和数据的绑定。</p><h2 id="数据绑定器-bindableproperty-t">数据绑定器 BindableProperty&lt;T&gt;</h2><p>数据绑定器 <strong>BindableProperty&lt;T&gt;</strong> 实现了在所绑定的属性变更时发出通知。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BindableProperty</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> T _value;   <span class="comment">// 绑定的值</span></span><br><span class="line">    <span class="keyword">public</span> T Value</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span> =&gt; _value;</span><br><span class="line">        <span class="keyword">set</span></span><br><span class="line">        &#123;</span><br><span class="line">            _value = <span class="keyword">value</span>;</span><br><span class="line">            OnValueChanged?.Invoke(<span class="keyword">value</span>);  <span class="comment">// 值发生改变时，事件触发</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">event</span> Action&lt;T&gt; OnValueChanged;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绑定逻辑</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bind</span>(<span class="params">Action&lt;T&gt; callback</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        OnValueChanged += callback;</span><br><span class="line">        callback(Value); <span class="comment">// 初始化回调</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="命令绑定器-icommand">命令绑定器 ICommand</h2><p>熟悉<strong>命令模式</strong>的同学看到 <strong>ICommand</strong> 这个名字的时候，大概就能想到这是一系列命令的接口，包含了命令的执行逻辑 <code>Execute</code>（如果需要，也可以为命令模式加上重做逻辑 <code>Redo</code>）。</p><p>RelayCommand封装了操作请求的独立对象，是一个具体<strong>命令的包装器</strong>，可以将任意方法包装成符合 ICommand 接口的对象。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 命令接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICommand</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Execute</span>()</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 具体命令包装器</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">RelayCommand</span> : <span class="title">ICommand</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> Action _execute;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RelayCommand</span>(<span class="params">Action execute</span>)</span> =&gt; _execute = execute;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Execute</span>()</span> =&gt; _execute?.Invoke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="实际应用">实际应用</h1><p>由于同一个 ViewModel 可以绑定不同 View，因此我们可以建立一个管理器来管理 MVVM：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用示例</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">UIManager</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> CoinView _view;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> CoinModel _model;</span><br><span class="line">    <span class="keyword">private</span> CoinViewModel _viewModel;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        _viewModel = <span class="keyword">new</span> CoinViewModel(_model);</span><br><span class="line">        _view.Initialize(_viewModel); <span class="comment">// 显式初始化</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>MVVM 的交互流程如下所示：</p><div class="mermaid-wrap"><pre class="mermaid-src" hidden>  pie  </pre></div><pre class="mermaid">sequenceDiagram    participant View as 视图层    participant ViewModel as 视图模型    participant Model as 数据层    View->>ViewModel: 绑定命令和数据    View->>ViewModel: 用户点击按钮触发命令    ViewModel->>Model: 执行 AddCoin()    Model->>ViewModel: 触发 OnCoinsChanged    ViewModel->>View: 通过 BindableProperty 更新数值</pre><p>在 Unity 中，MVVM 的优势体现在以下三个方面：</p><ol><li><strong>自动同步</strong>：当 Model 数据变化时，View 自动更新。</li><li><strong>解耦视图逻辑</strong>：ViewModel 不直接操作UI组件。</li><li><strong>复用性</strong>：同一 ViewModel 可绑定不同 View。</li></ol><h1 id="参考资料">参考资料</h1><p><a href="https://docs.unity3d.com/Packages/com.unity.dt.app-ui@0.3/manual/mvvm-intro.html">https://docs.unity3d.com/Packages/com.unity.dt.app-ui@0.3/manual/mvvm-intro.html</a><br><a href="https://medium.com/etermax-technology/embracing-changes-with-mvvm-14fcf6d35468">https://medium.com/etermax-technology/embracing-changes-with-mvvm-14fcf6d35468</a></p>]]></content>
       
       
       <categories>
@@ -2018,9 +2018,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 项目复盘 </tag>
             
@@ -2049,9 +2049,9 @@
             
             <tag> Unity </tag>
             
-            <tag> 经验分享 </tag>
-            
             <tag> 游戏编程 </tag>
+            
+            <tag> 经验分享 </tag>
             
             <tag> 项目复盘 </tag>
             
