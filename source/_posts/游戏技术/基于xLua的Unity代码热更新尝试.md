@@ -3,7 +3,7 @@ title: 热更新其一：基于xLua的Unity代码热更新尝试
 date: '2024-09-10T11:23:22.046Z'
 tags: ['Lua','xLua','编程', '热更新', 'demo', 'Unity']
 categories: 引擎功能
-cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA9084d78948da0d4d0bc77e1bfeb0ea1c.png
+cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA4d0c8bf6534866d7298abe03dd124a40.png
 ---
 
 最近用 Unity 做了一个移动端纯 UI 应用的尝试，应用的功能挺简单的，涉及到UI界面的响应、适配和切换等等，其中有一个部分是“通知”：

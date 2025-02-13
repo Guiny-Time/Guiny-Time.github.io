@@ -99,7 +99,7 @@ this.GetComponent<Animator>.SetFloat(param, 0.5f);
 
 在项目中，玩家所控制的角色通常具有**站立**、**走路**、**奔跑**等类型的动画。如果在开发的过程中，策划同学增加了一个枪械的玩法，那我们是不是要去制作**持枪站立**、**持枪走路**、**持枪奔跑**的动画呢？显然这样会大大增加美术组的工作量。
 
-“层”（Layer）位于 Animator 面板的左侧，可以通过层面板的右上角加号按钮新建一个层。每个层级有**权重**（Weight）控制对最终动画的影响，分层动画可以用于分离身体的不同部分（如上半身播放攻击动画，下半身播放跑步动画）。
+“层”（Layer）位于 Animator 面板的左侧，可以通过层面板的右上角加号按钮新建一个层。每个层级有**权重**（Weight）控制对最终动画的影响，分层动画可以用于分离身体的不同部分（如上半身播放攻击动画，下半身播放跑步动画）。层的**混合模式**有两种，一种是**覆盖**（Override），另一种是**叠加**（Addition）。对于动画层来说，**越下方的层拥有越高的播放优先级**，因此最下方的权重为 `1` 的覆盖层会完全盖住上方所有动画层正在播放的动画（如果没有设置 Avatar Mask）。叠加类型则顾名思义，是在当前展示的动画基础上按照权重叠加上该层的动画内容，需要动画存在动画曲线时才能作用。
 
 ![](layer.gif)
 
@@ -141,6 +141,10 @@ Avatar 就是人形动画，是 Unity 为人形模型动画复用推出的一套
 
 通过取消勾选 `Automate Thresholds` 勾选框，我们可以调整动画播放的切换阈值，以更好的调整过渡效果。在脚本中，为控制混合的参数（和动画参数是一样的）赋值（例如当前速度）就可以起到更改动画混合的效果，不过需要注意的是，混合的参数的范围在**0 ~ 1**，因此我们需要对输入做一些映射处理。
 
+如何修改混合树中片段的播放速度呢？这和混合树面板上的“**Threshold**（阈值）”以及时钟图标（**播放速度**）有关。我们可以通过 **Compute Thresholds** 快速计算出各个动画片段的阈值。以“向后走-静止-向前走”为例，可以通过 z 方向（前后方向）上的动画速度计算阈值。假设我们希望动画以当前的 `1.5` 倍速播放，就可以在时钟图标一栏填入 **1.5/threshold**，并将阈值设置为 `1.5`（向后则是 `-1.5`）。
+
+<img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAf76c2dd67c976ee23efc5ea694f21cc1.png" width=400 />
+
 ## 2D Simple Directional
 <img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA1d3c96b84c88cee3e11b5a8078cf9227.png" alt="2D Simple Directional" />
 
@@ -165,11 +169,13 @@ Avatar 就是人形动画，是 Unity 为人形模型动画复用推出的一套
 <img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA41e52ae58c28e43be037356651d711e7.png" width=200/>
 
 ## 2D Freeform Catasian
-**2D Freeform Catasian** 也是一种 2D（双变量）混合树，但是它的权重计算算法和上一个小节介绍的不同，使用的是**梯度带算法**（Gradient Band Interpolation）。
+<img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA3495e871467624551889235b809c91aa.png" width=350 alt="结合了静息、行走、奔跑和转向的2D Freeform Catasian混合树" />
+
+**2D Freeform Catasian** 也是一种 2D（双变量）混合树，但是它的权重计算算法和上一个小节介绍的不同，使用的是**梯度带算法**（Gradient Band Interpolation），适合需要根据**笛卡尔坐标系**下的**两个独立参数**（如转向和速度）进行动画混合的场景。动画片段在空间中呈网格状分布（如上图所示），Idle 位于原点，行走系列和奔跑系列动画的速度相同。
 
 在梯度带算法下，参数空间中的动画点 `Pi`（xi, yi）对空间中的任意一点 `P` 都能造成一个影响值 `hi`，`hi` 的计算由以下公式得出：
 
-<img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA03b7e63aa40a2c313815b488ea141cac.png" alt="公式" width=250 />
+<img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA03b7e63aa40a2c313815b488ea141cac.png" width=250 />
 
 以 `Pi` 为其中一点，遍历其他所有点 `Pj`，向量部分就是点 `P` 到 `PiPj` 所组成向量的**投影长度**与 `PiPj` **向量长度**的比值。该比值在一定程度上反应了 `P` 点到 `PiPj` 的距离关系。
 
@@ -196,7 +202,9 @@ Avatar 就是人形动画，是 Unity 为人形模型动画复用推出的一套
 因此如果希望制作一个融合了行走和跑步的多方向双变量混合树的话，**2D Freeform Catasian** 并不是一个合适的选择。
 
 ## 2D Freeform Directional
-**2D Freeform Directional** 采用的是**极坐标下的梯度带算法**。该算法采用**极轴**（半径分量）和**极角**（角度分量）来表示二维坐标系下一个的点。
+<img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAb7abaaa22c86ddfa484dcf871a3da696.png" width=350 alt="结合了静息瞄准、行走瞄准、奔跑瞄准的2D Freeform Directional混合树" />
+
+**2D Freeform Directional** 采用的是**极坐标下的梯度带算法**。该算法采用**极轴**（半径分量）和**极角**（角度分量）来表示二维坐标系下一个的点，**2D Freeform Directional**需要根据**方向**（垂直或水平）和**幅度**混合动画，因此动画片段按照方向分布，如上图所示。该类型混合树适合用于制作角色的 8 向运动。
 
 - **半径分量**：两点**模长的差**除以两点模长的**均值**（抵消长度单位的影响）。对 `PPi` 来说有点不一样。
 - **角度分量**：两点的**夹角**乘以 `α`。`α` 是用来调整半径分量和角度分量在计算中的**重要程度**。
@@ -228,7 +236,7 @@ Avatar 就是人形动画，是 Unity 为人形模型动画复用推出的一套
 
 <img src="https://p2.itc.cn/q_70/images03/20231031/90e07766f3c54109b7daafa937051692.gif" alt="恶搞一下，总之给人的感觉就很不真实" />
 
-在这种模式下，即使动画中的角色“好像在移动”，但实际上点击角色就会发现角色的 Transform 根本没有发生任何改变，因此开发者只能靠代码驱动角色移动（有点像动画刚体）。而 RootMotion 可以让动画驱动游戏对象移动（而不是代码），使运动更符合物理逻辑：
+在这种模式下，即使动画中的角色“好像在移动”，但实际上点击角色就会发现角色的 Transform 根本没有发生任何改变，因此开发者只能靠代码驱动角色移动（有点像动画刚体）。而 RootMotion 可以让动画驱动游戏对象移动（而不是代码），这使得运动更符合物理逻辑。RootMotion 通过**相对位移**和**相对转角**（四元数）移动游戏对象，相对移动的情况还和缩放有关（因此有缩放曲线会影响开启了 RootMotion 动画的性能），它是通过将位移、旋转、缩放矩阵相乘来实现的。
 
 <img src="https://pic3.zhimg.com/v2-97e48d42832f2b659838b0f61f4dd954_b.webp" width=500 />
 
@@ -239,21 +247,45 @@ Avatar 就是人形动画，是 Unity 为人形模型动画复用推出的一套
 4. 为 Animator 组件的 Avatar 指定第二步中创建的 Avatar。
 5. 现在动画就可以作用到角色的 Transform 上了。
 
-那我们的脚本还有什么用呢？嗯，用来设置动画参数、控制状态之间的转换。如果希望角色跑得更快，可以用脚本修改动画的**播放速度**。
+如果动画不是 `Humanoid` 形式，但也想启用 RootMotion 该怎么办呢？Unity 也为 `Generic` 形式的动画设置了 RootMotion，在遮罩情况下我们只需要为其创建 Avatar（`Generic` 动画也有 Avatar，但和 `Humanoid` 的不同），为 Avatar 指定一根**根骨骼**（该骨骼唯一的作用就是用来记录模型的位移和旋转信息，是其他所有骨骼的根骨骼），其后的操作就和上述步骤相同了。
+
+既然通过动画控制移动，那我们的脚本还有什么用呢？其实 RootMotion 有时并不完全可靠，脚本除了用来设置动画参数、控制状态之间的转换、修改动画播放速度之外，还可以通过调用 `OnAnimationMove()` 方法、将动画机的速度同步到物理引擎（**刚体**）的速度上，起到类似 RootMotion 的效果控制角色移动。RootMotion 要解决的问题本质是动画与实际表现的同步（即“防止脚底打滑”），而不是控制玩家位移，因此真正移动的部分交还给物理。
 
 ## 动画烘培
-有的时候，一些动作可能会改变角色的高度（在 Unity 中代表 Y 轴）信息，例如跳跃。如果在平地上播放 “**跳跃 -> 静息**” 的动画，就会发现玩家停留在了一个较高的位置没有落下，这是因为角色的 Transform 完全受到了动画驱动。
+有的时候，一些动作可能会改变角色的高度（在 Unity 中代表 Y 轴）信息，例如跳跃。如果在平地上播放 “**跳跃 -> 静息**” 的动画，就会发现玩家停留在了一个较高的位置没有落下，这是因为角色的 Transform 完全受到了动画驱动。多数情况下，我们希望动画的效果符合物理规则，好在 Unity 中存在 **Bake Into Pose** 功能可以帮助我们解决这个问题。
 
-在动画的 **Animation** 面板中，我们可以找到一系列的“烘培”：
-- Root Transform Rotation：将旋转变换烘培到动画上
-- Root Transform Position（Y）：将 Y 轴（高度）上的变化烘培到动画上
-- Root transform Position（XZ）：将 XZ 面（水平面）上的变化烘培到动画上
+在动画的 **Animation** 面板中，我们可以找到一系列的“烘培（Bake）”：
+- **Root Transform Rotation**：将旋转变换烘培到动画上
+- **Root Transform Position（Y）**：将 Y 轴（高度）上的变化烘培到动画上
+- **Root transform Position（XZ）**：将 XZ 面（水平面）上的变化烘培到动画上
 
 <img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA21db28cff564a90a30da7cd4ae7704d2.png" alt="image.png" title="image.png" />
 
-烘培将会停止动画影响到旋转 / Y轴 / XZ 平面上的变换，将其变为动画的。上图的面板上有一些奇怪的“红绿灯”，它们表示的信息是**该动作是否适合该类型的烘培**。要将启用了 RootMotion 的动画变为完全不影响模型 Transform，只需要将上述基于 Origin 全部烘培即可：
+勾选烘培将会停止动画影响到模型在旋转 / Y轴 / XZ 平面上的变换，将其变为骨骼动画（Pose）的而不是 RootMotion 的。上图的面板上有一些奇怪的“红绿灯”，它们表示的信息是**该动作是否适合该类型的烘培**。要将启用了 RootMotion 的动画变为完全不影响模型 Transform，只需要将上述选项全部烘培即可：
 
 <img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA5cab3f6e9a3bfddcdad491645870ea62.png" width=300 />
+
+烘焙界面还有两个值：**Based Upon** 和 **Offset**。前者决定了参数在动画第一帧的值取决于什么（是**根骨骼 / Avatar 计算出的数值**还是**动画的原始数值**）。我们可以通过设置 **Offset** 修改基准值的偏移量。
+
+{% note info %}
+**Avatar 计算出的数值是什么？**
+
+如果我们采用的模型与动画被设置成了 `Humanoid` 并启用 **Avatar**，就会在模型身上和地面上看到一个蓝色的小球（如果没有显示的话，需要在 Gizmos 里打开 Animator 的相关选项），这就是 Avatar 计算出来的“**根**”，类似于 `Generic` 动画中指定的**根节点**。通常，这个计算出的重心接近于人物模型 **Hips 骨骼**的位置。
+{% endnote %}
+
+{% note warning %}
+**特别注意：RootMotion 结合混合树的潜在问题**
+
+当我们开开心心地把一个使用了 RootMotion 动画片段的混合树添加到两个角色模型上时，我们可能发现一件事情：**两个角色的行走速度并不一样**。这可怎么办呢？对于一个游戏来说，如果可爱的萝莉角色跑图跑的比成女角色要慢的话，可能玩家就会有声音了。
+在 RootMotion 里，这种问题产生的原因是 RootMotion 的相对位移/旋转计算是参照**标准 Avatar** 的缩放大小来的，如果一个模型的 Avatar 大小与标准 Avatar 不符，那么它的相对位移/旋转也会被放缩，一个只有标准 Avatar 80% 大的模型的相对速度也是标准的 80%。为了解决不一致的问题，我们可以先通过脚本获取模型的大小：
+```C#
+animator.humanScale;    // 这是 Humanoid 才有的
+```
+然后将混合树的速度parameter（需要先打开勾选），将值设为 `1` 除以模型大小，就能让不同模型在混合树中播放RootMotion动画的效果相同了：
+```C#
+animator.SetFloat("xxx", 1 / animator.humanScale);  // blendtree 的 speed
+```
+{% endnote %}
 
 # 动画机覆写
 想象一个画面：我们现在有一系列的友方角色，角色的动画控制器都有**行走**、**奔跑**、**普通攻击**和**特殊攻击**四种状态。对于每个角色来说，行走和奔跑的动画都差不多，但普通攻击和特殊攻击则是定制化的动画。在这种情况下，我们看上去似乎不能用一个 Animation Controller 来控制所有角色，但为每个角色创建一个专属的 Animation Controller 并一步一步调整状态和转移听上去是一件很费时费力的事情（特别是动画数量很多的时候，这还很容易导致出错），该怎么办呢？这时我们就可以考虑使用**动画机覆写**（Animator Override）。
@@ -264,4 +296,4 @@ Avatar 就是人形动画，是 Unity 为人形模型动画复用推出的一套
 
 <img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA5fee83d028da6384ec70c2954a98f9fc.png" />
 
-可以为动画机覆写指定一个原始版本的动画机（例如前面例子中的角色动画机），然后就可以开始覆写操作了。为想要覆写的动画剪辑（例如特殊攻击）指定 Override 的动画剪辑，就完成了覆写。
+可以为动画机覆写指定一个原始版本的动画机（例如前面例子中的角色动画机），然后就可以开始覆写操作了。为想要覆写的动画剪辑（例如特殊攻击）指定 Override 的动画剪辑，就完成了动画机覆写。

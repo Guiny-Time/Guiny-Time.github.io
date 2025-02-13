@@ -3,7 +3,7 @@ title: 热更新其二：AssetBundle初窥
 date: '2024-09-12'
 tags: ['AssetBundle','打包','资源管理', '热更新', 'Unity']
 categories: 引擎功能
-cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAbb638bd203617ec12ceff2586949cccd.png
+cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA4d7a0cbb4aefb3c53e4d24bcf3a3d7d0.png
 ---
 
 在项目开发的过程中，我们经常会遇到“版本更新”或者“资源补丁”，例如游戏素材随着活动而发生改变等等：

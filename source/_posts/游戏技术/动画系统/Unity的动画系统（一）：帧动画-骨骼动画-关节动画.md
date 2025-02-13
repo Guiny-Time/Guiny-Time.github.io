@@ -27,12 +27,12 @@ cover: https://docs.unity3d.com/cn/2023.2/uploads/Main/AnimationIntroPic.jpg
 # 什么是Unity动画系统？
 Unity 的动画系统是引擎内置的一个强大的系统，可以帮助用户创建、导入和管理动画资产，为 Unity 的所有元素（包括对象、角色和属性）提供简单的动画工作流程和动画设置。
 
-动画系统中有三个重要的概念：**Animator**（动画机）、**Animation Clip**（动画剪辑）和 **Animation Controller**（动画控制器），这三者缺一不可。
+动画系统中有三个重要的概念：**Animator Component**（动画组件）、**Animation Clip**（动画剪辑）和 **Animation Controller**（动画控制器/动画状态机），这三者缺一不可。
 
 ![三者之间的关系](https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA5b3909275ddc04172a0c7206773f0b85.png)
 
 ## Animation Clip
-**动画剪辑**（Animation Clip）是 Unity 动画系统的核心元素之一，它包含某些对象应如何随时间改变其**位置、旋转或其他属性（包括自定义脚本中的属性）** 的相关信息。每个剪辑可视为单个线性录制。除了通过编辑器中的 **Animation** 窗口创建和制作动画之外，Unity 还支持从**外部源**导入动画。
+**动画剪辑**（Animation Clip）是 Unity 动画系统的核心元素之一，是动画内容的展示，它包含某些对象应如何随时间改变其**位置、旋转或其他属性（包括自定义脚本中的属性）** 的相关信息。开发者除了可以通过编辑器中的 **Animation** 窗口创建和制作动画之外，还可以从**外部源**导入动画。
 
 <img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA80a67fc9cd8c12368ad44f65ffd31208.png" alt="点击Create就可以为选中的对象创建动画" />
 
@@ -69,10 +69,10 @@ Animator Controller 的本质是一个**状态机**，负责决定**当前应该
 
 我们会在下一篇文章中介绍这两个概念的~
 
-## Animator
+## Animator Component
 ![Animator](https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA9078e15de979dadee44b6aec03347cec.png)
 
-这里的 Animator 和上一小节中所提到的“Animator 窗口”并不一样，是挂载在要播放动画的游戏对象身上的**组件**。开发者可以为该组件挂载对应的 Animator Controller，然后就可以播放动画了。除了动画控制器之外，Animator 组件还有以下几个参数：
+这里的 Animator 组件和上一小节中所提到的“Animator 窗口”并不一样，是挂载在要播放动画的游戏对象身上的**组件**。开发者可以为该组件挂载对应的 Animator Controller（动画状态机），然后就可以播放动画了。除了动画控制器之外，Animator 组件还有以下几个参数：
 
 1. **Avatar**
 指的是“人形动画”，Unity 有专门为人形动画制作一套配置，开发者可以相对轻松地将同一组动画应用于各种角色模型。关于这个概念可以参考在 **Mixamo** 上为不同的人形模型绑定 Avatar，然后使用动画的过程，它们本质上差不多。
@@ -306,7 +306,7 @@ Unity 为人形模型提出了一套解决方案：**Avatar**（替身系统）�
 ## IK系统
 IK 即 Inverse Kinematic（反向动力学），研究的是如何通过手/脚/头等**肢体末端**来逆向控制其他骨骼的变换。在 Unity 等游戏引擎中，IK 往往比较简单，因此一般采用 **CCD IK**（Cyclic Coordinate Descent，循环坐标下降），从末端骨骼依次计算到根骨骼的旋转来实现。
 
-在 Unity 中使用了 Avatar 系统之后，人物模型由于正向动力学的计算是从根节点出发的，因此在末梢会存在一定的偏移，这些偏移会导致动画看起来有点“怪”。这时候我们就可以通过设置末端 IK 的**权重**，类似于 footIK 那样，让模型实际的手脚更靠近 IK goal 所在的位置。
+在 Unity 中使用了 Avatar 系统之后，人物模型由于正向动力学的计算是从根节点出发的，因此在末梢会存在一定的偏移，这些偏移会导致动画看起来有点“怪”。这时候我们就可以通过设置末端 IK 的**权重**，类似于 footIK 那样，让模型实际的手脚更靠近 **IK goal**（Unity 在生成 Avatar 时保存的双手双脚末梢的位置）所在的位置。
 
 在动画机的任意一个层级中打开 `IK Pass`，Unity 就会在生命周期函数中计算 `OnAnimatroIK` 了：
 

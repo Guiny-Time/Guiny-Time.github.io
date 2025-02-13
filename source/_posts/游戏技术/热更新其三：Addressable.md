@@ -3,7 +3,7 @@ title: 热更新其三：Addressables
 date: '2024-09-14'
 tags: ['AssetBundle','Addressable', '打包','资源管理', '热更新', 'Unity']
 categories: 引擎功能
-cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA48c2de74555de8353a4c348854ec99c7.png
+cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA897df47010021e029beb2af054f892a9.png
 ---
 
 Addressables（可寻址资源系统）是 Unity 新推出的用于智能管理 AssetBundle 资源和加载的工具包，它为 AssetBundle 提供了更高层次的抽象，旨在取代 AssetBundle Manager。
