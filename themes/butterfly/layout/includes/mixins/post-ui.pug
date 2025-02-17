@@ -55,7 +55,8 @@ mixin postUI(posts)
                     i.fas.fa-angle-right.article-meta-link
             if (theme.post_meta.page.tags && article.tags.data.length > 0)
               span.article-meta.tags
-                span.article-meta-separator |
+                span.article-meta-separator 
+                br
                 i.fas.fa-tag
                 each item, index in article.tags.data
                   a(href=url_for(item.path)).article-meta__tags #[=item.name]
