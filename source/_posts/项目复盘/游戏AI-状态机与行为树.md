@@ -3,7 +3,7 @@ tags: ['AI', '状态机','行为树','游戏开发']
 categories: 项目复盘
 title: 游戏AI-状态机与行为树
 date: 2023-05-10
-cover: https://cdn.midjourney.com/584b8b41-24d2-4b71-a4bc-78e123c4eec2/0_0.png
+cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA9bda383188cb8e39bd77a5e7736b7948.png
 ---
 
 # 什么是游戏AI？
@@ -114,90 +114,176 @@ void Update{
 ```
 
 ## 状态模式
-状态模式将这可能存在于玩家控制器中的一大串 switch-case 解耦成了更符合面向对象思维的写法。在状态模式中，我们可以定义状态接口IState：
-```
-interface IState{
-  // 处理事件
-  void HandleInput();
-  // 状态行为
-  void Action();
-}
-```
-接着，我们可以为每个状态定义一个类（以警觉为例，我们正好可以实现一下计时器方法），并实现状态接口：
-```C#
-class AlertState : IState{
-  float _time = 0.0f;
-  bool _beginChase = false;
-  // 警觉状态的事件处理
-  void HandleInput(){
-    if(!playerTarget){
-      // 丢失目标，切换状态到Protal
-    }
-    if(_beginChase){
-      // 切换状态到Chase
-    }
-  }
-  // 警觉状态的行为
-  void Action(){
-    Timer();
-  }
-  // 计时器
-  void Timer(){
-    _time += Time.deltaTime();
-    if(_time > 2.0f){
-      _beginChase = true;
-    }
-  }
-}
-```
-接着，在 AI 控制器 AIController.cs 一类的脚本中，我们需要一个用来表示 AI 当前状态的指针，并直接调用接口方法（来执行每个状态实现的方法）。在修改状态时，改变状态指针所指的对象即可。如果状态类中不包含数据成员（比如Protal和Chase），那么这些不论怎么实例化都始终一样的对象，可以考虑作为静态对象存放在状态的类 AIState 中，例如：
-```C#
-class AIState{
-  static ProtalState protal;
-  static ChaseState chase;
-}
-```
-但对于警戒状态来说，它包含了与计时器有关的变量_timer，采用静态方法就行不通了。而且对于多个 AI 来说，它们可能同时处于一个状态中，就需要采用实例化的方式代替静态状态，为每个 AI 的状态机创建一个当前状态的实例。
+状态模式将这可能存在于玩家控制器中的一大串 switch-case 解耦成了更符合面向对象思维的写法。在状态模式中，我们可以定义状态接口 `IState` 作为所有状态的基类，：
 
-那应该如何实现状态之间的切换呢（就像我们在前面的 HandleInput 代码中只是用一行注释简单带过了）？我们可以考虑在状态的方法中**返回**新的状态,做法就是：
 ```C#
-// 警觉状态的事件处理
-  IState HandleInput(){
-    if(!playerTarget){
-      // 丢失目标，切换状态到Protal
-      return new ProtalState();
-    }
-    if(_beginChase){
-      // 切换状态到Chase
-      return new ChaseState();
-    }
-    return null;
-  }
+interface IState{
+    // 状态进入，初始化新状态
+    void Enter(StateContext ctx);
+    // 状态退出，清理前状态
+    void Exit(StateContext ctx);
+    // 状态行为
+    void Action(StateContext ctx);
+    // 事件处理（状态切换）
+    void HandleInput(StateContext ctx);
+}
 ```
-在 AI 控制器中，判断返回的状态，如果非空则认为状态发生了变化。在这个基础上，我们还可以实现 Entry 和 Exit 方法实现状态进入/退出时的特殊功能，完善状态机的健壮性。
+
+接着，我们可以为每个状态定义一个类（以警觉为例，我们正好可以实现一下计时器方法），并实现状态接口：
+
+```C#
+class AlertState : IState {
+    private float _timer;   // 计时器
+    
+    // 进入状态
+    public void Enter(StateContext ctx) {
+        _timer = 0;
+        ctx.Animator.Play("Alert");
+    }
+    
+    // 状态内对事件的处理
+    public IState HandleInput(StateContext ctx) {
+        if(ctx.PlayerTarget == null) 
+            return AIState.Protal;  // 切换状态为巡逻
+        if(_timer > 2f) 
+            return AIState.Chase;   // 切换状态为追逐
+        return null;
+    }
+    
+    // 状态的业务逻辑
+    public void Action(StateContext ctx) {
+        _timer += Time.deltaTime;
+        // 一些别的逻辑
+    }
+    
+    // 退出状态
+    public void Exit(StateContext ctx) {
+        ctx.Animator.ResetTrigger("Alert");
+    }
+}
+
+```
+
+在上面的代码中，有两个概念：**上下文环境**（StateContex）和**状态实例**（AIState）。
+
+- **上下文环境**
+  通过上下文环境，状态得以感知各类事件的发生（例如捕获到玩家），从而实现状态转移。
+  ```C#
+class StateContext {
+    public GameObject AIEntity;    // AI实体
+    public Transform PlayerTarget; // 玩家目标
+    public Animator Animator;      // 动画控制器
+    public float DetectionRange;   // 侦测范围
+}
+  ```
+
+- **状态转移**
+  转移则是通过返回一个状态实例来实现的，如果不发生切换则返回空。如果状态类中不包含数据成员（比如Protal和Chase），那么这些不论怎么实例化都始终一样的对象，可以考虑作为静态只读对象存放在状态的类 AIState 中，例如：
+  ```C#
+// 静态实例
+class AIState {
+    public static readonly IState Protal = new ProtalState();
+    public static readonly IState Chase = new ChaseState();
+}
+  ```
+  对于有数据成员的状态（比如警戒状态来说，它包含了与计时器有关的变量_timer），则可以考虑通过**对象池**的方式管理状态实例，毕竟如果频繁的创建和销毁状态实例可能会增加 GC 压力：
+  ```C#
+// 有状态对象使用对象池
+class StatePool {
+    private Dictionary<Type, Queue<IState>> _pool = new();
+    
+    public T GetState<T>() where T : IState, new() {
+        if(_pool[typeof(T)].Count > 0) 
+            return (T)_pool[typeof(T)].Dequeue();
+        return new T();
+    }
+    
+    public void Release(T state) {
+        _pool[typeof(T)].Enqueue(state);
+    }
+}
+  ```
+
+ok，现在我们已经有了各个状态，也有了状态之间如何转移的逻辑，如何应用到敌人身上呢？或者说，我们怎么知道某个敌人现在处于什么状态呢？这就需要一个状态管理器（状态机）`StateMachine` 来进行管理。
+
+```C#
+class StateMachine {
+    private IState _currentState;   // 当前所处状态
+    private StateContext _context;  // 上下文环境
+    
+    // 更新状态
+    public void Update() {
+        var newState = _currentState.HandleInput(_context);
+        if(newState != null) {
+            ChangeState(newState);
+        }
+        _currentState.Action(_context); // 执行状态的业务逻辑
+    }
+    
+    // 状态切换，负责上一个状态的退出和下一个状态的进入逻辑
+    private void ChangeState(IState newState) {
+        _currentState?.Exit(_context);
+        _currentState = newState;
+        _currentState.Enter(_context);
+    }
+    
+}
+```
+
+在类似于 AI 控制器的管理脚本中，维护 `StateMachine` 实例，就能实现简单的 AI 状态机了。
 
 ## 并发状态机
 在前文的有限状态机中同一时间 AI 只能处于一个状态中，那么如果我希望 AI 在追击角色的**同时**执行持枪/开火的循环状态，应该怎么办呢？对FSM，我们可能要把状态加上“巡逻时持枪”、“巡逻时开火”、“警觉时持枪”、“警觉时开火”、“追击时持枪”和“追击时开火”了，提升了代码的复杂性。
 
-但其实仔细想想，持枪/开火这个循环其实和其他状态是独立的，如下图所示，那么我们就可以在 AI 控制器中声明两个状态指针，分别指代持枪/开火和其他的 AI 行为，在执行 handleInput 时两个状态都调用一下就可以了。这就是并发状态机的思想，适合多个毫无关联的状态机并发执行（如果有关联，并发状态机依然可以完成任务，但需要结合一些 if 语句进行判断）。
+但其实仔细想想，持枪/开火这个循环其实和其他状态是独立的，如下图所示，那么我们就可以在 AI 控制器中声明两个**状态管理器**，分别指代持枪/开火和其他的 AI 行为就可以了。这就是并发状态机的思想，适合多个毫无关联的状态机并发执行（如果有关联，并发状态机依然可以完成任务，但需要结合一些 if 语句进行判断）。
 ![](Clipboard_2024-10-17-15-58-43.png)
 
-## 分层/层次状态机
+## 分层状态机
 ![](https://picx.zhimg.com/v2-f9122ffbc3cfd2350199893bd2b64f1f_r.jpg)
-在我们实际编写状态机代码时，可能会发现状态越来越复杂（可能达到了几百上千个状态），管理越来越困难，那么除了并发状态机之外（比如我们实在没有办法拆成并发的）有没有别的优化的方式呢？这就是这一小节要介绍的**分层状态机**，又名**层次状态机**。在层次状态机中，我们可以把一系列有关联的状态组合成一个抽象的“父状态”，例如一个怪物的攻击行为有好几种不同的攻击方式，每种攻击方式都对应了一个状态（因为 action 执行的内容各不相同），那么就可以让这一系列状态都继承一个父状态“攻击”。
+在我们实际编写状态机代码时，可能会发现状态越来越复杂（可能达到了几百上千个状态），管理越来越困难，那么除了并发状态机之外（比如我们实在没有办法拆成并发的）有没有别的优化的方式呢？这就是这一小节要介绍的**分层状态机**，又名**层次状态机**。在层次状态机中，我们可以把一系列有关联的状态组合成一个抽象的“**父状态**”，例如一个怪物的攻击行为有好几种不同的攻击方式，每种攻击方式都对应了一个状态（因为 action 执行的内容各不相同），那么就可以让这一系列状态都继承一个父状态“攻击”。
 
-上图就展示的很直观了，状态机由数个父状态组成，每个状态中有子状态，状态机的切换是在父状态之间切换的。例如在"攻击"父状态的 handleInput 中：
+上图就展示的很直观了，状态机由数个父状态组成，每个状态中有子状态，状态机的切换是在父状态之间切换的。对于层次状态机，我们可以在 `IState` 上为其加上**子状态**指针：
 
 ```C#
-if(!playerTarget){
-  // 丢失目标，切换状态到Protal（或者别的父状态）
-  return new ProtalState();
+interface IState {
+    // 基础方法们
+    void Enter(StateContext ctx);
+    void Exit(StateContext ctx);
+    IState HandleInput(StateContext ctx);
+    void Action(StateContext ctx);
+    
+    // 分层
+    IState CurrentSubState { get; } // 当前子状态
+}
+```
+
+对一个可以嵌套子状态的父状态（例如上文中提到的攻击状态），它需要管理（持有）当前的子状态，并处理相应的事件分发逻辑。所有事件会优先交由子状态进行处理，如果子状态无法处理，再返回给父状态处理。由于状态机可能嵌套了很多层，所以可能会**冒泡地**从最内的层次一路返回到最外的层次。
+
+```C#
+abstract class AttackCompositeState : IState {
+    protected IState _currentSubState;
+    
+    public IState CurrentSubState => _currentSubState;
+    
+    public override IState HandleInput(StateContext ctx) {
+        // 优先由子状态处理
+        var childResult = _currentSubState?.HandleInput(ctx);
+        if (childResult != null) return childResult;
+        
+        // 子状态未处理时检查父状态迁移
+        if (...) {
+            return AIState.nextState;
+        }
+
+        // 不转移
+        return null;
+    }
 }
 ```
 
 进入某个父状态之后状态机就会进入父状态内部的状态机循环，直到达到切换条件。UE5 的动画蓝图就是基于层次状态机实现的。
 
-即使状态模式已经在一定程度上解耦了状态机的复杂代码，但在实际项目中，我们随时可能增加新状态、减少状态或者改变状态之间的迁移关系，如果状态越来越多，任何一点小修改都会产生很大的工作量（例如我们需要维护新的状态类）。
+即使状态模式已经在一定程度上解耦了状态机的复杂代码，但在实际项目中，我们随时可能增加新状态、减少状态或者改变状态之间的迁移关系，如果状态越来越多，任何一点小修改都会产生很大的工作量（例如我们需要维护新的状态类），甚至可能破坏原有的逻辑。不过状态机相比于我们接下来要介绍的行为树，优点在于**执行效率更高**、**不需要判断冗余的条件**，因此适合**状态明确且有限的系统**。
 
 # 行为树(Behavior Tree)
 ![可视化行为树编辑器](https://user-images.githubusercontent.com/8220843/70063424-b20b3700-1622-11ea-8c58-102322c2a88b.png)
@@ -239,7 +325,11 @@ if(!playerTarget){
 
 不过在性能上，行为树的运算通过帧循环的 update 来驱动，每帧会遍历所有非行为节点，在树比较复杂时会造成资源浪费。在我用的 TheKiwiCoder 行为树插件中，行为树可以通过一个名叫 **Blackboard**（黑板）的类来存放**共享数据**（例如储存寻路算法的结果），这样可以避免每走一步都执行一遍寻路，减少开销。
 
-针对行为树的性能优化，还可以考虑**行为树+状态机**的实现方式：如果用状态机实现简单状态的切换，进入某个状态（例如战斗）后再用行为树表示复杂行为逻辑，这会是一个有效的优化。尤其是怪物很多时，大部分时间段，大部分怪都处于巡逻状态，完全没有必要遍历行为树。
+针对行为树的性能优化，还可以考虑**行为树+状态机**的实现方式：
+- **顶层状态机 + 细节行为树**
+如果用状态机实现简单状态的切换，进入某个状态（例如战斗）后再用行为树表示复杂行为逻辑，这会是一个有效的优化。尤其是怪物很多时，大部分时间段，大部分怪都处于巡逻状态，完全没有必要遍历行为树。
+- **顶层行为树 + 细节状态机**
+也可以用行为树作为上层来管理宏观策略，状态机作为底层处理具体的原子状态（例如移动、攻击等等）。
 
 现代游戏 AI 一般都是采用行为树来实现的了，在 UE 中更是包含了行为树的功能模块以供开发者使用。
 
