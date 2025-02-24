@@ -323,9 +323,9 @@
       
         <tags>
             
-            <tag> 设计模式 </tag>
-            
             <tag> 游戏开发 </tag>
+            
+            <tag> 设计模式 </tag>
             
             <tag> ECS </tag>
             
@@ -640,9 +640,9 @@
       
         <tags>
             
-            <tag> Unity </tag>
-            
             <tag> 游戏开发 </tag>
+            
+            <tag> Unity </tag>
             
             <tag> 物理 </tag>
             
@@ -675,9 +675,9 @@
       
         <tags>
             
-            <tag> Unity </tag>
-            
             <tag> 游戏开发 </tag>
+            
+            <tag> Unity </tag>
             
             <tag> 物理 </tag>
             
@@ -708,9 +708,9 @@
       
         <tags>
             
-            <tag> Unity </tag>
-            
             <tag> 游戏开发 </tag>
+            
+            <tag> Unity </tag>
             
             <tag> 物理 </tag>
             
@@ -834,9 +834,9 @@
       
         <tags>
             
-            <tag> 设计 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 设计 </tag>
             
             <tag> 框架 </tag>
             
@@ -999,9 +999,9 @@
       
         <tags>
             
-            <tag> Cinemachine </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> Cinemachine </tag>
             
             <tag> 相机 </tag>
             
@@ -1946,11 +1946,11 @@
       
         <tags>
             
+            <tag> 游戏开发 </tag>
+            
             <tag> Unity </tag>
             
             <tag> 设计模式 </tag>
-            
-            <tag> 游戏开发 </tag>
             
             <tag> 框架 </tag>
             
@@ -1981,11 +1981,11 @@
       
         <tags>
             
+            <tag> 游戏开发 </tag>
+            
             <tag> Unity </tag>
             
             <tag> 设计模式 </tag>
-            
-            <tag> 游戏开发 </tag>
             
             <tag> 框架 </tag>
             
@@ -2023,6 +2023,39 @@
             <tag> 游戏编程 </tag>
             
             <tag> 项目复盘 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Unity中的序列化与反序列化</title>
+      <link href="/2021/03/14/Unity%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"/>
+      <url>/2021/03/14/Unity%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="什么是序列化与反序列化">什么是序列化与反序列化</h1><p><strong>序列化</strong>与<strong>反序列化</strong>是两个至关重要却又常常被开发者们忽视的概念。想象一下，当你精心设计了一个复杂的游戏角色，它拥有独特的属性、技能和装备，而你希望能够将这个角色的数据保存到本地，以便下次游戏时可以继续使用（<strong>存档</strong>与<strong>读取存档</strong>）；或者你需要将角色的数据通过网络发送给其他玩家，让他们也能看到你的角色，该怎么办呢？这时，序列化与反序列化就派上用场了。序列化能够将复杂的数据结构转换为一种可以存储或传输的格式，反序列化再将序列化文件还原成原来的数据结构。在本文中，我们将深入探讨 Unity 的序列化与反序列化，揭开它们神秘的面纱。</p><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAdb9e1d27869fa49926aa9627295fad49.png"><h2 id="序列化">序列化</h2><p>序列化是指将对象的状态信息转换为<strong>可以存储或传输的形式</strong>的过程。在 Unity 中，这个过程通常是将对象的属性和字段转换为<strong>二进制字节流</strong>、<strong>JSON 字符串</strong>、<strong>XML 文档</strong>等格式。以 JSON 为例，一个包含角色生命值、攻击力和防御力的角色对象，经过序列化后可以变成如下所示的文本文件：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;health&quot;</span><span class="punctuation">:</span> <span class="number">100</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;attack&quot;</span><span class="punctuation">:</span> <span class="number">20</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;defense&quot;</span><span class="punctuation">:</span> <span class="number">15</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure><p>这样的字符串就可以轻松地保存到本地文件，或者通过网络发送到其他设备了。除了常见的int、float、string数据之外，JSON 还支持基本数据类型的数组、列表、字典，或声明了 <code>[System.Serializable]</code> 的内部类（对于需要序列化的类，需要一个包装类）。</p><blockquote><p><strong>JSON</strong>（JavaScript Object Notation）是一种轻量级的数据交换格式，易于人类阅读和编写，同时也易于机器解析和生成。在 Unity 中，<code>JsonUtility</code> 类提供了简单的 JSON 序列化和反序列化功能。当进行序列化时，Unity 会遍历对象的可序列化字段，将其转换为 JSON 格式的键值对。反序列化时，则根据 JSON 字符串中的键值对，将数据赋值给对象的相应字段。</p></blockquote><h2 id="反序列化">反序列化</h2><p>反序列化则是序列化的<strong>逆向操作</strong>，它把序列化后的数据重新<strong>还原</strong>为对象。当我们从本地文件读取之前保存的 JSON 字符串，或者从网络接收其他设备传来的 JSON 字符串后，就能够借助反序列化将其转化为原来的角色对象，以便在游戏里继续使用。以下是使用 Unity 中的 <code>JsonUtility</code> 类将上述 JSON 字符串反序列化为角色对象的示例代码：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 记得要加上System.Serializable，这样类能够被Unity序列化，否则无法读取json内容</span></span><br><span class="line">[<span class="meta">System.Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Character</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> health;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> attack;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> defense;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DeserializeExample</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">string</span> json = <span class="string">&quot;&#123;\&quot;health\&quot;: 100, \&quot;attack\&quot;: 20, \&quot;defense\&quot;: 15&#125;&quot;</span>;</span><br><span class="line">        Character character = JsonUtility.FromJson&lt;Character&gt;(json);</span><br><span class="line">        Debug.Log(<span class="string">&quot;Health: &quot;</span> + character.health + <span class="string">&quot;, Attack: &quot;</span> + character.attack + <span class="string">&quot;, Defense: &quot;</span> + character.defense);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>当然，序列化的方式不止包括 JSON，还有前面提到的二进制和 XML。让我们来看看它们都怎么用吧！</p><h1 id="xml">XML</h1><p>我相信平常接触前端开发比较多的同学对 XML 绝对不会陌生，这是一种类似于 HTML 的、使用标签来表示数据的数据结构（也因为这个特性，XML 文件容易变得冗长，可读性不如 JSON）：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Person</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Name</span>&gt;</span>Alice<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Age</span>&gt;</span>20<span class="tag">&lt;/<span class="name">Age</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Person</span>&gt;</span></span><br></pre></td></tr></table></figure><p>类似于 JSON，<strong>XML</strong>（eXtensible Markup Language）也常用于数据的存储和传输，是一种标记语言。在 Unity 中，可以使用 <code>System.Xml.Serialization</code> 命名空间下的类进行 XML 序列化和反序列化。序列化时，会将对象的字段和属性转换为 XML 标签和属性；反序列化时，根据 XML 文档的结构将数据还原到对象中。</p><p>在语法上，XML 相对会更加复杂一些，涉及 <code>StringWriter</code> 的读写操作。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"><span class="keyword">using</span> System.Xml.Serialization;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line">[<span class="meta">Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Enemy</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> type;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> health;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">XmlSerializationExample</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Enemy enemy = <span class="keyword">new</span> Enemy &#123; type = <span class="string">&quot;Goblin&quot;</span>, health = <span class="number">50</span> &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 序列化</span></span><br><span class="line">        XmlSerializer serializer = <span class="keyword">new</span> XmlSerializer(<span class="keyword">typeof</span>(Enemy));</span><br><span class="line">        <span class="keyword">using</span> (StringWriter writer = <span class="keyword">new</span> StringWriter())</span><br><span class="line">        &#123;</span><br><span class="line">            serializer.Serialize(writer, enemy);</span><br><span class="line">            <span class="built_in">string</span> xml = writer.ToString();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 反序列化</span></span><br><span class="line">            <span class="keyword">using</span> (StringReader reader = <span class="keyword">new</span> StringReader(xml))</span><br><span class="line">            &#123;</span><br><span class="line">                Enemy newEnemy = (Enemy)serializer.Deserialize(reader);</span><br><span class="line">                <span class="comment">// 测试读取结果</span></span><br><span class="line">                Debug.Log(<span class="string">&quot;Deserialized Enemy: Type - &quot;</span> + newEnemy.type + <span class="string">&quot;, Health - &quot;</span> + newEnemy.health);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="二进制文件">二进制文件</h1><p>在几种序列化方式中，二进制是<strong>可读性最差</strong>的一种格式，但也是<strong>安全性最高</strong>、<strong>体积最小</strong>、<strong>读写速度最快</strong>的一种格式。在 Unity 中，可以使用 <code>System.Runtime.Serialization.Formatters.Binary</code> 命名空间下的 <code>BinaryFormatter</code> 类进行二进制序列化和反序列化。序列化时，对象的所有字段（包括私有字段）都会被转换为字节流；反序列化时，字节流会被还原为对象。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"><span class="keyword">using</span> System.Runtime.Serialization.Formatters.Binary;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line">[<span class="meta">Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Item</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> name;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> <span class="keyword">value</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BinarySerializationExample</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Item item = <span class="keyword">new</span> Item &#123; name = <span class="string">&quot;Sword&quot;</span>, <span class="keyword">value</span> = <span class="number">100</span> &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 序列化</span></span><br><span class="line">        BinaryFormatter formatter = <span class="keyword">new</span> BinaryFormatter();</span><br><span class="line">        <span class="keyword">using</span> (MemoryStream stream = <span class="keyword">new</span> MemoryStream())</span><br><span class="line">        &#123;</span><br><span class="line">            formatter.Serialize(stream, item);</span><br><span class="line">            <span class="built_in">byte</span>[] bytes = stream.ToArray();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 反序列化</span></span><br><span class="line">            <span class="keyword">using</span> (MemoryStream newStream = <span class="keyword">new</span> MemoryStream(bytes))</span><br><span class="line">            &#123;</span><br><span class="line">                Item newItem = (Item)formatter.Deserialize(newStream);</span><br><span class="line">                <span class="comment">// 测试读取结果</span></span><br><span class="line">                Debug.Log(<span class="string">&quot;Deserialized Item: Name - &quot;</span> + newItem.name + <span class="string">&quot;, Value - &quot;</span> + newItem.<span class="keyword">value</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA254b97ad74bdfb8e51031243c3ccfa8c.png" alt="序列化后的文件，完全看不出来原本是什么" width="400"><h1 id="实际应用">实际应用</h1><ol><li><strong>数据持久化</strong><br>“数据持久化”，或者说“存档”，是现代大多数游戏必不可少的功能之一。无论是 JSON、XML 还是二进制序列化，都可以用于将游戏的进度、玩家的角色数据、游戏配置等信息保存到本地文件，以便下次游戏时继续使用。</li><li><strong>网络通信</strong><br>在多人在线游戏中，网络通信是必不可少的。通过序列化和反序列化，可以将游戏中的数据（如玩家的位置、动作、状态等）转换为可以在网络中传输的格式，然后发送给其他玩家；其他玩家接收到数据后，再通过反序列化将其还原为对象，以便在自己的游戏中显示。</li><li><strong>场景存储</strong><br>在 Unity 中，可以使用序列化和反序列化来保存和加载场景。通过将场景中的对象和它们的状态信息进行序列化，可以将整个场景保存到文件中；在需要加载场景时，再通过反序列化将其还原。</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 探索发现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 探索发现 </tag>
+            
+            <tag> 游戏开发 </tag>
+            
+            <tag> 序列化 </tag>
+            
+            <tag> 反序列化 </tag>
+            
+            <tag> Unity </tag>
             
         </tags>
       
