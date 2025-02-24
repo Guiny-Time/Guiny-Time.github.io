@@ -5,6 +5,8 @@ categories: 引擎功能
 date: '2023-07-20T11:23:22.046Z'
 updated: '2023-07-22T12:52:10.543Z'
 cover: https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA1fc5ff9e9083059d3dab93de58d27b40.png
+copyright_author: 时光
+katex: true
 ---
 
 UGUI是一个很强大的系统，通过它我们可以拼出多姿多彩的UI界面，让玩家更好的与游戏UI进行交互。但作为开发者，我们也需要注意UGUI中潜在的性能优化问题，防止游戏因为 **drawcall 过多**、**频繁 rebatch / rebuild** 而造成发热和卡顿（特别是对于低端机型来说）。
@@ -47,13 +49,36 @@ Unity 通常会为场景中的**每个不同的纹理**发出一个绘制调用�
 
 <img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VAa734381af96b3bc2216e18abf7e22206.png" alt="但多个 UI 元素使用不同的纹理" width=550 />
 
-图集（Atlas）的作用就是可以**把多张小贴图打包成一张大的贴图**，从而起到纹理合批的效果。右键点击 Create -> SpriteAtlas 就能生成一个图集，将想要合并的图片（或者放置图片的文件夹）拉进图集的 Objects for Packing 就能将图片自动打成图集，如下图所示。
+图集（Atlas）的作用就是可以**把多张小贴图打包成一张大的贴图**，从而起到纹理合批的效果，显著减少 drawcall。右键点击 Create -> SpriteAtlas 就能生成一个图集，将想要合并的图片（或者放置图片的文件夹）拉进图集的 **Objects for Packing** 就能将图片自动打成图集，如下图所示。
 
 > 如果找不到，可能是 Project Settings -> Editor -> Sprite Packer -> Mode 没有选择为 Enable。
 
 <img src="https://b.bdstatic.com/comment/HPpFm-ziUYsgpwpjCcQ1VA5cce33c83a1ff4b473b8c2e933a6c897.png" width=350 />
 
 上图中打包进图集的纹理紧密排列，这种看似“无缝紧凑”的布局实际暗藏风险。当 UI 元素进行缩放、旋转或偏移时，纹理边缘可能因采样精度问题"溢出"，意外显示相邻图案的像素。建议想要合并的纹理留出一些**出血线**（透明的边框）。
+
+{% note orange 'fas fa-lightbulb' %}
+**UGUI 元素是如何得知自己使用的纹理属于图集的哪一部分？**
+
+UGUI 元素使用图集的时候，它们实际上并不是直接渲染整个大图像，而是通过指定在大图像中的位置和大小来渲染自己对应的部分，这是通过纹理映射中的 **uv 坐标**实现的。假设图集尺寸为 512 x 512，某按钮图标位于 (128, 256) - (192, 320) 区域，则：
+
+- UV起点：(128/512, 256/512) = (0.25, 0.5)
+- UV终点：(192/512, 320/512) = (0.375, 0.625)
+
+顶点着色器通过以下矩阵变换获取正确坐标：
+
+$$\begin{bmatrix}
+u_{min} & v_{min} \\
+u_{max} & v_{max}
+\end{bmatrix}
+=
+\begin{bmatrix}
+0.25 & 0.5 \\
+0.375 & 0.625
+\end{bmatrix}$$
+
+在脚本中，可以使用 `SpriteAtlas.GetSprite` 方法获取图集中的某个特定的 Sprite，其中就包含了该 Sprite 在图集中的位置信息。
+{% endnote %}
 
 此外，图集的大小也不是无上限的，对于手机游戏来说建议以 2048x2048 为安全线，避免低端机崩溃。
 
