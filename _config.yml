@@ -18,7 +18,7 @@ theme: butterfly
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://cattyhouse-guiny.xyz
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -133,6 +133,44 @@ markdown:
 # APlayer
 aplayer:
   meting: true
+
+# 磁贴
+magnet:
+  enable: true
+  priority: 1
+  enable_page: /
+  type: categories
+  devide: 2
+  display:
+    - name: 引擎功能
+      display_name: Unity引擎功能
+      icon: 🧊
+    - name: 效果实现
+      display_name: 渲染效果实现
+      icon: 🦚
+    - name: 探索发现
+      display_name: 探索与发现
+      icon: 🪐
+    - name: 项目复盘
+      display_name: 项目复盘
+      icon: 👩‍💻
+    - name: 设计模式
+      display_name: 游戏编程模式
+      icon: 📒
+    - name: 计算机图形学
+      display_name: 计算机图形学
+      icon: 💡
+  color_setting:
+    text_color: black
+    text_hover_color: white
+    background_color: "#ffffff"
+    background_hover_color: "#1E90FF"
+  layout:
+    type: id
+    name: recent-posts
+    index: 0
+  temple_html: '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet">${temple_html_item}</div></div>'
+  plus_style: ""
 
 # tag-plugins-plus
 # see https://akilar.top/posts/615e2dec/
