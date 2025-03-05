@@ -9,6 +9,7 @@
 }
 #page-header::before {
   background: transparent !important;
+  backdrop-filter: blur(4px);
   height: 20px;
 }
 
